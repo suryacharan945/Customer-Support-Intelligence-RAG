@@ -1,48 +1,120 @@
-# Internship RAG MCP Capstone Project
+# Multi-Context Intelligent RAG System: Self-Improving, Agentic Platform for Advanced Customer Support
 
-## 1. Storage Architecture Overview
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg)](https://fastapi.tiangolo.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Storage: Google Drive First](https://img.shields.io/badge/Storage-Google%20Drive%205TB-4285F4.svg)](#storage-architecture)
 
-This project implements a **Google Drive First, Minimal Local Storage** policy to ensure high efficiency on limited local storage while leveraging ~5 TB of Google Cloud storage (`suryacharan5555@gmail.com`).
-
-- **Cloud Storage (Persistent)**: `G:\My Drive\Internship_RAG_MCP_Capstone\` (via Google Drive in **Stream files mode**).
-- **Local Workspace (Ephemeral / Fast Dev)**: `C:\Users\surya\Internship_RAG_MCP_Capstone\` (~1.5–2.0 GB maximum).
+An enterprise-grade, agentic Retrieval-Augmented Generation (RAG) platform leveraging **Multi-Context Prompting (MCP)** to retrieve, reason over, and synthesize technical support knowledge from disparate documentation sources (product manuals, troubleshooting guides, FAQs, and warranty agreements).
 
 ---
 
-## 2. Google Drive Directory Structure
+## 1. Project Directory Blueprint
 
 ```
 Internship_RAG_MCP_Capstone/
-├── 00_References/                 # Project PDFs & official guides
-├── 01_Source_Code/                # Regular source-code release archives
-├── 02_Datasets/                   # Raw and processed datasets
-├── 03_Knowledge_Base/             # Unstructured documents, manuals, knowledge files
-├── 04_Models_and_Embeddings/      # Saved embeddings & model weights
-├── 05_Vector_Database_Backups/    # ChromaDB snapshots & dumps
-├── 06_Test_Results/               # Evaluation results, benchmark metrics
-├── 07_Documentation/              # System architecture, API documentation
-├── 08_Reports/                    # Progress reports, milestone reviews
-├── 09_Presentations/              # Slides and defense visual decks
-├── 10_Deployment/                 # Dockerfiles, deployment manifests
-└── 11_Backups/                    # Timestamped full-project archives
+├── app/
+│   ├── __init__.py
+│   ├── main.py                          # FastAPI application factory & routes
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── router.py                    # Aggregated API router
+│   │   └── endpoints/
+│   │       ├── health.py                # System health diagnostics & storage telemetry
+│   │       ├── rag.py                   # Multi-Context RAG query endpoints
+│   │       ├── feedback.py              # Active learning human-in-the-loop feedback
+│   │       └── analytics.py             # Performance telemetry & accuracy metrics
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── config.py                    # Pydantic Settings with Google Drive defaults
+│   │   └── logging.py                   # Structured console logging
+│   ├── ingestion/
+│   │   ├── __init__.py
+│   │   ├── loader.py                    # Multi-format document loader (txt, md, json, pdf)
+│   │   └── chunker.py                   # Overlapping character & token chunker
+│   ├── retrieval/
+│   │   ├── __init__.py
+│   │   ├── base.py                      # Abstract retriever interface
+│   │   ├── vector_store.py              # ChromaDB / FAISS adapter with fallback
+│   │   └── hybrid.py                    # Dense semantic + Sparse keyword (BM25) fusion
+│   ├── generation/
+│   │   ├── __init__.py
+│   │   ├── llm_client.py                # Decoupled LLM client (Colab, Cloud API, Mock)
+│   │   ├── prompt_templates.py          # MCP synthesis & query expansion templates
+│   │   └── mcp_context.py               # Multi-Context Prompting context block builder
+│   └── services/
+│       ├── __init__.py
+│       ├── rag_service.py               # End-to-end RAG orchestrator & query expansion
+│       └── feedback_service.py          # Feedback collector & persistent archiver
+├── evaluation/
+│   ├── __init__.py
+│   ├── metrics.py                       # Faithfulness, Context Relevance, Latency
+│   └── evaluator.py                     # Automated benchmark runner with Drive export
+├── notebooks/
+│   ├── README.md                        # Remote compute workflow & GPU guidelines
+│   ├── 01_colab_embedding_and_chroma_indexing.ipynb # Batch GPU embedding & index creation
+│   └── 02_colab_mistral_rag_inference.ipynb         # Mistral-7B inference server
+├── scripts/
+│   ├── verify_storage_and_sync.py       # Cloud mount validator & folder builder
+│   ├── backup_to_drive.py               # Quiescent SQLite Online Backup & rotation
+│   └── test_backup_and_restore.py       # Sandboxed restoration test suite
+├── tests/
+│   ├── __init__.py
+│   └── test_health.py                   # FastAPI health & endpoint unit tests
+├── docs/
+│   ├── STORAGE_CONFIGURATION_REPORT.md  # Detailed Stage 1B storage verification
+│   ├── REQUIREMENTS_TRACEABILITY.md     # Traceability matrix to internship PDFs
+│   ├── ARCHITECTURE.md                  # Comprehensive architectural design
+│   └── STAGE_1_IMPLEMENTATION_REPORT.md # Stage 1 completion summary
+├── .gitignore                           # Cloud-safe exclusion rules
+├── .env.example                         # Environment configuration template
+├── README.md                            # Project documentation
+└── pyproject.toml                       # Python packaging & tool configuration
 ```
 
 ---
 
-## 3. Important Storage Rules
+## 2. Storage Architecture: Google Drive First
 
-1. **Stream files mode ONLY**: Google Drive for Desktop must remain in **Stream files** mode. Never set to "Mirror files" mode to prevent cloning cloud files to the local C: disk.
-2. **Local Isolation for Databases and Git**:
-   - Git repository (`.git/`) resides exclusively in the local working directory.
-   - ChromaDB active runtime resides in `.chroma_live/` (excluded from direct sync to avoid SQLite locking collisions).
-   - Consistent database snapshots are exported to `05_Vector_Database_Backups/` using `python scripts/backup_to_drive.py`.
-3. **No Heavy Models Locally**:
-   - Mistral 7B will run on **Google Colab (NVIDIA T4 GPU)** or remote API.
-   - Embeddings (`all-MiniLM-L6-v2`) are stored locally (~120 MB).
+To operate smoothly under strict local disk constraints (< 1 GB budget):
+- **Persistent Cloud Root**: `G:\My Drive\Internship_RAG_MCP_Capstone\` (via Google Drive for Desktop in **Stream files mode**).
+  - Holds reference PDFs (`00_References/`), knowledge base documents (`03_Knowledge_Base/`), consistent ChromaDB database backups (`05_Vector_Database_Backups/`), and test evaluation logs (`06_Test_Results/`).
+- **Minimal Local Workspace**: `C:\Users\surya\Internship_RAG_MCP_Capstone` (consumes **~0.15 MB**).
+  - Houses active source code and local Git repository.
+  - Active runtime ChromaDB database resides in `.chroma_live/` (excluded from cloud sync to avoid SQLite locking collisions).
+- **Atomic Database Backup**: `python scripts/backup_to_drive.py` utilizes the **SQLite Online Backup API** (`sqlite3.Connection.backup()`) to merge live WAL pages into a clean, uncorrupted snapshot before uploading to Google Drive.
 
 ---
 
-## 4. Maintenance Scripts
+## 3. Remote Compute Decoupling (Google Colab)
 
-- **`scripts/verify_storage_and_sync.py`**: Verifies Google Drive virtual mount, ensures folder hierarchy, and checks C: drive headroom.
-- **`scripts/backup_to_drive.py`**: Creates a clean, safe snapshot of source code and ChromaDB to Google Drive.
+Because the development machine uses integrated Intel Iris Xe Graphics and limited available RAM:
+- **Embedding Generation & Chroma Indexing**: Computed on Google Colab's free **NVIDIA T4 GPU** via `notebooks/01_colab_embedding_and_chroma_indexing.ipynb`.
+- **Mistral 7B Inference**: Served via Colab GPU via `notebooks/02_colab_mistral_rag_inference.ipynb` or remote high-speed API (Groq / Gemini).
+- **Local Model Storage**: **0 GB**.
+
+---
+
+## 4. Quickstart & Verification
+
+### Running the Tests
+```powershell
+python -m pytest tests/test_health.py
+```
+
+### Running the FastAPI Server Locally
+```powershell
+uvicorn app.main:app --reload --port 8000
+```
+- Interactive Swagger UI: `http://localhost:8000/docs`
+- Health Endpoint: `http://localhost:8000/api/v1/health`
+
+### Synchronizing Snapshots to Google Drive
+```powershell
+python scripts/backup_to_drive.py
+```
+
+### Validating Backup & Restore Integrity
+```powershell
+python scripts/test_backup_and_restore.py
+```
