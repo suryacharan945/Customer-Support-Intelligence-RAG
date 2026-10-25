@@ -30,8 +30,10 @@ Internship_RAG_MCP_Capstone/
 │   │   └── logging.py                   # Structured console logging
 │   ├── ingestion/
 │   │   ├── __init__.py
-│   │   ├── loader.py                    # Multi-format document loader (txt, md, json, pdf)
-│   │   └── chunker.py                   # Overlapping character & token chunker
+│   │   ├── loader.py                    # Multi-format document loader (pdf, txt, md)
+│   │   ├── chunker.py                   # Recursive text splitter & deterministic chunker
+│   │   ├── manifest.py                  # Deduplication engine & crash-safe manifest
+│   │   └── cli.py                       # Standalone ingestion & preprocessing CLI
 │   ├── retrieval/
 │   │   ├── __init__.py
 │   │   ├── base.py                      # Abstract retriever interface
@@ -44,6 +46,7 @@ Internship_RAG_MCP_Capstone/
 │   │   └── mcp_context.py               # Multi-Context Prompting context block builder
 │   └── services/
 │       ├── __init__.py
+│       ├── ingestion_service.py         # Standalone ingestion & deduplication orchestrator
 │       ├── rag_service.py               # End-to-end RAG orchestrator & query expansion
 │       └── feedback_service.py          # Feedback collector & persistent archiver
 ├── evaluation/
@@ -60,12 +63,18 @@ Internship_RAG_MCP_Capstone/
 │   └── test_backup_and_restore.py       # Sandboxed restoration test suite
 ├── tests/
 │   ├── __init__.py
-│   └── test_health.py                   # FastAPI health & endpoint unit tests
+│   ├── test_health.py                   # FastAPI health & feedback tests (3 tests)
+│   ├── test_rag_pipeline.py             # Agentic pipeline, providers & citations (14 tests)
+│   ├── test_ingestion.py                # Loader, PDF extraction, boundary validation (10 tests)
+│   ├── test_chunking.py                 # Recursive chunker, overlap & determinism (8 tests)
+│   └── test_duplicates.py               # Manifest persistence & duplicate skipping (4 tests)
 ├── docs/
 │   ├── STORAGE_CONFIGURATION_REPORT.md  # Detailed Stage 1B storage verification
 │   ├── REQUIREMENTS_TRACEABILITY.md     # Traceability matrix to internship PDFs
 │   ├── ARCHITECTURE.md                  # Comprehensive architectural design
-│   └── STAGE_1_IMPLEMENTATION_REPORT.md # Stage 1 completion summary
+│   ├── STAGE_1_IMPLEMENTATION_REPORT.md # Stage 1 completion summary
+│   ├── STAGE_1C_CORRECTION_REPORT.md    # Stage 1C foundation corrections report
+│   └── STAGE_2_IMPLEMENTATION_REPORT.md # Stage 2 ingestion & preprocessing report
 ├── .gitignore                           # Cloud-safe exclusion rules
 ├── .env.example                         # Environment configuration template
 ├── README.md                            # Project documentation
@@ -97,9 +106,23 @@ Because the development machine uses integrated Intel Iris Xe Graphics and limit
 
 ## 4. Quickstart & Verification
 
-### Running the Tests
+### Running the Test Suite (39 Tests)
 ```powershell
-python -m pytest tests/test_health.py
+$env:PYTHONPATH = "C:\Users\surya\Internship_RAG_MCP_Capstone"
+python -m pytest tests -v
+```
+
+### Knowledge Base Ingestion CLI
+Run the standalone ingestion CLI to process new documents or re-index the synthetic knowledge base on Google Drive:
+```powershell
+# Ingest entire Google Drive knowledge base
+python app/ingestion/cli.py "G:\My Drive\Internship_RAG_MCP_Capstone\03_Knowledge_Base"
+
+# Force re-indexing of modified/duplicate documents
+python app/ingestion/cli.py "G:\My Drive\Internship_RAG_MCP_Capstone\03_Knowledge_Base" --force
+
+# Ingest a single document with explicit category
+python app/ingestion/cli.py "path/to/manual.pdf" --category product_manual
 ```
 
 ### Running the FastAPI Server Locally

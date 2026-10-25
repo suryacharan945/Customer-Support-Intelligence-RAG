@@ -81,9 +81,26 @@ flowchart TD
 
 ## 3. Subsystem Breakdown
 
-### 3.1 Ingestion & Chunking (`app/ingestion/`)
-- **`DocumentLoader`**: Traverses knowledge base directories on Google Drive (`03_Knowledge_Base/`), parsing `.txt`, `.md`, `.json`, `.csv`, and `.pdf` files.
-- **`DocumentChunker`**: Executes character and token-level chunking with configurable overlap (default: 500 characters, 50-character overlap) while preserving source metadata, category, and chunk indices.
+### 3.1 Ingestion & Chunking Subsystem (`app/ingestion/`, `app/services/ingestion_service.py`)
+- **`DocumentLoader` (`app/ingestion/loader.py`)**:
+  - Traverses knowledge base directories on Google Drive (`03_Knowledge_Base/`), supporting `.pdf`, `.txt`, and `.md` formats.
+  - Page-by-page PDF text extraction via `pypdf`, preserving `page_number` and `total_pages`.
+  - Rejects empty files (`EMPTY_CONTENT`), corrupted PDFs, unsupported file types, and oversized documents (> 10 MB limit).
+  - Detects scanned PDFs without text extraction and raises `SCANNED_PDF_NO_TEXT` (avoids downloading OCR models locally).
+  - Enforces mandatory category validation against four core support domains: `product_manual`, `troubleshooting`, `warranty`, and `faq`.
+  - Computes deterministic SHA-256 content hashes and stable document IDs (`doc_{cat_prefix}_{hash[:12]}`).
+- **`RecursiveTextSplitter` & `DocumentChunker` (`app/ingestion/chunker.py`)**:
+  - Implements recursive splitting across hierarchical natural language boundaries: `\n\n` -> `\n` -> sentence boundaries (`. `, `? `, `! `, `; `) -> word boundaries (` `) -> characters (`""`).
+  - Preserves intra-chunk context with sliding window character overlap (default: 1,000 characters, 200 character overlap).
+  - Produces deterministic chunk IDs: `{doc_id}_p{page}_c{index}` for multi-page PDFs, and `{doc_id}_c{index}` for single-page files.
+  - Assigns per-chunk SHA-256 hashes and metadata payloads (`category`, `source`, `page_number`, `char_count`).
+- **`IngestionManifest` (`app/ingestion/manifest.py`)**:
+  - Persistent JSON registry stored on Google Drive (`02_Datasets/ingestion_manifest.json`) tracking document versions, content hashes, and chunk counts.
+  - State machine: `UNCHANGED` (skips re-indexing byte-for-byte identical files), `MODIFIED` (increments version and updates chunks), and `NEW`.
+  - Employs atomic file replacement via temporary files (`.tmp`) to guarantee crash-safe persistence across restarts.
+- **`IngestionService` & Standalone CLI (`app/services/ingestion_service.py`, `app/ingestion/cli.py`)**:
+  - Decoupled ingestion coordination independent of ChromaDB or LLM dependencies.
+  - Interactive CLI supporting single-file and batch directory processing (`python app/ingestion/cli.py <path> --category <cat> [--force]`).
 
 ### 3.2 Hybrid Retrieval (`app/retrieval/`)
 - **Dense Vector Search**: Connects to ChromaDB persistent collection.
