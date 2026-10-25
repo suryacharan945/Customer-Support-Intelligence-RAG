@@ -23,11 +23,17 @@ class Settings(BaseSettings):
     LOCAL_MAX_STORAGE_BUDGET_MB: int = 1024
 
     # LLM & Remote Compute
-    LLM_PROVIDER: str = "colab_remote"  # colab_remote, groq, gemini, local_mock
+    # Supported providers: colab_remote, groq, gemini, ollama, mock
+    LLM_PROVIDER: str = "colab_remote"
     COLAB_API_ENDPOINT: str = "http://localhost:8001/v1"
     GROQ_API_KEY: str = ""
     GEMINI_API_KEY: str = ""
+    OLLAMA_API_ENDPOINT: str = "http://localhost:11434/v1"
     DEFAULT_MODEL_NAME: str = "mistralai/Mistral-7B-Instruct-v0.3"
+
+    # Testing & Mock Configuration (Strictly disabled in normal dev / production)
+    ALLOW_MOCK_FALLBACK: bool = False
+    TEST_MODE: bool = False
 
     # Embedding Settings
     EMBEDDING_MODEL_NAME: str = "sentence-transformers/all-MiniLM-L6-v2"

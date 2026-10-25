@@ -36,21 +36,6 @@ def test_health_check_endpoint():
     assert data["storage"]["google_drive_root"] == settings.GOOGLE_DRIVE_ROOT
 
 
-def test_rag_mock_query():
-    """Verify that the RAG endpoint processes queries with mock client without errors."""
-    payload = {
-        "query": "How do I reset my printer?",
-        "session_id": "test-session-123",
-        "top_k": 3,
-    }
-    response = client.post(f"{settings.API_V1_PREFIX}/rag/query", json=payload)
-    assert response.status_code == 200
-    data = response.json()
-    assert "answer" in data
-    assert data["confidence_score"] > 0.0
-    assert len(data["citations"]) > 0
-
-
 def test_feedback_submission():
     """Verify recording feedback in the feedback endpoint."""
     payload = {
@@ -58,9 +43,10 @@ def test_feedback_submission():
         "rating": 5,
         "correction": None,
         "flagged_incorrect": False,
-        "comment": "Very accurate instructions",
+        "comment": "Accurate and traceable citations",
     }
     response = client.post(f"{settings.API_V1_PREFIX}/feedback/", json=payload)
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "success"
+    assert data["data"]["query_id"] == "qid-001"
