@@ -160,6 +160,21 @@ flowchart TD
   - Content structure validated (`%PDF-` signature and UTF-8 text integrity).
 - **Atomic Deletion Protocol**: `DELETE /api/v1/documents/{document_id}` purges raw storage files, removes dense chunks from ChromaDB, purges sparse chunks from BM25, and marks the manifest record as `deleted`. Safe and returns HTTP 404 on repeat.
 
+### 3.8 Streamlit Web Application Tier (`frontend/`)
+- **Modular Component Architecture**: Separated into main entrypoint (`app.py`), decoupled HTTP interface (`api_client.py`), session state manager (`state.py`), visual components (`components/`), and five domain views (`views/`).
+- **Decoupled API Client with Guardrails (`frontend/api_client.py`)**:
+  - Configurable timeouts and base URL.
+  - Typed exceptions: `APIConnectionError`, `APITimeoutError`, `APIStatusError`.
+  - Zero database or ChromaDB access from Streamlit.
+  - Safe idempotent retries on GET; strict **zero-retry policy on file uploads** to prevent duplicate document ingestion.
+- **Interactive Views**:
+  - **Page A (Chat Assistant)**: Dual-mode RAG question answering, optional category filtering, top-$k$ depth control, latency metrics, groundedness badges, verified citation accordion, and active learning feedback.
+  - **Page B (Document Management)**: Multi-format upload, category routing, 6-state lifecycle tracking, and confirmed deletion.
+  - **Page C (Baseline vs Multi-Context Comparison)**: Side-by-side execution on the same query, reporting latency delta, category routing, and citation counts.
+  - **Page D (Knowledge Base Telemetry)**: Live metrics from `/knowledge-base/status` and `/ready`, showing document counts, 6-state lifecycle cards, category balance, and Google Drive persistent storage status.
+  - **Page E (System Architecture)**: Complete reference manual covering MCP, hybrid RRF search, citation groundedness rules, and resource governance.
+- **Honest Runtime State Reporting**: Transparently reports `Colab GPU Standby` (`READY_FOR_COLAB_INFERENCE`) or `Test Mock Mode` when remote GPU compute is offline. Never fabricates answers or misrepresents mock text as live inference.
+
 ---
 
 ## 4. Storage Segregation & Safety Architecture

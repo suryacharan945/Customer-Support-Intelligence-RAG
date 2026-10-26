@@ -57,6 +57,21 @@ Internship_RAG_MCP_Capstone/
 │       ├── ingestion_service.py         # Standalone ingestion & deduplication orchestrator
 │       ├── rag_service.py               # End-to-end RAG orchestrator & query expansion
 │       └── feedback_service.py          # Feedback collector & persistent archiver
+├── frontend/
+│   ├── __init__.py
+│   ├── app.py                          # Streamlit application entrypoint & routing
+│   ├── api_client.py                   # Decoupled HTTP API client with error boundaries
+│   ├── state.py                        # Ephemeral session state manager
+│   ├── components/
+│   │   ├── badges.py                   # Lifecycle & provider visual status badges
+│   │   ├── citations.py                # Grounded supporting citation cards
+│   │   └── feedback_widget.py          # Active learning 1-5 star feedback form
+│   └── views/
+│       ├── chat_view.py                # Page A: Dual-mode RAG customer support chat
+│       ├── documents_view.py           # Page B: Document lifecycle management & upload
+│       ├── comparison_view.py          # Page C: Side-by-side Baseline vs MCP evaluation
+│       ├── knowledge_base_view.py      # Page D: Telemetry, lifecycle & storage dashboard
+│       └── about_view.py               # Page E: Architecture manual & diagnostics
 ├── evaluation/
 │   ├── __init__.py
 │   ├── metrics.py                       # Faithfulness, Context Relevance, Latency
@@ -83,6 +98,7 @@ Internship_RAG_MCP_Capstone/
 │   ├── test_vector_store.py             # Insertion, counts, category filter, top-k (10 tests)
 │   ├── test_stage4_multi_context.py     # Stage 4 MCP, hybrid retrieval, citation checks (17 tests)
 │   ├── test_stage5_api.py               # Stage 5 FastAPI endpoints, lifecycle, upload, delete (23 tests)
+│   ├── test_stage6_ui.py                # Stage 6 Streamlit UI, API client, AppTest, components (22 tests)
 │   └── test_retrieval.py                # Baseline retrieval, latency, snapshot restoration (7 tests)
 ├── docs/
 │   ├── STORAGE_CONFIGURATION_REPORT.md  # Detailed Stage 1B storage verification
@@ -94,6 +110,9 @@ Internship_RAG_MCP_Capstone/
 │   ├── STAGE_3_IMPLEMENTATION_REPORT.md # Stage 3 embedding & retrieval report
 │   ├── STAGE_4_IMPLEMENTATION_REPORT.md # Stage 4 multi-context hybrid RAG report
 │   ├── STAGE_5_IMPLEMENTATION_REPORT.md # Stage 5 FastAPI & document lifecycle report
+│   ├── STAGE_6_IMPLEMENTATION_REPORT.md # Stage 6 Streamlit frontend & UI testing report
+│   ├── STREAMLIT_USER_GUIDE.md          # Complete user manual for Streamlit dashboard
+│   ├── UI_TEST_REPORT.md                # UI automated and manual verification report
 │   ├── API_REFERENCE.md                 # Complete API reference and schemas
 │   ├── END_TO_END_VERIFICATION.md       # Stage 5 end-to-end inquiry verification report
 │   ├── EMBEDDING_AND_VECTOR_STORE.md    # Embedding models & collection specifications
@@ -129,32 +148,16 @@ Because the development machine uses integrated Intel Iris Xe Graphics and limit
 
 ## 4. Quickstart & Verification
 
-### Running the Complete Test Suite (108 Tests)
+### Running the Complete Test Suite (130 Tests)
 ```powershell
 python -m pytest tests/ -v
 ```
 
-### Knowledge Base Ingestion CLI
-Run the standalone ingestion CLI to process new documents or re-index the synthetic knowledge base on Google Drive:
+### Running the Streamlit Frontend Dashboard Locally
 ```powershell
-# Ingest entire Google Drive knowledge base
-python app/ingestion/cli.py "G:\My Drive\Internship_RAG_MCP_Capstone\03_Knowledge_Base"
-
-# Force re-indexing of modified/duplicate documents
-python app/ingestion/cli.py "G:\My Drive\Internship_RAG_MCP_Capstone\03_Knowledge_Base" --force
-
-# Ingest a single document with explicit category
-python app/ingestion/cli.py "path/to/manual.pdf" --category product_manual
+streamlit run frontend/app.py --server.port 8501
 ```
-
-### Retrieval Evaluation Benchmark CLI
-```powershell
-# Run benchmark with mock embedding provider and export to Google Drive
-python scripts/evaluate_retrieval.py --mock --export
-
-# Run benchmark with category-filtered retrieval
-python scripts/evaluate_retrieval.py --mock --category-filter
-```
+- Interactive Dashboard: `http://localhost:8501`
 
 ### Running the FastAPI Server Locally
 ```powershell
@@ -162,6 +165,11 @@ uvicorn app.main:app --reload --port 8000
 ```
 - Interactive Swagger UI: `http://localhost:8000/docs`
 - Health Endpoint: `http://localhost:8000/api/v1/health`
+
+### Executing Full UI Integration Verification & Screenshot Tool
+```powershell
+python scripts/verify_ui_integration.py
+```
 
 ### Synchronizing Snapshots to Google Drive
 ```powershell
