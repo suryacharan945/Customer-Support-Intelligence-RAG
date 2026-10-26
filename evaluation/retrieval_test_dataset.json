@@ -1,0 +1,134 @@
+{
+  "dataset_name": "ApexPrint Customer Support Retrieval Evaluation Dataset",
+  "version": "1.0",
+  "description": "Ground-truth relevance benchmark derived from the 9 synthetic ApexPrint knowledge base documents across 4 support categories.",
+  "model_evaluated": "sentence-transformers/all-MiniLM-L6-v2",
+  "queries": [
+    {
+      "id": "q01_product_specs_speed",
+      "category": "product_manual",
+      "query": "What is the maximum print speed in pages per minute for the ApexPrint ProX-400?",
+      "relevant_doc_ids": ["doc_prod_87e13ad145a4", "doc_prod_51063b27f241"],
+      "relevant_chunk_ids": ["doc_prod_87e13ad145a4_c0000", "doc_prod_51063b27f241_p1_c0000"],
+      "expected_category": "product_manual",
+      "description": "ProX-400 print speed (45 ppm monochrome, 35 ppm color)."
+    },
+    {
+      "id": "q02_product_specs_colorwave",
+      "category": "product_manual",
+      "query": "How do I load and calibrate the individual CMYK ink tanks on the ApexPrint ColorWave 850?",
+      "relevant_doc_ids": ["doc_prod_8828edaf40d0"],
+      "relevant_chunk_ids": ["doc_prod_8828edaf40d0_c0000"],
+      "expected_category": "product_manual",
+      "description": "ColorWave 850 wide-format CMYK cartridge loading."
+    },
+    {
+      "id": "q03_wifi_troubleshooting",
+      "category": "troubleshooting",
+      "query": "My ApexPrint printer cannot connect to Wi-Fi. What troubleshooting instructions are available?",
+      "relevant_doc_ids": ["doc_trou_6515a19c8290"],
+      "relevant_chunk_ids": ["doc_trou_6515a19c8290_c0000"],
+      "expected_category": "troubleshooting",
+      "description": "ProX-400 dual-band Wi-Fi connection troubleshooting."
+    },
+    {
+      "id": "q04_wifi_static_ip",
+      "category": "troubleshooting",
+      "query": "How do I configure a static IP address and WPA3 security for the ProX-400 on an enterprise network?",
+      "relevant_doc_ids": ["doc_trou_6515a19c8290"],
+      "relevant_chunk_ids": ["doc_trou_6515a19c8290_c0001"],
+      "expected_category": "troubleshooting",
+      "description": "Enterprise network static IP and WPA3 authentication."
+    },
+    {
+      "id": "q05_error_paper_jam",
+      "category": "troubleshooting",
+      "query": "How do I clear error code E-101 Paper Jam from Tray 1 without damaging the rollers?",
+      "relevant_doc_ids": ["doc_trou_ee29c06b48ed"],
+      "relevant_chunk_ids": ["doc_trou_ee29c06b48ed_c0000"],
+      "expected_category": "troubleshooting",
+      "description": "Hardware error code E-101 paper jam clearing sequence."
+    },
+    {
+      "id": "q06_error_fuser_overheat",
+      "category": "troubleshooting",
+      "query": "What should I do if the printer display flashes Error E-204 Fuser Unit Overheat?",
+      "relevant_doc_ids": ["doc_trou_ee29c06b48ed"],
+      "relevant_chunk_ids": ["doc_trou_ee29c06b48ed_c0001"],
+      "expected_category": "troubleshooting",
+      "description": "Thermal diagnostic for Error E-204 fuser unit overheat."
+    },
+    {
+      "id": "q07_warranty_eligibility",
+      "category": "warranty",
+      "query": "What is covered under the standard 1-year limited hardware warranty for ApexPrint?",
+      "relevant_doc_ids": ["doc_warr_16f0708fca0e"],
+      "relevant_chunk_ids": ["doc_warr_16f0708fca0e_c0000"],
+      "expected_category": "warranty",
+      "description": "Standard 1-year limited hardware warranty coverage."
+    },
+    {
+      "id": "q08_warranty_rma_procedure",
+      "category": "warranty",
+      "query": "What proof of purchase and RMA steps are required to claim warranty replacement parts?",
+      "relevant_doc_ids": ["doc_warr_16f0708fca0e"],
+      "relevant_chunk_ids": ["doc_warr_16f0708fca0e_c0001"],
+      "expected_category": "warranty",
+      "description": "Return Merchandise Authorization (RMA) process and receipt requirement."
+    },
+    {
+      "id": "q09_warranty_exclusions_spill",
+      "category": "warranty",
+      "query": "Does the ApexPrint standard warranty cover accidental liquid spills or physical impact damage?",
+      "relevant_doc_ids": ["doc_warr_2dc6b16efec0"],
+      "relevant_chunk_ids": ["doc_warr_2dc6b16efec0_c0000"],
+      "expected_category": "warranty",
+      "description": "Exclusions: liquid damage, electrical surge, physical abuse."
+    },
+    {
+      "id": "q10_warranty_exclusions_non_oem",
+      "category": "warranty",
+      "query": "Does using non-OEM third-party refilled toner cartridges void the printer warranty?",
+      "relevant_doc_ids": ["doc_warr_2dc6b16efec0"],
+      "relevant_chunk_ids": ["doc_warr_2dc6b16efec0_c0001"],
+      "expected_category": "warranty",
+      "description": "Damage caused by unauthorized third-party cartridges voiding coverage."
+    },
+    {
+      "id": "q11_faq_mobile_printing",
+      "category": "faq",
+      "query": "Can I print directly from my Apple iPhone or Android device using Apple AirPrint or Mopria?",
+      "relevant_doc_ids": ["doc_faq_d8c75166d413"],
+      "relevant_chunk_ids": ["doc_faq_d8c75166d413_c0000"],
+      "expected_category": "faq",
+      "description": "General FAQ on mobile AirPrint and Mopria wireless printing."
+    },
+    {
+      "id": "q12_faq_drum_replacement",
+      "category": "faq",
+      "query": "What is the expected lifecycle and replacement procedure for the imaging drum unit?",
+      "relevant_doc_ids": ["doc_faq_ae953a11c979"],
+      "relevant_chunk_ids": ["doc_faq_ae953a11c979_c0000"],
+      "expected_category": "faq",
+      "description": "Hardware FAQ: 30,000 page drum unit lifecycle and maintenance."
+    },
+    {
+      "id": "q13_cross_category_roller_warranty",
+      "category": "cross_category",
+      "query": "If my paper pickup rollers wear out during the first 6 months, is replacement covered under warranty?",
+      "relevant_doc_ids": ["doc_trou_ee29c06b48ed", "doc_warr_16f0708fca0e"],
+      "relevant_chunk_ids": ["doc_trou_ee29c06b48ed_c0000", "doc_warr_16f0708fca0e_c0000"],
+      "expected_category": null,
+      "description": "Cross-category query combining troubleshooting wear with warranty coverage."
+    },
+    {
+      "id": "q14_unsupported_3d_printing",
+      "category": "unsupported",
+      "query": "What extruder temperature should I set for printing with ABS or PLA filament on the ApexPrint?",
+      "relevant_doc_ids": [],
+      "relevant_chunk_ids": [],
+      "expected_category": null,
+      "description": "Out-of-domain unsupported question testing negative/zero-retrieval handling."
+    }
+  ]
+}

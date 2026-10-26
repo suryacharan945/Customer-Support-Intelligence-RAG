@@ -1,7 +1,7 @@
 """Abstract retrieval base interface."""
 
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 
 class RetrievalResult:
@@ -34,6 +34,8 @@ class BaseRetriever(ABC):
     """Abstract interface for all retrieval implementations."""
 
     @abstractmethod
-    def retrieve(self, query: str, top_k: int = 5) -> List[RetrievalResult]:
-        """Retrieve top_k matching documents for a given query."""
+    def retrieve(
+        self, query: str, top_k: int = 5, category: Optional[str] = None
+    ) -> List[RetrievalResult]:
+        """Retrieve top_k matching documents for a given query, optionally filtered by category."""
         pass

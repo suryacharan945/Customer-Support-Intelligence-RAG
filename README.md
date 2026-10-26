@@ -37,7 +37,9 @@ Internship_RAG_MCP_Capstone/
 │   ├── retrieval/
 │   │   ├── __init__.py
 │   │   ├── base.py                      # Abstract retriever interface
-│   │   ├── vector_store.py              # ChromaDB / FAISS adapter with fallback
+│   │   ├── embeddings.py                # Embedding provider abstraction (local, remote, mock)
+│   │   ├── vector_store.py              # ChromaDB vector store adapter & category filtering
+│   │   ├── chroma_backup.py             # Full ChromaDB persistence snapshot & restore manager
 │   │   └── hybrid.py                    # Dense semantic + Sparse keyword (BM25) fusion
 │   ├── generation/
 │   │   ├── __init__.py
@@ -52,7 +54,9 @@ Internship_RAG_MCP_Capstone/
 ├── evaluation/
 │   ├── __init__.py
 │   ├── metrics.py                       # Faithfulness, Context Relevance, Latency
-│   └── evaluator.py                     # Automated benchmark runner with Drive export
+│   ├── evaluator.py                     # Automated benchmark runner with Drive export
+│   ├── retrieval_evaluator.py           # Retrieval benchmark engine (Recall@K, MRR, latency)
+│   └── retrieval_test_dataset.json      # Ground-truth test queries & relevance labels
 ├── notebooks/
 │   ├── README.md                        # Remote compute workflow & GPU guidelines
 │   ├── 01_colab_embedding_and_chroma_indexing.ipynb # Batch GPU embedding & index creation
@@ -60,21 +64,28 @@ Internship_RAG_MCP_Capstone/
 ├── scripts/
 │   ├── verify_storage_and_sync.py       # Cloud mount validator & folder builder
 │   ├── backup_to_drive.py               # Quiescent SQLite Online Backup & rotation
-│   └── test_backup_and_restore.py       # Sandboxed restoration test suite
+│   ├── test_backup_and_restore.py       # Sandboxed restoration test suite
+│   └── evaluate_retrieval.py            # Retrieval benchmark CLI runner
 ├── tests/
 │   ├── __init__.py
 │   ├── test_health.py                   # FastAPI health & feedback tests (3 tests)
 │   ├── test_rag_pipeline.py             # Agentic pipeline, providers & citations (14 tests)
 │   ├── test_ingestion.py                # Loader, PDF extraction, boundary validation (10 tests)
 │   ├── test_chunking.py                 # Recursive chunker, overlap & determinism (8 tests)
-│   └── test_duplicates.py               # Manifest persistence & duplicate skipping (4 tests)
+│   ├── test_duplicates.py               # Manifest persistence & duplicate skipping (4 tests)
+│   ├── test_embeddings.py               # Dimensionality, normalization, provider errors (10 tests)
+│   ├── test_vector_store.py             # Insertion, counts, category filter, top-k (10 tests)
+│   └── test_retrieval.py                # Baseline retrieval, latency, snapshot restoration (7 tests)
 ├── docs/
 │   ├── STORAGE_CONFIGURATION_REPORT.md  # Detailed Stage 1B storage verification
 │   ├── REQUIREMENTS_TRACEABILITY.md     # Traceability matrix to internship PDFs
 │   ├── ARCHITECTURE.md                  # Comprehensive architectural design
 │   ├── STAGE_1_IMPLEMENTATION_REPORT.md # Stage 1 completion summary
 │   ├── STAGE_1C_CORRECTION_REPORT.md    # Stage 1C foundation corrections report
-│   └── STAGE_2_IMPLEMENTATION_REPORT.md # Stage 2 ingestion & preprocessing report
+│   ├── STAGE_2_IMPLEMENTATION_REPORT.md # Stage 2 ingestion & preprocessing report
+│   ├── STAGE_3_IMPLEMENTATION_REPORT.md # Stage 3 embedding & retrieval report
+│   ├── EMBEDDING_AND_VECTOR_STORE.md    # Embedding models & collection specifications
+│   └── CHROMADB_BACKUP_AND_RESTORE.md   # Persistence snapshot & restoration protocol
 ├── .gitignore                           # Cloud-safe exclusion rules
 ├── .env.example                         # Environment configuration template
 ├── README.md                            # Project documentation
@@ -106,7 +117,7 @@ Because the development machine uses integrated Intel Iris Xe Graphics and limit
 
 ## 4. Quickstart & Verification
 
-### Running the Test Suite (39 Tests)
+### Running the Test Suite (66 Tests)
 ```powershell
 $env:PYTHONPATH = "C:\Users\surya\Internship_RAG_MCP_Capstone"
 python -m pytest tests -v
@@ -123,6 +134,15 @@ python app/ingestion/cli.py "G:\My Drive\Internship_RAG_MCP_Capstone\03_Knowledg
 
 # Ingest a single document with explicit category
 python app/ingestion/cli.py "path/to/manual.pdf" --category product_manual
+```
+
+### Retrieval Evaluation Benchmark CLI
+```powershell
+# Run benchmark with mock embedding provider and export to Google Drive
+python scripts/evaluate_retrieval.py --mock --export
+
+# Run benchmark with category-filtered retrieval
+python scripts/evaluate_retrieval.py --mock --category-filter
 ```
 
 ### Running the FastAPI Server Locally

@@ -1,6 +1,6 @@
 """Hybrid Retrieval Combining Dense Semantic Embeddings and Sparse BM25 Keyword Matching."""
 
-from typing import List, Dict
+from typing import List, Dict, Optional
 from app.retrieval.base import BaseRetriever, RetrievalResult
 from app.retrieval.vector_store import VectorStoreRetriever
 from app.core.config import settings
@@ -24,9 +24,16 @@ class HybridRetriever(BaseRetriever):
         overlap = query_tokens.intersection(text_tokens)
         return len(overlap) / len(query_tokens)
 
-    def retrieve(self, query: str, top_k: int = 5) -> List[RetrievalResult]:
-        """Perform hybrid retrieval with reciprocal score re-weighting."""
-        dense_results = self.vector_retriever.retrieve(query, top_k=top_k * 2)
+    def retrieve(
+        self, query: str, top_k: int = 5, category: Optional[str] = None
+    ) -> List[RetrievalResult]:
+        """Perform hybrid retrieval with reciprocal score re-weighting, optionally filtered by category."""
+        if category:
+            dense_results = self.vector_retriever.retrieve(
+                query, top_k=top_k * 2, category=category
+            )
+        else:
+            dense_results = self.vector_retriever.retrieve(query, top_k=top_k * 2)
         fused_results: List[RetrievalResult] = []
 
         for item in dense_results:

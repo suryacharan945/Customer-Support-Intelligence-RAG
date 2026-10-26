@@ -36,10 +36,18 @@ class Settings(BaseSettings):
     TEST_MODE: bool = False
 
     # Embedding Settings
+    # Supported providers: remote, local, mock
+    EMBEDDING_PROVIDER: str = "remote"
+    ALLOW_LOCAL_EMBEDDINGS: bool = False
+    REMOTE_EMBEDDING_ENDPOINT: str = "http://localhost:8001/v1/embeddings"
     EMBEDDING_MODEL_NAME: str = "sentence-transformers/all-MiniLM-L6-v2"
+    EMBEDDING_MODEL_REVISION: str = "all-MiniLM-L6-v2"
+    EMBEDDING_DIMENSION: int = 384
     EMBEDDING_DEVICE: str = "cpu"
+    EMBEDDING_DISTANCE_METRIC: str = "cosine"
 
     # Retrieval Settings
+    CHROMA_COLLECTION_NAME: str = "apexprint_knowledge_base"
     TOP_K_RETRIEVAL: int = 5
     HYBRID_SEARCH_ALPHA: float = 0.6
     BM25_ENABLED: bool = True

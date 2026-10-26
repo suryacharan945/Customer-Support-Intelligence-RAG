@@ -102,12 +102,23 @@ flowchart TD
   - Decoupled ingestion coordination independent of ChromaDB or LLM dependencies.
   - Interactive CLI supporting single-file and batch directory processing (`python app/ingestion/cli.py <path> --category <cat> [--force]`).
 
-### 3.2 Hybrid Retrieval (`app/retrieval/`)
-- **Dense Vector Search**: Connects to ChromaDB persistent collection.
-- **Sparse Keyword Search**: Evaluates exact term overlap (BM25 proxy).
-- **Reciprocal Rank / Linear Score Fusion**: Weighted score calculation:
-  $$\text{Score}_{\text{hybrid}} = \alpha \cdot \text{Score}_{\text{dense}} + (1 - \alpha) \cdot \text{Score}_{\text{sparse}}$$
-  (Default $\alpha = 0.60$).
+### 3.2 Dense Vector & Hybrid Retrieval (`app/retrieval/`)
+- **`BaseEmbeddingProvider` (`app/retrieval/embeddings.py`)**:
+  - Implements provider abstraction: `SentenceTransformerEmbeddingProvider` (local, permission-guarded), `RemoteEmbeddingProvider` (Google Colab / REST API client), and `MockEmbeddingProvider` (deterministic 384-d unit vectors for CI testing).
+  - Standardizes on `sentence-transformers/all-MiniLM-L6-v2` (384 dimensions, cosine distance space).
+- **`VectorStoreRetriever` (`app/retrieval/vector_store.py`)**:
+  - Connects to ChromaDB persistent collection (`apexprint_knowledge_base`).
+  - Supports baseline multi-category semantic search and category-filtered search (`where={"category": ...}`).
+  - Computes cosine similarity scores: $\text{Score} = \max(0.0, \min(1.0, 1.0 - d))$.
+  - Implements controlled chunk upserting and retrieval latency telemetry.
+- **`ChromaSnapshotManager` (`app/retrieval/chroma_backup.py`)**:
+  - Complete persistence directory backup preserving both `chroma.sqlite3` and binary HNSW segment folders.
+  - Flushes SQLite Write-Ahead Log via `sqlite3.Connection.backup()` before packing into Google Drive snapshots.
+  - Generates machine-readable index manifests (`chroma_manifest.json`) with checksums and software telemetry.
+- **`HybridRetriever` (`app/retrieval/hybrid.py`)**:
+  - Fuses dense semantic embeddings with sparse keyword matching (BM25 token overlap proxy):
+    $$\text{Score}_{\text{hybrid}} = \alpha \cdot \text{Score}_{\text{dense}} + (1 - \alpha) \cdot \text{Score}_{\text{sparse}}$$
+    (Default $\alpha = 0.60$). Supports category filtering.
 
 ### 3.3 Multi-Context Prompting (MCP) (`app/generation/mcp_context.py`)
 - Standardizes diverse multi-source inputs into partitioned, labelled context sections:
