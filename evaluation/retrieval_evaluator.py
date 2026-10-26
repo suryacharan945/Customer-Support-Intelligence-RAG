@@ -66,30 +66,49 @@ class RetrievalEvaluator:
             elapsed_ms = (time.perf_counter() - t0) * 1000.0
             latencies_ms.append(elapsed_ms)
 
-            retrieved_doc_ids = [r.document_id for r in retrieved]
+            retrieved_doc_ids = [r.metadata.get("document_id", r.document_id) for r in retrieved]
+            retrieved_chunk_ids = [r.metadata.get("chunk_id", r.document_id) for r in retrieved]
 
             # Calculate document-level hits
             doc_hits_at_1 = (
                 1.0
-                if (is_supported and retrieved_doc_ids[:1] and retrieved_doc_ids[0] in relevant_docs)
+                if (
+                    is_supported
+                    and (
+                        (retrieved_doc_ids[:1] and retrieved_doc_ids[0] in relevant_docs)
+                        or (retrieved_chunk_ids[:1] and retrieved_chunk_ids[0] in relevant_chunks)
+                    )
+                )
                 else 0.0
             )
             doc_hits_at_3 = (
                 1.0
-                if (is_supported and any(d in relevant_docs for d in retrieved_doc_ids[:3]))
+                if (
+                    is_supported
+                    and (
+                        any(d in relevant_docs for d in retrieved_doc_ids[:3])
+                        or any(c in relevant_chunks for c in retrieved_chunk_ids[:3])
+                    )
+                )
                 else 0.0
             )
             doc_hits_at_5 = (
                 1.0
-                if (is_supported and any(d in relevant_docs for d in retrieved_doc_ids[:5]))
+                if (
+                    is_supported
+                    and (
+                        any(d in relevant_docs for d in retrieved_doc_ids[:5])
+                        or any(c in relevant_chunks for c in retrieved_chunk_ids[:5])
+                    )
+                )
                 else 0.0
             )
 
             # Calculate reciprocal rank
             rr = 0.0
             if is_supported:
-                for rank, doc_id in enumerate(retrieved_doc_ids, start=1):
-                    if doc_id in relevant_docs:
+                for rank, (doc_id, chunk_id) in enumerate(zip(retrieved_doc_ids, retrieved_chunk_ids), start=1):
+                    if doc_id in relevant_docs or chunk_id in relevant_chunks:
                         rr = 1.0 / rank
                         break
 

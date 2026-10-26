@@ -1,0 +1,325 @@
+{
+  "evaluation_timestamp": "2026-10-26T08:22:59Z",
+  "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+  "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "embedding_dimension": 384,
+  "device": "cpu",
+  "load_time_sec": 1.349,
+  "indexing_duration_sec": 3.875,
+  "total_documents": 9,
+  "total_chunks": 21,
+  "evaluation_summary": {
+    "dataset_name": "ApexPrint Customer Support Retrieval Evaluation Dataset",
+    "total_queries": 14,
+    "supported_queries": 13,
+    "unsupported_queries": 1,
+    "top_k": 5,
+    "category_filter_applied": false,
+    "aggregate_metrics": {
+      "recall@1": 0.8462,
+      "recall@3": 0.9231,
+      "recall@5": 0.9231,
+      "mrr": 0.8846,
+      "mean_latency_ms": 83.09,
+      "p95_latency_ms": 126.76,
+      "min_latency_ms": 56.68,
+      "max_latency_ms": 126.76
+    },
+    "detailed_query_results": [
+      {
+        "query_id": "q01_product_specs_speed",
+        "category": "product_manual",
+        "query": "What is the maximum print speed in pages per minute for the ApexPrint ProX-400?",
+        "is_supported": true,
+        "latency_ms": 98.54,
+        "relevant_doc_ids": [
+          "doc_prod_51063b27f241",
+          "doc_prod_87e13ad145a4"
+        ],
+        "retrieved_doc_ids": [
+          "doc_prod_87e13ad145a4",
+          "doc_prod_51063b27f241",
+          "doc_prod_51063b27f241",
+          "doc_prod_8828edaf40d0",
+          "doc_trou_6515a19c8290"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q02_product_specs_colorwave",
+        "category": "product_manual",
+        "query": "How do I load and calibrate the individual CMYK ink tanks on the ApexPrint ColorWave 850?",
+        "is_supported": true,
+        "latency_ms": 71.48,
+        "relevant_doc_ids": [
+          "doc_prod_8828edaf40d0"
+        ],
+        "retrieved_doc_ids": [
+          "doc_prod_8828edaf40d0",
+          "doc_faq_d8c75166d413",
+          "doc_prod_8828edaf40d0",
+          "doc_prod_87e13ad145a4",
+          "doc_trou_ee29c06b48ed"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q03_wifi_troubleshooting",
+        "category": "troubleshooting",
+        "query": "My ApexPrint printer cannot connect to Wi-Fi. What troubleshooting instructions are available?",
+        "is_supported": true,
+        "latency_ms": 56.68,
+        "relevant_doc_ids": [
+          "doc_trou_6515a19c8290"
+        ],
+        "retrieved_doc_ids": [
+          "doc_trou_6515a19c8290",
+          "doc_trou_6515a19c8290",
+          "doc_faq_d8c75166d413",
+          "doc_trou_ee29c06b48ed",
+          "doc_prod_51063b27f241"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q04_wifi_static_ip",
+        "category": "troubleshooting",
+        "query": "How do I configure a static IP address and WPA3 security for the ProX-400 on an enterprise network?",
+        "is_supported": true,
+        "latency_ms": 83.16,
+        "relevant_doc_ids": [
+          "doc_trou_6515a19c8290"
+        ],
+        "retrieved_doc_ids": [
+          "doc_trou_6515a19c8290",
+          "doc_prod_51063b27f241",
+          "doc_prod_51063b27f241",
+          "doc_trou_6515a19c8290",
+          "doc_faq_ae953a11c979"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q05_error_paper_jam",
+        "category": "troubleshooting",
+        "query": "How do I clear error code E-101 Paper Jam from Tray 1 without damaging the rollers?",
+        "is_supported": true,
+        "latency_ms": 95.16,
+        "relevant_doc_ids": [
+          "doc_trou_ee29c06b48ed"
+        ],
+        "retrieved_doc_ids": [
+          "doc_trou_ee29c06b48ed",
+          "doc_trou_ee29c06b48ed",
+          "doc_prod_87e13ad145a4",
+          "doc_prod_51063b27f241",
+          "doc_warr_16f0708fca0e"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q06_error_fuser_overheat",
+        "category": "troubleshooting",
+        "query": "What should I do if the printer display flashes Error E-204 Fuser Unit Overheat?",
+        "is_supported": true,
+        "latency_ms": 84.97,
+        "relevant_doc_ids": [
+          "doc_trou_ee29c06b48ed"
+        ],
+        "retrieved_doc_ids": [
+          "doc_trou_ee29c06b48ed",
+          "doc_faq_ae953a11c979",
+          "doc_trou_ee29c06b48ed",
+          "doc_prod_51063b27f241",
+          "doc_trou_ee29c06b48ed"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q07_warranty_eligibility",
+        "category": "warranty",
+        "query": "What is covered under the standard 1-year limited hardware warranty for ApexPrint?",
+        "is_supported": true,
+        "latency_ms": 73.3,
+        "relevant_doc_ids": [
+          "doc_warr_16f0708fca0e"
+        ],
+        "retrieved_doc_ids": [
+          "doc_warr_16f0708fca0e",
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_2dc6b16efec0",
+          "doc_faq_ae953a11c979"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q08_warranty_rma_procedure",
+        "category": "warranty",
+        "query": "What proof of purchase and RMA steps are required to claim warranty replacement parts?",
+        "is_supported": true,
+        "latency_ms": 78.7,
+        "relevant_doc_ids": [
+          "doc_warr_16f0708fca0e"
+        ],
+        "retrieved_doc_ids": [
+          "doc_warr_16f0708fca0e",
+          "doc_warr_16f0708fca0e",
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_2dc6b16efec0"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q09_warranty_exclusions_spill",
+        "category": "warranty",
+        "query": "Does the ApexPrint standard warranty cover accidental liquid spills or physical impact damage?",
+        "is_supported": true,
+        "latency_ms": 75.08,
+        "relevant_doc_ids": [
+          "doc_warr_2dc6b16efec0"
+        ],
+        "retrieved_doc_ids": [
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_16f0708fca0e",
+          "doc_faq_ae953a11c979",
+          "doc_warr_2dc6b16efec0"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q10_warranty_exclusions_non_oem",
+        "category": "warranty",
+        "query": "Does using non-OEM third-party refilled toner cartridges void the printer warranty?",
+        "is_supported": true,
+        "latency_ms": 71.06,
+        "relevant_doc_ids": [
+          "doc_warr_2dc6b16efec0"
+        ],
+        "retrieved_doc_ids": [
+          "doc_warr_2dc6b16efec0",
+          "doc_faq_ae953a11c979",
+          "doc_warr_16f0708fca0e",
+          "doc_warr_2dc6b16efec0",
+          "doc_faq_ae953a11c979"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q11_faq_mobile_printing",
+        "category": "faq",
+        "query": "Can I print directly from my Apple iPhone or Android device using Apple AirPrint or Mopria?",
+        "is_supported": true,
+        "latency_ms": 91.46,
+        "relevant_doc_ids": [
+          "doc_faq_d8c75166d413"
+        ],
+        "retrieved_doc_ids": [
+          "doc_faq_d8c75166d413",
+          "doc_prod_8828edaf40d0",
+          "doc_prod_8828edaf40d0",
+          "doc_faq_d8c75166d413",
+          "doc_warr_16f0708fca0e"
+        ],
+        "hit_at_1": 1.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "query_id": "q12_faq_drum_replacement",
+        "category": "faq",
+        "query": "What is the expected lifecycle and replacement procedure for the imaging drum unit?",
+        "is_supported": true,
+        "latency_ms": 82.72,
+        "relevant_doc_ids": [
+          "doc_faq_ae953a11c979"
+        ],
+        "retrieved_doc_ids": [
+          "doc_prod_51063b27f241",
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_16f0708fca0e",
+          "doc_prod_87e13ad145a4",
+          "doc_warr_2dc6b16efec0"
+        ],
+        "hit_at_1": 0.0,
+        "hit_at_3": 0.0,
+        "hit_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      },
+      {
+        "query_id": "q13_cross_category_roller_warranty",
+        "category": "cross_category",
+        "query": "If my paper pickup rollers wear out during the first 6 months, is replacement covered under warranty?",
+        "is_supported": true,
+        "latency_ms": 126.76,
+        "relevant_doc_ids": [
+          "doc_warr_16f0708fca0e",
+          "doc_trou_ee29c06b48ed"
+        ],
+        "retrieved_doc_ids": [
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_16f0708fca0e",
+          "doc_faq_ae953a11c979",
+          "doc_warr_2dc6b16efec0",
+          "doc_warr_16f0708fca0e"
+        ],
+        "hit_at_1": 0.0,
+        "hit_at_3": 1.0,
+        "hit_at_5": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "query_id": "q14_unsupported_3d_printing",
+        "category": "unsupported",
+        "query": "What extruder temperature should I set for printing with ABS or PLA filament on the ApexPrint?",
+        "is_supported": false,
+        "latency_ms": 74.22,
+        "relevant_doc_ids": [],
+        "retrieved_doc_ids": [
+          "doc_trou_ee29c06b48ed",
+          "doc_prod_51063b27f241",
+          "doc_prod_87e13ad145a4",
+          "doc_prod_51063b27f241",
+          "doc_faq_ae953a11c979"
+        ],
+        "hit_at_1": 0.0,
+        "hit_at_3": 0.0,
+        "hit_at_5": 0.0,
+        "reciprocal_rank": 0.0
+      }
+    ]
+  }
+}
