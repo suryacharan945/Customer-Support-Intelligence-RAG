@@ -18,10 +18,13 @@ Internship_RAG_MCP_Capstone/
 │   ├── main.py                          # FastAPI application factory & routes
 │   ├── api/
 │   │   ├── __init__.py
+│   │   ├── deps.py                      # Decoupled FastAPI dependency injection providers
 │   │   ├── router.py                    # Aggregated API router
 │   │   └── endpoints/
-│   │       ├── health.py                # System health diagnostics & storage telemetry
-│   │       ├── rag.py                   # Multi-Context RAG query endpoints
+│   │       ├── health.py                # System health diagnostics & deep readiness probe
+│   │       ├── rag.py                   # Baseline & Multi-Context RAG query endpoints
+│   │       ├── documents.py             # Document upload, lifecycle management & deletion
+│   │       ├── knowledge_base.py        # Knowledge base status & telemetry
 │   │       ├── feedback.py              # Active learning human-in-the-loop feedback
 │   │       └── analytics.py             # Performance telemetry & accuracy metrics
 │   ├── core/
@@ -78,6 +81,8 @@ Internship_RAG_MCP_Capstone/
 │   ├── test_duplicates.py               # Manifest persistence & duplicate skipping (4 tests)
 │   ├── test_embeddings.py               # Dimensionality, normalization, provider errors (10 tests)
 │   ├── test_vector_store.py             # Insertion, counts, category filter, top-k (10 tests)
+│   ├── test_stage4_multi_context.py     # Stage 4 MCP, hybrid retrieval, citation checks (17 tests)
+│   ├── test_stage5_api.py               # Stage 5 FastAPI endpoints, lifecycle, upload, delete (23 tests)
 │   └── test_retrieval.py                # Baseline retrieval, latency, snapshot restoration (7 tests)
 ├── docs/
 │   ├── STORAGE_CONFIGURATION_REPORT.md  # Detailed Stage 1B storage verification
@@ -87,6 +92,10 @@ Internship_RAG_MCP_Capstone/
 │   ├── STAGE_1C_CORRECTION_REPORT.md    # Stage 1C foundation corrections report
 │   ├── STAGE_2_IMPLEMENTATION_REPORT.md # Stage 2 ingestion & preprocessing report
 │   ├── STAGE_3_IMPLEMENTATION_REPORT.md # Stage 3 embedding & retrieval report
+│   ├── STAGE_4_IMPLEMENTATION_REPORT.md # Stage 4 multi-context hybrid RAG report
+│   ├── STAGE_5_IMPLEMENTATION_REPORT.md # Stage 5 FastAPI & document lifecycle report
+│   ├── API_REFERENCE.md                 # Complete API reference and schemas
+│   ├── END_TO_END_VERIFICATION.md       # Stage 5 end-to-end inquiry verification report
 │   ├── EMBEDDING_AND_VECTOR_STORE.md    # Embedding models & collection specifications
 │   └── CHROMADB_BACKUP_AND_RESTORE.md   # Persistence snapshot & restoration protocol
 ├── .gitignore                           # Cloud-safe exclusion rules
@@ -120,11 +129,9 @@ Because the development machine uses integrated Intel Iris Xe Graphics and limit
 
 ## 4. Quickstart & Verification
 
-### Running the Test Suite (85 Tests)
+### Running the Complete Test Suite (108 Tests)
 ```powershell
-$env:PYTHONPATH = "C:\Users\surya\Internship_RAG_MCP_Capstone"
-$env:KMP_DUPLICATE_LIB_OK = "TRUE"
-python -m pytest tests -v
+python -m pytest tests/ -v
 ```
 
 ### Knowledge Base Ingestion CLI

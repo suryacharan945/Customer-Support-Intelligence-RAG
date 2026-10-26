@@ -53,6 +53,11 @@ class EmptyDocumentError(IngestionError):
     pass
 
 
+class PathTraversalError(IngestionError):
+    """Raised when an uploaded filename attempts directory traversal."""
+    pass
+
+
 class DocumentPage:
     """Represents a discrete page within a document (for PDFs)."""
 

@@ -30,8 +30,15 @@ def create_application() -> FastAPI:
         allow_headers=["*"],
     )
 
-    # Register API Endpoints
+    # Register API Endpoints under /api/v1 prefix
     app.include_router(api_router, prefix=settings.API_V1_PREFIX)
+
+    # Root-level canonical route shortcuts
+    from app.api.endpoints import health, rag, documents, knowledge_base
+    app.include_router(health.router)
+    app.include_router(rag.router)
+    app.include_router(documents.router)
+    app.include_router(knowledge_base.router)
 
     @app.get("/", tags=["Root"])
     async def root():

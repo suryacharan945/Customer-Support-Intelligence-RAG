@@ -218,3 +218,24 @@ class VectorStoreRetriever(BaseRetriever):
         if self._collection:
             return self._collection.count()
         return 0
+
+    def delete_document(self, document_id: str) -> int:
+        """
+        Delete all indexed chunks belonging to document_id from the vector collection.
+        Returns the number of deleted chunks.
+        """
+        if not self._collection:
+            logger.info(f"Vector store collection uninitialized; skipped vector chunk deletion for '{document_id}'.")
+            return 0
+
+        try:
+            # Query for chunks with document_id metadata
+            res = self._collection.get(where={"document_id": document_id})
+            ids = res.get("ids", [])
+            if ids:
+                self._collection.delete(ids=ids)
+                logger.info(f"Deleted {len(ids)} chunks for document_id '{document_id}' from ChromaDB.")
+            return len(ids)
+        except Exception as e:
+            logger.error(f"Error deleting chunks for document_id '{document_id}': {e}")
+            raise VectorStoreError(f"Vector store deletion failed for document '{document_id}': {e}") from e

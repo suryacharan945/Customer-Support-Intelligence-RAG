@@ -152,3 +152,11 @@ class BM25Retriever(BaseRetriever):
                 break
 
         return results
+
+    def delete_document(self, document_id: str) -> int:
+        """Remove chunks associated with document_id and reindex remaining chunks."""
+        remaining = [c for c in self.chunks if getattr(c, "document_id", "") != document_id]
+        deleted_count = len(self.chunks) - len(remaining)
+        if deleted_count > 0:
+            self.index_chunks(remaining)
+        return deleted_count

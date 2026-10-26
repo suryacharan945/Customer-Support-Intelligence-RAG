@@ -132,6 +132,7 @@ class RAGService:
                 evidence_status="INSUFFICIENT",
                 retrieval_latency_ms=retrieval_latency_ms,
                 generation_latency_ms=0.0,
+                provider_status="NO_EVIDENCE_RETRIEVED",
                 evidence_found=False,
                 citations=[],
                 retrieval_similarity=None,
@@ -235,6 +236,8 @@ class RAGService:
         )
         total_exec_time_ms = round((time.perf_counter() - start_total) * 1000, 2)
 
+        p_status = "TEST_MOCK_MODE" if is_mock_response else "READY_FOR_COLAB_INFERENCE"
+
         return QueryResponse(
             query=query,
             expanded_query=expanded_query if expanded_query != query else None,
@@ -245,6 +248,7 @@ class RAGService:
             evidence_status=val_report.evidence_status,
             retrieval_latency_ms=retrieval_latency_ms,
             generation_latency_ms=generation_latency_ms,
+            provider_status=p_status,
             evidence_found=True,
             citations=legacy_citations,
             retrieval_similarity=mean_similarity,

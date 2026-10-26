@@ -2,8 +2,10 @@
 
 import json
 from pathlib import Path
-from typing import Dict, Any
-from app.api.endpoints.feedback import FeedbackSubmission
+from typing import Dict, Any, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.api.endpoints.feedback import FeedbackSubmission
 from app.core.config import settings
 from app.core.logging import logger
 
@@ -14,7 +16,7 @@ class FeedbackService:
     def __init__(self):
         self.gdrive_root = Path(settings.GOOGLE_DRIVE_ROOT)
 
-    async def record_feedback(self, submission: FeedbackSubmission) -> Dict[str, Any]:
+    async def record_feedback(self, submission: Any) -> Dict[str, Any]:
         """Log submission to in-memory queue and persist to Google Drive if connected."""
         feedback_record = {
             "query_id": submission.query_id,

@@ -1,8 +1,9 @@
 """RAG & Multi-Context Prompting (MCP) query endpoints supporting Baseline and Multi-Context modes."""
 
-from typing import List, Optional
-from fastapi import APIRouter, HTTPException
+from typing import List, Optional, Any
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
+from app.api.deps import get_rag_service
 
 router = APIRouter(tags=["RAG & MCP Query Engine"])
 
@@ -10,6 +11,7 @@ router = APIRouter(tags=["RAG & MCP Query Engine"])
 class QueryRequest(BaseModel):
     query: str = Field(
         ...,
+        min_length=1,
         description="Customer support inquiry",
         json_schema_extra={"example": "My printer cannot connect to Wi-Fi. How can I fix it, and is the repair covered by warranty?"},
     )
@@ -42,6 +44,7 @@ class QueryResponse(BaseModel):
     evidence_status: str = Field("SUFFICIENT", description="'SUFFICIENT', 'PARTIAL', or 'INSUFFICIENT'")
     retrieval_latency_ms: float = Field(0.0, description="Retrieval latency in milliseconds")
     generation_latency_ms: Optional[float] = Field(None, description="LLM generation latency in milliseconds")
+    provider_status: str = Field("READY_FOR_COLAB_INFERENCE", description="Inference provider connectivity status")
     
     # Backward compatibility fields for Stage 1-3 test suite
     evidence_found: bool = Field(True, description="Whether matching context was retrieved")
@@ -62,12 +65,14 @@ class QueryResponse(BaseModel):
 
 @router.post("/rag/query", response_model=QueryResponse, summary="Execute RAG Query (Legacy Route)")
 @router.post("/query", response_model=QueryResponse, summary="Execute RAG Query (Standard Route)")
-async def execute_rag_query(request: QueryRequest):
+async def execute_rag_query(
+    request: QueryRequest,
+    service: Any = Depends(get_rag_service),
+):
     """
     Execute end-to-end RAG query in either 'baseline' or 'multi_context' (MCP) mode.
     Returns clear HTTP errors when backends fail, avoiding silent mock fallbacks.
     """
-    from app.services.rag_service import rag_service
     from app.retrieval.vector_store import VectorStoreNotInitializedError, VectorStoreQueryError
     from app.generation.llm_client import (
         ProviderNotImplementedError,
@@ -76,12 +81,19 @@ async def execute_rag_query(request: QueryRequest):
         RemoteInferenceError,
     )
 
+    if not request.query or not request.query.strip():
+        raise HTTPException(status_code=422, detail="Query text cannot be empty or whitespace only.")
+
+    mode = request.retrieval_mode.lower() if request.retrieval_mode else "multi_context"
+    if mode not in ("baseline", "multi_context"):
+        mode = "multi_context"
+
     try:
-        response = await rag_service.process_query(
-            query=request.query,
-            session_id=request.session_id,
+        response = await service.process_query(
+            query=request.query.strip(),
+            session_id=request.session_id or "default-session",
             top_k=request.top_k or 5,
-            retrieval_mode=request.retrieval_mode or "multi_context",
+            retrieval_mode=mode,
         )
         return response
     except VectorStoreNotInitializedError as e:
@@ -96,5 +108,7 @@ async def execute_rag_query(request: QueryRequest):
         raise HTTPException(status_code=504, detail=f"Remote LLM inference timeout: {str(e)}")
     except RemoteInferenceError as e:
         raise HTTPException(status_code=502, detail=f"Remote LLM inference error: {str(e)}")
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal RAG pipeline error: {str(e)}")

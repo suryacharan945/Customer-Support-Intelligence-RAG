@@ -149,6 +149,17 @@ flowchart TD
 - **Human-in-the-Loop**: Captures ratings (1–5) and text corrections, auto-persisting to Google Drive `06_Test_Results/user_feedback_log.jsonl`.
 - **Active Learning**: Automatically flags answers with confidence $< 0.65$ (`requires_human_clarification=True`).
 
+### 3.7 FastAPI API Tier & Document Lifecycle State Machine (`app/api/`, `app/ingestion/manifest.py`)
+- **Dependency Injection Architecture (`app/api/deps.py`)**: All endpoints declare dependencies via FastAPI `Depends(...)`. Components (`RAGService`, `VectorStoreRetriever`, `BM25Retriever`, `IngestionService`, `IngestionManifest`) are resolved lazily, allowing full test isolation via `app.dependency_overrides`.
+- **Document Lifecycle State Machine**: Every document tracks across six discrete states: `uploaded`, `processed`, `pending_index`, `indexed`, `indexing_failed`, `deleted`.
+- **Searchability Boundary**: `is_searchable` is guaranteed `True` if and only if `lifecycle_status == "indexed"`. New uploads remain `pending_index` until ChromaDB upsert succeeds.
+- **Upload Security**:
+  - Path traversal sequences (`../`, `..\`) are strictly sanitized or rejected (HTTP 400).
+  - 10MB payload size limit enforced (HTTP 413).
+  - Supported extensions restricted to `.pdf`, `.txt`, `.md` (HTTP 400).
+  - Content structure validated (`%PDF-` signature and UTF-8 text integrity).
+- **Atomic Deletion Protocol**: `DELETE /api/v1/documents/{document_id}` purges raw storage files, removes dense chunks from ChromaDB, purges sparse chunks from BM25, and marks the manifest record as `deleted`. Safe and returns HTTP 404 on repeat.
+
 ---
 
 ## 4. Storage Segregation & Safety Architecture

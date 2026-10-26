@@ -1,8 +1,10 @@
 """Feedback collection & active learning loop endpoints."""
 
 from typing import Optional
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
+from app.api.deps import get_feedback_service
+from app.services.feedback_service import FeedbackService
 
 router = APIRouter(prefix="/feedback", tags=["Feedback & Active Learning"])
 
@@ -15,14 +17,17 @@ class FeedbackSubmission(BaseModel):
     comment: Optional[str] = Field(None, description="Qualitative feedback comments")
 
 
-@router.post("/", summary="Submit User / Agent Feedback")
-async def submit_feedback(submission: FeedbackSubmission):
+@router.post("", summary="Submit User / Agent Feedback")
+@router.post("/", summary="Submit User / Agent Feedback (Alias)")
+async def submit_feedback(
+    submission: FeedbackSubmission,
+    service: FeedbackService = Depends(get_feedback_service),
+):
     """
     Log human feedback to continuous improvement queue and export to persistent storage.
     """
-    from app.services.feedback_service import feedback_service
     try:
-        result = await feedback_service.record_feedback(submission)
+        result = await service.record_feedback(submission)
         return {"status": "success", "message": "Feedback recorded", "data": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
