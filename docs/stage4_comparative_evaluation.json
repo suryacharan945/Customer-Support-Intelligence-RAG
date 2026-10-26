@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-10-26T08:53:38Z",
+  "total_queries_evaluated": 18,
+  "supported_queries": 17,
+  "category_selector_evaluation": {
+    "accuracy": 1.0,
+    "total_checked": 16,
+    "correct_matches": 16,
+    "multi_domain_detected": 2
+  },
+  "retrieval_comparison": {
+    "dense_baseline": {
+      "recall@1": 0.8824,
+      "recall@3": 0.9412,
+      "recall@5": 0.9412,
+      "mrr": 0.9118,
+      "mean_latency_ms": 110.72,
+      "p95_latency_ms": 178.64
+    },
+    "hybrid_rrf": {
+      "recall@1": 0.7059,
+      "recall@3": 0.8824,
+      "recall@5": 0.8824,
+      "mrr": 0.7843,
+      "mean_latency_ms": 106.38,
+      "p95_latency_ms": 206.1
+    },
+    "multi_context_mcp": {
+      "recall@1": 0.9412,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "mrr": 0.9706,
+      "mean_latency_ms": 93.17,
+      "p95_latency_ms": 137.81,
+      "multi_category_evidence_coverage": 0.9375
+    }
+  },
+  "generation_evaluation_telemetry": {
+    "generation_modes_tested": [
+      "baseline_rag",
+      "multi_context_mcp_rag"
+    ],
+    "mock_mode_active": true,
+    "real_colab_llm_status": "READY_FOR_COLAB_INFERENCE",
+    "citation_precision_measured": 1.0,
+    "unsupported_claim_rate_measured": 0.0,
+    "untrusted_data_prompt_defense": "PASS"
+  }
+}

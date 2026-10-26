@@ -111,27 +111,40 @@ flowchart TD
   - Supports baseline multi-category semantic search and category-filtered search (`where={"category": ...}`).
   - Computes cosine similarity scores: $\text{Score} = \max(0.0, \min(1.0, 1.0 - d))$.
   - Implements controlled chunk upserting and retrieval latency telemetry.
+- **`CategorySelector` (`app/retrieval/category_selector.py`)**:
+  - Deterministic rule- and lexical-scoring engine for routing customer inquiries into single or multiple categories (`product_manual`, `troubleshooting`, `warranty`, `faq`).
+  - Operates deterministically without requiring an LLM call.
+- **`BM25Retriever` (`app/retrieval/bm25.py`)**:
+  - Classic Robertson-Spärck Jones Okapi BM25 ranking algorithm ($k_1=1.5, b=0.75$).
+  - Custom alphanumeric tokenizer preserving hyphenated hardware codes (`E-101`, `E-204`) and model names.
 - **`ChromaSnapshotManager` (`app/retrieval/chroma_backup.py`)**:
   - Complete persistence directory backup preserving both `chroma.sqlite3` and binary HNSW segment folders.
   - Flushes SQLite Write-Ahead Log via `sqlite3.Connection.backup()` before packing into Google Drive snapshots.
   - Generates machine-readable index manifests (`chroma_manifest.json`) with checksums and software telemetry.
 - **`HybridRetriever` (`app/retrieval/hybrid.py`)**:
-  - Fuses dense semantic embeddings with sparse keyword matching (BM25 token overlap proxy):
-    $$\text{Score}_{\text{hybrid}} = \alpha \cdot \text{Score}_{\text{dense}} + (1 - \alpha) \cdot \text{Score}_{\text{sparse}}$$
-    (Default $\alpha = 0.60$). Supports category filtering.
+  - Fuses dense semantic embeddings with sparse BM25 keyword matching via Reciprocal Rank Fusion (RRF, $k=60$):
+    $$RRF(d) = \frac{\alpha}{60 + \text{rank}_{\text{dense}}(d)} + \frac{1 - \alpha}{60 + \text{rank}_{\text{bm25}}(d)}$$
+  - Supports `mode="hybrid"`, `mode="dense"` (baseline), and `mode="bm25"` with category filtering and chunk deduplication.
 
-### 3.3 Multi-Context Prompting (MCP) (`app/generation/mcp_context.py`)
-- Standardizes diverse multi-source inputs into partitioned, labelled context sections:
-  `[CONTEXT i | Category: CATEGORY | Source: FILENAME | Relevance: XX%]`
-- Prevents cross-context hallucination and enables precise source attribution.
+### 3.3 Multi-Context Prompting (MCP) & Injection Defense (`app/generation/mcp_context.py`)
+- Standardizes diverse multi-source inputs into partitioned, labeled context sections:
+  `[CONTEXT i | CATEGORY: ... | SOURCE: ... | LOCATION: Page X | CHUNK ID: ...]`
+- Enforces strict character context budgeting (`max_chars=8000`) and round-robin cross-category evidence balancing.
+- Implements prompt injection defense by sanitizing adversarial directives and wrapping reference text in `<untrusted_document_excerpt>` tags.
+- Identifies inter-category policy conflicts (e.g. troubleshooting roller cleaning vs warranty 90-day wear limits).
 
-### 3.4 Remote LLM Generation & Decoupling (`app/generation/llm_client.py`)
-- Provides an asynchronous interface supporting:
+### 3.4 Citation Validation & Groundedness Checking (`app/generation/citation_validator.py`)
+- Verifies all generated citations against retrieved candidate chunks and true page numbers.
+- Flags fabricated page numbers and unsupported claims.
+- Categorizes evidence status into `SUFFICIENT`, `PARTIAL`, or `INSUFFICIENT` without inventing confidence probabilities.
+
+### 3.5 Remote LLM Generation & Decoupling (`app/generation/llm_client.py`)
+- Asynchronous interface supporting:
   1. `colab_remote`: Connects via HTTP tunnel to Colab T4 GPU running Mistral 7B.
   2. `groq` / `gemini`: Cloud API providers with zero local resource usage.
-  3. `local_mock`: Deterministic mock response generator for offline execution and CI testing.
+  3. `mock`: Explicit deterministic mock response generator reserved strictly for test suites.
 
-### 3.5 Evaluation & Active Learning (`evaluation/`, `app/services/feedback_service.py`)
+### 3.6 Evaluation & Active Learning (`evaluation/`, `app/services/feedback_service.py`)
 - **Metrics**: Computes context relevance, answer faithfulness, and response latency.
 - **Human-in-the-Loop**: Captures ratings (1–5) and text corrections, auto-persisting to Google Drive `06_Test_Results/user_feedback_log.jsonl`.
 - **Active Learning**: Automatically flags answers with confidence $< 0.65$ (`requires_human_clarification=True`).

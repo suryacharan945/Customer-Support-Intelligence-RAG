@@ -37,15 +37,18 @@ Internship_RAG_MCP_Capstone/
 │   ├── retrieval/
 │   │   ├── __init__.py
 │   │   ├── base.py                      # Abstract retriever interface
+│   │   ├── category_selector.py         # Category-aware query routing engine
+│   │   ├── bm25.py                      # BM25Okapi sparse keyword search engine
 │   │   ├── embeddings.py                # Embedding provider abstraction (local, remote, mock)
 │   │   ├── vector_store.py              # ChromaDB vector store adapter & category filtering
 │   │   ├── chroma_backup.py             # Full ChromaDB persistence snapshot & restore manager
-│   │   └── hybrid.py                    # Dense semantic + Sparse keyword (BM25) fusion
+│   │   └── hybrid.py                    # Reciprocal Rank Fusion (RRF) dense + sparse engine
 │   ├── generation/
 │   │   ├── __init__.py
 │   │   ├── llm_client.py                # Decoupled LLM client (Colab, Cloud API, Mock)
 │   │   ├── prompt_templates.py          # MCP synthesis & query expansion templates
-│   │   └── mcp_context.py               # Multi-Context Prompting context block builder
+│   │   ├── mcp_context.py               # Balanced multi-context assembly & injection defense
+│   │   └── citation_validator.py        # Evidence citation validation & claim check
 │   └── services/
 │       ├── __init__.py
 │       ├── ingestion_service.py         # Standalone ingestion & deduplication orchestrator
@@ -117,9 +120,10 @@ Because the development machine uses integrated Intel Iris Xe Graphics and limit
 
 ## 4. Quickstart & Verification
 
-### Running the Test Suite (66 Tests)
+### Running the Test Suite (85 Tests)
 ```powershell
 $env:PYTHONPATH = "C:\Users\surya\Internship_RAG_MCP_Capstone"
+$env:KMP_DUPLICATE_LIB_OK = "TRUE"
 python -m pytest tests -v
 ```
 

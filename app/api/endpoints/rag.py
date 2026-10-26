@@ -1,36 +1,51 @@
-"""RAG & MCP query endpoints with strict exception handling and uncalibrated metric isolation."""
+"""RAG & Multi-Context Prompting (MCP) query endpoints supporting Baseline and Multi-Context modes."""
 
 from typing import List, Optional
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
-router = APIRouter(prefix="/rag", tags=["RAG & MCP Query Engine"])
+router = APIRouter(tags=["RAG & MCP Query Engine"])
 
 
 class QueryRequest(BaseModel):
     query: str = Field(
         ...,
-        description="Customer support query",
-        json_schema_extra={"example": "How do I reset my printer to factory settings?"},
+        description="Customer support inquiry",
+        json_schema_extra={"example": "My printer cannot connect to Wi-Fi. How can I fix it, and is the repair covered by warranty?"},
     )
     session_id: Optional[str] = Field("default-session", description="Session identifier for conversation memory")
     user_id: Optional[str] = Field(None, description="Optional user ID for personalization")
     top_k: Optional[int] = Field(5, ge=1, le=20, description="Number of context passages to retrieve")
+    retrieval_mode: Optional[str] = Field(
+        "multi_context",
+        description="RAG retrieval mode: 'baseline' (dense single-channel) or 'multi_context' (MCP multi-category hybrid)",
+    )
 
 
 class Citation(BaseModel):
     document_source: str = Field(..., description="Source document filename or identifier")
     page_or_section: Optional[str] = Field(None, description="Section or page metadata if available")
     snippet: str = Field(..., description="Retrieved excerpt text")
-    relevance_score: float = Field(..., description="Hybrid retrieval relevance score (0.0 to 1.0)")
+    relevance_score: float = Field(..., description="Relevance score (0.0 to 1.0)")
+    category: Optional[str] = Field("general", description="Document category (e.g. troubleshooting, warranty)")
+    chunk_id: Optional[str] = Field(None, description="Exact chunk ID")
+    is_verified: bool = Field(True, description="True if citation was verified against retrieved context")
 
 
 class QueryResponse(BaseModel):
     query: str
     expanded_query: Optional[str] = None
     answer: str
+    retrieval_mode: str = Field("multi_context", description="'baseline' or 'multi_context'")
+    selected_categories: List[str] = Field(default_factory=list, description="Categories selected during query analysis")
+    supporting_citations: List[Citation] = Field(default_factory=list, description="Verified citations supporting the answer")
+    evidence_status: str = Field("SUFFICIENT", description="'SUFFICIENT', 'PARTIAL', or 'INSUFFICIENT'")
+    retrieval_latency_ms: float = Field(0.0, description="Retrieval latency in milliseconds")
+    generation_latency_ms: Optional[float] = Field(None, description="LLM generation latency in milliseconds")
+    
+    # Backward compatibility fields for Stage 1-3 test suite
     evidence_found: bool = Field(True, description="Whether matching context was retrieved")
-    citations: List[Citation] = Field(default_factory=list, description="Retrieved citation candidates from the knowledge base")
+    citations: List[Citation] = Field(default_factory=list, description="Retrieved citation candidates from knowledge base")
     retrieval_similarity: Optional[float] = Field(
         None,
         description="Mean relevance score of retrieved passages. Uncalibrated similarity only, not correctness probability.",
@@ -39,16 +54,17 @@ class QueryResponse(BaseModel):
         None,
         description="(Optional) Calibrated confidence probability. None until calibrated scoring model is integrated.",
     )
-    contexts_used: int
-    execution_time_ms: float
-    requires_human_clarification: bool = False
+    contexts_used: int = Field(0, description="Number of context passages provided to prompt")
+    execution_time_ms: float = Field(0.0, description="Total end-to-end request latency in milliseconds")
+    requires_human_clarification: bool = Field(False, description="Flag indicating if confidence falls below threshold")
     is_mock: bool = Field(False, description="Flag indicating if output was generated via explicit test mock mode")
 
 
-@router.post("/query", response_model=QueryResponse, summary="Execute Multi-Context RAG Query")
+@router.post("/rag/query", response_model=QueryResponse, summary="Execute RAG Query (Legacy Route)")
+@router.post("/query", response_model=QueryResponse, summary="Execute RAG Query (Standard Route)")
 async def execute_rag_query(request: QueryRequest):
     """
-    Execute hybrid retrieval, multi-context prompting (MCP), and LLM response synthesis.
+    Execute end-to-end RAG query in either 'baseline' or 'multi_context' (MCP) mode.
     Returns clear HTTP errors when backends fail, avoiding silent mock fallbacks.
     """
     from app.services.rag_service import rag_service
@@ -64,7 +80,8 @@ async def execute_rag_query(request: QueryRequest):
         response = await rag_service.process_query(
             query=request.query,
             session_id=request.session_id,
-            top_k=request.top_k,
+            top_k=request.top_k or 5,
+            retrieval_mode=request.retrieval_mode or "multi_context",
         )
         return response
     except VectorStoreNotInitializedError as e:

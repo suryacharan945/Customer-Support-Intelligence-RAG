@@ -129,6 +129,42 @@
       "relevant_chunk_ids": [],
       "expected_category": null,
       "description": "Out-of-domain unsupported question testing negative/zero-retrieval handling."
+    },
+    {
+      "id": "q15_multicat_wifi_warranty",
+      "category": "multi_category",
+      "query": "My printer cannot connect to Wi-Fi. How can I fix it, and is the repair covered by warranty?",
+      "relevant_doc_ids": ["doc_trou_6515a19c8290", "doc_warr_16f0708fca0e"],
+      "relevant_chunk_ids": ["doc_trou_6515a19c8290_c0000", "doc_warr_16f0708fca0e_c0000"],
+      "expected_categories": ["troubleshooting", "warranty"],
+      "description": "Multi-category question combining Wi-Fi network troubleshooting and warranty coverage."
+    },
+    {
+      "id": "q16_multicat_jam_rollers_warranty",
+      "category": "multi_category",
+      "query": "Error E-101 paper jam is occurring repeatedly in Tray 1. How do I fix it and will ApexPrint replace the worn pickup rollers under warranty?",
+      "relevant_doc_ids": ["doc_trou_ee29c06b48ed", "doc_warr_2dc6b16efec0"],
+      "relevant_chunk_ids": ["doc_trou_ee29c06b48ed_c0000", "doc_warr_2dc6b16efec0_c0001"],
+      "expected_categories": ["troubleshooting", "warranty"],
+      "description": "Multi-category question combining hardware error E-101 resolution and roller wear exclusions."
+    },
+    {
+      "id": "q17_multicat_speed_spill_coverage",
+      "category": "multi_category",
+      "query": "What is the maximum monochrome print speed of the ProX-400 and is water spill damage covered if an accident occurs?",
+      "relevant_doc_ids": ["doc_prod_87e13ad145a4", "doc_warr_2dc6b16efec0"],
+      "relevant_chunk_ids": ["doc_prod_87e13ad145a4_c0000", "doc_warr_2dc6b16efec0_c0001"],
+      "expected_categories": ["product_manual", "warranty"],
+      "description": "Multi-category question combining technical specifications with liquid spill exclusions."
+    },
+    {
+      "id": "q18_multicat_mobile_cloud_spec",
+      "category": "multi_category",
+      "query": "Can I print from an iPad using Apple AirPrint and what are the supported paper sizes in Tray 2?",
+      "relevant_doc_ids": ["doc_faq_d8c75166d413", "doc_prod_51063b27f241"],
+      "relevant_chunk_ids": ["doc_faq_d8c75166d413_c0000", "doc_prod_51063b27f241_p1_c0000"],
+      "expected_categories": ["faq", "product_manual"],
+      "description": "Multi-category question combining mobile AirPrint FAQ and hardware tray paper specifications."
     }
   ]
 }
