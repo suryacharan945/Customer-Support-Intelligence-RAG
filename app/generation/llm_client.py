@@ -37,11 +37,21 @@ class LLMClient:
     Strictly prohibits silent fallbacks to fabricated mock outputs in normal modes.
     """
 
-    def __init__(self, provider: Optional[str] = None, allow_mock: Optional[bool] = None):
+    def __init__(
+        self,
+        provider: Optional[str] = None,
+        allow_mock: Optional[bool] = None,
+        endpoint: Optional[str] = None,
+        api_key: Optional[str] = None,
+        model_name: Optional[str] = None,
+        timeout: Optional[float] = None,
+    ):
         self.provider = (provider or settings.LLM_PROVIDER).lower()
-        self.endpoint = settings.COLAB_API_ENDPOINT
-        self.model_name = settings.DEFAULT_MODEL_NAME
+        self.endpoint = (endpoint or settings.COLAB_API_ENDPOINT).rstrip("/")
+        self.api_key = api_key if api_key is not None else settings.COLAB_API_KEY
+        self.model_name = model_name or settings.DEFAULT_MODEL_NAME
         self.allow_mock = allow_mock if allow_mock is not None else settings.ALLOW_MOCK_FALLBACK
+        self.timeout = timeout or settings.REMOTE_INFERENCE_TIMEOUT
 
     async def generate_response(self, system_prompt: str, user_prompt: str) -> Dict[str, Any]:
         """
@@ -69,35 +79,65 @@ class LLMClient:
             )
 
     async def _call_colab_endpoint(self, system_prompt: str, user_prompt: str) -> Dict[str, Any]:
-        """Send payload to remote Google Colab GPU server."""
+        """Send payload to remote Google Colab GPU server with authentication and bounded limits."""
+        import time
+        import httpx
+
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+
+        payload = {
+            "model": self.model_name,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            "temperature": 0.2,
+            "max_tokens": settings.MAX_GENERATION_TOKENS,
+        }
+
         try:
-            import httpx
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                payload = {
-                    "model": self.model_name,
-                    "messages": [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                    "temperature": 0.2,
-                }
-                resp = await client.post(f"{self.endpoint}/chat/completions", json=payload)
+            t0 = time.perf_counter()
+            async with httpx.AsyncClient(timeout=self.timeout) as client:
+                resp = await client.post(
+                    f"{self.endpoint}/chat/completions",
+                    json=payload,
+                    headers=headers,
+                )
+                latency_ms = round((time.perf_counter() - t0) * 1000, 2)
+
                 if resp.status_code == 200:
-                    data = resp.json()
-                    answer = data["choices"][0]["message"]["content"]
-                    return {
-                        "text": answer,
-                        "model": self.model_name,
-                        "provider": "colab_remote",
-                        "is_mock": False,
-                    }
+                    try:
+                        data = resp.json()
+                        choices = data.get("choices", [])
+                        if not choices:
+                            raise RemoteInferenceError(f"Colab returned empty choices list: {data}")
+                        answer = choices[0].get("message", {}).get("content", "")
+                        return {
+                            "text": answer,
+                            "model": data.get("model", self.model_name),
+                            "provider": "colab_remote",
+                            "is_mock": False,
+                            "latency_ms": latency_ms,
+                            "usage": data.get("usage", {}),
+                        }
+                    except Exception as exc:
+                        if isinstance(exc, RemoteInferenceError):
+                            raise
+                        raise RemoteInferenceError(f"Malformed JSON from Colab inference endpoint: {resp.text}") from exc
+                elif resp.status_code == 401:
+                    raise RemoteInferenceError(
+                        "Authentication failed (HTTP 401) against Colab endpoint. Ensure COLAB_API_KEY is configured correctly."
+                    )
                 else:
                     raise RemoteInferenceError(
                         f"Colab inference endpoint returned HTTP {resp.status_code}: {resp.text}"
                     )
         except httpx.TimeoutException as exc:
+            t_str = f"{int(self.timeout)}s" if self.timeout == int(self.timeout) else f"{self.timeout}s"
             raise RemoteInferenceTimeoutError(
-                f"Colab inference endpoint timed out after 30s at {self.endpoint}"
+                f"Colab inference endpoint timed out after {t_str} at {self.endpoint}"
             ) from exc
         except httpx.ConnectError as exc:
             raise RemoteInferenceError(

@@ -77,16 +77,20 @@ Internship_RAG_MCP_Capstone/
 │   ├── metrics.py                       # Faithfulness, Context Relevance, Latency
 │   ├── evaluator.py                     # Automated benchmark runner with Drive export
 │   ├── retrieval_evaluator.py           # Retrieval benchmark engine (Recall@K, MRR, latency)
-│   └── retrieval_test_dataset.json      # Ground-truth test queries & relevance labels
+│   ├── retrieval_test_dataset.json      # Ground-truth test queries & relevance labels
+│   ├── stage4_evaluator.py              # Dense vs Hybrid comparative benchmark
+│   ├── stage7_evaluator.py              # Stage 7 Answer quality & safety benchmark runner
+│   └── stage7_evaluation_dataset.json   # 16 benchmark queries across 8 evaluation dimensions
 ├── notebooks/
 │   ├── README.md                        # Remote compute workflow & GPU guidelines
 │   ├── 01_colab_embedding_and_chroma_indexing.ipynb # Batch GPU embedding & index creation
-│   └── 02_colab_mistral_rag_inference.ipynb         # Mistral-7B inference server
+│   └── 02_colab_mistral_rag_inference.ipynb         # 10-step Mistral-7B 4-bit NF4 inference server
 ├── scripts/
 │   ├── verify_storage_and_sync.py       # Cloud mount validator & folder builder
 │   ├── backup_to_drive.py               # Quiescent SQLite Online Backup & rotation
 │   ├── test_backup_and_restore.py       # Sandboxed restoration test suite
-│   └── evaluate_retrieval.py            # Retrieval benchmark CLI runner
+│   ├── evaluate_retrieval.py            # Retrieval benchmark CLI runner
+│   └── verify_ui_integration.py         # End-to-end FastAPI & Streamlit verification
 ├── tests/
 │   ├── __init__.py
 │   ├── test_health.py                   # FastAPI health & feedback tests (3 tests)
@@ -99,6 +103,7 @@ Internship_RAG_MCP_Capstone/
 │   ├── test_stage4_multi_context.py     # Stage 4 MCP, hybrid retrieval, citation checks (17 tests)
 │   ├── test_stage5_api.py               # Stage 5 FastAPI endpoints, lifecycle, upload, delete (23 tests)
 │   ├── test_stage6_ui.py                # Stage 6 Streamlit UI, API client, AppTest, components (22 tests)
+│   ├── test_stage7_inference.py         # Stage 7 Remote LLM auth, token bounding, safety (10 tests)
 │   └── test_retrieval.py                # Baseline retrieval, latency, snapshot restoration (7 tests)
 ├── docs/
 │   ├── STORAGE_CONFIGURATION_REPORT.md  # Detailed Stage 1B storage verification
@@ -111,6 +116,10 @@ Internship_RAG_MCP_Capstone/
 │   ├── STAGE_4_IMPLEMENTATION_REPORT.md # Stage 4 multi-context hybrid RAG report
 │   ├── STAGE_5_IMPLEMENTATION_REPORT.md # Stage 5 FastAPI & document lifecycle report
 │   ├── STAGE_6_IMPLEMENTATION_REPORT.md # Stage 6 Streamlit frontend & UI testing report
+│   ├── STAGE_7_IMPLEMENTATION_REPORT.md # Stage 7 real inference & grounded evaluation report
+│   ├── REAL_LLM_INFERENCE_GUIDE.md      # Operator runbook for Colab GPU Mistral-7B service
+│   ├── ANSWER_QUALITY_EVALUATION.md     # Comparative answer quality, grounding & safety report
+│   ├── END_TO_END_DEMO_REPORT.md        # Full multi-tier system demonstration & walkthrough
 │   ├── STREAMLIT_USER_GUIDE.md          # Complete user manual for Streamlit dashboard
 │   ├── UI_TEST_REPORT.md                # UI automated and manual verification report
 │   ├── API_REFERENCE.md                 # Complete API reference and schemas
@@ -148,9 +157,14 @@ Because the development machine uses integrated Intel Iris Xe Graphics and limit
 
 ## 4. Quickstart & Verification
 
-### Running the Complete Test Suite (130 Tests)
+### Running the Complete Test Suite (140 Tests across 12 Suites)
 ```powershell
 python -m pytest tests/ -v
+```
+
+### Running the Stage 7 Groundedness & Safety Evaluation Benchmark
+```powershell
+python evaluation/stage7_evaluator.py
 ```
 
 ### Running the Streamlit Frontend Dashboard Locally

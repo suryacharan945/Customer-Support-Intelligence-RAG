@@ -26,10 +26,13 @@ class Settings(BaseSettings):
     # Supported providers: colab_remote, groq, gemini, ollama, mock
     LLM_PROVIDER: str = "colab_remote"
     COLAB_API_ENDPOINT: str = "http://localhost:8001/v1"
+    COLAB_API_KEY: str = ""
     GROQ_API_KEY: str = ""
     GEMINI_API_KEY: str = ""
     OLLAMA_API_ENDPOINT: str = "http://localhost:11434/v1"
     DEFAULT_MODEL_NAME: str = "mistralai/Mistral-7B-Instruct-v0.3"
+    MAX_GENERATION_TOKENS: int = 512
+    REMOTE_INFERENCE_TIMEOUT: float = 30.0
 
     # Testing & Mock Configuration (Strictly disabled in normal dev / production)
     ALLOW_MOCK_FALLBACK: bool = False

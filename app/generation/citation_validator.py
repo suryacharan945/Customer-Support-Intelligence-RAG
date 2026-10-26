@@ -38,6 +38,7 @@ class CitationValidationReport(BaseModel):
     unsupported_claims: List[str] = Field(default_factory=list, description="Extrapolated or unsubstantiated statements")
     claim_groundedness_ratio: float = Field(1.0, description="Ratio of supported claims to total claims")
     is_evidence_insufficient: bool = Field(False, description="True if knowledge base lacks adequate evidence")
+    conflicting_evidence_detected: bool = Field(False, description="True if retrieved evidence contains policy conflicts")
 
 
 class CitationValidator:
@@ -236,8 +237,33 @@ class CitationValidator:
             else:
                 unsupported_claims.append(sent)
 
+        # 3. Numerical & Period Claims Groundedness Check
+        combined_text_lower = " ".join(r.text.lower() for r in retrieved_contexts)
+        cited_pages = {str(c["page_number"]) for c in raw_citations if c.get("page_number") is not None}
+        answer_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", answer_text))
+        evidence_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", combined_text_lower))
+        
+        # Check for numbers in answer not present in evidence or citation page numbers
+        unsupported_nums = [
+            n for n in answer_numbers
+            if n not in evidence_numbers and n not in cited_pages and n not in {"1", "2", "3"}  # ignore basic bullet list indices
+        ]
+        for un in unsupported_nums:
+            unsupported_claims.append(f"Unsupported numerical claim: '{un}' not found in retrieved documentation")
+
+        # 4. Conflicting Evidence Detection
+        conflict_detected = False
+        categories_represented = {r.metadata.get("category", "") for r in retrieved_contexts}
+        if "troubleshooting" in categories_represented and "warranty" in categories_represented:
+            if ("void" in combined_text_lower or "disassemble" in combined_text_lower) and ("open" in answer_text.lower() or "disassemble" in answer_text.lower()):
+                conflict_detected = True
+
         total_claims = max(1, len(sentences))
-        groundedness_ratio = round(supported_count / total_claims, 4)
+        groundedness_ratio = (
+            round(max(0, supported_count - len(unsupported_nums)) / total_claims, 4)
+            if unsupported_nums
+            else round(supported_count / total_claims, 4)
+        )
 
         total_cites = len(raw_citations)
         precision = (
@@ -247,8 +273,11 @@ class CitationValidator:
         )
 
         # Determine evidence status
+        has_unsupported_numerical = any("Unsupported numerical" in u for u in unsupported_claims)
         if is_explicitly_insufficient or len(retrieved_contexts) == 0:
             evidence_status = "INSUFFICIENT"
+        elif has_unsupported_numerical or len(unverified_list) > 0:
+            evidence_status = "PARTIAL"
         elif (groundedness_ratio >= 0.60 or len(verified_list) > 0) and len(unverified_list) == 0:
             evidence_status = "SUFFICIENT"
         else:
@@ -265,6 +294,7 @@ class CitationValidator:
             unsupported_claims=unsupported_claims,
             claim_groundedness_ratio=groundedness_ratio,
             is_evidence_insufficient=is_explicitly_insufficient,
+            conflicting_evidence_detected=conflict_detected,
         )
 
 

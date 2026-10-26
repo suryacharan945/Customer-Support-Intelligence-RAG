@@ -175,6 +175,15 @@ flowchart TD
   - **Page E (System Architecture)**: Complete reference manual covering MCP, hybrid RRF search, citation groundedness rules, and resource governance.
 - **Honest Runtime State Reporting**: Transparently reports `Colab GPU Standby` (`READY_FOR_COLAB_INFERENCE`) or `Test Mock Mode` when remote GPU compute is offline. Never fabricates answers or misrepresents mock text as live inference.
 
+### 3.9 Remote LLM Inference, Factual Groundedness & Claim Verification Tier (`app/generation/`, `notebooks/02_colab_mistral_rag_inference.ipynb`)
+- **Remote Compute Decoupling**: Offloads `mistralai/Mistral-7B-Instruct-v0.3` inference to Google Colab T4 GPU via 4-bit NormalFloat4 (NF4) double quantization (`bitsandbytes`), reducing VRAM usage to ~5.2 GB and consuming **0 bytes of local model storage**.
+- **10-Step Operational Notebook**: Implements `notebooks/02_colab_mistral_rag_inference.ipynb` with Drive mount, VRAM validation, 4-bit model load, local token benchmark, authenticated FastAPI REST service (`/v1/chat/completions`), background Uvicorn daemon, public HTTPS tunnel (ngrok / Cloudflare), automated self-test, and clean shutdown.
+- **Bearer Token Authorization**: Enforces `Authorization: Bearer <token>` on all remote inference requests.
+- **Bounded Generation Safeguards**: Enforces strict token generation upper bounds (`max_tokens=512`) and 30-second request timeouts.
+- **Numerical Claim Extraction & Verification**: [`CitationValidator`](file:///C:/Users/surya/Internship_RAG_MCP_Capstone/app/generation/citation_validator.py) extracts all numerical tokens and flags unsubstantiated numbers absent from evidence, preventing hallucinated specifications.
+- **Inter-Category Conflict Detection**: Flags policy conflicts between self-service disassembly and warranty void clauses.
+- **Adversarial Defusal**: [`MCPContextBuilder.sanitize_untrusted_text`](file:///C:/Users/surya/Internship_RAG_MCP_Capstone/app/generation/mcp_context.py) neutralizes prompt injections (`ignore previous instructions`, `reveal system prompt`, `fabricate warranty`) into `[POTENTIAL_INJECTION_DEFUSED]`.
+
 ---
 
 ## 4. Storage Segregation & Safety Architecture

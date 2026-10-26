@@ -42,11 +42,15 @@ class MCPContextBuilder:
 
     # Prompt injection patterns commonly embedded in adversarial documents
     INJECTION_PATTERNS = [
-        re.compile(r"ignore\s+(?:all\s+)?previous\s+instructions", re.IGNORECASE),
-        re.compile(r"system\s*:\s*you\s+are\s+now", re.IGNORECASE),
-        re.compile(r"disregard\s+(?:all\s+)?guidelines", re.IGNORECASE),
+        re.compile(r"ignore\s+(?:all\s+)?(?:previous|prior)\s+instructions", re.IGNORECASE),
+        re.compile(r"system\s*:\s*you\s+are\s+(?:now\s+)?", re.IGNORECASE),
+        re.compile(r"disregard\s+(?:all\s+)?(?:guidelines|safety|policies|rules)", re.IGNORECASE),
         re.compile(r"do\s+not\s+follow\s+safety\s+rules", re.IGNORECASE),
-        re.compile(r"output\s+the\s+system\s+prompt", re.IGNORECASE),
+        re.compile(r"output\s+(?:the\s+)?(?:system\s+prompt|developer\s+mode|secret)", re.IGNORECASE),
+        re.compile(r"reveal\s+(?:all\s+)?(?:secrets?|tokens?|api[_\s]keys?|passwords?|credentials?)", re.IGNORECASE),
+        re.compile(r"override\s+(?:system|safety|previous|guardrails)", re.IGNORECASE),
+        re.compile(r"you\s+are\s+now\s+(?:unconstrained|jailbroken|in\s+developer\s+mode)", re.IGNORECASE),
+        re.compile(r"fabricate\s+(?:a\s+)?(?:citation|warranty|policy)", re.IGNORECASE),
     ]
 
     @classmethod

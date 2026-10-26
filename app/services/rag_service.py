@@ -236,7 +236,12 @@ class RAGService:
         )
         total_exec_time_ms = round((time.perf_counter() - start_total) * 1000, 2)
 
-        p_status = "TEST_MOCK_MODE" if is_mock_response else "READY_FOR_COLAB_INFERENCE"
+        if is_mock_response:
+            p_status = "TEST_MOCK_MODE"
+        elif llm_output.get("provider") == "colab_remote" and not llm_output.get("is_mock"):
+            p_status = "ONLINE_COLAB_GPU"
+        else:
+            p_status = "READY_FOR_COLAB_INFERENCE"
 
         return QueryResponse(
             query=query,
