@@ -58,24 +58,30 @@ Run the model loading cell:
 ```python
 # Loads mistralai/Mistral-7B-Instruct-v0.3 in 4-bit NF4 quantization (~5.2 GB VRAM)
 ```
-- If you have a Hugging Face User Access Token, you can optionally set `os.environ["HF_TOKEN"] = "your_hf_token"`.
-- If the gated repository requires authorization, the notebook automatically falls back to `HuggingFaceH4/zephyr-7b-beta` (identical 7B architecture, fully ungated).
-*Expected Output*: `[SUCCESS] Model loaded in ~45-60 seconds! Current VRAM Allocated: ~5.20 GB`
+- If your Hugging Face account has access to the gated Mistral weights, ensure you set `os.environ["HF_TOKEN"] = "your_hf_token"` or run `from huggingface_hub import login; login()` prior to running this cell.
+- **Strict Model Enforcement**: As required by project governance, automatic substitution of any other model is **strictly disabled**. If Mistral fails to load, execution halts immediately with a fatal diagnostic error explaining the exact cause.
+*Expected Output*: `[SUCCESS] mistralai/Mistral-7B-Instruct-v0.3 loaded successfully in ~45-60 seconds! Current VRAM Allocated: ~5.20 GB`
 
 ### Step 7: Run Sanity Generation Check (Step 5 Cell)
 Run the local generation cell to verify tokenizer, chat template, and token generation speed on the GPU.
 *Expected Output*: Prompt generation prints response text with ~25–40 tokens/sec.
 
 ### Step 8: Start Authenticated FastAPI Service (Steps 6 & 7 Cells)
-1. Run **Step 6** to define the OpenAI-compatible REST server with Bearer token authentication.
-   - Default secret auth token: `apexprint-capstone-secret-token-2026` (or set custom `INFERENCE_AUTH_TOKEN`).
+1. Run **Step 6** to initialize the authenticated REST server.
+   - At runtime, Step 6 automatically generates a fresh cryptographically secure session token (256-bit entropy via `secrets.token_urlsafe(32)`) or uses an explicit `INFERENCE_AUTH_TOKEN` from environment.
+   - The token fingerprint (e.g., `a1b2...y9z0`) is printed for verification without exposing the secret in plaintext logs.
+   - To inspect and copy your private token for configuring Windows, execute:
+     ```python
+     print(INFERENCE_AUTH_TOKEN)
+     ```
+     *(Clear the cell output after copying to ensure secrets are never stored in notebook history).*
 2. Run **Step 7** to start Uvicorn listening locally in the background on port `8001`:
    ```
    [OK] Uvicorn inference server listening locally on port 8001.
    ```
 
 ### Step 9: Expose Public HTTPS Tunnel (Step 8 Cell)
-You have two options to expose the server to your local Windows application:
+Expose the local server to your local Windows application without exposing secrets:
 
 #### Option A: Cloudflare Tunnel (Zero Sign-up Required)
 Run this command in a new code cell:
@@ -95,6 +101,7 @@ ngrok.set_auth_token("YOUR_NGROK_AUTHTOKEN")
 public_tunnel = ngrok.connect(8001)
 print(f"COLAB_API_ENDPOINT={public_tunnel.public_url}/v1")
 ```
+*(Notice that the tunnel command prints only the public URL; your private session token is never printed in tunnel logs).*
 
 ### Step 10: Run End-to-End Self-Test (Step 9 Cell)
 Run Step 9 to verify authentication:
@@ -113,7 +120,7 @@ Edit `C:\Users\surya\Internship_RAG_MCP_Capstone\.env`:
 ```ini
 LLM_PROVIDER=colab_remote
 COLAB_API_ENDPOINT=https://your-public-tunnel.trycloudflare.com/v1
-COLAB_API_KEY=apexprint-capstone-secret-token-2026
+COLAB_API_KEY=<your-private-session-token>
 ```
 
 ### Option 2: Configure via Streamlit UI
@@ -123,7 +130,7 @@ COLAB_API_KEY=apexprint-capstone-secret-token-2026
    streamlit run frontend/app.py --server.port 8501
    ```
 2. In the browser (`http://localhost:8501`), open the **Sidebar** -> **Inference Settings**.
-3. Paste the tunnel URL into **Colab API Endpoint** and your token into **Colab API Key**.
+3. Paste the tunnel URL into **Colab API Endpoint** and your private session token into **Colab API Key**.
 4. Confirm provider indicator turns: **🟢 Colab GPU Active**.
 
 ---

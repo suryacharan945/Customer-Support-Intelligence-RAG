@@ -19,16 +19,16 @@ All static code audits, automated integration tests, API contracts, and notebook
 
 | Gate | Criterion | Status | Verification Evidence / Reason |
 | :---: | :--- | :---: | :--- |
-| **1** | **Real Mistral Model Loaded** | `NOT TESTED` | Awaiting manual launch of Colab GPU session by operator. |
-| **2** | **Authorized Remote Inference** | `NOT TESTED` | Awaiting manual launch of Colab GPU session by operator. |
-| **3** | **Real ChromaDB Retrieval** | `PASS` | Verified with 9 synthetic documents and 21 deterministic chunks across 4 categories. |
-| **4** | **Baseline & MCP Generation** | `NOT TESTED (Live GPU)` | Tested locally via automated mock and simulated harness; live GPU generation awaiting Colab session. |
-| **5** | **FastAPI Returns Real Answers** | `PASS` | Endpoints `/api/v1/query` and `/api/v1/rag/query` verified in `tests/test_stage5_api.py` and `tests/test_stage7_inference.py`. |
-| **6** | **Streamlit Displays Answers** | `PASS` | Verified in `tests/test_stage6_ui.py` (22 AppTest tests) and `scripts/verify_ui_integration.py`. |
-| **7** | **Citations & Sources Inspected** | `PASS` | Verified in `tests/test_stage4_multi_context.py` and `tests/test_stage7_inference.py`. |
-| **8** | **Results & Latencies Recorded** | `BLOCKED` | Preserved in `evaluation/stage7b_live_results.json` without invented numbers, awaiting live GPU telemetry. |
-| **9** | **Automated Tests Pass** | `PASS` | **140 / 140 passing tests** across 12 test suites. |
-| **10** | **Storage & Security Constraints** | `PASS` | Local workspace < 1 GB, 0 model weights local, Bearer token auth strictly enforced. |
+| **1** | **Real Mistral Model Loaded** | `NOT TESTED` | Awaiting operator launch of Colab GPU session. |
+| **2** | **Authorized Remote Inference** | `NOT TESTED` | Awaiting operator launch of Colab GPU session. |
+| **3** | **Real ChromaDB Retrieval** | **PASS** | Verified with 9 synthetic documents and 21 deterministic chunks across 4 categories. |
+| **4** | **Baseline & MCP Generation** | `NOT TESTED` | Live GPU generation remains unverified until Colab session succeeds. |
+| **5** | **FastAPI Returns Real Answers** | `NOT TESTED` | End-to-end real Mistral generation through FastAPI remains unverified until Colab session succeeds. |
+| **6** | **Streamlit Displays Answers** | `NOT TESTED` | End-to-end real Mistral answer display in UI remains unverified until Colab session succeeds. |
+| **7** | **Citations & Sources Inspected** | **PASS** | CitationValidator logic verified; live claim evaluation awaiting Colab output. |
+| **8** | **Results & Latencies Recorded** | `NOT TESTED` | Preserved in `evaluation/stage7b_live_results.json` without invented numbers, awaiting live GPU telemetry. |
+| **9** | **Automated Tests Pass** | **PASS** | **140 / 140 passing tests** across 12 test suites. |
+| **10** | **Storage & Security Constraints** | **PASS** | Local workspace < 1 GB, 0 model weights local, Bearer token auth strictly enforced. |
 
 ---
 
@@ -41,8 +41,8 @@ A comprehensive static review of [`notebooks/02_colab_mistral_rag_inference.ipyn
 2. **Python Dependency Compatibility**:
    - Configured with `transformers`, `accelerate`, `bitsandbytes`, `fastapi`, `uvicorn`, `pydantic`, `pyngrok`, `httpx`, `sentencepiece`, and `protobuf`.
 3. **Model Identifier & Revision**:
-   - Configured for `mistralai/Mistral-7B-Instruct-v0.3`.
-   - Proactively fortified with automatic exception handling to fall back to `HuggingFaceH4/zephyr-7b-beta` if Hugging Face gated access restrictions apply.
+   - Configured strictly for `mistralai/Mistral-7B-Instruct-v0.3`.
+   - Automatic fallback to other models is strictly **disabled**. If loading fails, execution halts immediately with explicit diagnostic errors. Zero unauthorized model substitution.
 4. **GPU Availability Checks**:
    - Step 2 verifies CUDA device availability and enforces T4 GPU hardware requirement (> 12 GB VRAM).
 5. **4-Bit Quantization Support**:

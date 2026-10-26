@@ -126,7 +126,7 @@ Add the tunnel URL and key to your local `.env` file:
 ```ini
 LLM_PROVIDER=colab_remote
 COLAB_API_ENDPOINT=https://your-ngrok-tunnel.ngrok-free.app/v1
-COLAB_API_KEY=apexprint-capstone-secret-token-2026
+COLAB_API_KEY=<your-private-session-token>
 ```
 Restart the FastAPI backend (`python -m uvicorn app.main:app --port 8000`).
 

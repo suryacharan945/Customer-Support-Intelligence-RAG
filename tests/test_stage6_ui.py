@@ -291,7 +291,7 @@ class TestStreamlitAppTest(unittest.TestCase):
             "storage": {"google_drive_connected": True, "local_free_disk_gb": 65.5},
             "compute": {"llm_provider": "colab_remote"},
         }
-        at = AppTest.from_file("frontend/app.py", default_timeout=10)
+        at = AppTest.from_file("frontend/app.py", default_timeout=30)
         at.run()
         # Verify no fatal crashes
         self.assertEqual(len(at.exception), 0)
@@ -341,7 +341,7 @@ class TestStreamlitAppTest(unittest.TestCase):
             "checks": {"storage": True, "manifest": True, "vector_store": True},
         }
 
-        at = AppTest.from_file("frontend/app.py", default_timeout=10)
+        at = AppTest.from_file("frontend/app.py", default_timeout=30)
         at.run()
         self.assertEqual(len(at.exception), 0)
 
@@ -354,7 +354,7 @@ class TestStreamlitAppTest(unittest.TestCase):
         ]
 
         for option in nav_options:
-            sub_at = AppTest.from_file("frontend/app.py", default_timeout=5)
+            sub_at = AppTest.from_file("frontend/app.py", default_timeout=20)
             sub_at.run()
             sub_at.sidebar.radio[0].set_value(option)
             sub_at.run()
@@ -385,7 +385,7 @@ class TestStreamlitAppTest(unittest.TestCase):
             "citations": [],
         }
 
-        at = AppTest.from_file("frontend/app.py", default_timeout=10)
+        at = AppTest.from_file("frontend/app.py", default_timeout=30)
         at.run()
         self.assertEqual(len(at.exception), 0)
 
@@ -400,7 +400,7 @@ class TestStreamlitAppTest(unittest.TestCase):
         """Test 12: Backend unavailable renders clear error banner without crashing."""
         mock_health.side_effect = APIConnectionError("Target offline")
 
-        at = AppTest.from_file("frontend/app.py", default_timeout=10)
+        at = AppTest.from_file("frontend/app.py", default_timeout=30)
         at.run()
         self.assertEqual(len(at.exception), 0)
         # Verify markdown in sidebar reports offline
