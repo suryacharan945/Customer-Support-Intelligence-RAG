@@ -330,7 +330,7 @@ def test_missing_evidence_citation_validation():
 def test_llm_client_timeout_raises_remote_timeout_error():
     """Verify that provider timeouts raise RemoteInferenceTimeoutError."""
     import httpx
-    client_llm = LLMClient(provider="colab_remote", allow_mock=False)
+    client_llm = LLMClient(provider="colab_remote", allow_mock=False, timeout=30.0)
 
     async def _test():
         with patch("httpx.AsyncClient.post") as mock_post:
