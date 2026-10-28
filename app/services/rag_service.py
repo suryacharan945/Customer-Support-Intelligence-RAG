@@ -85,16 +85,20 @@ class RAGService:
         logger.info(f"Processing query: '{query}' [Mode: {retrieval_mode}, Session: {session_id}]")
 
         # Step 1: Query Category Analysis (for Mode B Multi-Context RAG)
+        t0_cat = time.perf_counter()
         selected_categories: List[str] = []
         if retrieval_mode == "multi_context":
             cat_analysis = self.category_selector.analyze_query(query)
             selected_categories = cat_analysis.selected_categories
             logger.info(f"Selected categories: {selected_categories} (Multi: {cat_analysis.is_multi_category})")
+        cat_latency_ms = round((time.perf_counter() - t0_cat) * 1000, 3)
 
         # Step 2: Retrieval Timing & Execution
-        t0_retrieval = time.perf_counter()
+        t0_exp = time.perf_counter()
         expanded_query = self._expand_query(query) if retrieval_mode == "multi_context" else query
+        exp_latency_ms = round((time.perf_counter() - t0_exp) * 1000, 3)
 
+        t0_retrieval = time.perf_counter()
         if retrieval_mode == "baseline":
             # Mode A: Dense-only semantic search across complete knowledge base
             retrieved_contexts = self.hybrid_retriever.retrieve(
@@ -113,11 +117,24 @@ class RAGService:
             )
 
         retrieval_latency_ms = round((time.perf_counter() - t0_retrieval) * 1000, 2)
+        ret_timings = getattr(self.hybrid_retriever, "last_timings", {})
 
         # Step 3: Handle Empty Retrieval (Zero evidence)
         if not retrieved_contexts:
             total_time_ms = round((time.perf_counter() - start_total) * 1000, 2)
             logger.info("Zero matching contexts retrieved. Returning evidence-insufficient response.")
+            empty_timings = {
+                "category_selection_ms": cat_latency_ms,
+                "query_expansion_ms": exp_latency_ms,
+                "retrieval_dense_ms": ret_timings.get("dense_ms", 0.0),
+                "retrieval_sparse_ms": ret_timings.get("sparse_ms", 0.0),
+                "retrieval_fusion_ms": ret_timings.get("fusion_ms", 0.0),
+                "retrieval_total_ms": retrieval_latency_ms,
+                "context_assembly_ms": 0.0,
+                "llm_generation_ms": 0.0,
+                "citation_validation_ms": 0.0,
+                "total_pipeline_ms": total_time_ms,
+            }
             return QueryResponse(
                 query=query,
                 expanded_query=expanded_query if expanded_query != query else None,
@@ -139,11 +156,15 @@ class RAGService:
                 confidence_score=None,
                 contexts_used=0,
                 execution_time_ms=total_time_ms,
+                timing_breakdown=empty_timings,
+                citation_precision=1.0,
+                context_utilization=0.0,
                 requires_human_clarification=True,
                 is_mock=False,
             )
 
         # Step 4: Context Assembly
+        t0_assembly = time.perf_counter()
         if retrieval_mode == "baseline":
             # Simple context concatenation for baseline mode
             blocks = []
@@ -169,6 +190,7 @@ class RAGService:
                 user_query=query,
             )
             contexts_used = mcp_result.total_chunks_used
+        assembly_latency_ms = round((time.perf_counter() - t0_assembly) * 1000, 3)
 
         # Step 5: LLM Generation
         t0_gen = time.perf_counter()
@@ -184,10 +206,12 @@ class RAGService:
         )
 
         # Step 6: Source Citation Validation & Groundedness Analysis
+        t0_val = time.perf_counter()
         val_report: CitationValidationReport = citation_validator.validate_answer(
             answer_text=answer_text,
             retrieved_contexts=retrieved_contexts,
         )
+        val_latency_ms = round((time.perf_counter() - t0_val) * 1000, 3)
 
         # Convert verified citations to Citation schema
         supporting_citations: List[Citation] = []
@@ -236,6 +260,19 @@ class RAGService:
         )
         total_exec_time_ms = round((time.perf_counter() - start_total) * 1000, 2)
 
+        timing_breakdown = {
+            "category_selection_ms": cat_latency_ms,
+            "query_expansion_ms": exp_latency_ms,
+            "retrieval_dense_ms": ret_timings.get("dense_ms", 0.0),
+            "retrieval_sparse_ms": ret_timings.get("sparse_ms", 0.0),
+            "retrieval_fusion_ms": ret_timings.get("fusion_ms", 0.0),
+            "retrieval_total_ms": retrieval_latency_ms,
+            "context_assembly_ms": assembly_latency_ms,
+            "llm_generation_ms": generation_latency_ms,
+            "citation_validation_ms": val_latency_ms,
+            "total_pipeline_ms": total_exec_time_ms,
+        }
+
         if is_mock_response:
             p_status = "TEST_MOCK_MODE"
         elif llm_output.get("provider") == "colab_remote" and not llm_output.get("is_mock"):
@@ -260,6 +297,9 @@ class RAGService:
             confidence_score=None,  # Uncalibrated confidence intentionally omitted
             contexts_used=contexts_used,
             execution_time_ms=total_exec_time_ms,
+            timing_breakdown=timing_breakdown,
+            citation_precision=val_report.citation_precision,
+            context_utilization=val_report.context_utilization,
             requires_human_clarification=requires_clarify,
             is_mock=is_mock_response,
         )

@@ -30,9 +30,14 @@ class CitationValidationReport(BaseModel):
     """Comprehensive citation and groundedness report."""
     evidence_status: str = Field(..., description="'SUFFICIENT', 'PARTIAL', or 'INSUFFICIENT'")
     candidate_citations_count: int = Field(..., description="Number of candidate chunks retrieved")
+    retrieved_evidence_count: int = Field(0, description="Total candidate context chunks retrieved")
+    model_generated_citations_count: int = Field(0, description="Total explicit source citations asserted in answer text")
+    validator_approved_citations_count: int = Field(0, description="Model citations verified against retrieved evidence")
+    unsupported_citations_count: int = Field(0, description="Model citations that could not be verified against evidence")
     verified_citations: List[VerifiedCitation] = Field(default_factory=list, description="Verified citations")
     unverified_citations: List[str] = Field(default_factory=list, description="Citations in answer that failed verification")
     citation_precision: float = Field(1.0, description="Ratio of verified citations to total citations in answer")
+    context_utilization: float = Field(0.0, description="Ratio of verified citations to total retrieved candidate chunks")
     total_claims_analyzed: int = Field(0, description="Total sentence claims checked")
     supported_claims_count: int = Field(0, description="Claims substantiated by retrieved context")
     unsupported_claims: List[str] = Field(default_factory=list, description="Extrapolated or unsubstantiated statements")
@@ -64,10 +69,17 @@ class CitationValidator:
     ]
 
     def extract_citations_from_text(self, answer_text: str) -> List[Dict[str, Any]]:
-        """Extract all candidate citation tokens from the generated text."""
+        """Extract all candidate citation tokens from the generated text without double-counting nested spans."""
         citations = []
+        matched_spans: List[Tuple[int, int]] = []
         for pat in self.CITATION_PATTERNS:
             for match in pat.finditer(answer_text):
+                start, end = match.start(), match.end()
+                # Skip overlapping spans from earlier, more specific regex patterns
+                if any(start < m_end and end > m_start for m_start, m_end in matched_spans):
+                    continue
+                matched_spans.append((start, end))
+
                 source = match.group(1).strip()
                 page_str = match.group(2) if len(match.groups()) >= 2 and match.group(2) else None
                 chunk_id = match.group(3) if len(match.groups()) >= 3 and match.group(3) else None
@@ -97,6 +109,11 @@ class CitationValidator:
             return CitationValidationReport(
                 evidence_status="INSUFFICIENT",
                 candidate_citations_count=len(retrieved_contexts),
+                retrieved_evidence_count=len(retrieved_contexts),
+                model_generated_citations_count=0,
+                validator_approved_citations_count=0,
+                unsupported_citations_count=0,
+                context_utilization=0.0,
                 is_evidence_insufficient=True,
             )
 
@@ -107,10 +124,15 @@ class CitationValidator:
             return CitationValidationReport(
                 evidence_status="INSUFFICIENT",
                 candidate_citations_count=len(retrieved_contexts),
+                retrieved_evidence_count=len(retrieved_contexts),
+                model_generated_citations_count=0,
+                validator_approved_citations_count=0,
+                unsupported_citations_count=0,
                 is_evidence_insufficient=True,
                 verified_citations=[],
                 unverified_citations=[],
                 citation_precision=1.0 if not retrieved_contexts else 0.0,
+                context_utilization=0.0,
                 total_claims_analyzed=1,
                 supported_claims_count=1 if is_explicitly_insufficient else 0,
                 claim_groundedness_ratio=1.0 if is_explicitly_insufficient else 0.0,
@@ -286,9 +308,14 @@ class CitationValidator:
         return CitationValidationReport(
             evidence_status=evidence_status,
             candidate_citations_count=len(retrieved_contexts),
+            retrieved_evidence_count=len(retrieved_contexts),
+            model_generated_citations_count=total_cites,
+            validator_approved_citations_count=len(verified_list),
+            unsupported_citations_count=len(unverified_list),
             verified_citations=verified_list,
             unverified_citations=unverified_list,
             citation_precision=precision,
+            context_utilization=round(len(verified_list) / max(1, len(retrieved_contexts)), 4),
             total_claims_analyzed=total_claims,
             supported_claims_count=supported_count,
             unsupported_claims=unsupported_claims,

@@ -5,6 +5,7 @@ into partitioned, traceable, and budgeted contextual blocks for LLM reasoning.
 Defends against prompt injections by treating retrieved content as untrusted data.
 """
 
+import hashlib
 import re
 from typing import List, Dict, Any, Optional, Set
 from app.retrieval.base import RetrievalResult
@@ -56,12 +57,15 @@ class MCPContextBuilder:
     @classmethod
     def sanitize_untrusted_text(cls, text: str) -> str:
         """
-        Neutralizes prompt injection vectors by escaping or flagging adversarial phrases.
+        Neutralizes prompt injection vectors by escaping or flagging adversarial phrases,
+        and compacts excessive empty whitespace to minimize prompt token footprint.
         """
         sanitized = text
         for pat in cls.INJECTION_PATTERNS:
             sanitized = pat.sub("[POTENTIAL_INJECTION_DEFUSED]", sanitized)
-        return sanitized
+        # Token compaction: normalize excessive consecutive whitespace/blank lines
+        sanitized = re.sub(r"\n\s*\n\s*\n+", "\n\n", sanitized)
+        return sanitized.strip()
 
     @classmethod
     def build_context(
@@ -94,7 +98,7 @@ class MCPContextBuilder:
                 estimated_characters=len(empty_msg),
             )
 
-        # 1. Deduplicate by chunk_id or content
+        # 1. Deduplicate by chunk_id
         seen_chunk_ids: Set[str] = set()
         unique_results: List[RetrievalResult] = []
         for r in retrieval_results:

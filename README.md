@@ -80,7 +80,10 @@ Internship_RAG_MCP_Capstone/
 │   ├── retrieval_test_dataset.json      # Ground-truth test queries & relevance labels
 │   ├── stage4_evaluator.py              # Dense vs Hybrid comparative benchmark
 │   ├── stage7_evaluator.py              # Stage 7 Answer quality & safety benchmark runner
-│   └── stage7_evaluation_dataset.json   # 16 benchmark queries across 8 evaluation dimensions
+│   ├── stage7_evaluation_dataset.json   # 16 benchmark queries across 8 evaluation dimensions
+│   ├── stage7b_live_results.json        # 32 live Mistral-7B generated responses & metrics
+│   ├── stage8_comparison_results.json   # Audited comparative metrics & latency telemetry
+│   └── held_out_dataset.json            # 10 strictly held-out test queries (anti-leakage)
 ├── notebooks/
 │   ├── README.md                        # Remote compute workflow & GPU guidelines
 │   ├── 01_colab_embedding_and_chroma_indexing.ipynb # Batch GPU embedding & index creation
@@ -104,8 +107,14 @@ Internship_RAG_MCP_Capstone/
 │   ├── test_stage5_api.py               # Stage 5 FastAPI endpoints, lifecycle, upload, delete (23 tests)
 │   ├── test_stage6_ui.py                # Stage 6 Streamlit UI, API client, AppTest, components (22 tests)
 │   ├── test_stage7_inference.py         # Stage 7 Remote LLM auth, token bounding, safety (10 tests)
+│   ├── test_stage8_quality_audit.py     # Stage 8 Citation precision, latency, held-out test (8 tests)
 │   └── test_retrieval.py                # Baseline retrieval, latency, snapshot restoration (7 tests)
 ├── docs/
+│   ├── STAGE_8_IMPLEMENTATION_REPORT.md # Stage 8 quality audit & validation report
+│   ├── STAGE_8_CITATION_AUDIT.md        # Citation taxonomy & 41.25% metric forensic audit
+│   ├── STAGE_8_PERFORMANCE_ANALYSIS.md  # Latency deconstruction & sub-millisecond telemetry
+│   ├── STAGE_8_EVALUATION_METHODOLOGY.md# Anti-leakage governance & synthetic KB limits
+│   ├── STAGE_8_HUMAN_REVIEW_GUIDE.md    # 1-5 Likert rubrics & blank human scoring sheets
 │   ├── STORAGE_CONFIGURATION_REPORT.md  # Detailed Stage 1B storage verification
 │   ├── REQUIREMENTS_TRACEABILITY.md     # Traceability matrix to internship PDFs
 │   ├── ARCHITECTURE.md                  # Comprehensive architectural design
@@ -157,7 +166,7 @@ Because the development machine uses integrated Intel Iris Xe Graphics and limit
 
 ## 4. Quickstart & Verification
 
-### Running the Complete Test Suite (140 Tests across 12 Suites)
+### Running the Complete Test Suite (148 Tests across 13 Suites)
 ```powershell
 python -m pytest tests/ -v
 ```

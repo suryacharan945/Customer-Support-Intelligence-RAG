@@ -4,7 +4,8 @@ Implements Reciprocal Rank Fusion (RRF) with configurable dense/sparse weighting
 strict chunk deduplication, category filtering, and metadata preservation.
 """
 
-from typing import List, Dict, Any, Optional, Set
+import time
+from typing import List, Dict, Any, Optional, Set, Tuple
 from app.retrieval.base import BaseRetriever, RetrievalResult
 from app.retrieval.bm25 import BM25Retriever
 from app.core.config import settings
@@ -54,19 +55,47 @@ class HybridRetriever(BaseRetriever):
     ) -> List[RetrievalResult]:
         """
         Execute retrieval across dense and/or sparse channels and fuse results.
+        """
+        results, timings = self.retrieve_with_timings(query, top_k=top_k, category=category, mode=mode)
+        self.last_timings = timings
+        return results
+
+    def retrieve_with_timings(
+        self,
+        query: str,
+        top_k: int = 5,
+        category: Optional[str | List[str]] = None,
+        mode: str = "hybrid",
+    ) -> Tuple[List[RetrievalResult], Dict[str, float]]:
+        """
+        Execute retrieval across dense and/or sparse channels and fuse results,
+        returning both the ranked results and granular sub-millisecond stage timings.
 
         Args:
             query: User search string.
             top_k: Maximum number of merged results to return.
             category: Optional category filter string or list of category strings.
             mode: 'hybrid' (RRF fusion), 'dense' (dense-only baseline), or 'bm25' (keyword-only).
+
+        Returns:
+            Tuple of (ranked_results, timings_dict).
         """
+        t0_total = time.perf_counter()
+        timings: Dict[str, float] = {
+            "dense_ms": 0.0,
+            "sparse_ms": 0.0,
+            "fusion_ms": 0.0,
+            "total_retrieval_ms": 0.0,
+        }
+
         if not query or not query.strip():
-            return []
+            timings["total_retrieval_ms"] = round((time.perf_counter() - t0_total) * 1000, 3)
+            return [], timings
 
         # 1. Dense Retrieval
         dense_results: List[RetrievalResult] = []
         if mode in ("hybrid", "dense"):
+            t0_dense = time.perf_counter()
             fetch_k = top_k * 3 if mode == "hybrid" else top_k
             # If category is a list of categories, query per-category or unconstrained
             if isinstance(category, list) and len(category) == 1:
@@ -90,22 +119,28 @@ class HybridRetriever(BaseRetriever):
                 dense_results = [
                     r for r in dense_results if r.metadata.get("category") in allowed_set
                 ]
+            timings["dense_ms"] = round((time.perf_counter() - t0_dense) * 1000, 3)
 
         if mode == "dense":
-            return dense_results[:top_k]
+            timings["total_retrieval_ms"] = round((time.perf_counter() - t0_total) * 1000, 3)
+            return dense_results[:top_k], timings
 
         # 2. Sparse BM25 Retrieval
         sparse_results: List[RetrievalResult] = []
         if mode in ("hybrid", "bm25") and self.bm25_retriever:
+            t0_sparse = time.perf_counter()
             fetch_k = top_k * 3 if mode == "hybrid" else top_k
             sparse_results = self.bm25_retriever.retrieve(
                 query, top_k=fetch_k, category=category
             )
+            timings["sparse_ms"] = round((time.perf_counter() - t0_sparse) * 1000, 3)
 
         if mode == "bm25":
-            return sparse_results[:top_k]
+            timings["total_retrieval_ms"] = round((time.perf_counter() - t0_total) * 1000, 3)
+            return sparse_results[:top_k], timings
 
         # 3. Fallback to token overlap if BM25 index is not populated
+        t0_fusion = time.perf_counter()
         if not sparse_results and dense_results:
             # Fallback to linear proxy score re-weighting
             fused_results: List[RetrievalResult] = []
@@ -123,7 +158,9 @@ class HybridRetriever(BaseRetriever):
                     )
                 )
             fused_results.sort(key=lambda x: x.score, reverse=True)
-            return fused_results[:top_k]
+            timings["fusion_ms"] = round((time.perf_counter() - t0_fusion) * 1000, 3)
+            timings["total_retrieval_ms"] = round((time.perf_counter() - t0_total) * 1000, 3)
+            return fused_results[:top_k], timings
 
         # 4. Reciprocal Rank Fusion (RRF)
         # Key: chunk_id (or document_id) -> merged item
@@ -176,4 +213,6 @@ class HybridRetriever(BaseRetriever):
                 )
             )
 
-        return final_results
+        timings["fusion_ms"] = round((time.perf_counter() - t0_fusion) * 1000, 3)
+        timings["total_retrieval_ms"] = round((time.perf_counter() - t0_total) * 1000, 3)
+        return final_results, timings

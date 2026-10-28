@@ -59,6 +59,18 @@ class QueryResponse(BaseModel):
     )
     contexts_used: int = Field(0, description="Number of context passages provided to prompt")
     execution_time_ms: float = Field(0.0, description="Total end-to-end request latency in milliseconds")
+    timing_breakdown: Optional[dict[str, float]] = Field(
+        default_factory=dict,
+        description="Granular latency breakdown in milliseconds across pipeline stages",
+    )
+    citation_precision: Optional[float] = Field(
+        None,
+        description="Ratio of verified citations to total citations asserted in model answer",
+    )
+    context_utilization: Optional[float] = Field(
+        None,
+        description="Ratio of verified citations to total retrieved candidate chunks",
+    )
     requires_human_clarification: bool = Field(False, description="Flag indicating if confidence falls below threshold")
     is_mock: bool = Field(False, description="Flag indicating if output was generated via explicit test mock mode")
 
