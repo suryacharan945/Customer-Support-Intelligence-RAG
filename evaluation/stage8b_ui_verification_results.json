@@ -1,0 +1,124 @@
+{
+  "health": {
+    "status": "healthy",
+    "app_name": "Multi-Context Intelligent RAG System",
+    "version": "0.1.0",
+    "environment": "development",
+    "uptime_seconds": 10.27,
+    "storage": {
+      "google_drive_connected": true,
+      "google_drive_root": "G:\\My Drive\\Internship_RAG_MCP_Capstone",
+      "local_free_disk_gb": 56.83,
+      "storage_budget_mb": 1024
+    },
+    "compute": {
+      "llm_provider": "colab_remote",
+      "model_name": "mistralai/Mistral-7B-Instruct-v0.3"
+    }
+  },
+  "knowledge_base": {
+    "status": "operational",
+    "total_active_documents": 9,
+    "total_active_chunks": 21,
+    "searchable_documents_count": 9,
+    "documents_by_category": {
+      "product_manual": 3,
+      "troubleshooting": 2,
+      "warranty": 2,
+      "faq": 2
+    },
+    "documents_by_lifecycle_status": {
+      "uploaded": 0,
+      "processed": 0,
+      "pending_index": 0,
+      "indexed": 9,
+      "indexing_failed": 0,
+      "deleted": 3
+    },
+    "vector_store": {
+      "collection_name": "apexprint_knowledge_base",
+      "total_indexed_chunks": 0,
+      "is_connected": false
+    },
+    "storage": {
+      "google_drive_connected": true,
+      "google_drive_root": "G:\\My Drive\\Internship_RAG_MCP_Capstone",
+      "local_free_disk_gb": 56.83,
+      "storage_budget_mb": 1024
+    }
+  },
+  "baseline_query": {
+    "query": "What is the maximum print speed of the ApexPrint ProX-400?",
+    "latency_ms": 10470.630168914795,
+    "answer": "Based on the provided ApexPrint documentation, the reference excerpts do not contain information about the maximum print speed of the ApexPrint ProX-400. Therefore, I am unable to provide an accurate answer to your inquiry. For more detailed information about the ApexPrint ProX-400's specifications, I recommend reaching out to an authorized ApexPrint service technician. [Source: Insufficient Evidence]",
+    "citations": [
+      {
+        "document_source": "printer_troubleshooting_guide.md",
+        "page_or_section": "reset",
+        "snippet": "To perform a factory reset, hold the power button for 10 seconds until the LED flashes orange....",
+        "relevance_score": 0.92,
+        "category": "troubleshooting",
+        "chunk_id": "mock_test_doc_001",
+        "is_verified": true
+      }
+    ],
+    "provider_status": "TEST_MOCK_MODE"
+  },
+  "multi_context_query": {
+    "query": "My printer jammed with error E-101 and I used non-OEM toner. Is the repair covered under warranty?",
+    "latency_ms": 19145.558834075928,
+    "selected_categories": [
+      "warranty",
+      "troubleshooting"
+    ],
+    "evidence_status": "PARTIAL",
+    "answer": "1. Executive Summary / Direct Answer: Based on the provided evidence, the use of non-OEM toner does not affect the warranty coverage for the E-101 error. However, to resolve the jamming issue, a factory reset might be necessary.\n\n2. Step-by-Step Resolution / Technical Specifications: To perform a factory reset, follow these steps:\n   a. [Source: printer_troubleshooting_guide.md, Page: 1, Chunk: mock_test_doc_001] Hold the power button for 10 seconds until the LED flashes orange.\n\n3. Warranty & Policy Cross-Reference (if applicable): The use of non-OEM toner does not void the warranty for the E-101 error according to the ApexPrint warranty policy. [Source: warranty_policy.pdf, Page: 3, Chunk: warranty_non_oem_toner]\n\n4. Verified Source Citations:\n   a. [Source: printer_troubleshooting_guide.md, Page: 1, Chunk: mock_test_doc",
+    "citations": [
+      {
+        "document_source": "printer_troubleshooting_guide.md",
+        "page_or_section": "Full Document",
+        "snippet": "To perform a factory reset, hold the power button for 10 seconds until the LED flashes orange....",
+        "relevance_score": 0.5755,
+        "category": "troubleshooting",
+        "chunk_id": "mock_test_doc_001",
+        "is_verified": true
+      }
+    ],
+    "provider_status": "TEST_MOCK_MODE"
+  },
+  "feedback": {
+    "status": "success",
+    "message": "Feedback recorded",
+    "data": {
+      "query_id": "stage8b-turn-1",
+      "rating": 5,
+      "correction": null,
+      "flagged_incorrect": false,
+      "comment": "Excellent multi-category synthesized answer with genuine citations."
+    }
+  },
+  "document_management": {
+    "upload": {
+      "status": "SUCCESS",
+      "document_id": "doc_prod_a09d70fc6a17",
+      "filename": "stage8b_ui_test_doc.md",
+      "category": "product_manual",
+      "lifecycle_status": "pending_index",
+      "is_searchable": false,
+      "chunk_count": 1,
+      "file_size_bytes": 181,
+      "content_hash": "a09d70fc6a178628e9d12e1c9b02ef85c4c8590392865f9f45f3e019c62e5fb8",
+      "message": "Document 'stage8b_ui_test_doc.md' successfully processed into 1 chunks."
+    },
+    "delete": {
+      "status": "success",
+      "message": "Document 'doc_prod_a09d70fc6a17' successfully deleted.",
+      "document_id": "doc_prod_a09d70fc6a17",
+      "deleted_chunks": 0
+    }
+  },
+  "disconnected_provider_test": {
+    "handled_gracefully": true,
+    "error_type": "APIConnectionError"
+  }
+}
