@@ -71,6 +71,7 @@ def render_comparison_view(api_client: APIClient) -> None:
                     retrieval_mode="baseline",
                     top_k=comp_top_k,
                     session_id="comparison-baseline",
+                    llm_provider=st.session_state.get("selected_llm_provider", "auto"),
                 )
 
                 # 2. Run Multi-Context Mode
@@ -79,6 +80,7 @@ def render_comparison_view(api_client: APIClient) -> None:
                     retrieval_mode="multi_context",
                     top_k=comp_top_k,
                     session_id="comparison-multicontext",
+                    llm_provider=st.session_state.get("selected_llm_provider", "auto"),
                 )
 
                 st.session_state.comparison_data = {

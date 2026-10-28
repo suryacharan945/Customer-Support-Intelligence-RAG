@@ -67,6 +67,7 @@ class RAGService:
         session_id: str = "default",
         top_k: int = 5,
         retrieval_mode: str = "multi_context",
+        llm_provider: Optional[str] = None,
     ) -> QueryResponse:
         """
         Execute end-to-end RAG workflow.
@@ -76,6 +77,7 @@ class RAGService:
             session_id: Optional conversation session tracking identifier.
             top_k: Number of candidate evidence passages to retrieve.
             retrieval_mode: 'baseline' (dense unconstrained) or 'multi_context' (MCP hybrid).
+            llm_provider: Optional override for generation provider ('colab_remote', 'local', 'auto').
         """
         start_total = time.perf_counter()
         retrieval_mode = retrieval_mode.lower()
@@ -194,9 +196,17 @@ class RAGService:
 
         # Step 5: LLM Generation
         t0_gen = time.perf_counter()
+        gen_kwargs = {}
+        if llm_provider is not None:
+            import inspect
+            sig = inspect.signature(self.llm_client.generate_response)
+            if "provider" in sig.parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()):
+                gen_kwargs["provider"] = llm_provider
+
         llm_output = await self.llm_client.generate_response(
             system_prompt=PromptTemplates.SYSTEM_PROMPT,
             user_prompt=user_prompt,
+            **gen_kwargs,
         )
         generation_latency_ms = round((time.perf_counter() - t0_gen) * 1000, 2)
         answer_text = llm_output.get("text", "")
@@ -273,9 +283,14 @@ class RAGService:
             "total_pipeline_ms": total_exec_time_ms,
         }
 
-        if is_mock_response:
+        prov = llm_output.get("provider", "")
+        if prov == "local_grounded":
+            p_status = "LOCAL_GROUNDED_SYNTHESIS"
+        elif prov == "local_grounded_fallback":
+            p_status = "LOCAL_GROUNDED_FALLBACK"
+        elif is_mock_response:
             p_status = "TEST_MOCK_MODE"
-        elif llm_output.get("provider") == "colab_remote" and not llm_output.get("is_mock"):
+        elif prov == "colab_remote" and not llm_output.get("is_mock"):
             p_status = "ONLINE_COLAB_GPU"
         else:
             p_status = "READY_FOR_COLAB_INFERENCE"

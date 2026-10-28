@@ -78,7 +78,19 @@ def get_category_badge_html(category: str) -> str:
 def get_provider_badge_html(status: str) -> str:
     """Generate HTML badge for LLM provider connectivity status."""
     st_upper = status.upper()
-    if "READY_FOR_COLAB" in st_upper:
+    if "LOCAL_GROUNDED_SYNTHESIS" in st_upper:
+        return (
+            '<span style="background-color:#f0fdf4; color:#15803d; border:1px solid #86efac; '
+            'padding:3px 10px; border-radius:12px; font-weight:600; font-size:12px;">'
+            '💻 Local Grounded Engine</span>'
+        )
+    elif "LOCAL_GROUNDED_FALLBACK" in st_upper:
+        return (
+            '<span style="background-color:#fffbeb; color:#b45309; border:1px solid #fcd34d; '
+            'padding:3px 10px; border-radius:12px; font-weight:600; font-size:12px;">'
+            '⚠️ Local Fallback (Colab Offline)</span>'
+        )
+    elif "READY_FOR_COLAB" in st_upper:
         return (
             '<span style="background-color:#eff6ff; color:#1d4ed8; border:1px solid #93c5fd; '
             'padding:3px 10px; border-radius:12px; font-weight:600; font-size:12px;">'

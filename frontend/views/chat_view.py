@@ -41,7 +41,7 @@ def render_chat_view(api_client: APIClient) -> None:
 
     # Top Control Bar
     with st.expander("⚙️ Retrieval & Prompting Configuration", expanded=False):
-        col1, col2, col3 = st.columns([2, 2, 1])
+        col1, col2, col3, col4 = st.columns([2, 2, 2, 1])
 
         with col1:
             mode_choice = st.radio(
@@ -59,6 +59,29 @@ def render_chat_view(api_client: APIClient) -> None:
             )
 
         with col2:
+            provider_choice = st.selectbox(
+                "LLM Generation Mode",
+                options=[
+                    "Auto (Colab GPU + Local Fallback)",
+                    "Local Grounded (Always Ready / No GPU)",
+                    "Remote Colab GPU Only",
+                ],
+                index=0,
+                help=(
+                    "Auto: attempts remote Colab GPU inference, seamlessly falling back to local grounded synthesis if Colab is offline. "
+                    "Local Grounded: instant offline synthesis directly from retrieved knowledge passages. "
+                    "Remote Colab GPU Only: strictly requires active Colab tunnel."
+                ),
+                key="llm_provider_select",
+            )
+            if "Local Grounded" in provider_choice:
+                st.session_state.selected_llm_provider = "local"
+            elif "Remote Colab" in provider_choice:
+                st.session_state.selected_llm_provider = "colab_remote"
+            else:
+                st.session_state.selected_llm_provider = "auto"
+
+        with col3:
             cat_choice = st.selectbox(
                 "Category Focus (Optional Filter)",
                 options=[
@@ -72,7 +95,7 @@ def render_chat_view(api_client: APIClient) -> None:
                 key="category_focus_select",
             )
 
-        with col3:
+        with col4:
             top_k = st.slider(
                 "Top-K Chunks",
                 min_value=1,
@@ -136,8 +159,13 @@ def render_chat_view(api_client: APIClient) -> None:
                     unsafe_allow_html=True,
                 )
 
-                # Provider notice if on standby
-                if "READY_FOR_COLAB" in provider_st.upper():
+                # Provider notice if on standby or fallback
+                if "LOCAL_GROUNDED_FALLBACK" in provider_st.upper():
+                    st.info(
+                        "ℹ️ **Local Grounded Fallback**: The remote Colab GPU endpoint was offline or timed out. "
+                        "Your answer was synthesized immediately using the local knowledge engine with 100% verified citations."
+                    )
+                elif "READY_FOR_COLAB" in provider_st.upper():
                     st.info(
                         "ℹ️ **Inference Runtime Note**: The remote Colab GPU inference node is currently in standby. "
                         "Grounded knowledge-base evidence was successfully retrieved below. "
@@ -192,6 +220,7 @@ def render_chat_view(api_client: APIClient) -> None:
                     retrieval_mode=retrieval_mode,
                     top_k=top_k_val,
                     session_id=st.session_state.session_id,
+                    llm_provider=st.session_state.get("selected_llm_provider", "auto"),
                 )
 
                 add_chat_turn(query=active_query, response=response)

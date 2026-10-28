@@ -22,6 +22,10 @@ class QueryRequest(BaseModel):
         "multi_context",
         description="RAG retrieval mode: 'baseline' (dense single-channel) or 'multi_context' (MCP multi-category hybrid)",
     )
+    llm_provider: Optional[str] = Field(
+        None,
+        description="Optional LLM provider override: 'auto', 'local', 'colab_remote'",
+    )
 
 
 class Citation(BaseModel):
@@ -106,6 +110,7 @@ async def execute_rag_query(
             session_id=request.session_id or "default-session",
             top_k=request.top_k or 5,
             retrieval_mode=mode,
+            llm_provider=request.llm_provider,
         )
         return response
     except VectorStoreNotInitializedError as e:

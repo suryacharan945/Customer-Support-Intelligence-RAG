@@ -45,6 +45,7 @@ class LLMClient:
         api_key: Optional[str] = None,
         model_name: Optional[str] = None,
         timeout: Optional[float] = None,
+        allow_fallback: Optional[bool] = None,
     ):
         self.provider = (provider or settings.LLM_PROVIDER).lower()
         self.endpoint = (endpoint or settings.COLAB_API_ENDPOINT).rstrip("/")
@@ -52,9 +53,16 @@ class LLMClient:
         self.model_name = model_name or settings.DEFAULT_MODEL_NAME
         self.allow_mock = allow_mock if allow_mock is not None else settings.ALLOW_MOCK_FALLBACK
         self.timeout = timeout or settings.REMOTE_INFERENCE_TIMEOUT
+        if allow_fallback is not None:
+            self.allow_fallback = allow_fallback
+        elif self.provider == "colab_remote":
+            # Strict colab_remote provider does not silently fall back unless explicitly requested
+            self.allow_fallback = False
+        else:
+            self.allow_fallback = getattr(settings, "ALLOW_LOCAL_FALLBACK", True) and self.allow_mock is not False
 
         # Auto-detect from colab_endpoint.json if no explicit endpoint/key was passed
-        if self.provider == "colab_remote" and endpoint is None and not self.api_key:
+        if self.provider in ("colab_remote", "auto") and endpoint is None and not self.api_key:
             from pathlib import Path
             for candidate in [Path("colab_endpoint.json"), Path(settings.GOOGLE_DRIVE_ROOT) / "colab_endpoint.json"]:
                 if candidate.exists():
@@ -69,29 +77,54 @@ class LLMClient:
                     except Exception:
                         pass
 
-    async def generate_response(self, system_prompt: str, user_prompt: str) -> Dict[str, Any]:
+    async def generate_response(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        provider: Optional[str] = None,
+    ) -> Dict[str, Any]:
         """
         Route generation request to the configured backend.
         Never silently falls back to synthetic mock text unless provider='mock' or allow_mock=True.
+        Supports intelligent local grounded synthesis when Colab is offline.
         """
-        logger.info(f"Generating response using provider: '{self.provider}' (Model: {self.model_name})")
+        active_provider = (provider or self.provider).lower()
+        logger.info(f"Generating response using provider: '{active_provider}' (Model: {self.model_name})")
 
-        if self.provider == "colab_remote":
-            return await self._call_colab_endpoint(system_prompt, user_prompt)
-        elif self.provider == "groq":
+        from app.generation.local_synthesizer import local_synthesizer
+
+        if active_provider == "colab_remote":
+            try:
+                return await self._call_colab_endpoint(system_prompt, user_prompt)
+            except (RemoteInferenceError, RemoteInferenceTimeoutError) as exc:
+                if self.allow_fallback:
+                    logger.warning(
+                        f"Colab endpoint unreachable ({exc}). Falling back to local grounded knowledge base synthesis."
+                    )
+                    return local_synthesizer.synthesize(user_prompt, is_fallback=True)
+                raise
+        elif active_provider in ("local", "offline", "local_grounded"):
+            return local_synthesizer.synthesize(user_prompt, is_fallback=False)
+        elif active_provider == "auto":
+            try:
+                return await self._call_colab_endpoint(system_prompt, user_prompt)
+            except Exception as exc:
+                logger.info(f"Auto-provider: Colab unavailable ({exc}), engaging local grounded synthesis.")
+                return local_synthesizer.synthesize(user_prompt, is_fallback=True)
+        elif active_provider == "groq":
             return await self._call_groq_api(system_prompt, user_prompt)
-        elif self.provider == "gemini":
+        elif active_provider == "gemini":
             return await self._call_gemini_api(system_prompt, user_prompt)
-        elif self.provider == "ollama":
+        elif active_provider == "ollama":
             return await self._call_ollama_api(system_prompt, user_prompt)
-        elif self.provider == "mock":
+        elif active_provider == "mock":
             if not self.allow_mock and not settings.TEST_MODE:
                 raise LLMError("Mock LLM provider invoked while mock mode is disabled in settings.")
             return self._mock_generation(user_prompt)
         else:
             raise ValueError(
-                f"Unsupported LLM provider: '{self.provider}'. "
-                f"Configured options: ['colab_remote', 'groq', 'gemini', 'ollama', 'mock']."
+                f"Unsupported LLM provider: '{active_provider}'. "
+                f"Configured options: ['colab_remote', 'local', 'auto', 'groq', 'gemini', 'ollama', 'mock']."
             )
 
     async def _call_colab_endpoint(self, system_prompt: str, user_prompt: str) -> Dict[str, Any]:

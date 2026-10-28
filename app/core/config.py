@@ -23,8 +23,9 @@ class Settings(BaseSettings):
     LOCAL_MAX_STORAGE_BUDGET_MB: int = 1024
 
     # LLM & Remote Compute
-    # Supported providers: colab_remote, groq, gemini, ollama, mock
+    # Supported providers: colab_remote, local, auto, groq, gemini, ollama, mock
     LLM_PROVIDER: str = "colab_remote"
+    ALLOW_LOCAL_FALLBACK: bool = True
     COLAB_API_ENDPOINT: str = "http://localhost:8001/v1"
     COLAB_API_KEY: str = ""
     GROQ_API_KEY: str = ""

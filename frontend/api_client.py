@@ -199,6 +199,7 @@ class APIClient:
         top_k: int = 5,
         session_id: str = "default-session",
         category: Optional[str] = None,
+        llm_provider: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         Execute customer support query retrieval and generation.
@@ -209,6 +210,7 @@ class APIClient:
             top_k: Number of context passages (1-20).
             session_id: Optional conversation session tracking identifier.
             category: Optional category filter hint.
+            llm_provider: Optional provider override ('auto', 'local', 'colab_remote').
         """
         payload: Dict[str, Any] = {
             "query": query.strip(),
@@ -216,6 +218,8 @@ class APIClient:
             "top_k": top_k,
             "session_id": session_id,
         }
+        if llm_provider:
+            payload["llm_provider"] = llm_provider
         return self._post("/api/v1/query", json_data=payload)
 
     # --------------------------------------------------------------------------
