@@ -17,20 +17,63 @@
     "gate_3_real_chromadb_retrieval": "PASS (21 deterministic chunks indexed)",
     "gate_4_baseline_and_mcp_generation": "PASS (16 queries evaluated on live Mistral-7B)",
     "gate_5_fastapi_returns_real_answers": "PASS (Verified with 200 OK responses)",
-    "gate_6_streamlit_displays_answers": "PASS (UI AppTest and Live API client verified)",
+    "gate_6_streamlit_displays_answers": "NOT_TESTED (Live browser session unavailable following GPU shutdown; automated UI AppTest passed 22/22 tests)",
     "gate_7_citations_inspected": "PASS (Citation precision calculated per response)",
     "gate_8_results_and_latencies_recorded": "PASS (Genuine live telemetry recorded)",
     "gate_9_tests_pass": "PASS (140/140 automated tests passing)",
     "gate_10_storage_and_security_respected": "PASS (0 local model weights, Bearer token auth)"
   },
   "summary_metrics": {
-    "total_queries": 16,
-    "live_requests_succeeded": 16,
-    "live_requests_failed": 0,
-    "baseline_mean_latency_ms": 12387.2,
-    "mcp_mean_latency_ms": 26519.45,
-    "baseline_citation_precision": 1.0,
-    "mcp_citation_precision": 0.4125,
+    "total_queries_evaluated": 16,
+    "missing_observations": 0,
+    "baseline": {
+      "status": "COMPLETED",
+      "answer_coverage": "16/16 (100%)",
+      "retrieval_latency_ms": {
+        "mean": 0.17,
+        "p95": 0.27,
+        "min": 0.1,
+        "max": 0.33
+      },
+      "generation_latency_ms": {
+        "mean": 12385.87,
+        "p95": 17397.83,
+        "min": 8720.44,
+        "max": 17551.29
+      },
+      "total_latency_ms": {
+        "mean": 12387.2,
+        "p95": 17399.47,
+        "min": 8721.4,
+        "max": 17552.85
+      },
+      "mean_citation_precision": 1.0,
+      "appropriate_abstention_rate": "1/2 (50.0%)"
+    },
+    "multi_context": {
+      "status": "COMPLETED",
+      "answer_coverage": "16/16 (100%)",
+      "retrieval_latency_ms": {
+        "mean": 0.63,
+        "p95": 0.93,
+        "min": 0.47,
+        "max": 1.03
+      },
+      "generation_latency_ms": {
+        "mean": 26514.24,
+        "p95": 29155.22,
+        "min": 23863.09,
+        "max": 30506.77
+      },
+      "total_latency_ms": {
+        "mean": 26519.45,
+        "p95": 29159.97,
+        "min": 23866.84,
+        "max": 30511.34
+      },
+      "mean_citation_precision": 0.4125,
+      "appropriate_abstention_rate": "2/2 (100.0%)"
+    },
     "human_review_completed": false
   },
   "queries_benchmark_results": [
