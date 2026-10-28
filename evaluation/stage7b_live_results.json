@@ -12,8 +12,8 @@
     "notes": "Zero invented measurements recorded. Populated with live data upon completion of manual Google Colab execution steps."
   },
   "acceptance_gates": {
-    "gate_1_model_loaded": "NOT_TESTED (Awaiting User Colab Session)",
-    "gate_2_authorized_remote_inference": "NOT_TESTED (Awaiting User Colab Session)",
+    "gate_1_model_loaded": "PASS (Verified on Colab Tesla T4: 250.19s load, 3.86 GB VRAM, 128 tokens in 16.34s / 7.83 tok/s)",
+    "gate_2_authorized_remote_inference": "IN_PROGRESS (Server running, resolving input tensor formatting for HTTP 200)",
     "gate_3_real_chromadb_retrieval": "PASS (Verified with 21 synthetic chunks)",
     "gate_4_baseline_and_mcp_generation": "NOT_TESTED (Awaiting Live Colab GPU Session)",
     "gate_5_fastapi_returns_real_answers": "NOT_TESTED (Awaiting Live Colab GPU Session)",

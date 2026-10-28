@@ -28,6 +28,7 @@ htmlcov/
 *.key
 credentials.json
 token.json
+colab_endpoint.json
 
 # Temporary & Log files
 *.log

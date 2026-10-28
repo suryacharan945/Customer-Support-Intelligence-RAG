@@ -19,8 +19,8 @@ All static code audits, automated integration tests, API contracts, and notebook
 
 | Gate | Criterion | Status | Verification Evidence / Reason |
 | :---: | :--- | :---: | :--- |
-| **1** | **Real Mistral Model Loaded** | `NOT TESTED` | Awaiting operator launch of Colab GPU session. |
-| **2** | **Authorized Remote Inference** | `NOT TESTED` | Awaiting operator launch of Colab GPU session. |
+| **1** | **Real Mistral Model Loaded** | **PASS** | Verified in Google Colab: `mistralai/Mistral-7B-Instruct-v0.3` loaded in 4-bit NF4 on Tesla T4 GPU (14.56 GB VRAM). Load time: 250.19s, VRAM allocated: 3.86 GB. Sanity check: 128 tokens generated in 16.34s (7.83 tok/s). |
+| **2** | **Authorized Remote Inference** | `IN PROGRESS` | Colab REST server running on port 8001 with 256-bit Bearer auth; applying input tensor formatting update to achieve HTTP 200. |
 | **3** | **Real ChromaDB Retrieval** | **PASS** | Verified with 9 synthetic documents and 21 deterministic chunks across 4 categories. |
 | **4** | **Baseline & MCP Generation** | `NOT TESTED` | Live GPU generation remains unverified until Colab session succeeds. |
 | **5** | **FastAPI Returns Real Answers** | `NOT TESTED` | End-to-end real Mistral generation through FastAPI remains unverified until Colab session succeeds. |

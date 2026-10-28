@@ -53,6 +53,22 @@ class LLMClient:
         self.allow_mock = allow_mock if allow_mock is not None else settings.ALLOW_MOCK_FALLBACK
         self.timeout = timeout or settings.REMOTE_INFERENCE_TIMEOUT
 
+        # Auto-detect from colab_endpoint.json if no explicit endpoint/key was passed
+        if self.provider == "colab_remote" and endpoint is None and not self.api_key:
+            from pathlib import Path
+            for candidate in [Path("colab_endpoint.json"), Path(settings.GOOGLE_DRIVE_ROOT) / "colab_endpoint.json"]:
+                if candidate.exists():
+                    try:
+                        with open(candidate, "r", encoding="utf-8") as f:
+                            cfg = json.load(f)
+                            if cfg.get("endpoint"):
+                                self.endpoint = cfg["endpoint"].rstrip("/")
+                            if cfg.get("token"):
+                                self.api_key = cfg["token"]
+                        break
+                    except Exception:
+                        pass
+
     async def generate_response(self, system_prompt: str, user_prompt: str) -> Dict[str, Any]:
         """
         Route generation request to the configured backend.
