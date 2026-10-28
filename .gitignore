@@ -36,3 +36,12 @@ tmp/
 temp/
 .DS_Store
 Thumbs.db
+
+# Frontend & Web Artifacts (Stage 10)
+node_modules/
+web/node_modules/
+web/dist/
+web/.vite/
+*.tsbuildinfo
+dist/
+coverage/

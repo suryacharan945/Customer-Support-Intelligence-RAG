@@ -59,7 +59,7 @@ Internship_RAG_MCP_Capstone/
 │       └── feedback_service.py          # Feedback collector & persistent archiver
 ├── frontend/
 │   ├── __init__.py
-│   ├── app.py                          # Streamlit application entrypoint & routing
+│   ├── app.py                          # Streamlit application fallback & demonstration
 │   ├── api_client.py                   # Decoupled HTTP API client with error boundaries
 │   ├── state.py                        # Ephemeral session state manager
 │   ├── components/
@@ -72,6 +72,15 @@ Internship_RAG_MCP_Capstone/
 │       ├── comparison_view.py          # Page C: Side-by-side Baseline vs MCP evaluation
 │       ├── knowledge_base_view.py      # Page D: Telemetry, lifecycle & storage dashboard
 │       └── about_view.py               # Page E: Architecture manual & diagnostics
+├── web/                                 # Stage 10 Enterprise React Web Application (Vite + TS)
+│   ├── src/
+│   │   ├── App.tsx                     # React Router (7 routes) & Theme Provider
+│   │   ├── api/                        # Typed API client & Pydantic-mirrored schemas
+│   │   ├── components/                 # Primitives, AppShell, Chat, Docs & 3D Hero
+│   │   ├── pages/                      # Dashboard, Chat, Documents, Compare, Analytics, Guide, Status
+│   │   └── test/                       # Vitest component & application test suite
+│   ├── package.json                    # Minimal npm dependencies (~294 MB node_modules)
+│   └── vite.config.ts                  # Vite 6 dev server with /api proxy to FastAPI port 8000
 ├── evaluation/
 │   ├── __init__.py
 │   ├── metrics.py                       # Faithfulness, Context Relevance, Latency
@@ -176,18 +185,26 @@ python -m pytest tests/ -v
 python evaluation/stage7_evaluator.py
 ```
 
-### Running the Streamlit Frontend Dashboard Locally
+### Running the Primary React Web Application (Port 5173)
 ```powershell
-streamlit run frontend/app.py --server.port 8501
+# In a terminal:
+cd web
+npm run dev
 ```
-- Interactive Dashboard: `http://localhost:8501`
+- Interactive React Application: `http://localhost:5173` (Proxies API calls to port 8000)
 
-### Running the FastAPI Server Locally
+### Running the FastAPI Backend Server (Port 8000)
 ```powershell
 uvicorn app.main:app --reload --port 8000
 ```
 - Interactive Swagger UI: `http://localhost:8000/docs`
 - Health Endpoint: `http://localhost:8000/api/v1/health`
+
+### Running the Streamlit Fallback Dashboard (Port 8501)
+```powershell
+streamlit run frontend/app.py --server.port 8501
+```
+- Streamlit Fallback: `http://localhost:8501`
 
 ### Executing Full UI Integration Verification & Screenshot Tool
 ```powershell

@@ -74,7 +74,7 @@ async def readiness_probe(
 
     # 5. LLM provider check
     llm_ready = bool(
-        app_settings.LLM_PROVIDER in ("colab_remote", "groq", "gemini", "ollama", "mock")
+        app_settings.LLM_PROVIDER in ("colab_remote", "groq", "gemini", "ollama", "mock", "local", "auto")
         or app_settings.ALLOW_MOCK_FALLBACK
     )
 
