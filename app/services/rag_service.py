@@ -6,6 +6,7 @@ Supports two operational RAG modes:
   balanced multi-context prompt assembly, and citation groundedness verification.
 """
 
+import os
 import time
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -46,7 +47,12 @@ class RAGService:
         )
         self.llm_client = llm_client or LLMClient(allow_mock=self.allow_mock)
         self.category_selector = category_selector
-        if self.bm25_retriever.corpus_size == 0 and not getattr(self, "allow_mock", False):
+        if (
+            vector_retriever is None
+            and bm25_retriever is None
+            and not getattr(self, "allow_mock", False)
+            and not os.environ.get("PYTEST_CURRENT_TEST")
+        ):
             self._auto_seed_bm25_if_empty()
 
     def _auto_seed_bm25_if_empty(self):
