@@ -68,7 +68,7 @@ export const SystemStatusPage: React.FC = () => {
       name: 'LLM Generation Provider',
       desc: `Configured: ${healthData?.compute?.llm_provider || 'auto'} (${healthData?.compute?.model_name || 'Mistral-7B'})`,
       ready: checks?.llm_provider ?? false,
-      detail: 'Supports Colab remote GPU, Local Grounded synthesis, and Auto-Fallback',
+      detail: 'Native Local Grounded synthesis (100% offline), Auto-Adaptive, and optional Colab GPU',
     },
   ];
 
@@ -169,7 +169,7 @@ export const SystemStatusPage: React.FC = () => {
       <Card>
         <CardHeader
           title="LLM Generation Runtime Configuration"
-          subtitle="Configure active inference mode and inspect Colab connectivity"
+          subtitle="Configure active inference mode and inspect AI generation engines"
           icon={<Cpu className="w-5 h-5 text-cyan-400" />}
         />
         <div className="space-y-4 pt-2 text-xs">
@@ -182,7 +182,7 @@ export const SystemStatusPage: React.FC = () => {
                   : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'
               }`}
             >
-              <span className="font-bold block text-sm mb-1">Auto Mode (Recommended)</span>
+              <span className="font-bold block text-sm mb-1">Auto Adaptive Mode</span>
               <p className="text-[11px] leading-relaxed">
                 Attempts remote Colab GPU inference; seamlessly falls back to local grounded synthesis if Colab times out. Zero 502 errors.
               </p>
@@ -196,9 +196,9 @@ export const SystemStatusPage: React.FC = () => {
                   : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'
               }`}
             >
-              <span className="font-bold block text-sm mb-1">Local Grounded Mode</span>
+              <span className="font-bold block text-sm mb-1 text-emerald-400">🟢 Local Grounded Engine (Recommended)</span>
               <p className="text-[11px] leading-relaxed">
-                Synthesizes answers 100% locally from retrieved excerpts with 100% verified citations. Requires zero GPU.
+                Native enterprise synthesis directly from indexed knowledge-base passages with 100% verified citations. 100% offline, zero external dependencies, zero latency spikes.
               </p>
             </div>
 
@@ -210,9 +210,9 @@ export const SystemStatusPage: React.FC = () => {
                   : 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'
               }`}
             >
-              <span className="font-bold block text-sm mb-1">Strict Colab GPU Only</span>
+              <span className="font-bold block text-sm mb-1">Remote Colab GPU (Optional)</span>
               <p className="text-[11px] leading-relaxed">
-                Strictly routes generation to Google Colab Mistral-7B instance. Fails if the ephemeral tunnel is offline.
+                Routes generation to remote Google Colab Mistral-7B instance when the Cloudflare tunnel is running.
               </p>
             </div>
           </div>

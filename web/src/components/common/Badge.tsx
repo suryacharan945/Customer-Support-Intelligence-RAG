@@ -110,6 +110,9 @@ export const EvidenceBadge: React.FC<{ status: EvidenceStatus }> = ({ status }) 
 
 export const ProviderBadge: React.FC<{ status: string }> = ({ status }) => {
   const upper = status.toUpperCase();
+  if (upper.includes('LOCAL_GROUNDED_FALLBACK')) {
+    return <Badge variant="warning">🟡 Local Grounded Fallback</Badge>;
+  }
   if (upper.includes('LOCAL_GROUNDED')) {
     return <Badge variant="success">🟢 Local Grounded Engine</Badge>;
   }
