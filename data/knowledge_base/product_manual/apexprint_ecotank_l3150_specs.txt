@@ -1,0 +1,11 @@
+# ApexPrint EcoTank L3150 All-in-One Ink Tank System
+Document Type: Technical Specifications Sheet
+Model: EcoTank L3150 / L300 Series
+
+Key Hardware Specifications:
+- Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.
+- Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.
+- Print Speed: 33 ppm draft black, 15 ppm draft color; ISO 24734 speed: 10 ipm black, 5.0 ipm color.
+- Print Resolution: 5760 x 1440 optimized dpi using Variable-Sized Droplet Technology (VSDT).
+- Mobile Connectivity: Supports Apple AirPrint, Mopria Print Service, ApexPrint Smart Panel App, and Wi-Fi Direct peer-to-peer connection.
+- Standard Warranty: 12 months or 30,000 pages, whichever comes first.

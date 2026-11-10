@@ -34,9 +34,14 @@ class ApiClient {
   private baseUrl: string;
 
   constructor() {
-    // Defaults to relative /api/v1 (proxied by Vite in dev, or direct FastAPI in production)
     const envUrl = import.meta.env.VITE_API_BASE_URL;
-    this.baseUrl = envUrl ? envUrl.replace(/\/+$/, '') : '/api/v1';
+    if (envUrl) {
+      this.baseUrl = envUrl.replace(/\/+$/, '');
+    } else if (typeof window !== 'undefined' && window.location.hostname) {
+      this.baseUrl = 'http://' + (window.location.hostname || 'localhost') + ':8000/api/v1';
+    } else {
+      this.baseUrl = 'http://127.0.0.1:8000/api/v1';
+    }
   }
 
   private async request<T>(

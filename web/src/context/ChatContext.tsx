@@ -36,7 +36,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [retrievalMode, setRetrievalMode] = useState<RetrievalMode>('multi_context');
   const [topK, setTopK] = useState<number>(5);
-  const [llmProvider, setLlmProvider] = useState<LLMProvider>('auto');
+  const [llmProvider, setLlmProvider] = useState<LLMProvider>('local');
   const [categoryFocus, setCategoryFocus] = useState<string>('all');
 
   useEffect(() => {

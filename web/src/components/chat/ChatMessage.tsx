@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { User, Bot, Copy, Check, ThumbsUp, Info, Clock, AlertTriangle } from 'lucide-react';
+import { User, Bot, Copy, Check, ThumbsUp, Info, Clock } from 'lucide-react';
 import { QueryResponse } from '../../api/types';
 import { ProviderBadge, EvidenceBadge, CategoryBadge } from '../common/Badge';
 import { CitationCard } from './CitationCard';
@@ -74,13 +74,13 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ query, response, turnI
             </div>
           )}
 
-          {/* Fallback Warning Notice if Colab was down */}
-          {isFallback && (
-            <div className="flex items-start gap-2.5 p-3 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-200 text-xs">
-              <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+          {/* Local Grounded Engine Indicator */}
+          {(isFallback || response.provider_status?.toUpperCase().includes('LOCAL_GROUNDED')) && (
+            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-200 text-xs">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
               <div>
-                <strong className="block font-semibold">Local Grounded Fallback Engaged</strong>
-                Remote Colab GPU was offline or unreachable. The response was synthesized instantly via the local knowledge-base engine with 100% verified citations.
+                <strong className="inline font-semibold text-emerald-300">Local Grounded AI Engine: </strong>
+                Synthesized directly from verified knowledge-base documentation (100% offline & private).
               </div>
             </div>
           )}

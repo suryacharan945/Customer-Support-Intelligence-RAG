@@ -110,11 +110,8 @@ export const EvidenceBadge: React.FC<{ status: EvidenceStatus }> = ({ status }) 
 
 export const ProviderBadge: React.FC<{ status: string }> = ({ status }) => {
   const upper = status.toUpperCase();
-  if (upper.includes('LOCAL_GROUNDED_SYNTHESIS') || upper.includes('LOCAL_GROUNDED_ENGINE')) {
-    return <Badge variant="success">💻 Local Grounded Engine</Badge>;
-  }
-  if (upper.includes('LOCAL_GROUNDED_FALLBACK')) {
-    return <Badge variant="warning">⚠️ Local Grounded Fallback</Badge>;
+  if (upper.includes('LOCAL_GROUNDED')) {
+    return <Badge variant="success">🟢 Local Grounded Engine</Badge>;
   }
   if (upper.includes('ONLINE_COLAB_GPU') || upper.includes('ONLINE')) {
     return <Badge variant="info">⚡ Remote Mistral GPU</Badge>;

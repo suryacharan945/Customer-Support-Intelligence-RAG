@@ -232,8 +232,17 @@ class LocalGroundedSynthesizer:
             steps_list = []
             policy_sentences = []
 
-            # Extract facts from primary block
-            raw_sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", primary_block["text"]) if s.strip()]
+            # Extract clean facts from primary block
+            clean_text = "\n".join([
+                re.sub(r"^#+\s*", "", line).strip()
+                for line in primary_block["text"].split("\n")
+                if line.strip() and not line.strip().startswith("**Document Type")
+            ])
+            raw_sentences = [
+                re.sub(r"^[-*?\s]+", "", s).strip()
+                for s in re.split(r"(?<=[.!?])\s+", clean_text)
+                if s.strip() and not s.strip().startswith("**Document")
+            ]
             summary_sentences.extend(raw_sentences[:2])
 
             # Troubleshooting / resolution steps
@@ -268,7 +277,7 @@ class LocalGroundedSynthesizer:
             if citations_used:
                 exec_summary += f" {citations_used[0]}"
 
-            steps_formatted = "\n".join([f"   - {st}" for st in steps_list[:4]]) if steps_list else "   - Follow standard operating instructions as indicated in the hardware guide."
+            steps_formatted = "\n".join([f"   - {re.sub(r'^[-*?\s]+', '', st).strip()}" for st in steps_list[:4]]) if steps_list else "   - Follow standard operating instructions as indicated in the hardware guide."
             
             if policy_sentences:
                 policy_formatted = " ".join(policy_sentences[:2])

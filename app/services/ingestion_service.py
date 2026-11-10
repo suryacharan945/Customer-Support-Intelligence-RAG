@@ -142,7 +142,11 @@ class IngestionService:
 
         # 9. Determine Indexing & Lifecycle Status
         lifecycle_status = "pending_index"
-        if vector_retriever is not None and getattr(vector_retriever, "_collection", None) is not None:
+        if (
+            vector_retriever is not None
+            and getattr(vector_retriever, "_collection", None) is not None
+            and (embedding_provider is not None or getattr(vector_retriever, "embedding_provider", None) is not None)
+        ):
             try:
                 vector_retriever.upsert_chunks(chunks, embedding_provider=embedding_provider)
                 lifecycle_status = "indexed"

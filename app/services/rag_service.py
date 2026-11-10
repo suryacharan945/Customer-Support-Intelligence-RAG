@@ -46,6 +46,30 @@ class RAGService:
         )
         self.llm_client = llm_client or LLMClient(allow_mock=self.allow_mock)
         self.category_selector = category_selector
+        if self.bm25_retriever.corpus_size == 0 and not getattr(self, "allow_mock", False):
+            self._auto_seed_bm25_if_empty()
+
+    def _auto_seed_bm25_if_empty(self):
+        """Populate BM25 sparse index from canonical knowledge base if empty."""
+        try:
+            from app.ingestion.loader import DocumentLoader
+            from app.ingestion.chunker import DocumentChunker
+            kb_dir = Path("data/knowledge_base")
+            if not kb_dir.exists():
+                kb_dir = Path(settings.GOOGLE_DRIVE_ROOT) / "03_Knowledge_Base"
+            if kb_dir.exists():
+                loader = DocumentLoader()
+                chunker = DocumentChunker()
+                chunks = []
+                for p in kb_dir.rglob("*.*"):
+                    if p.suffix in (".md", ".txt"):
+                        cat = p.parent.name
+                        doc = loader.load_file(p, category=cat)
+                        chunks.extend(chunker.chunk_document(doc))
+                if chunks:
+                    self.index_bm25_chunks(chunks)
+        except Exception as e:
+            logger.warning(f"Auto-seed BM25 index encountered non-fatal error: {e}")
 
     def index_bm25_chunks(self, chunks: List[Any]) -> int:
         """Populate the sparse BM25 retriever index with knowledge base chunks."""
