@@ -90,10 +90,6 @@ class VectorStoreRetriever(BaseRetriever):
             return 0
 
         provider = embedding_provider or self.embedding_provider
-        if not provider:
-            raise VectorStoreError(
-                "Cannot upsert chunks without an embedding provider to generate dense vectors."
-            )
 
         ids = [c.chunk_id for c in chunks]
         texts = [c.text for c in chunks]
@@ -102,23 +98,34 @@ class VectorStoreRetriever(BaseRetriever):
                 "document_id": c.document_id,
                 "chunk_id": c.chunk_id,
                 "category": c.category,
-                "filename": c.metadata.get("filename", "") if hasattr(c, "metadata") and c.metadata else "",
+                "filename": (
+                    c.metadata.get("filename", "")
+                    if hasattr(c, "metadata") and c.metadata
+                    else getattr(c, "source", "")
+                ),
                 "page_number": c.page_number if c.page_number is not None else -1,
                 "source": c.source,
                 "content_hash": c.content_hash,
+                "is_mock": False,
             }
             for c in chunks
         ]
 
-        logger.info(f"Generating embeddings for {len(chunks)} chunks via {provider.model_name}...")
-        embeddings = provider.embed_documents(texts)
-
-        self._collection.upsert(
-            ids=ids,
-            documents=texts,
-            metadatas=metadatas,
-            embeddings=embeddings,
-        )
+        if provider:
+            logger.info(f"Generating embeddings for {len(chunks)} chunks via {provider.model_name}...")
+            embeddings = provider.embed_documents(texts)
+            self._collection.upsert(
+                ids=ids,
+                documents=texts,
+                metadatas=metadatas,
+                embeddings=embeddings,
+            )
+        else:
+            self._collection.upsert(
+                ids=ids,
+                documents=texts,
+                metadatas=metadatas,
+            )
         logger.info(f"Successfully upserted {len(chunks)} chunks into ChromaDB collection '{self.collection_name}'.")
         return len(chunks)
 

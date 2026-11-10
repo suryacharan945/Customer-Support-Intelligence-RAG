@@ -148,6 +148,14 @@ class ApiClient {
     );
   }
 
+    public async indexDocument(documentId: string): Promise<DocumentSummary> {
+    return this.request<DocumentSummary>(`/documents/${documentId}/index`, { method: 'POST' }, 20000);
+  }
+
+  public async indexAllDocuments(): Promise<{ status: string; indexed_count: number; details: any[] }> {
+    return this.request<{ status: string; indexed_count: number; details: any[] }>('/documents/index-all', { method: 'POST' }, 60000);
+  }
+
   public async deleteDocument(documentId: string): Promise<DocumentDeleteResponse> {
     return this.request<DocumentDeleteResponse>(`/documents/${documentId}`, { method: 'DELETE' }, 10000);
   }

@@ -53,6 +53,7 @@ class IngestionService:
         content: bytes,
         category: str = "product_manual",
         vector_retriever: Optional[Any] = None,
+        bm25_retriever: Optional[Any] = None,
         embedding_provider: Optional[Any] = None,
     ) -> Dict[str, Any]:
         """
@@ -321,6 +322,85 @@ class IngestionService:
             "errors": errors,
             "results": results,
         }
+
+
+
+    def index_document(
+        self,
+        document_id: str,
+        vector_retriever: Optional[Any] = None,
+        bm25_retriever: Optional[Any] = None,
+        embedding_provider: Optional[Any] = None,
+    ) -> Dict[str, Any]:
+        """Index a specific document by its document_id into ChromaDB and BM25."""
+        doc_record = self.manifest.get_document_by_id(document_id)
+        if not doc_record or doc_record.get("status") == "DELETED" or doc_record.get("lifecycle_status") == "deleted":
+            raise ValueError(f"Document '{document_id}' not found or has been deleted.")
+
+        filename = doc_record.get("filename", "")
+        category = doc_record.get("category", "product_manual")
+
+        possible_paths = [
+            Path("data/knowledge_base") / category / filename,
+            Path("data/knowledge_base") / filename,
+            Path(settings.GOOGLE_DRIVE_ROOT) / "02_Datasets" / "raw_documents" / category / filename,
+            Path("tmp/uploads") / category / filename,
+            Path(settings.GOOGLE_DRIVE_ROOT) / "03_Knowledge_Base" / category / filename,
+        ]
+        file_path = None
+        for p_cand in possible_paths:
+            if p_cand.exists():
+                file_path = p_cand
+                break
+
+        if not file_path:
+            raise FileNotFoundError(f"Source file for document '{filename}' could not be found on disk.")
+
+        doc = self.loader.load_file(file_path, category=category)
+        chunks = self.chunker.chunk_document(doc)
+
+        indexed_chunks = 0
+        if vector_retriever and getattr(vector_retriever, "_collection", None) is not None:
+            indexed_chunks = vector_retriever.upsert_chunks(chunks, embedding_provider=embedding_provider)
+        if bm25_retriever:
+            bm25_retriever.index_chunks(chunks)
+
+        self.manifest.update_lifecycle_status(document_id, "indexed")
+
+        return {
+            "status": "success",
+            "document_id": document_id,
+            "filename": filename,
+            "category": category,
+            "lifecycle_status": "indexed",
+            "is_searchable": True,
+            "chunk_count": len(chunks),
+            "indexed_chunks": indexed_chunks,
+            "message": f"Document '{filename}' successfully indexed ({len(chunks)} chunks searchable).",
+        }
+
+    def index_all_pending(
+        self,
+        vector_retriever: Optional[Any] = None,
+        bm25_retriever: Optional[Any] = None,
+        embedding_provider: Optional[Any] = None,
+    ) -> List[Dict[str, Any]]:
+        """Index all active documents currently in 'pending_index' state."""
+        docs = self.manifest.list_documents(include_deleted=False)
+        results = []
+        for d in docs:
+            if d.get("lifecycle_status") in ("pending_index", "uploaded", "processed"):
+                try:
+                    res = self.index_document(
+                        document_id=d["document_id"],
+                        vector_retriever=vector_retriever,
+                        bm25_retriever=bm25_retriever,
+                        embedding_provider=embedding_provider,
+                    )
+                    results.append(res)
+                except Exception as e:
+                    logger.warning(f"Failed to index document {d.get('filename')}: {e}")
+        return results
 
 
 ingestion_service = IngestionService()

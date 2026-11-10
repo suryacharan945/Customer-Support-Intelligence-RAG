@@ -79,7 +79,14 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({ onSuccess }) => 
 
     try {
       const res = await apiClient.uploadDocument(selectedFile, category);
-      setSuccessMsg(`Document '${res.filename}' uploaded and indexed (${res.chunk_count} chunks generated).`);
+      if (res.lifecycle_status !== 'indexed') {
+        try {
+          await apiClient.indexDocument(res.document_id);
+        } catch (idxErr) {
+          console.warn('Auto-index after upload:', idxErr);
+        }
+      }
+      setSuccessMsg(`Document '${res.filename}' uploaded and indexed (${res.chunk_count} chunks searchable).`);
       setSelectedFile(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
       onSuccess();

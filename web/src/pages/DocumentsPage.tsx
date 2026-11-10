@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Files, RefreshCw } from 'lucide-react';
+import { Files, RefreshCw, Zap } from 'lucide-react';
 import { apiClient } from '../api/client';
 import { UploadDropzone } from '../components/documents/UploadDropzone';
 import { DocumentTable } from '../components/documents/DocumentTable';
@@ -31,15 +31,33 @@ export const DocumentsPage: React.FC = () => {
           </p>
         </div>
 
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => refetch()}
-          loading={isRefetching}
-          icon={<RefreshCw className="w-3.5 h-3.5 text-cyan-400" />}
-        >
-          Refresh Manifest
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={async () => {
+              try {
+                await apiClient.indexAllDocuments();
+                refetch();
+              } catch (e: any) {
+                alert(`Batch indexing: ${e.message}`);
+              }
+            }}
+            icon={<Zap className="w-3.5 h-3.5 text-emerald-400" />}
+          >
+            Index All Documents
+          </Button>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => refetch()}
+            loading={isRefetching}
+            icon={<RefreshCw className="w-3.5 h-3.5 text-cyan-400" />}
+          >
+            Refresh Manifest
+          </Button>
+        </div>
       </div>
 
       {/* 1. Upload & Ingest Dropzone */}

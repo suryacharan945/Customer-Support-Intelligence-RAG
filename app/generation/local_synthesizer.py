@@ -113,12 +113,9 @@ class LocalGroundedSynthesizer:
     @staticmethod
     def extract_user_query(prompt_text: str) -> str:
         """Extract the user's inquiry text from prompt templates."""
-        m = re.search(r"Customer Support Inquiry:\s*\n(.*?)(?=\nInstructions:|\nResponse Format:|\Z)", prompt_text, re.DOTALL)
+        m = re.search(r"(?:Customer Support Inquiry|CUSTOMER SUPPORT INQUIRY)[:\s=]*\n(.*?)(?=\n(?:Instructions|Response Format|=)|\Z)", prompt_text, re.DOTALL | re.IGNORECASE)
         if m:
             return m.group(1).strip()
-        m2 = re.search(r"==== CUSTOMER SUPPORT INQUIRY ====\s*\n(.*?)(?=\nResponse Format:|\Z)", prompt_text, re.DOTALL)
-        if m2:
-            return m2.group(1).strip()
         return prompt_text.strip()
 
     def synthesize(self, prompt_text: str, is_fallback: bool = False) -> Dict[str, Any]:
@@ -219,8 +216,18 @@ class LocalGroundedSynthesizer:
         warranty_evidence = [b for b in top_blocks if b["category"] == "warranty"]
         faq_evidence = [b for b in top_blocks if b["category"] == "faq"]
 
+        # Prefer block with "Executive Summary", "Overview", or Page 1 for primary summary
         primary_block = top_blocks[0]
+        for b in top_blocks:
+            b_lower = b["text"].lower()
+            if "executive summary" in b_lower or "overview" in b_lower or b.get("page") == "1":
+                primary_block = b
+                break
+
         citations_used = []
+        # Put primary block citation first
+        prim_cit = f"[Source: {primary_block['source']}, Page: {primary_block['page']}, Chunk: {primary_block['chunk_id']}]"
+        citations_used.append(prim_cit)
         for b in top_blocks[:3]:
             cit_str = f"[Source: {b['source']}, Page: {b['page']}, Chunk: {b['chunk_id']}]"
             if cit_str not in citations_used:
@@ -241,7 +248,7 @@ class LocalGroundedSynthesizer:
             raw_sentences = [
                 re.sub(r"^[-*?\s]+", "", s).strip()
                 for s in re.split(r"(?<=[.!?])\s+", clean_text)
-                if s.strip() and not s.strip().startswith("**Document")
+                if len(s.strip()) > 20 and not s.strip().startswith("**Document")
             ]
             summary_sentences.extend(raw_sentences[:2])
 
@@ -283,10 +290,12 @@ class LocalGroundedSynthesizer:
                 policy_formatted = " ".join(policy_sentences[:2])
                 if len(citations_used) > 1:
                     policy_formatted += f" {citations_used[1]}"
-            elif any("non-oem" in query_lower or "warranty" in query_lower for _ in [1]):
+            elif "non-oem" in query_lower or "third-party" in query_lower:
                 policy_formatted = "Note: Standard 12-month hardware warranty applies. Use of third-party supplies does not automatically void the warranty unless direct physical damage is determined."
+            elif any(w in query_lower for w in ["warranty", "rma", "coverage", "defect", "guarantee"]):
+                policy_formatted = "Standard 12-month limited hardware warranty applies to manufacturing and hardware defects."
             else:
-                policy_formatted = "Standard 12-month limited warranty applies to manufacturing and hardware defects."
+                policy_formatted = "No specific warranty or SLA restrictions apply to this documentation domain."
 
             citations_formatted = "\n".join([f"   - {c}" for c in citations_used])
 

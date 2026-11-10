@@ -4,6 +4,7 @@ Provides robust validation, page-level tracking, content hashing, and category e
 """
 
 import hashlib
+import unicodedata
 import os
 from datetime import datetime, timezone
 from pathlib import Path
@@ -315,6 +316,7 @@ class DocumentLoader:
             page_num = idx + 1
             try:
                 page_text = page.extract_text() or ""
+                page_text = unicodedata.normalize('NFKD', page_text)
             except Exception as e:
                 page_text = ""
             

@@ -87,6 +87,7 @@ async def upload_document(
     category: str = Form("product_manual", description="Category: product_manual, troubleshooting, warranty, faq"),
     ingestion: IngestionService = Depends(get_ingestion_service),
     vector_retriever: VectorStoreRetriever = Depends(get_vector_retriever),
+    bm25_retriever: BM25Retriever = Depends(get_bm25_retriever),
 ):
     """
     Upload and preprocess a document into the customer support knowledge base.
@@ -126,6 +127,7 @@ async def upload_document(
             content=content,
             category=category,
             vector_retriever=vector_retriever,
+            bm25_retriever=bm25_retriever,
         )
     except OversizedFileError as e:
         raise HTTPException(
@@ -274,3 +276,62 @@ async def delete_document(
         document_id=document_id,
         deleted_chunks=res.get("deleted_chunks", 0),
     )
+
+
+@router.post(
+    "/{document_id}/index",
+    response_model=DocumentSummary,
+    summary="Index Document into Vector Store & BM25",
+)
+async def index_document_endpoint(
+    document_id: str,
+    ingestion: IngestionService = Depends(get_ingestion_service),
+    vector_retriever: VectorStoreRetriever = Depends(get_vector_retriever),
+    bm25_retriever: BM25Retriever = Depends(get_bm25_retriever),
+    manifest: IngestionManifest = Depends(get_manifest),
+):
+    """Explicitly index a pending document into ChromaDB and BM25 to make it searchable."""
+    try:
+        res = ingestion.index_document(
+            document_id=document_id,
+            vector_retriever=vector_retriever,
+            bm25_retriever=bm25_retriever,
+        )
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Indexing failed: {e}")
+
+    doc = manifest.get_document_by_id(document_id)
+    return DocumentSummary(
+        document_id=doc.get("document_id", document_id),
+        filename=doc.get("filename", ""),
+        category=doc.get("category", "general"),
+        document_type=doc.get("document_type", "pdf"),
+        lifecycle_status=doc.get("lifecycle_status", "indexed"),
+        is_searchable=doc.get("is_searchable", True),
+        chunk_count=doc.get("chunk_count", 0),
+        file_size_bytes=doc.get("file_size_bytes", 0),
+        version=doc.get("version", 1),
+        first_ingested=doc.get("first_ingested", ""),
+        last_seen=doc.get("last_seen", ""),
+    )
+
+
+@router.post(
+    "/index-all",
+    summary="Index All Pending Documents",
+)
+async def index_all_documents_endpoint(
+    ingestion: IngestionService = Depends(get_ingestion_service),
+    vector_retriever: VectorStoreRetriever = Depends(get_vector_retriever),
+    bm25_retriever: BM25Retriever = Depends(get_bm25_retriever),
+):
+    """Index all pending documents across the ingestion manifest."""
+    results = ingestion.index_all_pending(
+        vector_retriever=vector_retriever,
+        bm25_retriever=bm25_retriever,
+    )
+    return {"status": "success", "indexed_count": len(results), "details": results}

@@ -68,12 +68,17 @@ class RAGService:
                 chunker = DocumentChunker()
                 chunks = []
                 for p in kb_dir.rglob("*.*"):
-                    if p.suffix in (".md", ".txt"):
+                    if p.suffix.lower() in (".md", ".txt", ".pdf"):
                         cat = p.parent.name
                         doc = loader.load_file(p, category=cat)
                         chunks.extend(chunker.chunk_document(doc))
                 if chunks:
                     self.index_bm25_chunks(chunks)
+                    if getattr(self.vector_retriever, "_collection", None) is not None:
+                        try:
+                            self.vector_retriever.upsert_chunks(chunks)
+                        except Exception as ce:
+                            logger.warning(f"Auto-seed Chroma upsert warning: {ce}")
         except Exception as e:
             logger.warning(f"Auto-seed BM25 index encountered non-fatal error: {e}")
 

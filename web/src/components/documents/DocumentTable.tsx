@@ -119,6 +119,25 @@ export const DocumentTable: React.FC<DocumentTableProps> = ({
                   </td>
                   <td className="py-3 px-4 text-right">
                     <div className="flex items-center justify-end gap-1.5">
+                      {doc.lifecycle_status !== 'indexed' && (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="text-[11px] py-0.5 px-2 text-emerald-400 border-emerald-500/40 hover:bg-emerald-500/10"
+                          onClick={async () => {
+                            try {
+                              await apiClient.indexDocument(doc.document_id);
+                              onRefresh();
+                            } catch (e: any) {
+                              alert(`Indexing failed: ${e.message}`);
+                            }
+                          }}
+                          title="Index document into ChromaDB & BM25"
+                        >
+                          ⚡ Index
+                        </Button>
+                      )}
                       <Button
                         type="button"
                         variant="ghost"
