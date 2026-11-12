@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { User, Bot, Copy, Check, ThumbsUp, Info, Clock } from 'lucide-react';
+import { User, Bot, Copy, Check, ThumbsUp, Info, Clock, Sparkles, Wrench, ShieldCheck, BookmarkCheck } from 'lucide-react';
 import { QueryResponse } from '../../api/types';
 import { ProviderBadge, EvidenceBadge, CategoryBadge } from '../common/Badge';
 import { CitationCard } from './CitationCard';
@@ -86,8 +86,63 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ query, response, turnI
           )}
 
           {/* Answer Markdown Body */}
-          <div className="prose prose-invert prose-sm max-w-none text-slate-200 leading-relaxed space-y-2">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <div className="prose prose-invert prose-sm max-w-none text-slate-200 leading-relaxed space-y-3">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h3: ({ children }) => {
+                  const text = String(children || '');
+                  let icon = <Sparkles className="w-3.5 h-3.5 text-indigo-400" />;
+                  let badgeStyle = 'border-indigo-500/30 bg-indigo-500/10 text-indigo-200';
+
+                  if (text.toLowerCase().includes('step-by-step') || text.toLowerCase().includes('technical')) {
+                    icon = <Wrench className="w-3.5 h-3.5 text-cyan-400" />;
+                    badgeStyle = 'border-cyan-500/30 bg-cyan-500/10 text-cyan-200';
+                  } else if (text.toLowerCase().includes('warranty') || text.toLowerCase().includes('policy')) {
+                    icon = <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />;
+                    badgeStyle = 'border-amber-500/30 bg-amber-500/10 text-amber-200';
+                  } else if (text.toLowerCase().includes('citation') || text.toLowerCase().includes('source')) {
+                    icon = <BookmarkCheck className="w-3.5 h-3.5 text-emerald-400" />;
+                    badgeStyle = 'border-emerald-500/30 bg-emerald-500/10 text-emerald-200';
+                  }
+
+                  return (
+                    <div className="mt-5 mb-2.5 pt-1.5 first:mt-1">
+                      <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg border font-semibold text-xs tracking-wide ${badgeStyle}`}>
+                        {icon}
+                        <span>{children}</span>
+                      </div>
+                    </div>
+                  );
+                },
+                p: ({ children }) => (
+                  <p className="text-slate-200 text-sm leading-relaxed mb-3">
+                    {children}
+                  </p>
+                ),
+                ul: ({ children }) => (
+                  <ul className="space-y-2 my-2.5 pl-1 list-none">
+                    {children}
+                  </ul>
+                ),
+                li: ({ children }) => (
+                  <li className="text-sm text-slate-200 leading-relaxed flex items-start gap-2.5">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                    <span className="flex-1">{children}</span>
+                  </li>
+                ),
+                strong: ({ children }) => (
+                  <strong className="font-semibold text-white">
+                    {children}
+                  </strong>
+                ),
+                code: ({ children }) => (
+                  <code className="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300 font-mono text-xs border border-slate-700/80">
+                    {children}
+                  </code>
+                ),
+              }}
+            >
               {response.answer}
             </ReactMarkdown>
           </div>

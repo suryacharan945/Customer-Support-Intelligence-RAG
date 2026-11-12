@@ -12,6 +12,7 @@ Guarantees:
 
 import re
 import time
+import unicodedata
 from typing import Dict, Any, List, Optional
 
 
@@ -117,6 +118,110 @@ class LocalGroundedSynthesizer:
         if m:
             return m.group(1).strip()
         return prompt_text.strip()
+
+    @staticmethod
+    def is_noise_or_header_line(line: str) -> bool:
+        """Filter out running headers, footers, page markers, and standalone titles."""
+        line_s = line.strip()
+        if not line_s:
+            return True
+        if re.search(r"Page \d+ of \d+|Capstone Dossier|ENGINEERING DOSSIER|Customer Support Inquiry", line_s, re.I):
+            return True
+        if re.match(r"^\d+\.\s+[A-Za-z0-9\s&/—\-\(\)]+$", line_s):
+            return True
+        if re.match(r"^\d+[\.\)]\s*$", line_s):
+            return True
+        if re.match(r"^[A-Z0-9\s•\-_/]{4,}$", line_s):
+            return True
+        if len(line_s) < 55 and not any(p in line_s for p in [".", ",", ";", ":", "?", "!"]):
+            return True
+        return False
+
+    @classmethod
+    def clean_block_text(cls, text: str) -> str:
+        """Strip structural noise, resolve broken hyphenations, and normalize whitespace."""
+        text = unicodedata.normalize('NFKD', text).replace('\u2211', 'sum')
+        lines = []
+        for line in text.split("\n"):
+            line_s = line.strip()
+            if cls.is_noise_or_header_line(line_s):
+                continue
+            lines.append(line_s)
+        joined = " ".join(lines)
+        joined = re.sub(r"(\w+)-\s+(\w+)", r"\1-\2", joined)
+        joined = re.sub(r'^[“"\'\s•\-\*]+', "", joined)
+        return joined.strip()
+
+    @classmethod
+    def extract_clean_sentences(cls, text: str) -> List[str]:
+        """Extract clean, grammatical sentences from a block."""
+        cleaned = cls.clean_block_text(text)
+        sents = []
+        for s in re.split(r"(?<=[.!?])\s+", cleaned):
+            s_clean = s.strip()
+            s_clean = re.sub(r'^[“"\'\s•\-\*\d\.\)]+', "", s_clean).strip()
+            if len(s_clean) > 25 and not s_clean.startswith("**Document"):
+                sents.append(s_clean)
+        return sents
+
+    @classmethod
+    def extract_structured_bullets(cls, blocks: List[Dict[str, Any]], exclude_sentences: Optional[List[str]] = None, max_bullets: int = 4) -> List[str]:
+        """Extract clean, deduplicated bullet points formatted with bold titles."""
+        bullets = []
+        seen = set()
+        exclude_set = {s.lower()[:35] for s in (exclude_sentences or [])}
+
+        for b in blocks:
+            cleaned_text = cls.clean_block_text(b["text"])
+            item_candidates = re.split(r"(?:\n\s*[-*•]|\s+\d+[\.\)]\s+)", cleaned_text)
+            for raw_item in item_candidates:
+                item = raw_item.strip()
+                if not item or len(item) < 25:
+                    continue
+                # Reject incomplete fragments starting in lowercase or ending with orphaned closing parens
+                if ")" in item and "(" not in item:
+                    continue
+                if not (item[0].isupper() or item.startswith("**")):
+                    continue
+
+                item = re.sub(r'^[“"\'\s•\-\*\d\.\)]+', "", item).strip()
+                item = re.sub(r"\s*Page \d+ of \d+.*$", "", item, flags=re.I)
+
+                if ":" in item and not item.startswith("http"):
+                    parts = item.split(":", 1)
+                    title = parts[0].strip()
+                    desc = parts[1].strip()
+                    if 3 < len(title) < 45 and len(desc) > 10:
+                        formatted = f"**{title}**: {desc}"
+                    else:
+                        formatted = item
+                else:
+                    formatted = item
+
+                clean_key = formatted.lower()[:35]
+                if len(formatted) > 25 and clean_key not in seen and clean_key not in exclude_set:
+                    seen.add(clean_key)
+                    bullets.append(formatted)
+                    if len(bullets) >= max_bullets:
+                        break
+            if len(bullets) >= max_bullets:
+                break
+
+        # Fallback to general sentences if explicit list items are absent
+        if not bullets:
+            for b in blocks:
+                sents = cls.extract_clean_sentences(b["text"])
+                for s in sents:
+                    clean_key = s.lower()[:35]
+                    if clean_key not in seen and clean_key not in exclude_set:
+                        seen.add(clean_key)
+                        bullets.append(s)
+                        if len(bullets) >= max_bullets:
+                            break
+                if len(bullets) >= max_bullets:
+                    break
+
+        return bullets
 
     def synthesize(self, prompt_text: str, is_fallback: bool = False) -> Dict[str, Any]:
         """Generate a grounded, structured answer from the prompt's reference documentation."""
@@ -234,57 +339,33 @@ class LocalGroundedSynthesizer:
                 citations_used.append(cit_str)
 
         if is_mcp:
-            # Build structured Multi-Context answer
-            summary_sentences = []
-            steps_list = []
-            policy_sentences = []
+            # Build structured, noise-free Multi-Context answer
+            summary_sentences = self.extract_clean_sentences(primary_block["text"])[:2]
+            if not summary_sentences:
+                cleaned_prim = self.clean_block_text(primary_block["text"])
+                summary_sentences = [cleaned_prim[:220].strip()]
 
-            # Extract clean facts from primary block
-            clean_text = "\n".join([
-                re.sub(r"^#+\s*", "", line).strip()
-                for line in primary_block["text"].split("\n")
-                if line.strip() and not line.strip().startswith("**Document Type")
-            ])
-            raw_sentences = [
-                re.sub(r"^[-*?\s]+", "", s).strip()
-                for s in re.split(r"(?<=[.!?])\s+", clean_text)
-                if len(s.strip()) > 20 and not s.strip().startswith("**Document")
-            ]
-            summary_sentences.extend(raw_sentences[:2])
-
-            # Troubleshooting / resolution steps
-            for b in trouble_evidence:
-                b_sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", b["text"]) if s.strip()]
-                for s in b_sents:
-                    if any(act in s.lower() for act in ["press", "turn", "power", "disconnect", "open", "clear", "remove", "clean", "hold"]):
-                        if s not in steps_list:
-                            steps_list.append(s)
-
-            # Manual specs
-            for b in manual_evidence:
-                b_sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", b["text"]) if s.strip()]
-                for s in b_sents:
-                    if any(k in s.lower() for k in ["support", "capacity", "sheet", "weight", "gsm", "duplex", "speed", "ppm", "dpi"]):
-                        if s not in steps_list:
-                            steps_list.append(s)
+            # Extract clean, structured bullets without duplicating summary sentences
+            structured_bullets = self.extract_structured_bullets(
+                top_blocks,
+                exclude_sentences=summary_sentences,
+                max_bullets=4,
+            )
 
             # Warranty policies
+            policy_sentences = []
             for b in warranty_evidence:
-                b_sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", b["text"]) if s.strip()]
+                b_sents = self.extract_clean_sentences(b["text"])
                 for s in b_sents:
                     if any(k in s.lower() for k in ["warranty", "cover", "exclude", "void", "repair", "service", "tier", "rma", "non-oem"]):
                         if s not in policy_sentences:
                             policy_sentences.append(s)
 
-            # Fallback if specific sections empty
-            if not steps_list and len(raw_sentences) > 2:
-                steps_list = raw_sentences[2:5]
-
-            exec_summary = " ".join(summary_sentences[:2]) if summary_sentences else primary_block["text"][:200]
+            exec_summary = " ".join(summary_sentences)
             if citations_used:
                 exec_summary += f" {citations_used[0]}"
 
-            steps_formatted = "\n".join([f"   - {re.sub(r'^[-*?\s]+', '', st).strip()}" for st in steps_list[:4]]) if steps_list else "   - Follow standard operating instructions as indicated in the hardware guide."
+            steps_formatted = "\n".join([f"   - {st}" for st in structured_bullets]) if structured_bullets else "   - Follow standard operating instructions as indicated in the hardware guide."
             
             if policy_sentences:
                 policy_formatted = " ".join(policy_sentences[:2])
@@ -300,17 +381,19 @@ class LocalGroundedSynthesizer:
             citations_formatted = "\n".join([f"   - {c}" for c in citations_used])
 
             answer_text = (
-                f"1. Executive Summary / Direct Answer: {exec_summary}\n\n"
-                f"2. Step-by-Step Resolution / Technical Specifications:\n{steps_formatted}\n\n"
-                f"3. Warranty & Policy Cross-Reference (if applicable): {policy_formatted}\n\n"
-                f"4. Verified Source Citations:\n{citations_formatted}"
+                f"### 1. Executive Summary / Direct Answer\n{exec_summary}\n\n"
+                f"### 2. Step-by-Step Resolution / Technical Specifications\n{steps_formatted}\n\n"
+                f"### 3. Warranty & Policy Cross-Reference (if applicable)\n{policy_formatted}\n\n"
+                f"### 4. Verified Source Citations\n{citations_formatted}"
             )
         else:
-            # Baseline format: concise answer with top citation
-            p_text = primary_block["text"].replace("\n", " ")
+            # Baseline format: clean, grounded answer with top citation
+            cleaned_base = self.clean_block_text(primary_block["text"])
             cit = citations_used[0] if citations_used else f"[Source: {primary_block['source']}]"
+            base_sents = self.extract_clean_sentences(primary_block["text"])
+            base_body = " ".join(base_sents[:3]) if base_sents else cleaned_base[:350]
             answer_text = (
-                f"Based on the provided ApexPrint documentation {cit}, {p_text[:400].strip()}."
+                f"Based on verified documentation in {primary_block['source']} {cit}, {base_body.strip()}."
             )
 
         lat_ms = round((time.perf_counter() - t0) * 1000, 2)
