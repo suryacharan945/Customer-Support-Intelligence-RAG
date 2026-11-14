@@ -1,0 +1,530 @@
+{
+  "metadata": {
+    "dataset_name": "Stage 8 Phase 4.2 Independent Validation Dataset",
+    "description": "32 independent, multi-domain evaluation questions covering technical specs, architecture, cross-document reasoning, unseen competitors, missing perils, and policy contradictions.",
+    "created_date": "2026-11-14",
+    "total_questions": 32,
+    "supported_questions_count": 20,
+    "conflicting_questions_count": 2,
+    "partial_questions_count": 1,
+    "insufficient_questions_count": 9,
+    "labeling_attribution": "Author-generated and code-verified against indexed knowledge base"
+  },
+  "questions": [
+    {
+      "id": "P4_2_VAL01",
+      "query": "What are the supported network interface protocols and wireless frequencies on the ApexPrint ProX-400?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Hardware Specifications",
+      "expected_relevant_docs": [
+        "apexprint_prox400_user_manual.md",
+        "apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ],
+      "expected_answerable_claims": [
+        "Gigabit Ethernet 10/100/1000Base-T",
+        "Wi-Fi 802.11 b/g/n 2.4 GHz",
+        "WPA2/WPA3 enterprise encryption"
+      ],
+      "required_evidence_coverage": "Single document or technical connectivity manual",
+      "labeling_rationale": "Directly documented in ProX-400 user manual connectivity section."
+    },
+    {
+      "id": "P4_2_VAL02",
+      "query": "What is the physical paper tray capacity of Tray 1, Tray 2, and Tray 3 on the ApexPrint ColorWave-850?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Hardware Specifications",
+      "expected_relevant_docs": [
+        "apexprint_colorwave850_user_manual.md"
+      ],
+      "expected_answerable_claims": [
+        "Tray 1 multipurpose bypass 150 sheets",
+        "Tray 2 550 sheets",
+        "Tray 3 optional 1,000 sheets"
+      ],
+      "required_evidence_coverage": "ColorWave-850 technical specifications section",
+      "labeling_rationale": "Directly documented in ColorWave-850 paper handling specifications."
+    },
+    {
+      "id": "P4_2_VAL03",
+      "query": "How does the document chunking service split uploaded documents and what overlap is maintained between chunks?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Architecture & Engineering",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "Recursive character text splitter",
+        "Chunk size 500 characters",
+        "Chunk overlap 50 characters",
+        "Metadata preservation"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 3.2 Ingestion Engine",
+      "labeling_rationale": "Directly documented in Project Dossier architecture specifications."
+    },
+    {
+      "id": "P4_2_VAL04",
+      "query": "What distance metric and space configuration are utilized by ChromaDB in this platform?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Architecture & Engineering",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "HNSW cosine distance space",
+        "hnsw:space cosine",
+        "1.0 - distance similarity conversion"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 3.3 Vector Store",
+      "labeling_rationale": "Directly documented in Project Dossier vector storage architecture."
+    },
+    {
+      "id": "P4_2_VAL05",
+      "query": "What are the diagnostic steps when the ProX-400 front panel displays blinking amber LED alongside error code E-101?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Troubleshooting Synthesis",
+      "expected_relevant_docs": [
+        "apexprint_error_codes_and_hardware_troubleshooting.md"
+      ],
+      "expected_answerable_claims": [
+        "Error E-101 corresponds to paper jam in registration sensors",
+        "Power off printer",
+        "Open Door A",
+        "Inspect pickup rollers and remove obstructed media"
+      ],
+      "required_evidence_coverage": "Troubleshooting manual Error Code E-101 section",
+      "labeling_rationale": "Documented in error codes troubleshooting guide."
+    },
+    {
+      "id": "P4_2_VAL06",
+      "query": "What is the recommended cleaning interval and procedure for the optical laser glass and corona wire?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Hardware Maintenance",
+      "expected_relevant_docs": [
+        "apexprint_frequently_asked_questions_hardware_and_service.md",
+        "apexprint_prox400_user_manual.md"
+      ],
+      "expected_answerable_claims": [
+        "Clean corona wire using built-in cleaning slider tab",
+        "Slide tab gently 3-4 times",
+        "Wipe laser glass with lint-free microfiber cloth"
+      ],
+      "required_evidence_coverage": "Hardware maintenance FAQ and user manual",
+      "labeling_rationale": "Directly documented in hardware maintenance FAQ."
+    },
+    {
+      "id": "P4_2_VAL07",
+      "query": "How does the hybrid retrieval engine fuse dense ChromaDB embeddings with sparse BM25 scores using Reciprocal Rank Fusion?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Architecture & Engineering",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "RRF formula: sum 1 / (60 + rank)",
+        "Combines dense semantic vector rank with BM25 keyword rank",
+        "Equal weighting alpha=0.5"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 3.4 Hybrid Retrieval Engine",
+      "labeling_rationale": "Fully documented in Project Dossier architecture."
+    },
+    {
+      "id": "P4_2_VAL08",
+      "query": "Compare the duty cycle, resolution, and ink or toner technology between the ProX-400 and the ColorWave-850.",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Cross-Document Comparison",
+      "expected_relevant_docs": [
+        "apexprint_prox400_user_manual.md",
+        "apexprint_colorwave850_user_manual.md"
+      ],
+      "expected_answerable_claims": [
+        "ProX-400: monochrome laser, 100,000 pages duty cycle, 1200x1200 dpi",
+        "ColorWave-850: wide-format color inkjet, pigment inks, 2400x1200 dpi"
+      ],
+      "required_evidence_coverage": "Cross-document synthesis between ProX-400 manual and ColorWave-850 manual",
+      "labeling_rationale": "Requires multi-document synthesis across two user manuals."
+    },
+    {
+      "id": "P4_2_VAL09",
+      "query": "How do the document categories selected during upload influence retrieval filtering and prompt assembly in MCP mode?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Cross-Document Comparison",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "Category metadata tagged at ingestion",
+        "Soft category ranking in hybrid retrieval",
+        "Category-balanced MCP prompt blocks"
+      ],
+      "required_evidence_coverage": "Project Dossier Sections 3.2, 3.4, and 3.5",
+      "labeling_rationale": "Cross-subsystem explanation documented in Project Dossier."
+    },
+    {
+      "id": "P4_2_VAL10",
+      "query": "What is Reciprocal Rank Fusion and what value of k is configured as the rank constant in the hybrid retriever?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Technical Terminology",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "RRF is a rank-based fusion algorithm",
+        "Rank constant k=60 to dampen outlier rankings"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 3.4",
+      "labeling_rationale": "Documented in technical retrieval architecture."
+    },
+    {
+      "id": "P4_2_VAL11",
+      "query": "Explain what Multi-Context Prompting is and how it prevents loss-in-the-middle phenomena in customer support answers.",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Technical Terminology",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "MCP structures contexts into labeled category blocks",
+        "Balances candidate chunks across categories",
+        "Mitigates context dilution and attention decay"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 3.5 Multi-Context Prompting",
+      "labeling_rationale": "Directly documented in Project Dossier."
+    },
+    {
+      "id": "P4_2_VAL12",
+      "query": "Does the standard limited warranty cover damage caused by operating the printer outside specified voltage or temperature limits?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Documented Exclusion",
+      "expected_relevant_docs": [
+        "apexprint_standard_limited_warranty_policy.md",
+        "apexprint_extended_warranty_and_exclusions.md"
+      ],
+      "expected_answerable_claims": [
+        "Explicitly excluded: operating hardware outside specified environmental or electrical limits voids coverage"
+      ],
+      "required_evidence_coverage": "Warranty policy exclusions section",
+      "labeling_rationale": "Documented as an explicit policy exclusion."
+    },
+    {
+      "id": "P4_2_VAL13",
+      "query": "What specific consumables are excluded from warranty coverage once their initial yield is depleted?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Documented Exclusion",
+      "expected_relevant_docs": [
+        "apexprint_standard_limited_warranty_policy.md"
+      ],
+      "expected_answerable_claims": [
+        "Toner cartridges, ink tanks, waste toner containers, and imaging drums are consumable items excluded after initial depletion"
+      ],
+      "required_evidence_coverage": "Warranty policy consumable exclusion clause",
+      "labeling_rationale": "Documented under consumable exclusions clause."
+    },
+    {
+      "id": "P4_2_VAL14",
+      "query": "What are the core benchmark metrics achieved by the Customer Support Intelligence Platform in Stage 7B?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "General Document Intelligence",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "16 live queries evaluated",
+        "100% verified source citations",
+        "Context utilization 41.25%",
+        "Sub-second hybrid retrieval"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 5 Benchmark Results",
+      "labeling_rationale": "Documented in benchmark evaluation chapter."
+    },
+    {
+      "id": "P4_2_VAL15",
+      "query": "What storage budget constraint was established for the project and how is compliance monitored?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "General Document Intelligence",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "Strict limit of 1,024 MB (1 GB)",
+        "Monitored via automated health check in app/services/health.py",
+        "Local disk footprint currently under 25 MB"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 4 Engineering Decisions & Constraints",
+      "labeling_rationale": "Documented in engineering constraints section."
+    },
+    {
+      "id": "P4_2_VAL16",
+      "query": "What five subsystems are evaluated by the automated health check in the backend platform?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "General Document Intelligence",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "Storage subsystem",
+        "Ingestion manifest",
+        "ChromaDB vector store",
+        "Embedding provider",
+        "Inference LLM service"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 3.6 System Health Subsystem",
+      "labeling_rationale": "Documented in system health architecture."
+    },
+    {
+      "id": "P4_2_VAL17",
+      "query": "Can multiple client workstations on different subnets print to the ColorWave-850 simultaneously?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "General Product QA",
+      "expected_relevant_docs": [
+        "apexprint_colorwave850_user_manual.md",
+        "apexprint_frequently_asked_questions_general.md"
+      ],
+      "expected_answerable_claims": [
+        "Yes, supports concurrent network spooling over TCP/IP Gigabit Ethernet across routed subnets"
+      ],
+      "required_evidence_coverage": "ColorWave-850 networking documentation",
+      "labeling_rationale": "Documented in networking section of user manual."
+    },
+    {
+      "id": "P4_2_VAL18",
+      "query": "What file formats are supported for document upload in the Customer Support Intelligence Platform?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "General Document Intelligence",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "PDF (.pdf)",
+        "Markdown (.md)",
+        "Plain text (.txt)"
+      ],
+      "required_evidence_coverage": "Project Dossier Section 3.2 Ingestion Engine",
+      "labeling_rationale": "Documented in ingestion format specifications."
+    },
+    {
+      "id": "P4_2_VAL19",
+      "query": "What are the print speeds for black and color documents on the EcoTank L3150?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Hardware Specifications",
+      "expected_relevant_docs": [
+        "apexprint_ecotank_l3150_specs.txt"
+      ],
+      "expected_answerable_claims": [
+        "Up to 33 ppm for black",
+        "Up to 15 ppm for color"
+      ],
+      "required_evidence_coverage": "EcoTank L3150 specifications sheet",
+      "labeling_rationale": "Documented in EcoTank technical specifications sheet."
+    },
+    {
+      "id": "P4_2_VAL20",
+      "query": "How do you perform a network reset to restore factory Wi-Fi settings on the ApexPrint ProX-400?",
+      "is_supported": true,
+      "expected_evidence_status": "SUFFICIENT",
+      "taxonomy_category": "Troubleshooting Synthesis",
+      "expected_relevant_docs": [
+        "apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ],
+      "expected_answerable_claims": [
+        "Hold network button for 10 seconds until Wi-Fi LED flashes amber",
+        "Reboots internal print server to factory defaults"
+      ],
+      "required_evidence_coverage": "Wi-Fi troubleshooting guide",
+      "labeling_rationale": "Documented in Wi-Fi troubleshooting manual."
+    },
+    {
+      "id": "P4_2_VAL21",
+      "query": "Can I disassemble and replace the fuser unit myself using hand tools if Error E-204 persists?",
+      "is_supported": false,
+      "expected_evidence_status": "CONFLICTING",
+      "taxonomy_category": "Contradictory Evidence",
+      "expected_relevant_docs": [
+        "apexprint_error_codes_and_hardware_troubleshooting.md",
+        "apexprint_standard_limited_warranty_policy.md"
+      ],
+      "expected_answerable_claims": [
+        "Troubleshooting guide describes opening fuser unit",
+        "Warranty policy strictly warns unauthorized disassembly voids warranty"
+      ],
+      "required_evidence_coverage": "Cross-category conflict between troubleshooting and warranty",
+      "labeling_rationale": "Troubleshooting manual explains component access while warranty policy explicitly voids warranty for unauthorized disassembly."
+    },
+    {
+      "id": "P4_2_VAL22",
+      "query": "Should I bypass the internal power supply if voltage fluctuations occur in the printing environment?",
+      "is_supported": false,
+      "expected_evidence_status": "CONFLICTING",
+      "taxonomy_category": "Contradictory Evidence",
+      "expected_relevant_docs": [
+        "apexprint_error_codes_and_hardware_troubleshooting.md",
+        "apexprint_standard_limited_warranty_policy.md"
+      ],
+      "expected_answerable_claims": [
+        "Troubleshooting advises surge suppressor",
+        "Warranty voids coverage for electrical modifications or non-OEM power"
+      ],
+      "required_evidence_coverage": "Cross-category conflict regarding power maintenance",
+      "labeling_rationale": "Troubleshooting recommends power conditioning while warranty policy warns tampering with power components terminates warranty."
+    },
+    {
+      "id": "P4_2_VAL23",
+      "query": "What is the standard warranty period and what is the exact physical mailing address for sending international return merchandise?",
+      "is_supported": false,
+      "expected_evidence_status": "PARTIAL",
+      "taxonomy_category": "Partial Evidence",
+      "expected_relevant_docs": [
+        "apexprint_standard_limited_warranty_policy.md"
+      ],
+      "expected_answerable_claims": [
+        "12-month standard warranty period is documented",
+        "International return physical street address is absent from documentation"
+      ],
+      "required_evidence_coverage": "Partial coverage: warranty duration is documented, international return warehouse address is missing",
+      "labeling_rationale": "Query contains two factual sub-questions; one is documented while the second is absent from the knowledge base."
+    },
+    {
+      "id": "P4_2_VAL24",
+      "query": "How do you replace the waste toner box on a Ricoh Aficio MP C4503 multi-function copier?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "Competitor Hardware Mismatch",
+      "expected_relevant_docs": [],
+      "expected_answerable_claims": [
+        "Abstention due to competitor brand mismatch (Ricoh Aficio vs. ApexPrint)"
+      ],
+      "required_evidence_coverage": "Zero valid evidence in corpus",
+      "labeling_rationale": "Query targets Ricoh Aficio, an unseen external competitor absent from the knowledge base."
+    },
+    {
+      "id": "P4_2_VAL25",
+      "query": "What is the procedure for clearing error code 13.00.00 paper jam on a Lexmark CS720 color laser printer?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "Competitor Hardware Mismatch",
+      "expected_relevant_docs": [],
+      "expected_answerable_claims": [
+        "Abstention due to competitor brand mismatch (Lexmark CS720 vs. ApexPrint)"
+      ],
+      "required_evidence_coverage": "Zero valid evidence in corpus",
+      "labeling_rationale": "Query targets Lexmark CS720, an unseen external competitor absent from the knowledge base."
+    },
+    {
+      "id": "P4_2_VAL26",
+      "query": "What is the duplex printing speed of a Kyocera ECOSYS P3155dn monochrome printer?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "Competitor Hardware Mismatch",
+      "expected_relevant_docs": [],
+      "expected_answerable_claims": [
+        "Abstention due to competitor brand mismatch (Kyocera ECOSYS vs. ApexPrint)"
+      ],
+      "required_evidence_coverage": "Zero valid evidence in corpus",
+      "labeling_rationale": "Query targets Kyocera ECOSYS, an unseen external competitor absent from the knowledge base."
+    },
+    {
+      "id": "P4_2_VAL27",
+      "query": "Does the ApexPrint warranty cover repairs for damage caused by volcanic eruption ash or toxic chemical spills?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "Missing Policy Peril",
+      "expected_relevant_docs": [
+        "apexprint_standard_limited_warranty_policy.md"
+      ],
+      "expected_answerable_claims": [
+        "Retrieved warranty policies do not mention volcanic eruption ash or toxic chemical spills; absence of clause is not proof of inclusion or exclusion"
+      ],
+      "required_evidence_coverage": "Warranty policy silent on queried conditions",
+      "labeling_rationale": "Volcanic eruption ash and toxic chemical spills are unmentioned in warranty documentation."
+    },
+    {
+      "id": "P4_2_VAL28",
+      "query": "Is liquid spill damage from spilled coffee or tea covered under the standard hardware warranty agreement?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "Missing Policy Peril",
+      "expected_relevant_docs": [
+        "apexprint_standard_limited_warranty_policy.md"
+      ],
+      "expected_answerable_claims": [
+        "Warranty policy does not contain clauses defining coverage or exclusion for spilled coffee or tea beverages"
+      ],
+      "required_evidence_coverage": "Warranty policy silent on beverage liquid spills",
+      "labeling_rationale": "Coffee/tea beverage spills are not specified in the warranty agreement."
+    },
+    {
+      "id": "P4_2_VAL29",
+      "query": "What are the maximum cabin carry-on dimensions and checked baggage weight limits on United Airlines?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "Misleading Lexical Overlap",
+      "expected_relevant_docs": [],
+      "expected_answerable_claims": [
+        "Abstention due to out-of-domain airline topic (sub-threshold similarity)"
+      ],
+      "required_evidence_coverage": "Zero valid evidence in corpus",
+      "labeling_rationale": "Query has misleading lexical overlap with shipping/packaging box dimensions in printer manual, but targets United Airlines baggage."
+    },
+    {
+      "id": "P4_2_VAL30",
+      "query": "How do astronomers calculate the orbital velocity of Jupiter's moon Europa?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "Alien Out-of-Domain",
+      "expected_relevant_docs": [],
+      "expected_answerable_claims": [
+        "Abstention due to sub-threshold similarity (< 0.2800)"
+      ],
+      "required_evidence_coverage": "Zero valid evidence in corpus",
+      "labeling_rationale": "Alien celestial mechanics topic with zero presence in indexed knowledge base."
+    },
+    {
+      "id": "P4_2_VAL31",
+      "query": "What is the wholesale bulk dealer discount percentage for purchasing 500 units of the ColorWave-850?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "In-Domain Missing Information",
+      "expected_relevant_docs": [
+        "apexprint_colorwave850_user_manual.md"
+      ],
+      "expected_answerable_claims": [
+        "Knowledge base documents hardware technical specifications; wholesale dealer bulk pricing is completely absent"
+      ],
+      "required_evidence_coverage": "Corpus lacks pricing data",
+      "labeling_rationale": "Valid in-domain hardware product (ColorWave-850), but commercial dealer wholesale discounts are not in knowledge base."
+    },
+    {
+      "id": "P4_2_VAL32",
+      "query": "What is the exact AWS EC2 instance type and monthly hosting cost for production Kubernetes deployment of this platform?",
+      "is_supported": false,
+      "expected_evidence_status": "INSUFFICIENT",
+      "taxonomy_category": "In-Domain Missing Information",
+      "expected_relevant_docs": [
+        "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ],
+      "expected_answerable_claims": [
+        "Dossier documents local deployment and Colab GPU fallback; AWS EC2 Kubernetes production hosting is not documented"
+      ],
+      "required_evidence_coverage": "Dossier lacks AWS EC2 cloud pricing",
+      "labeling_rationale": "Valid in-domain project topic, but cloud deployment hosting on AWS EC2/Kubernetes is absent from the dossier."
+    }
+  ]
+}

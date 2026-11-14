@@ -275,11 +275,15 @@ class CitationValidator:
         for un in unsupported_nums:
             unsupported_claims.append(f"Unsupported numerical claim: '{un}' not found in retrieved documentation")
 
-        # 4. Conflicting Evidence Detection
+        # 4. Conflicting Evidence Detection (detects when answer recommends opening/disassembling while policy voids warranty)
         conflict_detected = False
         categories_represented = {r.metadata.get("category", "") for r in retrieved_contexts}
         if "troubleshooting" in categories_represented and "warranty" in categories_represented:
-            if ("void" in combined_text_lower or "disassemble" in combined_text_lower) and ("open" in answer_text.lower() or "disassemble" in answer_text.lower()):
+            has_void_clause = "void" in combined_text_lower or "disassemble" in combined_text_lower
+            suggests_disassembly = bool(
+                re.search(r"\b(?:can\s+(?:open|disassemble)|open\s+(?:the\s+)?(?:internal|fuser|chassis|assembly|mechanism)|disassemble\s+(?:the\s+)?(?:fuser|assembly|chassis|printer))\b", answer_text.lower())
+            )
+            if has_void_clause and suggests_disassembly:
                 conflict_detected = True
 
         total_claims = max(1, len(sentences))

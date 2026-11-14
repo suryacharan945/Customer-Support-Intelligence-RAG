@@ -81,7 +81,8 @@ class RAGService:
                     self.index_bm25_chunks(chunks)
                     if getattr(self.vector_retriever, "_collection", None) is not None:
                         try:
-                            self.vector_retriever.upsert_chunks(chunks)
+                            if self.vector_retriever._collection.count() == 0:
+                                self.vector_retriever.upsert_chunks(chunks)
                         except Exception as ce:
                             logger.warning(f"Auto-seed Chroma upsert warning: {ce}")
         except Exception as e:

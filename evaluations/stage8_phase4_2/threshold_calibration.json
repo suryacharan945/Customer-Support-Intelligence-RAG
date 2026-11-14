@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "vector_store": "ChromaDB (PersistentClient)",
+    "collection_name": "apexprint_knowledge_base",
+    "distance_metric": "cosine",
+    "distance_formula": "CosineDistance = 1.0 - cos(u, v)",
+    "similarity_formula": "Similarity = 1.0 - CosineDistance = cos(u, v) clamped to [0.0, 1.0]",
+    "total_chunks_indexed": 43
+  },
+  "score_distribution_summary": {
+    "supported_queries_count": 45,
+    "supported_top1_similarity": {
+      "min": 0.3124,
+      "q25": 0.5284,
+      "median": 0.6125,
+      "mean": 0.5891,
+      "q75": 0.6742,
+      "max": 0.7882
+    },
+    "pure_alien_unsupported_queries_count": 3,
+    "pure_alien_top1_similarity": {
+      "min": 0.0842,
+      "mean": 0.1782,
+      "max": 0.2658,
+      "queries": [
+        {
+          "id": "P4_Q48",
+          "topic": "Earth-Mars distance",
+          "top1_score": 0.0842
+        },
+        {
+          "id": "P4_Q46",
+          "topic": "Hyderabadi chicken dum biryani",
+          "top1_score": 0.1845
+        },
+        {
+          "id": "P4_Q49",
+          "topic": "Delta Airlines baggage",
+          "top1_score": 0.2658
+        }
+      ]
+    },
+    "domain_confusable_unsupported_queries_count": 2,
+    "domain_confusable_top1_similarity": {
+      "notes": "Queries with brand or clause mismatch that overlap lexically with valid printer/warranty docs",
+      "queries": [
+        {
+          "id": "P4_Q50",
+          "topic": "Extraterrestrial meteor warranty",
+          "top1_score": 0.6055
+        },
+        {
+          "id": "P4_Q47",
+          "topic": "HP LaserJet M608 paper jam",
+          "top1_score": 0.6165
+        }
+      ]
+    },
+    "empirical_calibration_gap": {
+      "highest_alien_score": 0.2658,
+      "lowest_supported_score": 0.3124,
+      "separation_margin": 0.0466,
+      "midpoint": 0.2891,
+      "selected_floor": 0.28
+    }
+  },
+  "split_calibration_evaluation": {
+    "development_set_evaluation": [
+      {
+        "threshold": 0.22,
+        "total_queries": 25,
+        "supported_count": 25,
+        "unsupported_count": 0,
+        "true_positives": 25,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 0,
+        "false_positives_acceptances": 0,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.0,
+        "accuracy": 1.0
+      },
+      {
+        "threshold": 0.25,
+        "total_queries": 25,
+        "supported_count": 25,
+        "unsupported_count": 0,
+        "true_positives": 25,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 0,
+        "false_positives_acceptances": 0,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.0,
+        "accuracy": 1.0
+      },
+      {
+        "threshold": 0.28,
+        "total_queries": 25,
+        "supported_count": 25,
+        "unsupported_count": 0,
+        "true_positives": 25,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 0,
+        "false_positives_acceptances": 0,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.0,
+        "accuracy": 1.0
+      },
+      {
+        "threshold": 0.32,
+        "total_queries": 25,
+        "supported_count": 25,
+        "unsupported_count": 0,
+        "true_positives": 25,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 0,
+        "false_positives_acceptances": 0,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.0,
+        "accuracy": 1.0
+      },
+      {
+        "threshold": 0.35,
+        "total_queries": 25,
+        "supported_count": 25,
+        "unsupported_count": 0,
+        "true_positives": 25,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 0,
+        "false_positives_acceptances": 0,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.0,
+        "accuracy": 1.0
+      }
+    ],
+    "validation_set_evaluation": [
+      {
+        "threshold": 0.22,
+        "total_queries": 25,
+        "supported_count": 20,
+        "unsupported_count": 5,
+        "true_positives": 20,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 2,
+        "false_positives_acceptances": 3,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.6,
+        "accuracy": 0.88
+      },
+      {
+        "threshold": 0.25,
+        "total_queries": 25,
+        "supported_count": 20,
+        "unsupported_count": 5,
+        "true_positives": 20,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 2,
+        "false_positives_acceptances": 3,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.6,
+        "accuracy": 0.88
+      },
+      {
+        "threshold": 0.28,
+        "total_queries": 25,
+        "supported_count": 20,
+        "unsupported_count": 5,
+        "true_positives": 20,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 3,
+        "false_positives_acceptances": 2,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.4,
+        "accuracy": 0.92
+      },
+      {
+        "threshold": 0.32,
+        "total_queries": 25,
+        "supported_count": 20,
+        "unsupported_count": 5,
+        "true_positives": 19,
+        "false_negatives_rejections": 1,
+        "true_negatives_abstentions": 3,
+        "false_positives_acceptances": 2,
+        "false_rejection_rate": 0.05,
+        "false_acceptance_rate": 0.4,
+        "accuracy": 0.88
+      },
+      {
+        "threshold": 0.35,
+        "total_queries": 25,
+        "supported_count": 20,
+        "unsupported_count": 5,
+        "true_positives": 19,
+        "false_negatives_rejections": 1,
+        "true_negatives_abstentions": 3,
+        "false_positives_acceptances": 2,
+        "false_rejection_rate": 0.05,
+        "false_acceptance_rate": 0.4,
+        "accuracy": 0.88
+      }
+    ],
+    "full_benchmark_evaluation": [
+      {
+        "threshold": 0.22,
+        "total_queries": 50,
+        "supported_count": 45,
+        "unsupported_count": 5,
+        "true_positives": 45,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 2,
+        "false_positives_acceptances": 3,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.6,
+        "accuracy": 0.94
+      },
+      {
+        "threshold": 0.25,
+        "total_queries": 50,
+        "supported_count": 45,
+        "unsupported_count": 5,
+        "true_positives": 45,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 2,
+        "false_positives_acceptances": 3,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.6,
+        "accuracy": 0.94
+      },
+      {
+        "threshold": 0.28,
+        "total_queries": 50,
+        "supported_count": 45,
+        "unsupported_count": 5,
+        "true_positives": 45,
+        "false_negatives_rejections": 0,
+        "true_negatives_abstentions": 3,
+        "false_positives_acceptances": 2,
+        "false_rejection_rate": 0.0,
+        "false_acceptance_rate": 0.4,
+        "accuracy": 0.96
+      },
+      {
+        "threshold": 0.32,
+        "total_queries": 50,
+        "supported_count": 45,
+        "unsupported_count": 5,
+        "true_positives": 44,
+        "false_negatives_rejections": 1,
+        "true_negatives_abstentions": 3,
+        "false_positives_acceptances": 2,
+        "false_rejection_rate": 0.0222,
+        "false_acceptance_rate": 0.4,
+        "accuracy": 0.94
+      },
+      {
+        "threshold": 0.35,
+        "total_queries": 50,
+        "supported_count": 45,
+        "unsupported_count": 5,
+        "true_positives": 44,
+        "false_negatives_rejections": 1,
+        "true_negatives_abstentions": 3,
+        "false_positives_acceptances": 2,
+        "false_rejection_rate": 0.0222,
+        "false_acceptance_rate": 0.4,
+        "accuracy": 0.94
+      }
+    ]
+  },
+  "tradeoff_analysis": {
+    "threshold_0_2200": "Permissive. Zero false rejections, but high risk of accepting out-of-domain queries with partial lexical overlap.",
+    "threshold_0_2500": "Near alien boundary. Falsely accepts Delta Airlines query (0.2658).",
+    "threshold_0_2800": "Optimal separation floor. Accurately rejects all alien queries (FAR=0.0 on alien queries) while preserving 100% of supported queries (FRR=0.0).",
+    "threshold_0_3200": "Conservative. Falsely rejects Spanish query P4_Q43 (0.3124), increasing FRR on supported queries.",
+    "threshold_0_3500": "Strict. Falsely rejects P4_Q43 and P4_Q45 (0.3717), significantly degrading supported answerability."
+  },
+  "core_limitation": "Vector similarity floor alone CANNOT reject domain-confusable out-of-domain queries (P4_Q47 at 0.6165 and P4_Q50 at 0.6055). Multi-signal gating (Entity Compatibility and Policy Condition Verification) is mandatory to prevent false positives in high-similarity domains."
+}

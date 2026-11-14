@@ -1,0 +1,239 @@
+{
+  "dataset_name": "Phase 4.1 Regression Benchmark (10 Questions)",
+  "summary_metrics": {
+    "total_evaluated": 10,
+    "supported_query_count": 5,
+    "unsupported_query_count": 5,
+    "correct_sufficient_count": 5,
+    "correct_partial_count": 0,
+    "correct_insufficient_count": 5,
+    "correct_conflicting_count": 0,
+    "false_acceptance_count": 0,
+    "false_acceptance_rate_on_ood": 0.0,
+    "false_rejection_count": 0,
+    "false_rejection_rate_on_supported": 0.0,
+    "appropriate_abstention_count": 5,
+    "appropriate_abstention_rate_on_ood": 1.0,
+    "overall_accuracy": 1.0,
+    "confusion_matrix": {
+      "SUFFICIENT": {
+        "SUFFICIENT": 5,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "PARTIAL": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "INSUFFICIENT": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 5,
+        "CONFLICTING": 0
+      },
+      "CONFLICTING": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      }
+    },
+    "per_category_breakdown": {
+      "Competitor Hardware": {
+        "total": 2,
+        "correct": 2,
+        "accuracy": 1.0
+      },
+      "Missing Policy Clause": {
+        "total": 2,
+        "correct": 2,
+        "accuracy": 1.0
+      },
+      "Alien Out-of-Domain": {
+        "total": 1,
+        "correct": 1,
+        "accuracy": 1.0
+      },
+      "Generic Troubleshooting": {
+        "total": 1,
+        "correct": 1,
+        "accuracy": 1.0
+      },
+      "Generic Paper Handling": {
+        "total": 1,
+        "correct": 1,
+        "accuracy": 1.0
+      },
+      "Documented Policy Exclusion": {
+        "total": 1,
+        "correct": 1,
+        "accuracy": 1.0
+      },
+      "Project Architecture": {
+        "total": 1,
+        "correct": 1,
+        "accuracy": 1.0
+      },
+      "Project Constraints": {
+        "total": 1,
+        "correct": 1,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "detailed_results": [
+    {
+      "id": "P4_1_REG01",
+      "query": "How do you clear a paper jam on a Canon imageCLASS MF445dw laser multifunction printer?",
+      "category": "Competitor Hardware",
+      "is_supported": false,
+      "expected_status": "INSUFFICIENT",
+      "actual_status": "INSUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 0,
+      "citations_verified": true,
+      "gate_latency_ms": 1.283,
+      "total_latency_ms": 783.05,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'canon' (evidenc..."
+    },
+    {
+      "id": "P4_1_REG02",
+      "query": "What is the print speed and monthly duty cycle of an Epson EcoTank ET-4760 all-in-one printer?",
+      "category": "Competitor Hardware",
+      "is_supported": false,
+      "expected_status": "INSUFFICIENT",
+      "actual_status": "INSUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 0,
+      "citations_verified": true,
+      "gate_latency_ms": 0.343,
+      "total_latency_ms": 717.58,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'epson' (evidenc..."
+    },
+    {
+      "id": "P4_1_REG03",
+      "query": "Does the standard limited warranty cover damage caused by earthquake or tsunami floods?",
+      "category": "Missing Policy Clause",
+      "is_supported": false,
+      "expected_status": "INSUFFICIENT",
+      "actual_status": "INSUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 0,
+      "citations_verified": true,
+      "gate_latency_ms": 2.314,
+      "total_latency_ms": 624.33,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing earthquake, floods, tsunami.  ### 2. Specific Policy Exclusions ..."
+    },
+    {
+      "id": "P4_1_REG04",
+      "query": "Does the commercial care warranty cover cosmetic scratches and exterior casing scuffs?",
+      "category": "Missing Policy Clause",
+      "is_supported": false,
+      "expected_status": "INSUFFICIENT",
+      "actual_status": "INSUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 0,
+      "citations_verified": true,
+      "gate_latency_ms": 2.894,
+      "total_latency_ms": 722.33,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing casing, cosmetic, scratches, scuffs.  ### 2. Specific Policy Exc..."
+    },
+    {
+      "id": "P4_1_REG05",
+      "query": "What is the capital city of Australia and what is its current estimated population?",
+      "category": "Alien Out-of-Domain",
+      "is_supported": false,
+      "expected_status": "INSUFFICIENT",
+      "actual_status": "INSUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 0,
+      "citations_verified": true,
+      "gate_latency_ms": 0.927,
+      "total_latency_ms": 817.86,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'Australia' (evi..."
+    },
+    {
+      "id": "P4_1_REG06",
+      "query": "What causes vertical black streaks on laser printer outputs and how do you inspect the drum unit?",
+      "category": "Generic Troubleshooting",
+      "is_supported": true,
+      "expected_status": "SUFFICIENT",
+      "actual_status": "SUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 4,
+      "citations_verified": true,
+      "gate_latency_ms": 0.388,
+      "total_latency_ms": 761.71,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Align the cartridge with the internal tracks and push firmly until it clicks into locked position. Close front door A and verify the status LED illuminates sol..."
+    },
+    {
+      "id": "P4_1_REG07",
+      "query": "Explain how duplex paper feeding operates mechanically during two-sided document printing.",
+      "category": "Generic Paper Handling",
+      "is_supported": true,
+      "expected_status": "SUFFICIENT",
+      "actual_status": "SUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 4,
+      "citations_verified": true,
+      "gate_latency_ms": 0.378,
+      "total_latency_ms": 699.02,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages. Media Handling, Trays,..."
+    },
+    {
+      "id": "P4_1_REG08",
+      "query": "Does the warranty policy explicitly exclude damage resulting from non-OEM or third-party ink cartridges?",
+      "category": "Documented Policy Exclusion",
+      "is_supported": true,
+      "expected_status": "SUFFICIENT",
+      "actual_status": "SUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 4,
+      "citations_verified": true,
+      "gate_latency_ms": 1.596,
+      "total_latency_ms": 706.97,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Tampering and Disassembly**: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fu..."
+    },
+    {
+      "id": "P4_1_REG09",
+      "query": "How does the citation validation engine ensure that source filenames and page numbers are not fabricated?",
+      "category": "Project Architecture",
+      "is_supported": true,
+      "expected_status": "SUFFICIENT",
+      "actual_status": "SUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 3,
+      "citations_verified": true,
+      "gate_latency_ms": 0.497,
+      "total_latency_ms": 812.68,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer Stage 5 \u2014 Citation Validation Engine: app/generation/citation_validator.py uses regex to extract asserted filenames and chunk IDs from the generated text, veri..."
+    },
+    {
+      "id": "P4_1_REG10",
+      "query": "What is the storage budget constraint and how does the system enforce a sub-1024 MB disk footprint?",
+      "category": "Project Constraints",
+      "is_supported": true,
+      "expected_status": "SUFFICIENT",
+      "actual_status": "SUFFICIENT",
+      "verdict": "PASS",
+      "supporting_citations_count": 1,
+      "citations_verified": true,
+      "gate_latency_ms": 0.452,
+      "total_latency_ms": 788.02,
+      "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+      "answer_preview": "### 1. Executive Summary / Direct Answer A 5-subsystem automated health check reporting on: Storage Subsystem (local disk budget & Google Drive mount), Ingestion Manifest (JSON crash-safe state), Vect..."
+    }
+  ]
+}

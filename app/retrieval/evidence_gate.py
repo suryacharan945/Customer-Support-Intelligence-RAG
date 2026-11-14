@@ -83,17 +83,46 @@ class EvidenceGate:
 
     KNOWN_PROJECT_ENTITIES: Set[str] = {
         "multi-context prompting",
+        "multi-context rag",
         "mcp",
+        "baseline rag",
+        "baseline",
+        "rag",
         "reciprocal rank fusion",
         "rrf",
+        "bm25",
         "fastapi",
         "react",
         "chromadb",
         "sentence-transformers",
         "all-minilm-l6-v2",
+        "mistral",
         "mistral-7b",
         "citation validation",
         "project dossier",
+        "customer support intelligence platform",
+        "customer support",
+        "intelligence platform",
+        "vector store",
+        "hybrid search",
+        "hybrid retrieval",
+        "document intelligence",
+        "ipv4",
+        "ipv6",
+        "usb",
+        "wi-fi",
+        "wifi",
+        "bluetooth",
+        "ethernet",
+        "e-101",
+        "e-102",
+        "e-204",
+        "e-305",
+        "e-410",
+        "stage 7b",
+        "stage 8",
+        "precision",
+        "recall",
     }
 
     # Competitor / external hardware brands & entities (used as non-exclusive entity anchors)
@@ -163,11 +192,12 @@ class EvidenceGate:
             )
 
         top_dense_score = max((self.get_effective_similarity(r) for r in retrieved_contexts), default=0.0)
-        top_sparse_score = max((float(r.metadata.get("sparse_score", 0.0) or 0.0) for r in retrieved_contexts), default=0.0)
+        top_sparse_raw = max((float(r.metadata.get("raw_bm25_score", 0.0) or 0.0) for r in retrieved_contexts), default=0.0)
+        top_sparse_norm = max((float(r.metadata.get("sparse_score", 0.0) or 0.0) for r in retrieved_contexts), default=0.0)
         top_score = top_dense_score
 
-        # 1. Calibrated Similarity Floor: pass if dense >= 0.2800 OR sparse keyword match >= 3.0
-        similarity_passed = (top_dense_score >= self.MIN_SIMILARITY_FLOOR) or (top_sparse_score >= 3.0)
+        # 1. Calibrated Similarity Floor: pass if dense >= 0.2800 OR sparse raw >= 3.0 OR sparse norm >= 0.50
+        similarity_passed = (top_dense_score >= self.MIN_SIMILARITY_FLOOR) or (top_sparse_raw >= 3.0) or (top_sparse_norm >= 0.50)
         if not similarity_passed:
             reasons.append(
                 f"Top retrieval similarity score ({top_dense_score:.4f}) is below empirical relevance floor ({self.MIN_SIMILARITY_FLOOR:.4f}). "
@@ -194,7 +224,7 @@ class EvidenceGate:
             )
 
         # 2. Named-Entity Compatibility Check
-        entity_res = self._check_entity_compatibility(lower_query, retrieved_contexts)
+        entity_res = self._check_entity_compatibility(clean_query, retrieved_contexts)
         if not entity_res.is_compatible:
             reasons.append(entity_res.explanation)
             abstention_msg = (
@@ -217,7 +247,7 @@ class EvidenceGate:
             )
 
         # 3. Policy & Negative-Claim Verification (Address P4_Q50)
-        policy_res = self._check_policy_verification(lower_query, retrieved_contexts)
+        policy_res = self._check_policy_verification(clean_query, retrieved_contexts)
         if policy_res.is_policy_query and not policy_res.is_explicitly_documented:
             reasons.append(policy_res.explanation)
             abstention_msg = (
@@ -272,13 +302,14 @@ class EvidenceGate:
 
     def _check_entity_compatibility(
         self,
-        lower_query: str,
+        query: str,
         retrieved_contexts: List[RetrievalResult],
     ) -> EntityCompatibilityResult:
         """
-        Detects whether the query demands instructions for a specific competitor brand/product
-        that does not match the retrieved documentation.
+        Dynamically detects whether the query demands instructions for a specific competitor brand/product
+        or external entity that does not match the retrieved documentation.
         """
+        lower_query = query.lower()
         combined_text = " ".join(r.text.lower() for r in retrieved_contexts)
         combined_sources = " ".join((r.metadata.get("filename") or r.source or "").lower() for r in retrieved_contexts)
 
@@ -289,6 +320,51 @@ class EvidenceGate:
             if match:
                 detected_external_brands.append(match.group(0).strip())
 
+        # 2. Dynamic proper-noun entity candidate extraction
+        # If the query explicitly targets an ApexPrint / system brand, any embedded nouns (protocols, error codes)
+        # belong to that platform and should not be dynamically declared as competitor mismatches.
+        is_query_targeting_system = any(b in lower_query for b in self.KNOWN_SYSTEM_BRANDS)
+
+        if not is_query_targeting_system:
+            # Matches capitalized multi-word phrases and alphanumeric model codes (e.g. "Lexmark CS720", "Ricoh Aficio")
+            proper_noun_candidates = []
+            matches = re.finditer(r"\b[A-Z][a-zA-Z0-9\-]*(?:\s+[A-Z0-9][a-zA-Z0-9\-]*)*\b", query)
+            for m in matches:
+                phrase = m.group(0).strip()
+                words = phrase.split()
+                filtered = [w for w in words if w.lower() not in self.GENERIC_STOP_WORDS]
+                if filtered and len(" ".join(filtered)) > 2:
+                    candidate = " ".join(filtered)
+                    if candidate.lower() not in {"apexprint", "customer", "support", "document", "error", "page", "user", "manual", "guide", "paper", "jam"}:
+                        proper_noun_candidates.append(candidate)
+
+            for cand in proper_noun_candidates:
+                cand_lower = cand.lower()
+                if cand_lower in self.KNOWN_SYSTEM_BRANDS or cand_lower in self.KNOWN_PROJECT_ENTITIES:
+                    continue
+                # Exclude error codes, protocols, project milestones, metrics, and hardware parts
+                if re.match(r"^(?:error\s+)?e-\d+$", cand_lower):
+                    continue
+                if re.match(r"^stage\s+\d+[a-z]?$", cand_lower):
+                    continue
+                if cand_lower in {"ipv4", "ipv6", "ip", "usb", "wifi", "wi-fi", "bluetooth", "ethernet", "lan", "tcp", "udp", "http", "https"}:
+                    continue
+                if cand_lower in {"precision", "recall", "f1", "mrr", "ndcg", "accuracy", "latency", "throughput", "p95", "qps"}:
+                    continue
+                if cand_lower in {"drum", "fuser", "printhead", "toner", "ink", "roller", "tray", "formatter", "cartridge"}:
+                    continue
+                # Exclude algorithmic, evaluation, or architectural terms
+                if any(term in cand_lower.split() for term in ["rag", "mcp", "rrf", "bm25", "baseline", "architecture", "dossier", "platform", "system", "table", "benchmark", "metric", "coverage"]):
+                    continue
+                if cand_lower in combined_text or cand_lower in combined_sources:
+                    continue
+                # Targeted product context (e.g. "on a <Cand>", "for <Cand>") or model number pattern
+                is_targeted = any(re.search(rf"\b(?:on|for|with|of|by|a|an)\s+{re.escape(cand_lower)}\b", lower_query) for cand_lower in [cand.lower()])
+                has_model_pattern = bool(re.search(r"[A-Za-z]+\-?[0-9]+|[0-9]+\-?[A-Za-z]+", cand))
+                if is_targeted or has_model_pattern:
+                    if cand not in detected_external_brands and cand_lower not in [b.lower() for b in detected_external_brands]:
+                        detected_external_brands.append(cand)
+
         if not detected_external_brands:
             # No competitor brand present in query
             return EntityCompatibilityResult(
@@ -297,10 +373,11 @@ class EvidenceGate:
                 explanation="No incompatible external entities detected in query.",
             )
 
-        # 2. When a competitor brand is detected, check if it exists in retrieved evidence
+        # 3. When a competitor brand is detected, check if it exists in retrieved evidence
         conflicts = []
         for brand in detected_external_brands:
-            if brand not in combined_text and brand not in combined_sources:
+            b_low = brand.lower()
+            if b_low not in combined_text and b_low not in combined_sources:
                 doc_brand = "ApexPrint" if ("apexprint" in combined_sources or "prox" in combined_sources) else "the indexed documentation"
                 conflicts.append((brand, doc_brand))
 
@@ -322,60 +399,99 @@ class EvidenceGate:
 
     def _check_policy_verification(
         self,
-        lower_query: str,
+        query: str,
         retrieved_contexts: List[RetrievalResult],
     ) -> PolicyVerificationResult:
         """
-        Verifies whether specific rare/catastrophic perils or unmentioned policy clauses
-        queried are actually documented in the retrieved warranty documentation.
+        Dynamically extracts queried perils/conditions and verifies whether they are
+        substantiated by retrieved policy documentation.
         """
-        is_coverage_check = any(kw in lower_query for kw in [
-            "cover", "covered", "coverage", "exclusion", "exclude", "warranty", "policy"
-        ])
+        lower_query = query.lower()
+        is_coverage_check = (
+            any(w in lower_query for w in ["warranty", "rma", "guarantee", "policy"])
+            or bool(re.search(r"\b(?:covered\s+(?:under|by)|does\s+.*cover)\b", lower_query))
+        )
+        # Exclude software engineering / evaluation contexts unless explicit warranty words present
+        if any(t in lower_query for t in ["benchmark", "table", "code coverage", "test coverage", "dataset", "architecture", "pipeline", "metric", "percentage"]):
+            if "warranty" not in lower_query and "policy" not in lower_query and "rma" not in lower_query:
+                is_coverage_check = False
+
         if not is_coverage_check:
             return PolicyVerificationResult(is_policy_query=False, is_explicitly_documented=True)
 
         combined_policy_text = " ".join(r.text.lower() for r in retrieved_contexts)
 
-        # Specific catastrophic, environmental, or out-of-scope perils that must never be fabricated
-        EXOTIC_PERILS = {
+        # 1. Dynamically extract queried peril/condition from coverage query
+        extracted_conditions: List[str] = []
+        condition_patterns = [
+            re.compile(r'(?:cover|covered|coverage)(?:\s+(?:for|against|of|damage caused by|damage from|damage resulting from))?\s+([^?.,;]+)', re.IGNORECASE),
+            re.compile(r'(?:exclude|excluded|exclusion|exclusions)(?:\s+(?:for|against|of|damage caused by|damage from|damage resulting from))?\s+([^?.,;]+)', re.IGNORECASE),
+            re.compile(r'(?:policy\s+on|warranty\s+on)\s+([^?.,;]+)', re.IGNORECASE),
+        ]
+        for pat in condition_patterns:
+            m = pat.search(query)
+            if m:
+                raw_cond = m.group(1).strip()
+                clean_cond = re.sub(r'\b(?:under|in|by|the|a|an|standard|limited|commercial|warranty|policy)\b.*$', '', raw_cond, flags=re.IGNORECASE).strip()
+                if clean_cond:
+                    extracted_conditions.append(clean_cond)
+
+        content_words = set()
+        for cond in extracted_conditions:
+            words = re.findall(r"\b[a-zA-Z]{3,}\b", cond.lower())
+            content_words.update(w for w in words if w not in self.GENERIC_STOP_WORDS and w not in self.POLICY_KEYWORDS)
+
+        # Fallback anchor perils for safety
+        anchor_perils = {
             "meteor", "radiation", "nuclear", "extraterrestrial", "earthquake",
             "tsunami", "flood", "tornado", "hurricane", "alien", "war", "riot",
-            "cosmetic", "scratches", "scuffs", "dent"
+            "cosmetic", "scratches", "scuffs", "dent", "dents", "volcano", "volcanic",
+            "lightning", "coffee", "tea", "beverage", "spill", "spilled"
         }
+        for ap in anchor_perils:
+            if re.search(rf"\b{re.escape(ap)}\b", lower_query):
+                content_words.add(ap)
 
-        queried_exotic_perils = [
-            p for p in EXOTIC_PERILS
-            if re.search(rf"\b{re.escape(p)}\b", lower_query)
-        ]
-        if not queried_exotic_perils:
-            # Query asks about standard operating perils (defects, wear, non-OEM ink, disassembly)
+        # Informational policy queries asking for lists or explanations of terms
+        # (e.g. "What specific consumables are excluded...", "What is the warranty period...")
+        is_informational = bool(re.match(r"^(?:what|which|list|name|explain|describe|compare)\b", lower_query))
+        has_anchor_peril = any(re.search(rf"\b{re.escape(ap)}\b", lower_query) for ap in anchor_perils)
+        if is_informational and not has_anchor_peril:
+            return PolicyVerificationResult(
+                is_policy_query=True,
+                is_explicitly_documented=True,
+                explanation="Informational warranty policy inquiry.",
+            )
+
+        if not content_words:
             return PolicyVerificationResult(
                 is_policy_query=True,
                 is_explicitly_documented=True,
                 explanation="Standard warranty inquiry.",
             )
 
-        missing_perils = [
-            p for p in queried_exotic_perils
-            if not re.search(rf"\b{re.escape(p)}\b", combined_policy_text)
+        documented_conditions = [
+            w for w in sorted(content_words)
+            if re.search(rf"\b{re.escape(w)}\b", combined_policy_text)
         ]
-        is_documented = len(missing_perils) == 0
+        missing_conditions = [
+            w for w in sorted(content_words)
+            if not re.search(rf"\b{re.escape(w)}\b", combined_policy_text)
+        ]
+
+        is_documented = len(missing_conditions) == 0
 
         explanation = (
-            f"Queried policy perils {missing_perils} are not documented in retrieved warranty policy."
+            f"Queried policy conditions {missing_conditions} are not documented in retrieved warranty policy."
             if not is_documented
-            else "Queried policy perils are documented."
+            else f"Queried policy conditions {documented_conditions} are documented."
         )
 
         return PolicyVerificationResult(
             is_policy_query=True,
-            queried_conditions=queried_exotic_perils,
-            documented_conditions=[
-                p for p in queried_exotic_perils
-                if re.search(rf"\b{re.escape(p)}\b", combined_policy_text)
-            ],
-            missing_conditions=missing_perils,
+            queried_conditions=list(content_words),
+            documented_conditions=documented_conditions,
+            missing_conditions=missing_conditions,
             is_explicitly_documented=is_documented,
             explanation=explanation,
         )

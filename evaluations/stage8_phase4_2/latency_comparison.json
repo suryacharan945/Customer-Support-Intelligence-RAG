@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "active_generation_provider": "local_grounded_synthesizer (Local deterministic execution)",
+    "retrieval_mode": "hybrid_mcp (ChromaDB + BM25 + RRF)",
+    "vector_index": "sentence-transformers/all-MiniLM-L6-v2 in .chroma_live"
+  },
+  "execution_paths": {
+    "evidence_gate_overhead": {
+      "count": 92,
+      "mean": 0.79,
+      "median": 0.51,
+      "p95": 2.31,
+      "min": 0.14,
+      "max": 3.67
+    },
+    "warm_hybrid_retrieval": {
+      "count": 50,
+      "mean": 752.83,
+      "median": 720.82,
+      "p95": 896.27,
+      "min": 628.29,
+      "max": 1325.31
+    },
+    "local_synthesis_generation": {
+      "count": 50,
+      "mean": 14.49,
+      "median": 14.06,
+      "p95": 33.14,
+      "min": 0.0,
+      "max": 58.14
+    },
+    "end_to_end_supported_path": {
+      "count": 72,
+      "mean": 770.37,
+      "median": 754.38,
+      "p95": 918.64,
+      "min": 625.73,
+      "max": 1390.53
+    },
+    "end_to_end_abstention_path": {
+      "count": 20,
+      "mean": 726.29,
+      "median": 720.81,
+      "p95": 817.86,
+      "min": 624.33,
+      "max": 817.86
+    },
+    "full_query_latency_overall": {
+      "count": 92,
+      "mean": 760.79,
+      "median": 745.17,
+      "p95": 914.12,
+      "min": 624.33,
+      "max": 1390.53
+    }
+  },
+  "latency_reduction_analysis": {
+    "mean_supported_latency_ms": 770.37,
+    "mean_abstention_latency_ms": 726.29,
+    "relative_latency_reduction_percent": 5.72,
+    "conclusion": "When the EvidenceGate rejects an ungrounded or out-of-domain query, context assembly and synthesis are completely bypassed, saving computational overhead and latency."
+  }
+}
