@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { ChatMessage } from '../components/chat/ChatMessage';
 import { CitationCard } from '../components/chat/CitationCard';
-import { CategoryBadge, EvidenceBadge } from '../components/common/Badge';
+import { CategoryBadge } from '../components/common/Badge';
 import { UploadDropzone } from '../components/documents/UploadDropzone';
 import { QueryResponse, Citation } from '../api/types';
 

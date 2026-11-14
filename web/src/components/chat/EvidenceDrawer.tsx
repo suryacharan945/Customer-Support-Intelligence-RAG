@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, FileText, CheckCircle2, Bookmark, Layers, Hash, MapPin, Gauge, Copy, Check, Info } from 'lucide-react';
+import { X, CheckCircle2, Bookmark, Layers, Hash, MapPin, Gauge, Copy, Check, Info } from 'lucide-react';
 import { Citation } from '../../api/types';
 import { CategoryBadge } from '../common/Badge';
 

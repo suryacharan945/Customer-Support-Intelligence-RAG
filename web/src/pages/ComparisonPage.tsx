@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GitCompare, Play, Sparkles, AlertCircle, Clock, CheckCircle2 } from 'lucide-react';
+import { GitCompare, Play, Sparkles, AlertCircle } from 'lucide-react';
 import { apiClient } from '../api/client';
 import { QueryResponse } from '../api/types';
 import { Card } from '../components/common/Card';
@@ -81,8 +81,6 @@ export const ComparisonPage: React.FC = () => {
   const mRetLat = multiRes?.retrieval_latency_ms ?? 0;
   const bGenLat = baselineRes?.generation_latency_ms ?? 0;
   const mGenLat = multiRes?.generation_latency_ms ?? 0;
-  const bCites = baselineRes?.supporting_citations?.length ?? 0;
-  const mCites = multiRes?.supporting_citations?.length ?? 0;
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-16">

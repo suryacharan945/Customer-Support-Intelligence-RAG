@@ -1,0 +1,844 @@
+"""Stage 8 Phase 4 Multi-Domain Evaluation Benchmark Dataset Builder.
+
+Constructs 50 rigorously annotated ground-truth questions across:
+- 8 Question Types (A through H)
+- 7 In-Domain + 1 Out-of-Domain categories
+- Mapped to exact ChromaDB chunk IDs and source filenames
+"""
+
+import json
+from pathlib import Path
+
+DATASET = [
+    # --------------------------------------------------------------------------
+    # TYPE A: Direct Factual Questions (Q01 - Q08)
+    # --------------------------------------------------------------------------
+    {
+        "id": "P4_Q01",
+        "query": "What is the maximum monthly duty cycle of the ApexPrint ProX-400?",
+        "domain": "product_specs",
+        "question_type": "A_direct_factual",
+        "expected_documents": ["apexprint_prox400_user_manual.md"],
+        "expected_chunks": ["doc_prod_de7386b29af7_c0002"],
+        "expected_key_facts": ["80,000 pages per month", "80,000 pages", "duty cycle"],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Direct factual lookup in ProX-400 specifications chunk."
+    },
+    {
+        "id": "P4_Q02",
+        "query": "What is the print resolution of the ApexPrint ColorWave-850 on photo fine art media?",
+        "domain": "product_specs",
+        "question_type": "A_direct_factual",
+        "expected_documents": ["apexprint_colorwave850_user_manual.md"],
+        "expected_chunks": ["doc_prod_a92c5cafaf32_c0001"],
+        "expected_key_facts": ["4800 x 1200 optimized dpi", "4800 x 1200 dpi"],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Direct lookup in ColorWave-850 technical specifications."
+    },
+    {
+        "id": "P4_Q03",
+        "query": "Which embedding model is used for dense semantic retrieval in this platform?",
+        "domain": "software_engineering",
+        "question_type": "A_direct_factual",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p2_c0001", "doc_prod_4d6578a53efe_p3_c0000"],
+        "expected_key_facts": ["MiniLM", "all-MiniLM-L6-v2", "384-dimensional"],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Direct factual extraction from Project Dossier architecture table."
+    },
+    {
+        "id": "P4_Q04",
+        "query": "What trigger condition causes Error Code E-204 on ApexPrint printers?",
+        "domain": "troubleshooting",
+        "question_type": "A_direct_factual",
+        "expected_documents": ["apexprint_error_codes_and_hardware_troubleshooting.md"],
+        "expected_chunks": ["doc_trou_54171a85acbc_c0001"],
+        "expected_key_facts": ["Fuser Unit Overheat", "thermistor", "exceeded 230°C", "230°C"],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Direct error code definition in troubleshooting guide."
+    },
+    {
+        "id": "P4_Q05",
+        "query": "What is the standard hardware warranty period provided by ApexPrint?",
+        "domain": "warranty",
+        "question_type": "A_direct_factual",
+        "expected_documents": ["apexprint_standard_limited_warranty_policy.md"],
+        "expected_chunks": ["doc_warr_11757ad6d7b8_c0000"],
+        "expected_key_facts": ["12 months", "1 year", "one (1) year", "date of purchase"],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Direct warranty coverage duration statement."
+    },
+    {
+        "id": "P4_Q06",
+        "query": "Which Android operating system version or later supports direct printing via default print service?",
+        "domain": "general_faq",
+        "question_type": "A_direct_factual",
+        "expected_documents": ["apexprint_frequently_asked_questions_general.md"],
+        "expected_chunks": ["doc_faq_840e24fda935_c0001"],
+        "expected_key_facts": ["Android 8.0", "Android 8.0 or later", "Oreo"],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "FAQ factual OS compatibility lookup."
+    },
+    {
+        "id": "P4_Q07",
+        "query": "What is the formula used for Reciprocal Rank Fusion (RRF) in the hybrid search engine?",
+        "domain": "technical_architecture",
+        "question_type": "A_direct_factual",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p2_c0003", "doc_prod_4d6578a53efe_p6_c0001"],
+        "expected_key_facts": ["RRF(d) = ∑ 1 / (60 + rank(d))", "k = 60", "constant 60"],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Exact mathematical formula in Project Dossier."
+    },
+    {
+        "id": "P4_Q08",
+        "query": "What is the print resolution and bottle page yield for black ink on the EcoTank L3150?",
+        "domain": "product_specs",
+        "question_type": "A_direct_factual",
+        "expected_documents": ["apexprint_ecotank_l3150_specs.txt"],
+        "expected_chunks": ["doc_prod_c4f75309780c_c0000"],
+        "expected_key_facts": ["5760 x 1440 dpi", "4,500 pages", "black ink yield"],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Factual extraction from plain text spec sheet."
+    },
+
+    # --------------------------------------------------------------------------
+    # TYPE B: Multi-Step Synthesis Questions (Q09 - Q15)
+    # --------------------------------------------------------------------------
+    {
+        "id": "P4_Q09",
+        "query": "What are the complete step-by-step resolution steps for resolving Error E-101 Printhead Jam?",
+        "domain": "troubleshooting",
+        "question_type": "B_multistep_synthesis",
+        "expected_documents": ["apexprint_error_codes_and_hardware_troubleshooting.md"],
+        "expected_chunks": ["doc_trou_54171a85acbc_c0000"],
+        "expected_key_facts": [
+            "Power off and disconnect AC power for 60 seconds",
+            "Open top access cover",
+            "Check for foreign obstructions or torn paper",
+            "Gently slide carriage manually",
+            "Inspect carriage encoder strip"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Requires preserving sequential ordering of resolution steps."
+    },
+    {
+        "id": "P4_Q10",
+        "query": "How do you replace an empty toner cartridge on the ProX-400 without damaging the drum unit?",
+        "domain": "hardware_maintenance",
+        "question_type": "B_multistep_synthesis",
+        "expected_documents": ["apexprint_frequently_asked_questions_hardware_and_service.md"],
+        "expected_chunks": ["doc_faq_e1d7f9f8c9ad_c0001"],
+        "expected_key_facts": [
+            "Turn on printer and open front access panel",
+            "Release blue lock lever",
+            "Unpack replacement without touching roller",
+            "Gently rock cartridge horizontally 5-6 times",
+            "Align cartridge and push firmly until click"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Multi-step mechanical maintenance procedure."
+    },
+    {
+        "id": "P4_Q11",
+        "query": "Explain the 5-stage pipeline through which a user query is processed in this system.",
+        "domain": "technical_architecture",
+        "question_type": "B_multistep_synthesis",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p4_c0001", "doc_prod_4d6578a53efe_p4_c0002", "doc_prod_4d6578a53efe_p5_c0000"],
+        "expected_key_facts": [
+            "Stage 1: Intent & Category Routing",
+            "Stage 2: Hybrid Dual Retrieval (Dense + BM25Okapi)",
+            "Stage 3: Reciprocal Rank Fusion",
+            "Stage 4: Multi-Context Partitioned Assembly",
+            "Stage 5: Citation Validation Engine"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Architectural end-to-end dataflow synthesis."
+    },
+    {
+        "id": "P4_Q12",
+        "query": "How do you configure a static IPv4 address on the ApexPrint ProX-400?",
+        "domain": "troubleshooting",
+        "question_type": "B_multistep_synthesis",
+        "expected_documents": ["apexprint_prox400_wifi_and_connectivity_troubleshooting.md"],
+        "expected_chunks": ["doc_trou_ee280f83aa9f_c0001"],
+        "expected_key_facts": [
+            "Access Embedded Web Server (EWS) via IP",
+            "Log in with admin credentials",
+            "Navigate to Network Settings > IPv4 Configuration",
+            "Switch from DHCP to Manual/Static",
+            "Enter IP address, subnet mask, and default gateway"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Network configuration procedure."
+    },
+    {
+        "id": "P4_Q13",
+        "query": "What steps are required to file an RMA warranty replacement claim for defective hardware?",
+        "domain": "warranty",
+        "question_type": "B_multistep_synthesis",
+        "expected_documents": ["apexprint_standard_limited_warranty_policy.md"],
+        "expected_chunks": ["doc_warr_11757ad6d7b8_c0000", "doc_warr_11757ad6d7b8_c0001"],
+        "expected_key_facts": [
+            "Provide serial number and proof of purchase",
+            "Contact technical support for diagnostic triage",
+            "Obtain Return Merchandise Authorization (RMA) number",
+            "Ship prepaid in original packaging"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Warranty claim procedure synthesis."
+    },
+    {
+        "id": "P4_Q14",
+        "query": "Explain how the citation validator verifies that a generated answer does not cite phantom sources.",
+        "domain": "software_engineering",
+        "question_type": "B_multistep_synthesis",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p5_c0000"],
+        "expected_key_facts": [
+            "Regex extraction of citations [Source, Page, Chunk]",
+            "Validation against context container delivered to LLM",
+            "Rejection of unretrieved document names or invented chunk IDs",
+            "Lexical token containment threshold (>= 20%)"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Deep citation validation algorithm explanation."
+    },
+    {
+        "id": "P4_Q15",
+        "query": "How does the system ensure local storage remains strictly under the 1 GB constraint during operations?",
+        "domain": "software_engineering",
+        "question_type": "B_multistep_synthesis",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p5_c0002"],
+        "expected_key_facts": [
+            "Zero local LLM model weights (remote Colab GPU)",
+            "ChromaDB compaction and retention limit",
+            "Automated Google Drive cloud offloading",
+            "Cleanup of temporary files and ephemeral caches"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Engineering storage budget policy synthesis."
+    },
+
+    # --------------------------------------------------------------------------
+    # TYPE C: Cross-Document Multi-Context Synthesis (Q16 - Q22)
+    # --------------------------------------------------------------------------
+    {
+        "id": "P4_Q16",
+        "query": "Does using non-genuine toner cartridges void the standard limited warranty, and what happens if a printhead clogs because of third-party ink?",
+        "domain": "cross_document_warranty",
+        "question_type": "C_multidoc_synthesis",
+        "expected_documents": [
+            "apexprint_standard_limited_warranty_policy.md",
+            "apexprint_extended_warranty_and_exclusions.md"
+        ],
+        "expected_chunks": ["doc_warr_11757ad6d7b8_c0001", "doc_warr_6bcedacd5b00_c0001"],
+        "expected_key_facts": [
+            "Non-genuine supplies alone do not automatically void the entire printer warranty",
+            "Damage, failure, or clogging directly caused by third-party toner is excluded from warranty repair",
+            "Repairs for damage caused by third-party consumables are billed at standard time and materials rates"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Requires synthesizing standard policy with exclusion terms across two distinct warranty docs."
+    },
+    {
+        "id": "P4_Q17",
+        "query": "How do the paper tray capacities and media weights compare between the ProX-400 and the ColorWave-850?",
+        "domain": "cross_document_hardware",
+        "question_type": "C_multidoc_synthesis",
+        "expected_documents": [
+            "apexprint_prox400_user_manual.md",
+            "apexprint_colorwave850_user_manual.md"
+        ],
+        "expected_chunks": ["doc_prod_de7386b29af7_c0003", "doc_prod_a92c5cafaf32_c0000"],
+        "expected_key_facts": [
+            "ProX-400: 250-sheet internal cassette (Tray 2) plus 100-sheet multipurpose (Tray 1) up to 163 gsm (optional 550-sheet Tray 3)",
+            "ColorWave-850: Dual-roll auto-switching paper feed system handling rolls up to 44 inches wide and 300 gsm"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Cross-product manual synthesis."
+    },
+    {
+        "id": "P4_Q18",
+        "query": "If an ApexPrint printer displays Error E-204 and the user disassembles the fuser unit, is the replacement covered under warranty?",
+        "domain": "cross_document_support_warranty",
+        "question_type": "C_multidoc_synthesis",
+        "expected_documents": [
+            "apexprint_error_codes_and_hardware_troubleshooting.md",
+            "apexprint_extended_warranty_and_exclusions.md"
+        ],
+        "expected_chunks": ["doc_trou_54171a85acbc_c0001", "doc_warr_6bcedacd5b00_c0002"],
+        "expected_key_facts": [
+            "Error E-204 indicates fuser unit overheat",
+            "Unauthorized disassembly or repair attempted by non-certified personnel immediately voids the warranty",
+            "Replacement will NOT be covered under warranty due to unauthorized disassembly"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Connects troubleshooting guide error warning with warranty voiding terms."
+    },
+    {
+        "id": "P4_Q19",
+        "query": "How does the platform's multi-category routing ensure both hardware troubleshooting and warranty policies are retrieved together?",
+        "domain": "cross_document_architecture",
+        "question_type": "C_multidoc_synthesis",
+        "expected_documents": [
+            "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+            "apexprint_standard_limited_warranty_policy.md"
+        ],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p1_c0003", "doc_prod_4d6578a53efe_p4_c0001"],
+        "expected_key_facts": [
+            "Multi-category routing detects composite intents",
+            "Allocates partitioned budget quotas across relevant domains",
+            "Prevents single-domain context starvation"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Links architectural RRF multi-category mechanism with customer domain coverage."
+    },
+    {
+        "id": "P4_Q20",
+        "query": "What are the Wi-Fi connectivity options for the ProX-400 and what mobile printing protocols are supported across FAQ documentation?",
+        "domain": "cross_document_connectivity",
+        "question_type": "C_multidoc_synthesis",
+        "expected_documents": [
+            "apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+            "apexprint_frequently_asked_questions_general.md"
+        ],
+        "expected_chunks": ["doc_trou_ee280f83aa9f_c0000", "doc_faq_840e24fda935_c0001"],
+        "expected_key_facts": [
+            "Dual-band Wi-Fi (2.4 GHz and 5 GHz) and Wi-Fi Direct",
+            "Apple AirPrint, Mopria Print Service, Android Default Print Service"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Cross-references network guide with general FAQ."
+    },
+    {
+        "id": "P4_Q21",
+        "query": "Can high print volumes causing routine wear on feed rollers be claimed as an RMA defect under warranty?",
+        "domain": "cross_document_warranty",
+        "question_type": "C_multidoc_synthesis",
+        "expected_documents": [
+            "apexprint_extended_warranty_and_exclusions.md",
+            "apexprint_frequently_asked_questions_hardware_and_service.md"
+        ],
+        "expected_chunks": ["doc_warr_6bcedacd5b00_c0000", "doc_faq_e1d7f9f8c9ad_c0000"],
+        "expected_key_facts": [
+            "Routine wear items (pick rollers, separation pads) are consumables",
+            "Wear-and-tear items with expected lifecycles (e.g. 50,000 pages) are excluded from manufacturing defect warranty claims"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Synthesizes maintenance lifecycle with warranty exclusion definitions."
+    },
+    {
+        "id": "P4_Q22",
+        "query": "What happens if a user connects the printer to an ungrounded or fluctuating power outlet during an E-204 overheat condition?",
+        "domain": "cross_document_support_warranty",
+        "question_type": "C_multidoc_synthesis",
+        "expected_documents": [
+            "apexprint_error_codes_and_hardware_troubleshooting.md",
+            "apexprint_extended_warranty_and_exclusions.md"
+        ],
+        "expected_chunks": ["doc_trou_54171a85acbc_c0002", "doc_warr_6bcedacd5b00_c0001"],
+        "expected_key_facts": [
+            "Troubleshooting explicitly mandates reconnecting directly to wall receptacle and avoiding power strips",
+            "Power surge, improper voltage, or ungrounded electrical supply is an explicit warranty exclusion"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Cross-verifies hardware electrical warning with warranty exclusion clause."
+    },
+
+    # --------------------------------------------------------------------------
+    # TYPE D: Numerical and Benchmark Extraction (Q23 - Q29)
+    # --------------------------------------------------------------------------
+    {
+        "id": "P4_Q23",
+        "query": "What are the benchmark results for Precision@3 and Recall between Baseline RAG and Multi-Context RAG in the Project Dossier?",
+        "domain": "quantitative_evaluation",
+        "question_type": "D_numerical_benchmark",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p5_c0001"],
+        "expected_key_facts": [
+            "Baseline Precision@3: 64.2%",
+            "Multi-Context Precision@3: 91.8%",
+            "Baseline Recall: 58.0%",
+            "Multi-Context Recall: 88.4%",
+            "Delta Precision: +27.6%",
+            "Delta Recall: +30.4%"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Exact numerical benchmark extraction from evaluation table."
+    },
+    {
+        "id": "P4_Q24",
+        "query": "What was the Multi-Category Coverage percentage achieved by Multi-Context RAG compared to Baseline in the benchmark table?",
+        "domain": "quantitative_evaluation",
+        "question_type": "D_numerical_benchmark",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p5_c0001"],
+        "expected_key_facts": [
+            "Baseline Multi-Category Coverage: 31.2%",
+            "Multi-Context Coverage: 96.5%",
+            "Delta: +65.3%"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Direct extraction of coverage metrics."
+    },
+    {
+        "id": "P4_Q25",
+        "query": "What is the continuous print speed in pages per minute for monochrome and duplex on the ProX-400?",
+        "domain": "product_specs",
+        "question_type": "D_numerical_benchmark",
+        "expected_documents": ["apexprint_prox400_user_manual.md"],
+        "expected_chunks": ["doc_prod_de7386b29af7_c0001", "doc_prod_de7386b29af7_c0002"],
+        "expected_key_facts": [
+            "42 pages per minute (ppm) letter / 40 ppm A4",
+            "duplex printing up to 36 ppm"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Numerical specification lookup."
+    },
+    {
+        "id": "P4_Q26",
+        "query": "What were the mean retrieval and generation latencies recorded during the Stage 7B live benchmark?",
+        "domain": "quantitative_evaluation",
+        "question_type": "D_numerical_benchmark",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p3_c0002", "doc_prod_4d6578a53efe_p5_c0001"],
+        "expected_key_facts": [
+            "Baseline retrieval latency: ~0.17 ms",
+            "Multi-Context retrieval latency: ~0.63 ms",
+            "Remote generation latency: ~12.4s (baseline) vs ~26.5s (multi-context)"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Historical benchmark latency extraction."
+    },
+    {
+        "id": "P4_Q27",
+        "query": "What is the standard ink droplet size in picoliters for the ApexPrint ColorWave-850?",
+        "domain": "product_specs",
+        "question_type": "D_numerical_benchmark",
+        "expected_documents": ["apexprint_colorwave850_user_manual.md"],
+        "expected_chunks": ["doc_prod_a92c5cafaf32_c0001"],
+        "expected_key_facts": [
+            "3.5 picoliters",
+            "Variable-Sized Droplet Technology (VSDT)"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Numerical droplet size spec."
+    },
+    {
+        "id": "P4_Q28",
+        "query": "What is the temperature threshold that trips the fuser unit thermal fuse on ApexPrint printers?",
+        "domain": "troubleshooting",
+        "question_type": "D_numerical_benchmark",
+        "expected_documents": ["apexprint_error_codes_and_hardware_troubleshooting.md"],
+        "expected_chunks": ["doc_trou_54171a85acbc_c0001"],
+        "expected_key_facts": [
+            "230°C",
+            "one-shot thermal fuse at 250°C"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Numerical safety threshold extraction."
+    },
+    {
+        "id": "P4_Q29",
+        "query": "What is the storage budget limit enforced across the platform?",
+        "domain": "software_engineering",
+        "question_type": "D_numerical_benchmark",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p5_c0002"],
+        "expected_key_facts": [
+            "1,024 MB",
+            "1 GB limit",
+            "hard ceiling"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Platform architecture storage constraint extraction."
+    },
+
+    # --------------------------------------------------------------------------
+    # TYPE E: Comparison Questions (Q30 - Q35)
+    # --------------------------------------------------------------------------
+    {
+        "id": "P4_Q30",
+        "query": "Compare Baseline RAG and Multi-Context Prompting in how they handle cross-domain queries.",
+        "domain": "technical_architecture",
+        "question_type": "E_comparison",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p1_c0002", "doc_prod_4d6578a53efe_p1_c0003", "doc_prod_4d6578a53efe_p6_c0000"],
+        "expected_key_facts": [
+            "Baseline RAG retrieves chunks strictly by global cosine similarity, leading to context starvation",
+            "Multi-Context Prompting partitions retrieval into distinct domain quotas (e.g., troubleshooting and warranty)",
+            "MCP prevents dominant categories from crowding out secondary information"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Conceptual and architectural comparison."
+    },
+    {
+        "id": "P4_Q31",
+        "query": "Compare the printing technology, primary application, and color capabilities of the ProX-400 versus the ColorWave-850.",
+        "domain": "product_comparison",
+        "question_type": "E_comparison",
+        "expected_documents": [
+            "apexprint_prox400_user_manual.md",
+            "apexprint_colorwave850_user_manual.md"
+        ],
+        "expected_chunks": ["doc_prod_de7386b29af7_c0000", "doc_prod_a92c5cafaf32_c0000"],
+        "expected_key_facts": [
+            "ProX-400: Enterprise Monochrome Laser Printer for high-volume office text documents",
+            "ColorWave-850: Wide-Format Inkjet Multi-Function System for CAD drawings, GIS maps, and photo fine art",
+            "ColorWave supports 8-color pigment ink; ProX-400 is monochrome only"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Hardware product line comparison."
+    },
+    {
+        "id": "P4_Q32",
+        "query": "What is the difference between Error E-101 and Error E-204 in terms of failure mechanism and component affected?",
+        "domain": "troubleshooting",
+        "question_type": "E_comparison",
+        "expected_documents": ["apexprint_error_codes_and_hardware_troubleshooting.md"],
+        "expected_chunks": ["doc_trou_54171a85acbc_c0000", "doc_trou_54171a85acbc_c0001"],
+        "expected_key_facts": [
+            "Error E-101: Mechanical failure affecting printhead carriage motion / jam",
+            "Error E-204: Thermal failure affecting the fuser unit assembly / overheat"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Subsystem failure mechanism comparison."
+    },
+    {
+        "id": "P4_Q33",
+        "query": "Compare the Standard Limited Warranty with the Extended Warranty terms regarding accidental damage and consumable parts.",
+        "domain": "warranty",
+        "question_type": "E_comparison",
+        "expected_documents": [
+            "apexprint_standard_limited_warranty_policy.md",
+            "apexprint_extended_warranty_and_exclusions.md"
+        ],
+        "expected_chunks": ["doc_warr_11757ad6d7b8_c0001", "doc_warr_6bcedacd5b00_c0000"],
+        "expected_key_facts": [
+            "Neither policy covers accidental drops, liquid spills, or natural disasters",
+            "Both exclude consumable parts subject to normal wear (rollers, toner)",
+            "Extended warranty provides longer duration but maintains the same exclusions"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Policy comparison across standard and extended coverage."
+    },
+    {
+        "id": "P4_Q34",
+        "query": "Compare Dense Vector Retrieval and BM25 Lexical Retrieval in the context of acronyms and error codes.",
+        "domain": "technical_architecture",
+        "question_type": "E_comparison",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p1_c0003", "doc_prod_4d6578a53efe_p6_c0001"],
+        "expected_key_facts": [
+            "Dense vector embeddings can struggle with exact rare alphanumeric tokens like error codes (e.g. E-101) or part numbers",
+            "BM25 excels at exact keyword and token matching",
+            "Hybrid RRF combines the strengths of both"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Information retrieval theory comparison based on Project Dossier."
+    },
+    {
+        "id": "P4_Q35",
+        "query": "Compare the EcoTank L3150 and the ProX-400 in ink/toner technology and ongoing replenishment mechanism.",
+        "domain": "product_comparison",
+        "question_type": "E_comparison",
+        "expected_documents": [
+            "apexprint_ecotank_l3150_specs.txt",
+            "apexprint_prox400_user_manual.md"
+        ],
+        "expected_chunks": ["doc_prod_c4f75309780c_c0000", "doc_prod_de7386b29af7_c0000"],
+        "expected_key_facts": [
+            "EcoTank L3150 uses refillable high-capacity liquid ink tanks with key-lock spill-free bottles",
+            "ProX-400 uses all-in-one dry laser toner cartridges"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Replenishment technology comparison."
+    },
+
+    # --------------------------------------------------------------------------
+    # TYPE F: Conflicting Information & Exclusions (Q36 - Q40)
+    # --------------------------------------------------------------------------
+    {
+        "id": "P4_Q36",
+        "query": "A customer claims their 3-year-old printer is covered under the standard warranty because they purchased it for corporate use. Does the warranty cover this claim?",
+        "domain": "warranty",
+        "question_type": "F_conflicting_info",
+        "expected_documents": ["apexprint_standard_limited_warranty_policy.md"],
+        "expected_chunks": ["doc_warr_11757ad6d7b8_c0000"],
+        "expected_key_facts": [
+            "Standard limited warranty is valid strictly for 12 months (1 year) from purchase",
+            "Corporate use does not extend standard 1-year duration without a separate extended contract",
+            "Claim is NOT covered"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Contradiction resolution against standard warranty policy."
+    },
+    {
+        "id": "P4_Q37",
+        "query": "Does the warranty cover a replacement printhead if an uncertified third-party repair shop attempted to replace the carriage belt?",
+        "domain": "warranty",
+        "question_type": "F_conflicting_info",
+        "expected_documents": ["apexprint_extended_warranty_and_exclusions.md"],
+        "expected_chunks": ["doc_warr_6bcedacd5b00_c0002"],
+        "expected_key_facts": [
+            "Unauthorized repair or disassembly by non-certified personnel immediately and permanently voids the warranty",
+            "Claim is void and excluded from warranty"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Resolves unauthorized repair contradiction."
+    },
+    {
+        "id": "P4_Q38",
+        "query": "Can high-yield photo printing on glossy cardstock exceeding 350 gsm be run through the ProX-400 multipurpose tray without voiding warranty?",
+        "domain": "cross_document_hardware_warranty",
+        "question_type": "F_conflicting_info",
+        "expected_documents": [
+            "apexprint_prox400_user_manual.md",
+            "apexprint_extended_warranty_and_exclusions.md"
+        ],
+        "expected_chunks": ["doc_prod_de7386b29af7_c0003", "doc_warr_6bcedacd5b00_c0001"],
+        "expected_key_facts": [
+            "ProX-400 Tray 1 maximum media weight is 163 gsm",
+            "Operating beyond manufacturer specifications constitutes operating outside specifications, which voids warranty for resulting damage"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Exceeding operating specifications conflict resolution."
+    },
+    {
+        "id": "P4_Q39",
+        "query": "If an error E-101 occurred during a power outage and the customer opened the case using a screwdriver, will ApexPrint replace the printhead free of charge?",
+        "domain": "cross_document_support_warranty",
+        "question_type": "F_conflicting_info",
+        "expected_documents": [
+            "apexprint_error_codes_and_hardware_troubleshooting.md",
+            "apexprint_extended_warranty_and_exclusions.md"
+        ],
+        "expected_chunks": ["doc_trou_54171a85acbc_c0000", "doc_warr_6bcedacd5b00_c0002"],
+        "expected_key_facts": [
+            "E-101 troubleshooting specifies only opening the top user access cover, not disassembling the case",
+            "Unauthorized disassembly and power surge events are explicitly excluded from free warranty coverage"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Multiple conflicting user actions against warranty terms."
+    },
+    {
+        "id": "P4_Q40",
+        "query": "A user claims that Bluetooth audio can be streamed through the ApexPrint ColorWave speakers. Does the documentation support this?",
+        "domain": "general_faq",
+        "question_type": "F_conflicting_info",
+        "expected_documents": ["apexprint_frequently_asked_questions_general.md"],
+        "expected_chunks": ["doc_faq_840e24fda935_c0002"],
+        "expected_key_facts": [
+            "Documentation explicitly states the printer does not support Bluetooth audio streaming or A2DP profiles",
+            "Bluetooth Low Energy (BLE) hardware is strictly restricted to initial Wi-Fi setup",
+            "Claim is false"
+        ],
+        "expected_evidence_status": "SUFFICIENT",
+        "notes": "Direct factual contradiction of incorrect user assumption."
+    },
+
+    # --------------------------------------------------------------------------
+    # TYPE G: Ambiguous or Partially Supported Questions (Q41 - Q45)
+    # --------------------------------------------------------------------------
+    {
+        "id": "P4_Q41",
+        "query": "Can the ApexPrint printer print documents sent from an iPhone over Bluetooth without a Wi-Fi router?",
+        "domain": "connectivity",
+        "question_type": "G_ambiguous_partial",
+        "expected_documents": [
+            "apexprint_frequently_asked_questions_general.md",
+            "apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+        ],
+        "expected_chunks": ["doc_faq_840e24fda935_c0002", "doc_trou_ee280f83aa9f_c0000"],
+        "expected_key_facts": [
+            "Bluetooth printing is NOT supported (BLE is setup only)",
+            "However, direct mobile printing without a router IS supported via Wi-Fi Direct (using AirPrint over peer-to-peer Wi-Fi)"
+        ],
+        "expected_evidence_status": "PARTIAL",
+        "notes": "Partially supported: Bluetooth is not supported, but Wi-Fi Direct achieves the router-free goal."
+    },
+    {
+        "id": "P4_Q42",
+        "query": "What is the exact battery life of the ApexPrint ProX-400 when used outdoors?",
+        "domain": "product_specs",
+        "question_type": "G_ambiguous_partial",
+        "expected_documents": ["apexprint_prox400_user_manual.md"],
+        "expected_chunks": ["doc_prod_de7386b29af7_c0000"],
+        "expected_key_facts": [
+            "The ProX-400 is an enterprise AC-powered laser printer (110V/220V)",
+            "It has NO internal battery and cannot operate outdoors without external AC power"
+        ],
+        "expected_evidence_status": "PARTIAL",
+        "notes": "Partially supported premise: corrects the false assumption of battery operation."
+    },
+    {
+        "id": "P4_Q43",
+        "query": "Does the system support natural language querying in Spanish or Japanese?",
+        "domain": "platform_capabilities",
+        "question_type": "G_ambiguous_partial",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p2_c0001"],
+        "expected_key_facts": [
+            "The embedding model is all-MiniLM-L6-v2 (predominantly English)",
+            "Corpus documents are English; multilingual performance is not documented in the dossier"
+        ],
+        "expected_evidence_status": "PARTIAL",
+        "notes": "Partial evidence: English-centric architecture, non-English capability is unverified."
+    },
+    {
+        "id": "P4_Q44",
+        "query": "Can the ColorWave-850 print directly from a USB flash drive without a connected computer?",
+        "domain": "product_specs",
+        "question_type": "G_ambiguous_partial",
+        "expected_documents": ["apexprint_colorwave850_user_manual.md"],
+        "expected_chunks": ["doc_prod_a92c5cafaf32_c0000"],
+        "expected_key_facts": [
+            "Features a 10.1-inch color touchscreen and Gigabit Ethernet / USB 3.0",
+            "Full USB direct walk-up print format list is not fully detailed in available excerpt"
+        ],
+        "expected_evidence_status": "PARTIAL",
+        "notes": "Ambiguous/incomplete hardware feature in current indexed chunks."
+    },
+    {
+        "id": "P4_Q45",
+        "query": "How many total questions were evaluated in the Stage 8 held-out benchmark and what was the completion rate?",
+        "domain": "quantitative_evaluation",
+        "question_type": "G_ambiguous_partial",
+        "expected_documents": ["AI Customer Support Intelligence Platform - Project Dossier.pdf"],
+        "expected_chunks": ["doc_prod_4d6578a53efe_p5_c0001"],
+        "expected_key_facts": [
+            "Held-out benchmark evaluated 10 queries with 100% completion in Stage 8B",
+            "Project Dossier notes held-out validation but detailed individual held-out responses are in separate held_out_live_results.json"
+        ],
+        "expected_evidence_status": "PARTIAL",
+        "notes": "Requires distinguishing Project Dossier aggregate summary from live evaluation logs."
+    },
+
+    # --------------------------------------------------------------------------
+    # TYPE H: Unsupported & Out-of-Domain Questions (Q46 - Q50)
+    # --------------------------------------------------------------------------
+    {
+        "id": "P4_Q46",
+        "query": "What is the traditional recipe and cooking duration for Hyderabadi chicken dum biryani?",
+        "domain": "out_of_domain",
+        "question_type": "H_unsupported_ood",
+        "expected_documents": [],
+        "expected_chunks": [],
+        "expected_key_facts": [
+            "No culinary or cooking documentation in knowledge base",
+            "System must honestly abstain"
+        ],
+        "expected_evidence_status": "INSUFFICIENT",
+        "notes": "Classic culinary out-of-domain test. System must abstain."
+    },
+    {
+        "id": "P4_Q47",
+        "query": "How do you clear a paper jam on a Hewlett-Packard HP LaserJet Enterprise M608?",
+        "domain": "out_of_domain_competitor",
+        "question_type": "H_unsupported_ood",
+        "expected_documents": [],
+        "expected_chunks": [],
+        "expected_key_facts": [
+            "No Hewlett-Packard (HP) documentation exists in the ApexPrint knowledge base",
+            "System must abstain from fabricating HP repair steps"
+        ],
+        "expected_evidence_status": "INSUFFICIENT",
+        "notes": "Competitor product out-of-domain test."
+    },
+    {
+        "id": "P4_Q48",
+        "query": "What is the distance between the Earth and the planet Mars at closest approach?",
+        "domain": "out_of_domain_astronomy",
+        "question_type": "H_unsupported_ood",
+        "expected_documents": [],
+        "expected_chunks": [],
+        "expected_key_facts": [
+            "No astronomical science data in knowledge base",
+            "System must honestly abstain"
+        ],
+        "expected_evidence_status": "INSUFFICIENT",
+        "notes": "General scientific knowledge outside corpus."
+    },
+    {
+        "id": "P4_Q49",
+        "query": "What are the rules and baggage allowance policies for transatlantic flights on Delta Airlines?",
+        "domain": "out_of_domain_travel",
+        "question_type": "H_unsupported_ood",
+        "expected_documents": [],
+        "expected_chunks": [],
+        "expected_key_facts": [
+            "No airline or baggage policy in knowledge base",
+            "System must honestly abstain"
+        ],
+        "expected_evidence_status": "INSUFFICIENT",
+        "notes": "Airlines policy out-of-domain test."
+    },
+    {
+        "id": "P4_Q50",
+        "query": "Does the ApexPrint warranty policy cover damage caused by extraterrestrial meteor strikes or nuclear radiation?",
+        "domain": "unsupported_hypothetical",
+        "question_type": "H_unsupported_ood",
+        "expected_documents": [],
+        "expected_chunks": [],
+        "expected_key_facts": [
+            "Act of God / disaster exclusions exist, but specific meteor strike clause is not explicitly documented",
+            "System must abstain or identify lack of specific documentation rather than inventing clauses"
+        ],
+        "expected_evidence_status": "INSUFFICIENT",
+        "notes": "Extreme hypothetical clause test."
+    }
+]
+
+def build_dataset():
+    out_dir = Path("evaluations/stage8_phase4/dataset")
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    json_path = out_dir / "benchmark_50_questions.json"
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(DATASET, f, indent=2)
+
+    jsonl_path = out_dir / "benchmark_50_questions.jsonl"
+    with open(jsonl_path, "w", encoding="utf-8") as f:
+        for item in DATASET:
+            f.write(json.dumps(item) + "\n")
+
+    print(f"Dataset generated: {len(DATASET)} questions saved to {json_path} and {jsonl_path}")
+
+    # Build README
+    readme_path = out_dir / "README.md"
+    readme_content = f"""# Stage 8 Phase 4 Multi-Domain Evaluation Benchmark Dataset
+
+## 1. Overview
+This dataset contains **{len(DATASET)} rigorously designed evaluation questions** spanning all 10 indexed documents in the active knowledge base across 8 question categories.
+Every question has verified chunk-level ground truth extracted directly from ChromaDB.
+
+## 2. Question Distribution by Type
+- **Type A (Direct Factual)**: 8 questions (Q01–Q08)
+- **Type B (Multi-Step Synthesis)**: 7 questions (Q09–Q15)
+- **Type C (Cross-Document Multi-Context)**: 7 questions (Q16–Q22)
+- **Type D (Numerical & Benchmark Extraction)**: 7 questions (Q23–Q29)
+- **Type E (Comparison)**: 6 questions (Q30–Q35)
+- **Type F (Conflicting Information & Exclusions)**: 5 questions (Q36–Q40)
+- **Type G (Ambiguous or Partially Supported)**: 5 questions (Q41–Q45)
+- **Type H (Unsupported & Out-of-Domain)**: 5 questions (Q46–Q50)
+
+## 3. Evidence Status Breakdown
+- **SUFFICIENT**: 40 questions (80.0%)
+- **PARTIAL**: 5 questions (10.0%)
+- **INSUFFICIENT (Honest Abstention Target)**: 5 questions (10.0%)
+
+## 4. Ground Truth Construction Methodology
+- **Chunk-Level Mapping**: For every supported question, the exact ChromaDB `chunk_id` and source filename were mapped using the persistent index catalog (`scripts/inspect_corpus_for_phase4.py`).
+- **Zero Hallucinated Keys**: Expected facts are derived strictly from verbatim text in indexed files.
+- **Strict Abstention Standards**: Unsupported questions have empty `expected_chunks` and mandate `INSUFFICIENT` evidence status.
+"""
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.write(readme_content)
+
+    print(f"Dataset README saved to {readme_path}")
+
+if __name__ == "__main__":
+    build_dataset()

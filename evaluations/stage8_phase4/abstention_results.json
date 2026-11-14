@@ -1,0 +1,21 @@
+{
+  "supported_questions": {
+    "total": 45,
+    "correctly_answered": 45,
+    "incorrectly_abstained": 0,
+    "answer_coverage_rate": 1.0,
+    "inappropriate_abstention_rate": 0.0
+  },
+  "unsupported_questions": {
+    "total": 5,
+    "correctly_abstained": 1,
+    "incorrectly_answered_hallucinated": 4,
+    "appropriate_abstention_rate": 0.2
+  },
+  "evidence_status_confusion_matrix": {
+    "true_sufficient": 45,
+    "false_insufficient": 0,
+    "true_insufficient": 1,
+    "false_sufficient": 4
+  }
+}

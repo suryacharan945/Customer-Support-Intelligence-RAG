@@ -10,12 +10,12 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
-import { BarChart3, ShieldCheck, Clock, AlertTriangle, Info, FileText, CheckCircle2 } from 'lucide-react';
+import { BarChart3, ShieldCheck, Clock, AlertTriangle, Info, FileText, Layers } from 'lucide-react';
 import { apiClient } from '../api/client';
 import { Card, CardHeader } from '../components/common/Card';
 
 export const AnalyticsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'stage8_eval' | 'dev' | 'held_out' | 'limitations'>('stage8_eval');
+  const [activeTab, setActiveTab] = useState<'stage8_phase4' | 'stage8_eval' | 'dev' | 'held_out' | 'limitations'>('stage8_phase4');
 
   const { data: evalData } = useQuery({
     queryKey: ['evaluation-summary'],
@@ -23,7 +23,6 @@ export const AnalyticsPage: React.FC = () => {
   });
 
   const devMetrics = evalData?.development_benchmark?.aggregate_metrics;
-  const devMeta = evalData?.development_benchmark;
   const heldOutMeta = evalData?.held_out_benchmark;
 
   // Chart data 1: Latency Breakdown (ms)
@@ -83,6 +82,37 @@ export const AnalyticsPage: React.FC = () => {
     { id: 'Q15', category: 'Unsupported Abstention', query: 'Provide a culinary recipe for chocolate chip cookies with quantum computing principles.', status: 'INSUFFICIENT', precision: '0.0%', ret_ms: 561.1, gen_ms: 1.0, hits: '1/5' },
   ];
 
+  // Stage 8 Phase 4 Retrieval Comparison Data (45 Supported Queries)
+  const phase4RetrievalData = [
+    { metric: 'Recall@1', Dense: 33.0, Hybrid: 31.9, MultiContext: 29.6 },
+    { metric: 'Recall@3', Dense: 55.9, Hybrid: 55.6, MultiContext: 60.0 },
+    { metric: 'Recall@5', Dense: 74.1, Hybrid: 74.1, MultiContext: 75.2 },
+    { metric: 'nDCG@3', Dense: 50.5, Hybrid: 50.4, MultiContext: 52.4 },
+    { metric: 'nDCG@5', Dense: 58.9, Hybrid: 59.0, MultiContext: 59.8 },
+    { metric: 'MRR', Dense: 59.4, Hybrid: 59.0, MultiContext: 58.9 },
+  ];
+
+  // Stage 8 Phase 4 Taxonomy Breakdown
+  const phase4Taxonomies = [
+    { type: 'Type A', name: 'Direct Factual', count: 8, recall5: '87.5%', precision5: '25.0%', completeness: '92.5%', mrr: '0.725' },
+    { type: 'Type B', name: 'Multi-Step Synthesis', count: 7, recall5: '71.4%', precision5: '22.9%', completeness: '84.3%', mrr: '0.583' },
+    { type: 'Type C', name: 'Cross-Document Multi-Context', count: 7, recall5: '76.2%', precision5: '22.9%', completeness: '88.6%', mrr: '0.595' },
+    { type: 'Type D', name: 'Numerical & Benchmarks', count: 7, recall5: '85.7%', precision5: '25.7%', completeness: '90.0%', mrr: '0.679' },
+    { type: 'Type E', name: 'Comparison', count: 6, recall5: '66.7%', precision5: '20.0%', completeness: '81.7%', mrr: '0.542' },
+    { type: 'Type F', name: 'Conflicting Info & Exclusions', count: 5, recall5: '80.0%', precision5: '24.0%', completeness: '86.0%', mrr: '0.560' },
+    { type: 'Type G', name: 'Ambiguous / Partial Evidence', count: 5, recall5: '60.0%', precision5: '18.0%', completeness: '74.0%', mrr: '0.440' },
+    { type: 'Type H', name: 'Unsupported & Out-of-Domain', count: 5, recall5: 'N/A', precision5: 'N/A', completeness: '20.0% (Abstained)', mrr: 'N/A' },
+  ];
+
+  // Stage 8 Phase 4 Out-of-Domain Abstention & Failure Cases
+  const phase4OODCases = [
+    { id: 'P4_Q46', query: 'What is the traditional recipe for Hyderabadi chicken dum biryani?', expected: 'INSUFFICIENT', actual: 'INSUFFICIENT', outcome: 'PASS', note: 'Complete semantic divergence; system safely abstained.' },
+    { id: 'P4_Q47', query: 'How do you clear a paper jam on a Hewlett-Packard HP LaserJet Enterprise M608?', expected: 'INSUFFICIENT', actual: 'SUFFICIENT', outcome: 'FAIL', note: 'False positive: "paper jam" matched ProX-400 E-101 chunk due to lack of brand entity gating.' },
+    { id: 'P4_Q48', query: 'What is the distance between the Earth and the planet Mars at closest approach?', expected: 'INSUFFICIENT', actual: 'SUFFICIENT', outcome: 'FAIL', note: 'False positive: low similarity (~0.22) Dossier chunks accepted due to absence of cosine distance threshold.' },
+    { id: 'P4_Q49', query: 'Baggage allowance policies for transatlantic flights on Delta Airlines', expected: 'INSUFFICIENT', actual: 'SUFFICIENT', outcome: 'FAIL', note: 'False positive: generic terms matched maintenance chunks; generated answer from irrelevant text.' },
+    { id: 'P4_Q50', query: 'Does the warranty cover extraterrestrial meteor strikes or nuclear radiation?', expected: 'INSUFFICIENT', actual: 'SUFFICIENT', outcome: 'FAIL', note: 'False positive: matched warranty exclusion chunk and cited generic exclusions rather than stating missing clause.' },
+  ];
+
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-16">
       {/* Header */}
@@ -92,12 +122,23 @@ export const AnalyticsPage: React.FC = () => {
           Evaluation & Empirical Benchmarks
         </h2>
         <p className="text-xs text-slate-400 mt-0.5">
-          Audited experimental metrics with verified provenance across Stage 7B live inference, Stage 8B held-out validation, and Stage 8 Phase 2.1 local synthesis.
+          Audited experimental metrics with verified provenance across Stage 7B live inference, Stage 8 Phase 2.1, and Stage 8 Phase 4 50-query multi-domain evaluation.
         </p>
       </div>
 
       {/* Dataset & Scope Switcher */}
       <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-[#151D32] border border-slate-700/80 w-fit flex-wrap">
+        <button
+          type="button"
+          onClick={() => setActiveTab('stage8_phase4')}
+          className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+            activeTab === 'stage8_phase4'
+              ? 'bg-indigo-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-white'
+          }`}
+        >
+          Stage 8 Phase 4 Multi-Domain Benchmark (50 Qs)
+        </button>
         <button
           type="button"
           onClick={() => setActiveTab('stage8_eval')}
@@ -107,7 +148,7 @@ export const AnalyticsPage: React.FC = () => {
               : 'text-slate-400 hover:text-white'
           }`}
         >
-          Stage 8 Phase 2.1 Dossier Benchmark (15 Queries)
+          Stage 8 Phase 2.1 Dossier Benchmark (15 Qs)
         </button>
         <button
           type="button"
@@ -143,6 +184,201 @@ export const AnalyticsPage: React.FC = () => {
           Known Limitations
         </button>
       </div>
+
+      {/* TAB 0: Stage 8 Phase 4 Multi-Domain Evaluation (50 Questions) */}
+      {activeTab === 'stage8_phase4' && (
+        <div className="space-y-6">
+          {/* Top KPI Cards (6 cards) */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <Card className="p-4">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase">Recall@5 (MCP)</span>
+              <div className="text-2xl font-extrabold text-cyan-400 mt-1">75.2%</div>
+              <span className="text-[10px] text-emerald-400 mt-0.5 block">+1.1% vs Dense (74.1%)</span>
+            </Card>
+
+            <Card className="p-4">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase">nDCG@5 (MCP)</span>
+              <div className="text-2xl font-extrabold text-indigo-400 mt-1">0.5980</div>
+              <span className="text-[10px] text-emerald-400 mt-0.5 block">+0.0091 vs Dense (0.5889)</span>
+            </Card>
+
+            <Card className="p-4">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase">Fact Completeness</span>
+              <div className="text-2xl font-extrabold text-emerald-400 mt-1">85.6%</div>
+              <span className="text-[10px] text-slate-500 mt-0.5 block">45 Supported Questions</span>
+            </Card>
+
+            <Card className="p-4">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase">Citation Integrity</span>
+              <div className="text-2xl font-extrabold text-emerald-400 mt-1">100.0%</div>
+              <span className="text-[10px] text-slate-500 mt-0.5 block">0 Fabricated Chunks</span>
+            </Card>
+
+            <Card className="p-4">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase">Abstention Accuracy</span>
+              <div className="text-2xl font-extrabold text-amber-400 mt-1">92.0%</div>
+              <span className="text-[10px] text-slate-500 mt-0.5 block">46/50 Overall (20% OOD)</span>
+            </Card>
+
+            <Card className="p-4">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase">Warm Retrieval</span>
+              <div className="text-2xl font-extrabold text-slate-200 mt-1">629.7 ms</div>
+              <span className="text-[10px] text-cyan-400 mt-0.5 block">Local Synthesis: 11.8 ms</span>
+            </Card>
+          </div>
+
+          {/* Retrieval Comparison Chart & IR Trade-off Card */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <Card className="lg:col-span-2">
+              <CardHeader
+                title="Stage 8 Phase 4 Retrieval Benchmark: Dense vs. Hybrid vs. Multi-Context"
+                subtitle="Evaluated across 45 supported questions with ground-truth chunk mapping (%)"
+                icon={<BarChart3 className="w-5 h-5 text-indigo-400" />}
+              />
+              <div className="h-72 w-full pt-4">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={phase4RetrievalData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#263353" />
+                    <XAxis dataKey="metric" stroke="#94A3B8" fontSize={11} />
+                    <YAxis stroke="#94A3B8" fontSize={11} domain={[0, 100]} />
+                    <RechartsTooltip
+                      contentStyle={{
+                        backgroundColor: '#151D32',
+                        borderColor: '#334155',
+                        borderRadius: '0.75rem',
+                        fontSize: '12px',
+                        color: '#F8FAFC',
+                      }}
+                    />
+                    <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '8px' }} />
+                    <Bar dataKey="Dense" fill="#64748B" radius={[4, 4, 0, 0]} name="Dense Baseline" />
+                    <Bar dataKey="Hybrid" fill="#06B6D4" radius={[4, 4, 0, 0]} name="Hybrid Fusion" />
+                    <Bar dataKey="MultiContext" fill="#6366F1" radius={[4, 4, 0, 0]} name="Multi-Context RAG" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+
+            <Card className="space-y-3 p-5">
+              <CardHeader
+                title="Empirical IR Trade-off"
+                subtitle="Understanding top-1 rank vs. top-5 recall"
+                icon={<Layers className="w-5 h-5 text-cyan-400" />}
+              />
+              <div className="text-xs text-slate-300 space-y-3 leading-relaxed">
+                <p>
+                  <strong>Multi-Context Wins on Multi-Chunk Retrieval:</strong> Multi-Context RAG achieves the highest <strong>Recall@3 (60.0%)</strong>, <strong>Recall@5 (75.2%)</strong>, and <strong>nDCG@5 (0.5980)</strong>, ensuring multi-hop synthesis questions assemble complete evidence.
+                </p>
+                <p>
+                  <strong>Dense Baseline Leads on Top-1 Direct Rank:</strong> Dense Baseline achieves slightly higher <strong>Recall@1 (33.0%)</strong> and <strong>MRR (0.5941)</strong> for direct single-fact lookup.
+                </p>
+                <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-[11px] text-slate-400">
+                  <span className="font-semibold text-slate-200">RRF Rank Dynamics:</span> Reciprocal Rank Fusion interleaves high-scoring keyword matches from secondary sections, occasionally displacing a dense top hit while vastly broadening total multi-chunk recall.
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          {/* Question Taxonomy Performance Table */}
+          <Card>
+            <CardHeader
+              title="Performance by Question Taxonomy (50 Annotated Benchmark Questions)"
+              subtitle="Systematic breakdown across direct factual, multi-step synthesis, cross-document, numerical, comparison, exclusions, ambiguity, and OOD"
+              icon={<FileText className="w-5 h-5 text-indigo-400" />}
+            />
+            <div className="overflow-x-auto mt-4">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-900/80 text-slate-400 font-semibold uppercase text-[11px] border-b border-slate-700">
+                  <tr>
+                    <th className="py-2.5 px-3">Taxonomy Type</th>
+                    <th className="py-2.5 px-3">Category Name</th>
+                    <th className="py-2.5 px-3 text-center">Questions</th>
+                    <th className="py-2.5 px-3 font-mono text-cyan-400">Recall@5</th>
+                    <th className="py-2.5 px-3 font-mono text-indigo-400">Precision@5</th>
+                    <th className="py-2.5 px-3 font-mono text-emerald-400">Fact Completeness</th>
+                    <th className="py-2.5 px-3 font-mono text-slate-300">MRR</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800">
+                  {phase4Taxonomies.map((tax) => (
+                    <tr key={tax.type} className="hover:bg-slate-800/30">
+                      <td className="py-2.5 px-3 font-mono text-indigo-300 font-bold">{tax.type}</td>
+                      <td className="py-2.5 px-3 text-slate-200 font-medium">{tax.name}</td>
+                      <td className="py-2.5 px-3 text-center text-slate-400">{tax.count}</td>
+                      <td className="py-2.5 px-3 font-mono text-cyan-300">{tax.recall5}</td>
+                      <td className="py-2.5 px-3 font-mono text-indigo-300">{tax.precision5}</td>
+                      <td className="py-2.5 px-3 font-mono text-emerald-300">{tax.completeness}</td>
+                      <td className="py-2.5 px-3 font-mono text-slate-300">{tax.mrr}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+
+          {/* Out-of-Domain Abstention & Failure Case Analysis Table */}
+          <Card>
+            <CardHeader
+              title="Out-of-Domain & Adversarial Abstention Audit"
+              subtitle="Auditing whether ungrounded or competitor queries trigger honest abstention or false-positive answers"
+              icon={<AlertTriangle className="w-5 h-5 text-amber-400" />}
+            />
+            <div className="overflow-x-auto mt-4">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-900/80 text-slate-400 font-semibold uppercase text-[11px] border-b border-slate-700">
+                  <tr>
+                    <th className="py-2.5 px-3">Query ID</th>
+                    <th className="py-2.5 px-3">Adversarial / OOD Question</th>
+                    <th className="py-2.5 px-3">Expected</th>
+                    <th className="py-2.5 px-3">Actual</th>
+                    <th className="py-2.5 px-3">Verdict</th>
+                    <th className="py-2.5 px-3">Root Cause Analysis</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800">
+                  {phase4OODCases.map((c) => (
+                    <tr key={c.id} className="hover:bg-slate-800/30">
+                      <td className="py-2.5 px-3 font-mono text-[11px] text-amber-300">{c.id}</td>
+                      <td className="py-2.5 px-3 text-slate-200 font-medium max-w-sm">{c.query}</td>
+                      <td className="py-2.5 px-3 font-mono text-slate-400">{c.expected}</td>
+                      <td className="py-2.5 px-3 font-mono text-slate-300">{c.actual}</td>
+                      <td className="py-2.5 px-3">
+                        <span
+                          className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${
+                            c.outcome === 'PASS'
+                              ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-500/30'
+                              : 'bg-rose-950/60 text-rose-400 border border-rose-500/30'
+                          }`}
+                        >
+                          {c.outcome === 'PASS' ? 'PASS (Honest)' : 'FAIL (False Pos)'}
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 text-slate-400 text-[11px] leading-relaxed max-w-md">{c.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+
+          {/* Scientific Transparency & Methodological Boundaries */}
+          <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-700/80 text-xs text-slate-300 space-y-2">
+            <div className="flex items-center gap-2 font-bold text-slate-200">
+              <Info className="w-4 h-4 text-cyan-400" />
+              <span>Scientific Rigor & Empirical Transparency Boundaries</span>
+            </div>
+            <p className="leading-relaxed">
+              <strong>Grounding Metric Distinction:</strong> Automated fact coverage (85.6%) measures token overlap with ground-truth expected facts. Automated citation integrity (100.0%) verifies that citation identifiers physically belong to retrieved candidate containers. Neither metric replaces human semantic verification of nuanced claims.
+            </p>
+            <p className="leading-relaxed">
+              <strong>Out-of-Domain Gating Gap:</strong> The system achieved a 20.0% honest abstention rate on out-of-domain queries (1/5). When an ungrounded query shares lexical tokens with indexed content (e.g., &quot;paper jam&quot; for HP LaserJet), the current pipeline lacks an absolute cosine similarity threshold cut-off, causing 4 false-positive answers.
+            </p>
+            <p className="leading-relaxed">
+              <strong>Cold-Start vs. Warm Latency:</strong> First-query retrieval took 15,112 ms due to PyTorch SentenceTransformer weight loading into CPU memory. Subsequent warm hybrid retrieval averaged 629.7 ms, and local synthesis completed in 11.8 ms.
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* TAB 1: Stage 8 Phase 2.1 Local Synthesizer Evaluation */}
       {activeTab === 'stage8_eval' && (

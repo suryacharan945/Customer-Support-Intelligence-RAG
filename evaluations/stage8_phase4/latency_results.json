@@ -1,0 +1,371 @@
+{
+  "total_latency_ms": {
+    "mean": 646.31,
+    "median": 642.95,
+    "p95": 751.2,
+    "min": 532.62,
+    "max": 792.06
+  },
+  "retrieval_latency_ms": {
+    "mean": 629.7,
+    "median": 623.6,
+    "p95": 726.98
+  },
+  "synthesis_latency_ms": {
+    "mean": 11.75,
+    "median": 11.06,
+    "p95": 20.16
+  },
+  "per_query_latencies": [
+    {
+      "id": "P4_Q01",
+      "retrieval_latency_ms": 566.72,
+      "synthesis_latency_ms": 20.16,
+      "total_latency_ms": 593.43,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q02",
+      "retrieval_latency_ms": 668.33,
+      "synthesis_latency_ms": 10.28,
+      "total_latency_ms": 683.91,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q03",
+      "retrieval_latency_ms": 728.71,
+      "synthesis_latency_ms": 18.15,
+      "total_latency_ms": 751.2,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q04",
+      "retrieval_latency_ms": 781.43,
+      "synthesis_latency_ms": 6.26,
+      "total_latency_ms": 792.06,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q05",
+      "retrieval_latency_ms": 690.27,
+      "synthesis_latency_ms": 12.17,
+      "total_latency_ms": 709.11,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q06",
+      "retrieval_latency_ms": 618.6,
+      "synthesis_latency_ms": 12.91,
+      "total_latency_ms": 636.96,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q07",
+      "retrieval_latency_ms": 676.72,
+      "synthesis_latency_ms": 14.71,
+      "total_latency_ms": 696.46,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q08",
+      "retrieval_latency_ms": 660.94,
+      "synthesis_latency_ms": 7.8,
+      "total_latency_ms": 674.56,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q09",
+      "retrieval_latency_ms": 609.94,
+      "synthesis_latency_ms": 4.88,
+      "total_latency_ms": 619.76,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q10",
+      "retrieval_latency_ms": 576.78,
+      "synthesis_latency_ms": 4.37,
+      "total_latency_ms": 584.69,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q11",
+      "retrieval_latency_ms": 596.75,
+      "synthesis_latency_ms": 42.92,
+      "total_latency_ms": 643.96,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q12",
+      "retrieval_latency_ms": 592.87,
+      "synthesis_latency_ms": 7.28,
+      "total_latency_ms": 604.7,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q13",
+      "retrieval_latency_ms": 675.47,
+      "synthesis_latency_ms": 10.8,
+      "total_latency_ms": 690.09,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q14",
+      "retrieval_latency_ms": 626.16,
+      "synthesis_latency_ms": 12.13,
+      "total_latency_ms": 642.88,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q15",
+      "retrieval_latency_ms": 543.93,
+      "synthesis_latency_ms": 12.01,
+      "total_latency_ms": 561.14,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q16",
+      "retrieval_latency_ms": 645.32,
+      "synthesis_latency_ms": 12.61,
+      "total_latency_ms": 662.85,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q17",
+      "retrieval_latency_ms": 648.62,
+      "synthesis_latency_ms": 9.53,
+      "total_latency_ms": 663.91,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q18",
+      "retrieval_latency_ms": 619.37,
+      "synthesis_latency_ms": 8.75,
+      "total_latency_ms": 633.03,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q19",
+      "retrieval_latency_ms": 605.27,
+      "synthesis_latency_ms": 11.98,
+      "total_latency_ms": 621.97,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q20",
+      "retrieval_latency_ms": 682.7,
+      "synthesis_latency_ms": 8.2,
+      "total_latency_ms": 696.58,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q21",
+      "retrieval_latency_ms": 574.27,
+      "synthesis_latency_ms": 11.28,
+      "total_latency_ms": 589.74,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q22",
+      "retrieval_latency_ms": 645.38,
+      "synthesis_latency_ms": 5.49,
+      "total_latency_ms": 656.23,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q23",
+      "retrieval_latency_ms": 609.39,
+      "synthesis_latency_ms": 31.8,
+      "total_latency_ms": 646.08,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q24",
+      "retrieval_latency_ms": 592.05,
+      "synthesis_latency_ms": 17.38,
+      "total_latency_ms": 614.17,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q25",
+      "retrieval_latency_ms": 619.7,
+      "synthesis_latency_ms": 10.59,
+      "total_latency_ms": 635.28,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q26",
+      "retrieval_latency_ms": 726.98,
+      "synthesis_latency_ms": 19.24,
+      "total_latency_ms": 751.52,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q27",
+      "retrieval_latency_ms": 519.51,
+      "synthesis_latency_ms": 8.3,
+      "total_latency_ms": 532.62,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q28",
+      "retrieval_latency_ms": 627.59,
+      "synthesis_latency_ms": 5.25,
+      "total_latency_ms": 637.01,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q29",
+      "retrieval_latency_ms": 720.13,
+      "synthesis_latency_ms": 12.03,
+      "total_latency_ms": 737.37,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q30",
+      "retrieval_latency_ms": 576.78,
+      "synthesis_latency_ms": 16.2,
+      "total_latency_ms": 597.84,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q31",
+      "retrieval_latency_ms": 602.34,
+      "synthesis_latency_ms": 8.6,
+      "total_latency_ms": 615.56,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q32",
+      "retrieval_latency_ms": 583.35,
+      "synthesis_latency_ms": 5.37,
+      "total_latency_ms": 593.09,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q33",
+      "retrieval_latency_ms": 555.38,
+      "synthesis_latency_ms": 16.08,
+      "total_latency_ms": 577.19,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q34",
+      "retrieval_latency_ms": 641.63,
+      "synthesis_latency_ms": 12.58,
+      "total_latency_ms": 659.03,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q35",
+      "retrieval_latency_ms": 673.07,
+      "synthesis_latency_ms": 8.55,
+      "total_latency_ms": 686.49,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q36",
+      "retrieval_latency_ms": 607.74,
+      "synthesis_latency_ms": 11.31,
+      "total_latency_ms": 623.75,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q37",
+      "retrieval_latency_ms": 686.0,
+      "synthesis_latency_ms": 11.68,
+      "total_latency_ms": 702.49,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q38",
+      "retrieval_latency_ms": 664.16,
+      "synthesis_latency_ms": 10.84,
+      "total_latency_ms": 681.79,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q39",
+      "retrieval_latency_ms": 637.11,
+      "synthesis_latency_ms": 5.48,
+      "total_latency_ms": 648.22,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q40",
+      "retrieval_latency_ms": 582.75,
+      "synthesis_latency_ms": 8.98,
+      "total_latency_ms": 596.46,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q41",
+      "retrieval_latency_ms": 632.12,
+      "synthesis_latency_ms": 8.69,
+      "total_latency_ms": 645.7,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q42",
+      "retrieval_latency_ms": 583.65,
+      "synthesis_latency_ms": 7.53,
+      "total_latency_ms": 595.19,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q43",
+      "retrieval_latency_ms": 695.99,
+      "synthesis_latency_ms": 15.02,
+      "total_latency_ms": 716.04,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q44",
+      "retrieval_latency_ms": 653.53,
+      "synthesis_latency_ms": 8.92,
+      "total_latency_ms": 667.52,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q45",
+      "retrieval_latency_ms": 573.92,
+      "synthesis_latency_ms": 15.66,
+      "total_latency_ms": 593.9,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q46",
+      "retrieval_latency_ms": 634.36,
+      "synthesis_latency_ms": 1.31,
+      "total_latency_ms": 637.76,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q47",
+      "retrieval_latency_ms": 669.69,
+      "synthesis_latency_ms": 5.52,
+      "total_latency_ms": 679.38,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q48",
+      "retrieval_latency_ms": 621.04,
+      "synthesis_latency_ms": 17.16,
+      "total_latency_ms": 643.02,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q49",
+      "retrieval_latency_ms": 587.41,
+      "synthesis_latency_ms": 11.4,
+      "total_latency_ms": 603.07,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    },
+    {
+      "id": "P4_Q50",
+      "retrieval_latency_ms": 572.94,
+      "synthesis_latency_ms": 11.28,
+      "total_latency_ms": 588.74,
+      "provider": "LOCAL_GROUNDED_SYNTHESIS"
+    }
+  ]
+}
