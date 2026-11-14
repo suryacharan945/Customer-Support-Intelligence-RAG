@@ -53,7 +53,12 @@ async def readiness_probe(
     """
     # 1. Storage check (Google Drive or fallback local storage writable)
     gdrive_connected = os.path.isdir(app_settings.GOOGLE_DRIVE_ROOT)
-    storage_ready = gdrive_connected or os.path.exists("tmp")
+    storage_ready = bool(
+        gdrive_connected
+        or os.path.isdir("data")
+        or os.path.isdir(app_settings.LOCAL_EPHEMERAL_CHROMA_DIR)
+        or os.path.exists("tmp")
+    )
 
     # 2. Manifest check
     manifest_ready = manifest is not None and isinstance(manifest.manifest_data, dict)

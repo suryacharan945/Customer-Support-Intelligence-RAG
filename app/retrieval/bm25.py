@@ -81,6 +81,7 @@ class BM25Retriever(BaseRetriever):
         query: str,
         top_k: int = 5,
         category: Optional[str | List[str]] = None,
+        soft_category: bool = False,
     ) -> List[RetrievalResult]:
         """
         Rank indexed chunks using BM25Okapi scoring with optional category filtering.
@@ -127,10 +128,15 @@ class BM25Retriever(BaseRetriever):
                 continue
 
             chunk = self.chunks[idx]
-            if allowed_cats and chunk.category not in allowed_cats:
+            # Hard exclusion only when soft_category is False
+            if allowed_cats and not soft_category and chunk.category not in allowed_cats:
                 continue
 
             normalized_score = min(1.0, score / max_score)
+            # Soft category boost: prioritize preferred categories without excluding other relevant evidence
+            if allowed_cats and soft_category and chunk.category in allowed_cats:
+                normalized_score = min(1.0, normalized_score * 1.15)
+
             results.append(
                 RetrievalResult(
                     document_id=chunk.document_id,

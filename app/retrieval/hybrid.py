@@ -52,11 +52,14 @@ class HybridRetriever(BaseRetriever):
         top_k: int = 5,
         category: Optional[str | List[str]] = None,
         mode: str = "hybrid",
+        soft_category: bool = False,
     ) -> List[RetrievalResult]:
         """
         Execute retrieval across dense and/or sparse channels and fuse results.
         """
-        results, timings = self.retrieve_with_timings(query, top_k=top_k, category=category, mode=mode)
+        results, timings = self.retrieve_with_timings(
+            query, top_k=top_k, category=category, mode=mode, soft_category=soft_category
+        )
         self.last_timings = timings
         return results
 
@@ -66,6 +69,7 @@ class HybridRetriever(BaseRetriever):
         top_k: int = 5,
         category: Optional[str | List[str]] = None,
         mode: str = "hybrid",
+        soft_category: bool = False,
     ) -> Tuple[List[RetrievalResult], Dict[str, float]]:
         """
         Execute retrieval across dense and/or sparse channels and fuse results,
@@ -76,6 +80,8 @@ class HybridRetriever(BaseRetriever):
             top_k: Maximum number of merged results to return.
             category: Optional category filter string or list of category strings.
             mode: 'hybrid' (RRF fusion), 'dense' (dense-only baseline), or 'bm25' (keyword-only).
+            soft_category: If True, uses category preferences as a soft ranking signal rather
+                           than a hard exclusion filter.
 
         Returns:
             Tuple of (ranked_results, timings_dict).
@@ -92,13 +98,19 @@ class HybridRetriever(BaseRetriever):
             timings["total_retrieval_ms"] = round((time.perf_counter() - t0_total) * 1000, 3)
             return [], timings
 
+        allowed_set: Optional[Set[str]] = None
+        if category:
+            allowed_set = {category} if isinstance(category, str) else set(category)
+
         # 1. Dense Retrieval
         dense_results: List[RetrievalResult] = []
         if mode in ("hybrid", "dense"):
             t0_dense = time.perf_counter()
             fetch_k = top_k * 3 if mode == "hybrid" else top_k
-            # If category is a list of categories, query per-category or unconstrained
-            if isinstance(category, list) and len(category) == 1:
+            # If soft_category is True, retrieve unconstrained to avoid excluding relevant evidence
+            if soft_category:
+                cat_arg = None
+            elif isinstance(category, list) and len(category) == 1:
                 cat_arg = category[0]
             elif isinstance(category, str):
                 cat_arg = category
@@ -113,9 +125,8 @@ class HybridRetriever(BaseRetriever):
             except TypeError:
                 dense_results = self.vector_retriever.retrieve(query, top_k=fetch_k)
 
-            # In-memory post-filter if category was a multi-item list
-            if isinstance(category, list) and len(category) > 1:
-                allowed_set = set(category)
+            # In-memory post-filter only when strict filtering (soft_category is False)
+            if not soft_category and isinstance(category, list) and len(category) > 1:
                 dense_results = [
                     r for r in dense_results if r.metadata.get("category") in allowed_set
                 ]
@@ -131,7 +142,7 @@ class HybridRetriever(BaseRetriever):
             t0_sparse = time.perf_counter()
             fetch_k = top_k * 3 if mode == "hybrid" else top_k
             sparse_results = self.bm25_retriever.retrieve(
-                query, top_k=fetch_k, category=category
+                query, top_k=fetch_k, category=category, soft_category=soft_category
             )
             timings["sparse_ms"] = round((time.perf_counter() - t0_sparse) * 1000, 3)
 
@@ -185,6 +196,13 @@ class HybridRetriever(BaseRetriever):
             rrf_scores[cid] = rrf_scores.get(cid, 0.0) + (w_sparse / (self.rrf_k + rank))
             if cid not in items_by_id:
                 items_by_id[cid] = res
+
+        # Apply soft category preference boost if soft_category is enabled
+        if soft_category and allowed_set:
+            for cid in list(rrf_scores.keys()):
+                res = items_by_id[cid]
+                if res.metadata.get("category") in allowed_set:
+                    rrf_scores[cid] = rrf_scores[cid] * 1.15
 
         # Sort all deduplicated chunks by descending RRF score
         sorted_ids = sorted(rrf_scores.keys(), key=lambda cid: rrf_scores[cid], reverse=True)

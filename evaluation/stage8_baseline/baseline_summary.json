@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-11-14T13:03:30+05:30",
+  "workspace_path": "C:\\Users\\surya\\Downloads\\Customer Support ChatBot",
+  "git": {
+    "branch": "master",
+    "head_commit": "1cb72c2",
+    "ahead_of_remote": 5,
+    "uncommitted_working_tree_files": [
+      "app/api/endpoints/health.py",
+      "app/services/ingestion_service.py"
+    ]
+  },
+  "backend_tests": {
+    "framework": "pytest-9.1.1",
+    "python_version": "3.13.9",
+    "collected": 148,
+    "passed": 148,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 45.37
+  },
+  "frontend_tests": {
+    "framework": "vitest-2.1.9",
+    "test_files_passed": 2,
+    "collected": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "duration_seconds": 32.17
+  },
+  "total_baseline_tests": 152
+}

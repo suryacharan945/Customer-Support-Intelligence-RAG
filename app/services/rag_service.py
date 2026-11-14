@@ -15,6 +15,7 @@ from app.retrieval.vector_store import VectorStoreRetriever
 from app.retrieval.bm25 import BM25Retriever
 from app.retrieval.hybrid import HybridRetriever
 from app.retrieval.category_selector import category_selector, CategorySelector
+from app.retrieval.query_analyzer import query_analyzer, QueryAnalyzer
 from app.generation.llm_client import LLMClient
 from app.generation.mcp_context import MCPContextBuilder, ContextAssemblyResult
 from app.generation.prompt_templates import PromptTemplates
@@ -36,6 +37,7 @@ class RAGService:
         bm25_retriever: Optional[BM25Retriever] = None,
         llm_client: Optional[LLMClient] = None,
         allow_mock: Optional[bool] = None,
+        query_analyzer_instance: Optional[QueryAnalyzer] = None,
     ):
         self.allow_mock = allow_mock if allow_mock is not None else settings.ALLOW_MOCK_FALLBACK
         self.vector_retriever = vector_retriever or VectorStoreRetriever(allow_mock=self.allow_mock)
@@ -47,6 +49,7 @@ class RAGService:
         )
         self.llm_client = llm_client or LLMClient(allow_mock=self.allow_mock)
         self.category_selector = category_selector
+        self.query_analyzer = query_analyzer_instance or query_analyzer
         if (
             vector_retriever is None
             and bm25_retriever is None
@@ -88,11 +91,12 @@ class RAGService:
         logger.info(f"Populated BM25 keyword index with {count} chunks.")
         return count
 
-    def _expand_query(self, query: str) -> str:
+    def _expand_query(self, query: str, is_customer_support: bool = True) -> str:
         """Lightweight query expansion and intent detection."""
         expanded = query
         lower_q = query.lower()
-        if "reset" in lower_q or "not working" in lower_q:
+        # Only add printer troubleshooting terms if this is actually a printer customer support query
+        if is_customer_support and ("reset" in lower_q or "not working" in lower_q):
             expanded += " factory restore troubleshooting power cycle error"
         return expanded
 
@@ -121,18 +125,29 @@ class RAGService:
 
         logger.info(f"Processing query: '{query}' [Mode: {retrieval_mode}, Session: {session_id}]")
 
-        # Step 1: Query Category Analysis (for Mode B Multi-Context RAG)
+        # Step 1: Query Intent & Category Analysis (for Mode B Multi-Context RAG)
         t0_cat = time.perf_counter()
         selected_categories: List[str] = []
+        is_customer_support = False
+        soft_category = True
         if retrieval_mode == "multi_context":
-            cat_analysis = self.category_selector.analyze_query(query)
-            selected_categories = cat_analysis.selected_categories
-            logger.info(f"Selected categories: {selected_categories} (Multi: {cat_analysis.is_multi_category})")
+            analysis = self.query_analyzer.analyze_query(query)
+            is_customer_support = analysis.is_customer_support
+            selected_categories = analysis.category_preferences
+            soft_category = analysis.soft_preference_only
+            logger.info(
+                f"Query Analysis: intent='{analysis.primary_intent}', "
+                f"support={is_customer_support}, categories={selected_categories}, soft={soft_category}"
+            )
         cat_latency_ms = round((time.perf_counter() - t0_cat) * 1000, 3)
 
         # Step 2: Retrieval Timing & Execution
         t0_exp = time.perf_counter()
-        expanded_query = self._expand_query(query) if retrieval_mode == "multi_context" else query
+        expanded_query = (
+            self._expand_query(query, is_customer_support=is_customer_support)
+            if retrieval_mode == "multi_context"
+            else query
+        )
         exp_latency_ms = round((time.perf_counter() - t0_exp) * 1000, 3)
 
         t0_retrieval = time.perf_counter()
@@ -145,12 +160,15 @@ class RAGService:
                 mode="dense",
             )
         else:
-            # Mode B: Multi-Context hybrid search across selected categories
+            # Mode B: Multi-Context hybrid search
+            # For general document queries or broad queries, use soft category preference
+            cat_arg = selected_categories if (selected_categories and len(selected_categories) < len(CategorySelector.SUPPORTED_CATEGORIES)) else None
             retrieved_contexts = self.hybrid_retriever.retrieve(
                 query=expanded_query,
                 top_k=top_k,
-                category=selected_categories if len(selected_categories) < len(CategorySelector.SUPPORTED_CATEGORIES) else None,
+                category=cat_arg,
                 mode="hybrid",
+                soft_category=soft_category,
             )
 
         retrieval_latency_ms = round((time.perf_counter() - t0_retrieval) * 1000, 2)

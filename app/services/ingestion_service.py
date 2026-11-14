@@ -47,6 +47,41 @@ class IngestionService:
         self.loader = DocumentLoader(max_file_size_bytes=max_file_size_bytes)
         self.chunker = DocumentChunker(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
 
+        if not os.environ.get("PYTEST_CURRENT_TEST"):
+            self._auto_seed_manifest_if_empty()
+
+    def _auto_seed_manifest_if_empty(self) -> None:
+        """Register existing files from data/knowledge_base into manifest if not already present."""
+        try:
+            kb_dir = Path("data/knowledge_base")
+            if not kb_dir.exists():
+                return
+
+            registered_any = False
+            for cat_dir in kb_dir.iterdir():
+                if cat_dir.is_dir():
+                    cat = cat_dir.name
+                    for f in cat_dir.glob("*.*"):
+                        if f.suffix.lower() in (".md", ".txt", ".pdf"):
+                            key = f"{cat}:{f.name}"
+                            if key in self.manifest.manifest_data.get("file_registry", {}):
+                                continue
+                            try:
+                                doc = self.loader.load_file(f, category=cat)
+                                chunks = self.chunker.chunk_document(doc)
+                                self.manifest.register_document(
+                                    doc.to_dict(),
+                                    chunk_count=len(chunks),
+                                    lifecycle_status="indexed",
+                                )
+                                registered_any = True
+                            except Exception as e:
+                                logger.warning(f"Manifest auto-seed failed for {f.name}: {e}")
+            if registered_any:
+                self.manifest.save()
+        except Exception as e:
+            logger.warning(f"Error during manifest auto-seeding: {e}")
+
     def process_uploaded_file(
         self,
         filename: str,

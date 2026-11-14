@@ -1,0 +1,240 @@
+[
+  {
+    "query": "Explain the overall project architecture.",
+    "intent": "architecture",
+    "is_customer_support": false,
+    "retrieved_count": 5,
+    "dossier_chunks_retrieved": 5,
+    "retrieval_latency_ms": 1150.4,
+    "top_matches": [
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p5_c0002",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 5,
+        "category": "product_manual",
+        "score": 1.0,
+        "snippet": "node_modules and Vite artifacts).\n2. Decoupled Model Architecture: Supports remote GPU endpoints via secure tunnels, CPU..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p3_c0000",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 3,
+        "category": "product_manual",
+        "score": 0.9919,
+        "snippet": "Subsystem / Layer Technologies Deployed Core Purpose & Role\nLLM Inference Mistral-7B-Instruct-v0.3 Instruction-tuned fou..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p5_c0001",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 5,
+        "category": "product_manual",
+        "score": 0.9398,
+        "snippet": "and post-validation\ncompletely prevented\nphantom sources.\nMulti-Category Coverage 31.2% (top category\nonly)\n93.8% Multi-..."
+      }
+    ]
+  },
+  {
+    "query": "What technologies are used in the frontend?",
+    "intent": "technology_stack",
+    "is_customer_support": false,
+    "retrieved_count": 5,
+    "dossier_chunks_retrieved": 5,
+    "retrieval_latency_ms": 1049.1,
+    "top_matches": [
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p3_c0000",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 3,
+        "category": "product_manual",
+        "score": 1.0,
+        "snippet": "Subsystem / Layer Technologies Deployed Core Purpose & Role\nLLM Inference Mistral-7B-Instruct-v0.3 Instruction-tuned fou..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p2_c0001",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 2,
+        "category": "product_manual",
+        "score": 0.9839,
+        "snippet": "| INGESTION & DB | | RETRIEVAL ENGINE | | LLM INFERENCE |\n| - PDF / TXT / MD| | - Dense: MiniLM | | - Mistral-7B- |\n| -..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p6_c0001",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 6,
+        "category": "product_manual",
+        "score": 0.8841,
+        "snippet": "unbounded positive values dependent on document collection statistics. Direct linear combinations require manual\nweight..."
+      }
+    ]
+  },
+  {
+    "query": "Explain the backend architecture.",
+    "intent": "architecture",
+    "is_customer_support": false,
+    "retrieved_count": 5,
+    "dossier_chunks_retrieved": 5,
+    "retrieval_latency_ms": 1172.66,
+    "top_matches": [
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p3_c0000",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 3,
+        "category": "product_manual",
+        "score": 1.0,
+        "snippet": "Subsystem / Layer Technologies Deployed Core Purpose & Role\nLLM Inference Mistral-7B-Instruct-v0.3 Instruction-tuned fou..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p5_c0002",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 5,
+        "category": "product_manual",
+        "score": 0.984,
+        "snippet": "node_modules and Vite artifacts).\n2. Decoupled Model Architecture: Supports remote GPU endpoints via secure tunnels, CPU..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p2_c0002",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 2,
+        "category": "product_manual",
+        "score": 0.9421,
+        "snippet": "UI Primitives & Icons Radix UI + Lucide React Accessible primitives (dialogs, tooltips,\ndropdowns) and vector iconograph..."
+      }
+    ]
+  },
+  {
+    "query": "What is Multi-Context Prompting?",
+    "intent": "feature_explanation",
+    "is_customer_support": false,
+    "retrieved_count": 5,
+    "dossier_chunks_retrieved": 5,
+    "retrieval_latency_ms": 1265.96,
+    "top_matches": [
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p6_c0000",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 6,
+        "category": "product_manual",
+        "score": 1.0,
+        "snippet": "8. Key Technical Interview Questions & Detailed Answers\nQ1: How does Multi-Context Prompting differ from standard LangCh..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p1_c0000",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 1,
+        "category": "product_manual",
+        "score": 0.9745,
+        "snippet": "Multi-Context Intelligent RAG System\nAI CUSTOMER SUPPORT INTELLIGENCE PLATFORM \u2022 ENGINEERING DOSSIER\n1. Executive Summar..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p1_c0002",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 1,
+        "category": "product_manual",
+        "score": 0.96,
+        "snippet": "distinct sources. Standard vector retrieval selects chunks strictly by global cosine similarity, allowing long\ntroublesh..."
+      }
+    ]
+  },
+  {
+    "query": "Explain the hybrid retrieval pipeline.",
+    "intent": "feature_explanation",
+    "is_customer_support": false,
+    "retrieved_count": 5,
+    "dossier_chunks_retrieved": 5,
+    "retrieval_latency_ms": 1080.55,
+    "top_matches": [
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p1_c0002",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 1,
+        "category": "product_manual",
+        "score": 1.0,
+        "snippet": "distinct sources. Standard vector retrieval selects chunks strictly by global cosine similarity, allowing long\ntroublesh..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p4_c0001",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 4,
+        "category": "product_manual",
+        "score": 0.9784,
+        "snippet": "\u2502\n\u25bc\n5. Multi-Context Partitioned Assembly (Structured sections per category)\n\u2502\n\u25bc\n6. LLM Generation (Mistral-7B-Instruct..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p4_c0002",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 4,
+        "category": "product_manual",
+        "score": 0.9775,
+        "snippet": "loaded into ChromaDB; tokens are indexed simultaneously into an in-memory BM25Okapi corpus.\nStage 2 \u2014 Query Categorizati..."
+      }
+    ]
+  },
+  {
+    "query": "What are the benchmark results?",
+    "intent": "benchmark_analysis",
+    "is_customer_support": false,
+    "retrieved_count": 5,
+    "dossier_chunks_retrieved": 5,
+    "retrieval_latency_ms": 1355.84,
+    "top_matches": [
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p3_c0002",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 3,
+        "category": "product_manual",
+        "score": 1.0,
+        "snippet": "diff views to evaluate completeness, tone, latency deltas (e.g., 0.32 ms vs 0.26 ms), total chunks\nreviewed, and verifie..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p5_c0000",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 5,
+        "category": "product_manual",
+        "score": 0.9789,
+        "snippet": "Stage 5 \u2014 Citation Validation Engine: app/generation/citation_validator.py uses regex to extract\nasserted filenames and..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p4_c0002",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 4,
+        "category": "product_manual",
+        "score": 0.9628,
+        "snippet": "loaded into ChromaDB; tokens are indexed simultaneously into an in-memory BM25Okapi corpus.\nStage 2 \u2014 Query Categorizati..."
+      }
+    ]
+  },
+  {
+    "query": "Explain the storage constraints.",
+    "intent": "feature_explanation",
+    "is_customer_support": false,
+    "retrieved_count": 5,
+    "dossier_chunks_retrieved": 3,
+    "retrieval_latency_ms": 1469.74,
+    "top_matches": [
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p5_c0001",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 5,
+        "category": "product_manual",
+        "score": 1.0,
+        "snippet": "and post-validation\ncompletely prevented\nphantom sources.\nMulti-Category Coverage 31.2% (top category\nonly)\n93.8% Multi-..."
+      },
+      {
+        "chunk_id": "doc_prod_4d6578a53efe_p4_c0000",
+        "source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "page": 4,
+        "category": "product_manual",
+        "score": 0.9336,
+        "snippet": "7. Live Subsystem Status & Diagnostics (/status)\nA 5-subsystem automated health check reporting on: Storage Subsystem (l..."
+      },
+      {
+        "chunk_id": "doc_faq_e1d7f9f8c9ad_c0001",
+        "source": "apexprint_frequently_asked_questions_hardware_and_service.md",
+        "page": 1,
+        "category": "faq",
+        "score": 0.8909,
+        "snippet": "completely removed.\n6. Align the cartridge with the internal tracks and push firmly until it clicks into locked position..."
+      }
+    ]
+  }
+]
