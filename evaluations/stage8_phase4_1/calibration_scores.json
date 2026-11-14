@@ -1,0 +1,502 @@
+[
+  {
+    "id": "P4_Q01",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the maximum monthly duty cycle of the ApexPrint ProX-400?",
+    "top1_score": 0.6544,
+    "top3_mean": 0.5813,
+    "top5_mean": 0.5362,
+    "top1_doc": "apexprint_prox400_user_manual.md"
+  },
+  {
+    "id": "P4_Q02",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the print resolution of the ApexPrint ColorWave-850 on photo fine art media?",
+    "top1_score": 0.6456,
+    "top3_mean": 0.5983,
+    "top5_mean": 0.5477,
+    "top1_doc": "apexprint_colorwave850_user_manual.md"
+  },
+  {
+    "id": "P4_Q03",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Which embedding model is used for dense semantic retrieval in this platform?",
+    "top1_score": 0.4867,
+    "top3_mean": 0.4747,
+    "top5_mean": 0.4682,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q04",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What trigger condition causes Error Code E-204 on ApexPrint printers?",
+    "top1_score": 0.6023,
+    "top3_mean": 0.569,
+    "top5_mean": 0.5259,
+    "top1_doc": "apexprint_error_codes_and_hardware_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q05",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the standard hardware warranty period provided by ApexPrint?",
+    "top1_score": 0.7835,
+    "top3_mean": 0.6896,
+    "top5_mean": 0.6192,
+    "top1_doc": "apexprint_standard_limited_warranty_policy.md"
+  },
+  {
+    "id": "P4_Q06",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Which Android operating system version or later supports direct printing via default print service?",
+    "top1_score": 0.6601,
+    "top3_mean": 0.5525,
+    "top5_mean": 0.5018,
+    "top1_doc": "apexprint_frequently_asked_questions_general.md"
+  },
+  {
+    "id": "P4_Q07",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the formula used for Reciprocal Rank Fusion (RRF) in the hybrid search engine?",
+    "top1_score": 0.6986,
+    "top3_mean": 0.5365,
+    "top5_mean": 0.459,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q08",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the print resolution and bottle page yield for black ink on the EcoTank L3150?",
+    "top1_score": 0.7292,
+    "top3_mean": 0.5716,
+    "top5_mean": 0.5161,
+    "top1_doc": "apexprint_ecotank_l3150_specs.txt"
+  },
+  {
+    "id": "P4_Q09",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What are the complete step-by-step resolution steps for resolving Error E-101 Printhead Jam?",
+    "top1_score": 0.5905,
+    "top3_mean": 0.5398,
+    "top5_mean": 0.5032,
+    "top1_doc": "apexprint_error_codes_and_hardware_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q10",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "How do you replace an empty toner cartridge on the ProX-400 without damaging the drum unit?",
+    "top1_score": 0.7882,
+    "top3_mean": 0.6402,
+    "top5_mean": 0.5451,
+    "top1_doc": "apexprint_frequently_asked_questions_hardware_and_service.md"
+  },
+  {
+    "id": "P4_Q11",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Explain the 5-stage pipeline through which a user query is processed in this system.",
+    "top1_score": 0.4689,
+    "top3_mean": 0.4046,
+    "top5_mean": 0.3744,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q12",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "How do you configure a static IPv4 address on the ApexPrint ProX-400?",
+    "top1_score": 0.5967,
+    "top3_mean": 0.5491,
+    "top5_mean": 0.5127,
+    "top1_doc": "apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q13",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What steps are required to file an RMA warranty replacement claim for defective hardware?",
+    "top1_score": 0.5924,
+    "top3_mean": 0.5207,
+    "top5_mean": 0.4573,
+    "top1_doc": "apexprint_standard_limited_warranty_policy.md"
+  },
+  {
+    "id": "P4_Q14",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Explain how the citation validator verifies that a generated answer does not cite phantom sources.",
+    "top1_score": 0.4623,
+    "top3_mean": 0.3335,
+    "top5_mean": 0.283,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q15",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "How does the system ensure local storage remains strictly under the 1 GB constraint during operations?",
+    "top1_score": 0.3932,
+    "top3_mean": 0.2737,
+    "top5_mean": 0.2389,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q16",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Does using non-genuine toner cartridges void the standard limited warranty, and what happens if a printhead clogs because of third-party ink?",
+    "top1_score": 0.6794,
+    "top3_mean": 0.6006,
+    "top5_mean": 0.5215,
+    "top1_doc": "apexprint_extended_warranty_and_exclusions.md"
+  },
+  {
+    "id": "P4_Q17",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "How do the paper tray capacities and media weights compare between the ProX-400 and the ColorWave-850?",
+    "top1_score": 0.5738,
+    "top3_mean": 0.5341,
+    "top5_mean": 0.5046,
+    "top1_doc": "apexprint_prox400_user_manual.md"
+  },
+  {
+    "id": "P4_Q18",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "If an ApexPrint printer displays Error E-204 and the user disassembles the fuser unit, is the replacement covered under warranty?",
+    "top1_score": 0.6918,
+    "top3_mean": 0.682,
+    "top5_mean": 0.6532,
+    "top1_doc": "apexprint_extended_warranty_and_exclusions.md"
+  },
+  {
+    "id": "P4_Q19",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "How does the platform's multi-category routing ensure both hardware troubleshooting and warranty policies are retrieved together?",
+    "top1_score": 0.4406,
+    "top3_mean": 0.3862,
+    "top5_mean": 0.3565,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q20",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What are the Wi-Fi connectivity options for the ProX-400 and what mobile printing protocols are supported across FAQ documentation?",
+    "top1_score": 0.7094,
+    "top3_mean": 0.643,
+    "top5_mean": 0.6162,
+    "top1_doc": "apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q21",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Can high print volumes causing routine wear on feed rollers be claimed as an RMA defect under warranty?",
+    "top1_score": 0.5347,
+    "top3_mean": 0.4897,
+    "top5_mean": 0.4613,
+    "top1_doc": "apexprint_extended_warranty_and_exclusions.md"
+  },
+  {
+    "id": "P4_Q22",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What happens if a user connects the printer to an ungrounded or fluctuating power outlet during an E-204 overheat condition?",
+    "top1_score": 0.605,
+    "top3_mean": 0.5169,
+    "top5_mean": 0.4659,
+    "top1_doc": "apexprint_error_codes_and_hardware_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q23",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What are the benchmark results for Precision@3 and Recall between Baseline RAG and Multi-Context RAG in the Project Dossier?",
+    "top1_score": 0.5118,
+    "top3_mean": 0.4719,
+    "top5_mean": 0.4436,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q24",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What was the Multi-Category Coverage percentage achieved by Multi-Context RAG compared to Baseline in the benchmark table?",
+    "top1_score": 0.4787,
+    "top3_mean": 0.4568,
+    "top5_mean": 0.4248,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q25",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the continuous print speed in pages per minute for monochrome and duplex on the ProX-400?",
+    "top1_score": 0.7442,
+    "top3_mean": 0.5999,
+    "top5_mean": 0.5421,
+    "top1_doc": "apexprint_prox400_user_manual.md"
+  },
+  {
+    "id": "P4_Q26",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What were the mean retrieval and generation latencies recorded during the Stage 7B live benchmark?",
+    "top1_score": 0.4444,
+    "top3_mean": 0.4264,
+    "top5_mean": 0.4043,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q27",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the standard ink droplet size in picoliters for the ApexPrint ColorWave-850?",
+    "top1_score": 0.521,
+    "top3_mean": 0.4599,
+    "top5_mean": 0.4235,
+    "top1_doc": "apexprint_colorwave850_user_manual.md"
+  },
+  {
+    "id": "P4_Q28",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the temperature threshold that trips the fuser unit thermal fuse on ApexPrint printers?",
+    "top1_score": 0.5674,
+    "top3_mean": 0.4697,
+    "top5_mean": 0.4339,
+    "top1_doc": "apexprint_error_codes_and_hardware_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q29",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the storage budget limit enforced across the platform?",
+    "top1_score": 0.3911,
+    "top3_mean": 0.3308,
+    "top5_mean": 0.2953,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q30",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Compare Baseline RAG and Multi-Context Prompting in how they handle cross-domain queries.",
+    "top1_score": 0.6123,
+    "top3_mean": 0.5849,
+    "top5_mean": 0.545,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q31",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Compare the printing technology, primary application, and color capabilities of the ProX-400 versus the ColorWave-850.",
+    "top1_score": 0.7238,
+    "top3_mean": 0.6819,
+    "top5_mean": 0.6255,
+    "top1_doc": "apexprint_prox400_user_manual.md"
+  },
+  {
+    "id": "P4_Q32",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the difference between Error E-101 and Error E-204 in terms of failure mechanism and component affected?",
+    "top1_score": 0.4216,
+    "top3_mean": 0.3828,
+    "top5_mean": 0.3372,
+    "top1_doc": "apexprint_error_codes_and_hardware_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q33",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Compare the Standard Limited Warranty with the Extended Warranty terms regarding accidental damage and consumable parts.",
+    "top1_score": 0.5087,
+    "top3_mean": 0.4726,
+    "top5_mean": 0.415,
+    "top1_doc": "apexprint_extended_warranty_and_exclusions.md"
+  },
+  {
+    "id": "P4_Q34",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Compare Dense Vector Retrieval and BM25 Lexical Retrieval in the context of acronyms and error codes.",
+    "top1_score": 0.6212,
+    "top3_mean": 0.5599,
+    "top5_mean": 0.5346,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q35",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Compare the EcoTank L3150 and the ProX-400 in ink/toner technology and ongoing replenishment mechanism.",
+    "top1_score": 0.649,
+    "top3_mean": 0.5574,
+    "top5_mean": 0.5257,
+    "top1_doc": "apexprint_ecotank_l3150_specs.txt"
+  },
+  {
+    "id": "P4_Q36",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "A customer claims their 3-year-old printer is covered under the standard warranty because they purchased it for corporate use. Does the warranty cover this claim?",
+    "top1_score": 0.6501,
+    "top3_mean": 0.6151,
+    "top5_mean": 0.5485,
+    "top1_doc": "apexprint_standard_limited_warranty_policy.md"
+  },
+  {
+    "id": "P4_Q37",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Does the warranty cover a replacement printhead if an uncertified third-party repair shop attempted to replace the carriage belt?",
+    "top1_score": 0.5395,
+    "top3_mean": 0.5188,
+    "top5_mean": 0.4713,
+    "top1_doc": "apexprint_extended_warranty_and_exclusions.md"
+  },
+  {
+    "id": "P4_Q38",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Can high-yield photo printing on glossy cardstock exceeding 350 gsm be run through the ProX-400 multipurpose tray without voiding warranty?",
+    "top1_score": 0.5306,
+    "top3_mean": 0.5232,
+    "top5_mean": 0.4961,
+    "top1_doc": "apexprint_prox400_user_manual.md"
+  },
+  {
+    "id": "P4_Q39",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "If an error E-101 occurred during a power outage and the customer opened the case using a screwdriver, will ApexPrint replace the printhead free of charge?",
+    "top1_score": 0.5339,
+    "top3_mean": 0.5228,
+    "top5_mean": 0.507,
+    "top1_doc": "apexprint_error_codes_and_hardware_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q40",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "A user claims that Bluetooth audio can be streamed through the ApexPrint ColorWave speakers. Does the documentation support this?",
+    "top1_score": 0.6677,
+    "top3_mean": 0.5569,
+    "top5_mean": 0.4542,
+    "top1_doc": "apexprint_frequently_asked_questions_general.md"
+  },
+  {
+    "id": "P4_Q41",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Can the ApexPrint printer print documents sent from an iPhone over Bluetooth without a Wi-Fi router?",
+    "top1_score": 0.7054,
+    "top3_mean": 0.6142,
+    "top5_mean": 0.5264,
+    "top1_doc": "apexprint_frequently_asked_questions_general.md"
+  },
+  {
+    "id": "P4_Q42",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the exact battery life of the ApexPrint ProX-400 when used outdoors?",
+    "top1_score": 0.4729,
+    "top3_mean": 0.4137,
+    "top5_mean": 0.4006,
+    "top1_doc": "apexprint_prox400_user_manual.md"
+  },
+  {
+    "id": "P4_Q43",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Does the system support natural language querying in Spanish or Japanese?",
+    "top1_score": 0.3124,
+    "top3_mean": 0.3007,
+    "top5_mean": 0.2925,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q44",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Can the ColorWave-850 print directly from a USB flash drive without a connected computer?",
+    "top1_score": 0.5303,
+    "top3_mean": 0.4741,
+    "top5_mean": 0.4304,
+    "top1_doc": "apexprint_frequently_asked_questions_general.md"
+  },
+  {
+    "id": "P4_Q45",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "How many total questions were evaluated in the Stage 8 held-out benchmark and what was the completion rate?",
+    "top1_score": 0.3717,
+    "top3_mean": 0.36,
+    "top5_mean": 0.3241,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q46",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the traditional recipe and cooking duration for Hyderabadi chicken dum biryani?",
+    "top1_score": 0.1845,
+    "top3_mean": 0.1484,
+    "top5_mean": 0.1335,
+    "top1_doc": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "P4_Q47",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "How do you clear a paper jam on a Hewlett-Packard HP LaserJet Enterprise M608?",
+    "top1_score": 0.6165,
+    "top3_mean": 0.5148,
+    "top5_mean": 0.4669,
+    "top1_doc": "apexprint_error_codes_and_hardware_troubleshooting.md"
+  },
+  {
+    "id": "P4_Q48",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What is the distance between the Earth and the planet Mars at closest approach?",
+    "top1_score": 0.0842,
+    "top3_mean": 0.0747,
+    "top5_mean": 0.0699,
+    "top1_doc": "apexprint_prox400_user_manual.md"
+  },
+  {
+    "id": "P4_Q49",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "What are the rules and baggage allowance policies for transatlantic flights on Delta Airlines?",
+    "top1_score": 0.2658,
+    "top3_mean": 0.2229,
+    "top5_mean": 0.1957,
+    "top1_doc": "apexprint_extended_warranty_and_exclusions.md"
+  },
+  {
+    "id": "P4_Q50",
+    "is_supported": true,
+    "taxonomy": "General",
+    "query": "Does the ApexPrint warranty policy cover damage caused by extraterrestrial meteor strikes or nuclear radiation?",
+    "top1_score": 0.6055,
+    "top3_mean": 0.5792,
+    "top5_mean": 0.5442,
+    "top1_doc": "apexprint_standard_limited_warranty_policy.md"
+  }
+]

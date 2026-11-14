@@ -188,14 +188,20 @@ class HybridRetriever(BaseRetriever):
             dense_ranks[cid] = rank
             rrf_scores[cid] = rrf_scores.get(cid, 0.0) + (w_dense / (self.rrf_k + rank))
             if cid not in items_by_id:
+                res.metadata["dense_score"] = round(res.score, 4)
                 items_by_id[cid] = res
+            else:
+                items_by_id[cid].metadata["dense_score"] = round(res.score, 4)
 
         for rank, res in enumerate(sparse_results, start=1):
             cid = res.metadata.get("chunk_id") or res.document_id
             sparse_ranks[cid] = rank
             rrf_scores[cid] = rrf_scores.get(cid, 0.0) + (w_sparse / (self.rrf_k + rank))
             if cid not in items_by_id:
+                res.metadata["sparse_score"] = round(res.score, 4)
                 items_by_id[cid] = res
+            else:
+                items_by_id[cid].metadata["sparse_score"] = round(res.score, 4)
 
         # Apply soft category preference boost if soft_category is enabled
         if soft_category and allowed_set:

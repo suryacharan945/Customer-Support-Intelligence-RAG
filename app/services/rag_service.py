@@ -16,6 +16,7 @@ from app.retrieval.bm25 import BM25Retriever
 from app.retrieval.hybrid import HybridRetriever
 from app.retrieval.category_selector import category_selector, CategorySelector
 from app.retrieval.query_analyzer import query_analyzer, QueryAnalyzer
+from app.retrieval.evidence_gate import evidence_gate, EvidenceGate
 from app.generation.llm_client import LLMClient
 from app.generation.mcp_context import MCPContextBuilder, ContextAssemblyResult
 from app.generation.prompt_templates import PromptTemplates
@@ -50,6 +51,7 @@ class RAGService:
         self.llm_client = llm_client or LLMClient(allow_mock=self.allow_mock)
         self.category_selector = category_selector
         self.query_analyzer = query_analyzer_instance or query_analyzer
+        self.evidence_gate = evidence_gate
         if (
             vector_retriever is None
             and bm25_retriever is None
@@ -218,6 +220,88 @@ class RAGService:
                 is_mock=False,
             )
 
+        # Step 3.5: Dedicated Evidence Sufficiency Gate
+        t0_gate = time.perf_counter()
+        gate_decision = self.evidence_gate.evaluate_evidence_sufficiency(
+            query=query,
+            retrieved_contexts=retrieved_contexts,
+            top_k=top_k,
+        )
+        gate_latency_ms = round((time.perf_counter() - t0_gate) * 1000, 3)
+
+        if gate_decision.status == "INSUFFICIENT":
+            total_time_ms = round((time.perf_counter() - start_total) * 1000, 2)
+            logger.info(
+                "Evidence sufficiency gate determined INSUFFICIENT evidence for '%s': %s",
+                query,
+                gate_decision.decision_reasons,
+            )
+
+            legacy_citations: List[Citation] = []
+            similarity_scores: List[float] = []
+            for ctx in retrieved_contexts:
+                page_num = ctx.metadata.get("page_number")
+                page_str = f"Page {page_num}" if page_num is not None and page_num != -1 else ctx.metadata.get("section", "N/A")
+                legacy_citations.append(
+                    Citation(
+                        document_source=ctx.metadata.get("filename") or ctx.source,
+                        page_or_section=page_str,
+                        snippet=ctx.text[:150] + "...",
+                        relevance_score=round(ctx.score, 4),
+                        category=ctx.metadata.get("category", "general"),
+                        chunk_id=ctx.metadata.get("chunk_id") or ctx.document_id,
+                        is_verified=False,
+                    )
+                )
+                similarity_scores.append(ctx.score)
+
+            mean_similarity = (
+                round(sum(similarity_scores) / len(similarity_scores), 4)
+                if similarity_scores
+                else None
+            )
+
+            abstention_timings = {
+                "category_selection_ms": cat_latency_ms,
+                "query_expansion_ms": exp_latency_ms,
+                "retrieval_dense_ms": ret_timings.get("dense_ms", 0.0),
+                "retrieval_sparse_ms": ret_timings.get("sparse_ms", 0.0),
+                "retrieval_fusion_ms": ret_timings.get("fusion_ms", 0.0),
+                "retrieval_total_ms": retrieval_latency_ms,
+                "evidence_gate_ms": gate_latency_ms,
+                "context_assembly_ms": 0.0,
+                "llm_generation_ms": 0.0,
+                "citation_validation_ms": 0.0,
+                "total_pipeline_ms": total_time_ms,
+            }
+
+            return QueryResponse(
+                query=query,
+                expanded_query=expanded_query if expanded_query != query else None,
+                answer=(
+                    gate_decision.abstention_message
+                    or "Based on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry."
+                ),
+                retrieval_mode=retrieval_mode,
+                selected_categories=selected_categories,
+                supporting_citations=[],
+                evidence_status="INSUFFICIENT",
+                retrieval_latency_ms=retrieval_latency_ms,
+                generation_latency_ms=0.0,
+                provider_status="LOCAL_GROUNDED_SYNTHESIS",
+                evidence_found=False,
+                citations=legacy_citations,
+                retrieval_similarity=mean_similarity,
+                confidence_score=None,
+                contexts_used=0,
+                execution_time_ms=total_time_ms,
+                timing_breakdown=abstention_timings,
+                citation_precision=1.0,
+                context_utilization=0.0,
+                requires_human_clarification=gate_decision.requires_human_clarification,
+                is_mock=False,
+            )
+
         # Step 4: Context Assembly
         t0_assembly = time.perf_counter()
         if retrieval_mode == "baseline":
@@ -330,6 +414,7 @@ class RAGService:
             "retrieval_sparse_ms": ret_timings.get("sparse_ms", 0.0),
             "retrieval_fusion_ms": ret_timings.get("fusion_ms", 0.0),
             "retrieval_total_ms": retrieval_latency_ms,
+            "evidence_gate_ms": gate_latency_ms,
             "context_assembly_ms": assembly_latency_ms,
             "llm_generation_ms": generation_latency_ms,
             "citation_validation_ms": val_latency_ms,
@@ -348,6 +433,10 @@ class RAGService:
         else:
             p_status = "READY_FOR_COLAB_INFERENCE"
 
+        final_evidence_status = val_report.evidence_status
+        if gate_decision.status in ["PARTIAL", "CONFLICTING"]:
+            final_evidence_status = gate_decision.status
+
         return QueryResponse(
             query=query,
             expanded_query=expanded_query if expanded_query != query else None,
@@ -355,7 +444,7 @@ class RAGService:
             retrieval_mode=retrieval_mode,
             selected_categories=selected_categories,
             supporting_citations=supporting_citations if supporting_citations else legacy_citations,
-            evidence_status=val_report.evidence_status,
+            evidence_status=final_evidence_status,
             retrieval_latency_ms=retrieval_latency_ms,
             generation_latency_ms=generation_latency_ms,
             provider_status=p_status,

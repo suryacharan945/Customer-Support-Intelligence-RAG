@@ -5,7 +5,7 @@
 
 export type RetrievalMode = 'baseline' | 'multi_context';
 export type LLMProvider = 'auto' | 'local' | 'colab_remote';
-export type EvidenceStatus = 'SUFFICIENT' | 'PARTIAL' | 'INSUFFICIENT';
+export type EvidenceStatus = 'SUFFICIENT' | 'PARTIAL' | 'INSUFFICIENT' | 'CONFLICTING';
 export type DocumentCategory = 
   | 'product_manual' 
   | 'troubleshooting' 

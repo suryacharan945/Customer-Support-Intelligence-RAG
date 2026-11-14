@@ -118,6 +118,9 @@ export const EvidenceBadge: React.FC<{ status: EvidenceStatus }> = ({ status }) 
   if (status === 'PARTIAL') {
     return <Badge variant="warning">🟡 Partial Evidence</Badge>;
   }
+  if (status === 'CONFLICTING') {
+    return <Badge variant="warning">⚠️ Conflicting Evidence</Badge>;
+  }
   return <Badge variant="error">🔴 Insufficient Evidence</Badge>;
 };
 

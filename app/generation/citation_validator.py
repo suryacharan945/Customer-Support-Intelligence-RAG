@@ -300,6 +300,8 @@ class CitationValidator:
         has_unsupported_numerical = any("Unsupported numerical" in u for u in unsupported_claims)
         if is_explicitly_insufficient or len(retrieved_contexts) == 0:
             evidence_status = "INSUFFICIENT"
+        elif conflict_detected:
+            evidence_status = "CONFLICTING"
         elif has_unsupported_numerical or len(unverified_list) > 0:
             evidence_status = "PARTIAL"
         elif (groundedness_ratio >= 0.60 or len(verified_list) > 0) and len(unverified_list) == 0:

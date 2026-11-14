@@ -1,0 +1,122 @@
+[
+  {
+    "id": "P4_1_REG01",
+    "category": "Competitor Hardware",
+    "query": "How do you clear a paper jam on a Canon imageCLASS MF445dw laser multifunction printer?",
+    "expected_status": "INSUFFICIENT",
+    "actual_status": "INSUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.172,
+    "total_latency_ms": 573.04,
+    "citations_count": 0,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'canon' (evidence covers ApexPrint). Cross-product instructions ca..."
+  },
+  {
+    "id": "P4_1_REG02",
+    "category": "Competitor Hardware",
+    "query": "What is the print speed and monthly duty cycle of an Epson EcoTank ET-4760 all-in-one printer?",
+    "expected_status": "INSUFFICIENT",
+    "actual_status": "INSUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.181,
+    "total_latency_ms": 522.63,
+    "citations_count": 0,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'epson' (evidence covers ApexPrint). Cross-product instructions ca..."
+  },
+  {
+    "id": "P4_1_REG03",
+    "category": "Missing Policy Clause",
+    "query": "Does the standard limited warranty cover damage caused by earthquake or tsunami floods?",
+    "expected_status": "INSUFFICIENT",
+    "actual_status": "INSUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.907,
+    "total_latency_ms": 539.76,
+    "citations_count": 0,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing earthquake, tsunami.  ### 2. Specific Policy Exclusions & Missing Terms The retrieved warranty policies explicitly..."
+  },
+  {
+    "id": "P4_1_REG04",
+    "category": "Missing Policy Clause",
+    "query": "Does the commercial care warranty cover cosmetic scratches and exterior casing scuffs?",
+    "expected_status": "INSUFFICIENT",
+    "actual_status": "INSUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 1.223,
+    "total_latency_ms": 593.05,
+    "citations_count": 0,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing scratches, scuffs, cosmetic.  ### 2. Specific Policy Exclusions & Missing Terms The retrieved warranty policies ex..."
+  },
+  {
+    "id": "P4_1_REG05",
+    "category": "Alien Out-of-Domain",
+    "query": "What is the capital city of Australia and what is its current estimated population?",
+    "expected_status": "INSUFFICIENT",
+    "actual_status": "INSUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.081,
+    "total_latency_ms": 546.46,
+    "citations_count": 0,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry. The topic falls outside the scope of indexed documents (retrieval relevance score 0.0887 < 0...."
+  },
+  {
+    "id": "P4_1_REG06",
+    "category": "Generic Troubleshooting",
+    "query": "What causes vertical black streaks on laser printer outputs and how do you inspect the drum unit?",
+    "expected_status": "SUFFICIENT",
+    "actual_status": "SUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.292,
+    "total_latency_ms": 546.56,
+    "citations_count": 4,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Align the cartridge with the internal tracks and push firmly until it clicks into locked position. Close front door A and verify the status LED illuminates solid green. [Source: apexprint_frequently_asked_ques..."
+  },
+  {
+    "id": "P4_1_REG07",
+    "category": "Generic Paper Handling",
+    "query": "Explain how duplex paper feeding operates mechanically during two-sided document printing.",
+    "expected_status": "SUFFICIENT",
+    "actual_status": "SUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.217,
+    "total_latency_ms": 593.54,
+    "citations_count": 4,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages. Media Handling, Trays, and Paper Weights - **Tray 1 (Multipurpose Bypass..."
+  },
+  {
+    "id": "P4_1_REG08",
+    "category": "Documented Policy Exclusion",
+    "query": "Does the warranty policy explicitly exclude damage resulting from non-OEM or third-party ink cartridges?",
+    "expected_status": "SUFFICIENT",
+    "actual_status": "SUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.47,
+    "total_latency_ms": 554.83,
+    "citations_count": 4,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Tampering and Disassembly**: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fuser or laser optics with hand tools. Third-Party S..."
+  },
+  {
+    "id": "P4_1_REG09",
+    "category": "Project Architecture",
+    "query": "How does the citation validation engine ensure that source filenames and page numbers are not fabricated?",
+    "expected_status": "SUFFICIENT",
+    "actual_status": "SUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.232,
+    "total_latency_ms": 569.51,
+    "citations_count": 3,
+    "answer_preview": "### 1. Executive Summary / Direct Answer Stage 5 \u2014 Citation Validation Engine: app/generation/citation_validator.py uses regex to extract asserted filenames and chunk IDs from the generated text, verifying them against Step 4 chunks. Valid citations ..."
+  },
+  {
+    "id": "P4_1_REG10",
+    "category": "Project Constraints",
+    "query": "What is the storage budget constraint and how does the system enforce a sub-1024 MB disk footprint?",
+    "expected_status": "SUFFICIENT",
+    "actual_status": "SUFFICIENT",
+    "verdict": "PASS",
+    "gate_latency_ms": 0.265,
+    "total_latency_ms": 570.98,
+    "citations_count": 1,
+    "answer_preview": "### 1. Executive Summary / Direct Answer A 5-subsystem automated health check reporting on: Storage Subsystem (local disk budget & Google Drive mount), Ingestion Manifest (JSON crash-safe state), Vector Store (ChromaDB readiness), Embedding Provider ..."
+  }
+]
