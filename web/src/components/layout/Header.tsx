@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ onMobileMenuToggle }) => {
       case '/':
         return 'System Overview';
       case '/chat':
-        return 'AI Customer Support Assistant';
+        return 'Document Intelligence Assistant';
       case '/documents':
         return 'Knowledge Base Studio';
       case '/comparison':

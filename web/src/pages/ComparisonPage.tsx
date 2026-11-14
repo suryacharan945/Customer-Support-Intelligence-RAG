@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GitCompare, Play, Sparkles, AlertCircle } from 'lucide-react';
+import { GitCompare, Play, Sparkles, AlertCircle, Clock, CheckCircle2 } from 'lucide-react';
 import { apiClient } from '../api/client';
 import { QueryResponse } from '../api/types';
 import { Card } from '../components/common/Card';
@@ -11,7 +11,7 @@ import remarkGfm from 'remark-gfm';
 
 export const ComparisonPage: React.FC = () => {
   const [query, setQuery] = useState<string>(
-    'What is the warranty coverage for ProX-400 and how to fix error E-101?'
+    'Explain the complete system architecture of this project.'
   );
   const [topK, setTopK] = useState<number>(5);
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,10 +20,26 @@ export const ComparisonPage: React.FC = () => {
   const [multiRes, setMultiRes] = useState<QueryResponse | null>(null);
 
   const sampleQueries = [
-    'What is the warranty coverage for ProX-400 and how to fix error E-101?',
-    'Can I return an opened printer if the printhead is defective?',
-    'How do I clear error code E-204 and is it covered under standard warranty?',
-    'What maintenance procedures are required for ColorWave 850 monthly?',
+    {
+      label: 'Architecture',
+      query: 'Explain the complete system architecture of this project.',
+    },
+    {
+      label: 'Benchmarks',
+      query: 'Summarize the benchmark results comparing Baseline RAG and Multi-Context Prompting.',
+    },
+    {
+      label: 'Printer Support & Warranty',
+      query: 'What is the warranty coverage for ProX-400 and how to fix error E-101?',
+    },
+    {
+      label: 'Storage Budget',
+      query: 'What are the storage constraints and how is the 1024 MB budget enforced?',
+    },
+    {
+      label: 'Honest Abstention',
+      query: 'Provide a culinary recipe for chocolate chip cookies with quantum computing principles.',
+    },
   ];
 
   const handleRunComparison = async (overrideQuery?: string) => {
@@ -34,7 +50,7 @@ export const ComparisonPage: React.FC = () => {
     setErrorMessage('');
 
     try {
-      // Execute both baseline and multi_context queries concurrently
+      // Execute both baseline and multi_context queries concurrently with exact same query
       const [resBaseline, resMulti] = await Promise.all([
         apiClient.queryRAG({
           query: q,
@@ -61,8 +77,10 @@ export const ComparisonPage: React.FC = () => {
     }
   };
 
-  const bLat = baselineRes?.retrieval_latency_ms ?? 0;
-  const mLat = multiRes?.retrieval_latency_ms ?? 0;
+  const bRetLat = baselineRes?.retrieval_latency_ms ?? 0;
+  const mRetLat = multiRes?.retrieval_latency_ms ?? 0;
+  const bGenLat = baselineRes?.generation_latency_ms ?? 0;
+  const mGenLat = multiRes?.generation_latency_ms ?? 0;
   const bCites = baselineRes?.supporting_citations?.length ?? 0;
   const mCites = multiRes?.supporting_citations?.length ?? 0;
 
@@ -75,8 +93,7 @@ export const ComparisonPage: React.FC = () => {
           Baseline vs Multi-Context RAG Comparison
         </h2>
         <p className="text-xs text-slate-400 mt-0.5">
-          Execute queries across both Mode A (Baseline Dense) and Mode B (Multi-Context MCP Hybrid) to
-          compare retrieval latency, category routing, and citation precision.
+          Execute any technical, architectural, benchmark, or customer-support query concurrently across Mode A (Baseline Dense) and Mode B (Multi-Context MCP Hybrid).
         </p>
       </div>
 
@@ -85,13 +102,13 @@ export const ComparisonPage: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-4 items-end">
           <div className="flex-1 w-full">
             <label className="block text-xs font-semibold text-slate-300 mb-1">
-              Customer Support Inquiry
+              Knowledge Base Inquiry (Any Document Subject)
             </label>
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Enter cross-domain technical or warranty question..."
+              placeholder="Enter cross-domain technical, architectural, or warranty question..."
               className="w-full text-xs sm:text-sm bg-slate-900 border border-slate-700/80 rounded-xl px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
@@ -125,18 +142,19 @@ export const ComparisonPage: React.FC = () => {
 
         {/* Quick sample inquiry pills */}
         <div className="pt-2 border-t border-slate-800 flex items-center gap-2 flex-wrap">
-          <span className="text-[11px] font-semibold text-slate-400">Quick Samples:</span>
+          <span className="text-[11px] font-semibold text-slate-400">Multi-Domain Presets:</span>
           {sampleQueries.map((sq, i) => (
             <button
               key={i}
               type="button"
               onClick={() => {
-                setQuery(sq);
-                handleRunComparison(sq);
+                setQuery(sq.query);
+                handleRunComparison(sq.query);
               }}
-              className="text-[11px] text-slate-300 bg-slate-800/60 hover:bg-slate-800 hover:text-white px-2.5 py-1 rounded-lg border border-slate-700/60 transition-colors"
+              className="text-[11px] text-slate-300 bg-slate-800/60 hover:bg-slate-800 hover:text-white px-3 py-1 rounded-lg border border-slate-700/60 transition-colors flex items-center gap-1.5"
             >
-              Option {i + 1}
+              <span className="text-indigo-400 font-semibold">{sq.label}:</span>
+              <span className="truncate max-w-[200px]">"{sq.query}"</span>
             </button>
           ))}
         </div>
@@ -156,29 +174,29 @@ export const ComparisonPage: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
               <span className="text-[11px] text-slate-400 block font-medium">Baseline Retrieval</span>
-              <span className="text-xl font-extrabold text-slate-200">{bLat.toFixed(2)} ms</span>
-              <span className="text-[10px] text-slate-500 block">Single-Channel Dense</span>
+              <span className="text-xl font-extrabold text-slate-200">{bRetLat.toFixed(1)} ms</span>
+              <span className="text-[10px] text-slate-500 block">Single-Channel Dense Search</span>
             </div>
 
             <div className="p-4 rounded-xl bg-indigo-950/30 border border-indigo-500/30 space-y-1">
               <span className="text-[11px] text-indigo-300 block font-medium">Multi-Context Retrieval</span>
-              <span className="text-xl font-extrabold text-cyan-300">{mLat.toFixed(2)} ms</span>
+              <span className="text-xl font-extrabold text-cyan-300">{mRetLat.toFixed(1)} ms</span>
               <span className="text-[10px] text-indigo-400 block">
-                {mLat >= bLat ? `+${(mLat - bLat).toFixed(2)} ms` : `${(mLat - bLat).toFixed(2)} ms`} (BM25 + RRF)
+                Dense + BM25Okapi + RRF Fusion
               </span>
             </div>
 
             <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-1">
-              <span className="text-[11px] text-slate-400 block font-medium">Baseline Verified Citations</span>
-              <span className="text-xl font-extrabold text-slate-200">{bCites}</span>
-              <span className="text-[10px] text-slate-500 block">Passages Cited</span>
+              <span className="text-[11px] text-slate-400 block font-medium">Baseline Synthesis Latency</span>
+              <span className="text-xl font-extrabold text-slate-200">{bGenLat.toFixed(1)} ms</span>
+              <span className="text-[10px] text-slate-500 block">Local Grounded Synthesis</span>
             </div>
 
             <div className="p-4 rounded-xl bg-indigo-950/30 border border-indigo-500/30 space-y-1">
-              <span className="text-[11px] text-indigo-300 block font-medium">MCP Verified Citations</span>
-              <span className="text-xl font-extrabold text-cyan-300">{mCites}</span>
+              <span className="text-[11px] text-indigo-300 block font-medium">MCP Synthesis Latency</span>
+              <span className="text-xl font-extrabold text-cyan-300">{mGenLat.toFixed(1)} ms</span>
               <span className="text-[10px] text-cyan-400 block">
-                {mCites - bCites >= 0 ? `+${mCites - bCites}` : `${mCites - bCites}`} Cross-Domain Citations
+                Structured Adaptive Formatting
               </span>
             </div>
           </div>
@@ -204,13 +222,14 @@ export const ComparisonPage: React.FC = () => {
 
               {baselineRes ? (
                 <>
-                  <div className="prose prose-invert prose-xs text-slate-200 leading-relaxed">
+                  <div className="prose prose-invert prose-xs text-slate-200 leading-relaxed space-y-2">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{baselineRes.answer}</ReactMarkdown>
                   </div>
 
                   <CitationCard
                     supportingCitations={baselineRes.supporting_citations || []}
                     candidateCitations={baselineRes.citations || []}
+                    queryContext={query}
                   />
                 </>
               ) : (
@@ -227,7 +246,7 @@ export const ComparisonPage: React.FC = () => {
                     Mode B: Multi-Context RAG (MCP)
                   </h3>
                   <span className="text-[11px] text-indigo-300">
-                    Category Routing + Hybrid Fusion (Dense + BM25)
+                    Category Routing + Hybrid Fusion (Dense + BM25Okapi)
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -242,7 +261,7 @@ export const ComparisonPage: React.FC = () => {
 
               {multiRes && multiRes.selected_categories?.length > 0 && (
                 <div className="flex items-center gap-1.5 flex-wrap text-xs">
-                  <span className="text-[11px] text-indigo-400">Routed Categories:</span>
+                  <span className="text-[11px] text-indigo-400">Routed Domains:</span>
                   {multiRes.selected_categories.map((c) => (
                     <CategoryBadge key={c} category={c} />
                   ))}
@@ -251,13 +270,14 @@ export const ComparisonPage: React.FC = () => {
 
               {multiRes ? (
                 <>
-                  <div className="prose prose-invert prose-xs text-slate-100 leading-relaxed">
+                  <div className="prose prose-invert prose-xs text-slate-100 leading-relaxed space-y-2">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>{multiRes.answer}</ReactMarkdown>
                   </div>
 
                   <CitationCard
                     supportingCitations={multiRes.supporting_citations || []}
                     candidateCitations={multiRes.citations || []}
+                    queryContext={query}
                   />
                 </>
               ) : (

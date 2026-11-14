@@ -103,7 +103,7 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({ onSuccess }) => 
         <div>
           <h3 className="text-base font-bold text-slate-100">Upload Knowledge Document</h3>
           <p className="text-xs text-slate-400 mt-0.5">
-            Ingest technical manuals, troubleshooting sheets, or warranty policies into ChromaDB & BM25.
+            Ingest technical manuals, project dossiers, architecture designs, research papers, or policies into ChromaDB & BM25.
           </p>
         </div>
       </div>
@@ -171,6 +171,10 @@ export const UploadDropzone: React.FC<UploadDropzoneProps> = ({ onSuccess }) => 
             <option value="troubleshooting">troubleshooting (Error Codes & Fixes)</option>
             <option value="warranty">warranty (Warranty Policies & SLAs)</option>
             <option value="faq">faq (Customer Support FAQs)</option>
+            <option value="engineering">engineering (Architecture, Code & Engineering)</option>
+            <option value="architecture">architecture (System Architecture & Designs)</option>
+            <option value="evaluation">evaluation (Benchmarks, Metrics & Audits)</option>
+            <option value="general">general (Reports, Research & General Knowledge)</option>
           </select>
         </div>
 

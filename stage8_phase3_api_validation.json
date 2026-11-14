@@ -1,0 +1,78 @@
+[
+  {
+    "id": "Q1_Architecture",
+    "domain": "Project Dossier / Engineering",
+    "query": "Explain the complete architecture of this project.",
+    "retrieval_mode": "multi_context",
+    "evidence_status": "SUFFICIENT",
+    "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+    "retrieval_latency_ms": 1161.52,
+    "generation_latency_ms": 39.05,
+    "citations_count": 5,
+    "primary_source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+    "answer_preview": "### 1. Executive Summary / Direct Answer\nDecoupled Model Architecture: Supports remote GPU endpoints via secure tunnels, CPU inference, and local fallback routines. The application remains responsive ..."
+  },
+  {
+    "id": "Q2_Benchmarks",
+    "domain": "Project Dossier / Evaluation",
+    "query": "What are the benchmark results?",
+    "retrieval_mode": "multi_context",
+    "evidence_status": "SUFFICIENT",
+    "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+    "retrieval_latency_ms": 1175.62,
+    "generation_latency_ms": 12.6,
+    "citations_count": 5,
+    "primary_source": "AI Customer Support Intelligence Platform - Project Dossier.pdf",
+    "answer_preview": "### 1. Executive Summary / Direct Answer\nStage 5 \u2014 Citation Validation Engine: app/generation/citation_validator.py uses regex to extract asserted filenames and chunk IDs from the generated text, veri..."
+  },
+  {
+    "id": "Q3_Printer_Troubleshooting",
+    "domain": "Printer Support / Troubleshooting",
+    "query": "How do I resolve Error E-101 on ApexPrint ProX400?",
+    "retrieval_mode": "multi_context",
+    "evidence_status": "SUFFICIENT",
+    "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+    "retrieval_latency_ms": 1112.42,
+    "generation_latency_ms": 7.18,
+    "citations_count": 5,
+    "primary_source": "apexprint_error_codes_and_hardware_troubleshooting.md",
+    "answer_preview": "### 1. Executive Summary / Direct Answer\nError Code E-101: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters. Power off the prin..."
+  },
+  {
+    "id": "Q4_Comparison_Baseline",
+    "domain": "Cross-Domain Comparison",
+    "query": "How does the citation validation engine work?",
+    "retrieval_mode": "baseline",
+    "evidence_status": "SUFFICIENT",
+    "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+    "retrieval_latency_ms": 1074.22,
+    "generation_latency_ms": 9.48,
+    "citations_count": 5,
+    "primary_source": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "Q4_Comparison_MultiContext",
+    "domain": "Cross-Domain Comparison",
+    "query": "How does the citation validation engine work?",
+    "retrieval_mode": "multi_context",
+    "evidence_status": "SUFFICIENT",
+    "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+    "retrieval_latency_ms": 1295.6,
+    "generation_latency_ms": 19.05,
+    "citations_count": 5,
+    "primary_source": "AI Customer Support Intelligence Platform - Project Dossier.pdf"
+  },
+  {
+    "id": "Q5_Honest_Abstention",
+    "domain": "Out-of-Domain",
+    "query": "What is the secret recipe for making hyderabadi chicken biryani?",
+    "retrieval_mode": "multi_context",
+    "evidence_status": "INSUFFICIENT",
+    "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+    "retrieval_latency_ms": 1250.55,
+    "generation_latency_ms": 1.56,
+    "citations_count": 5,
+    "primary_source": null,
+    "answer_preview": "### 1. Executive Summary / Direct Answer\nBased on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry. The provided excerpts do not contain verifi..."
+  }
+]

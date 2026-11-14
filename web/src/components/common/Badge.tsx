@@ -82,7 +82,7 @@ export const LifecycleBadge: React.FC<{ status: DocumentLifecycleStatus; isSearc
 };
 
 export const CategoryBadge: React.FC<{ category: DocumentCategory | string }> = ({ category }) => {
-  const cat = category.toLowerCase();
+  const cat = (category || '').toLowerCase();
   if (cat === 'troubleshooting') {
     return <Badge variant="warning">🔧 Troubleshooting</Badge>;
   }
@@ -95,7 +95,20 @@ export const CategoryBadge: React.FC<{ category: DocumentCategory | string }> = 
   if (cat === 'faq') {
     return <Badge variant="purple">❓ FAQ</Badge>;
   }
-  return <Badge variant="default">📁 {category}</Badge>;
+  if (cat === 'engineering') {
+    return <Badge variant="purple">⚙️ Engineering</Badge>;
+  }
+  if (cat === 'architecture') {
+    return <Badge variant="info">🏗️ Architecture</Badge>;
+  }
+  if (cat === 'evaluation') {
+    return <Badge variant="success">📊 Evaluation & Benchmarks</Badge>;
+  }
+  if (cat === 'general') {
+    return <Badge variant="default">📁 General Document</Badge>;
+  }
+  const formatted = category ? category.charAt(0).toUpperCase() + category.slice(1).replace(/_/g, ' ') : 'General';
+  return <Badge variant="default">📁 {formatted}</Badge>;
 };
 
 export const EvidenceBadge: React.FC<{ status: EvidenceStatus }> = ({ status }) => {

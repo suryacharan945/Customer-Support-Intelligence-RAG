@@ -26,17 +26,36 @@ export const ChatPage: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const samplePrompts = [
-    "What is the warranty coverage for ProX-400 and how to fix error E-101?",
-    "How do I clear a paper jam in feed tray B on the ApexPrint ColorWave 850?",
-    "Is print head damage covered under standard warranty or SLA tier 2?",
-    "What maintenance procedures are required for ColorWave 850 monthly?",
+    {
+      category: 'Architecture',
+      query: 'Explain the complete system architecture of this project.',
+    },
+    {
+      category: 'Multi-Context',
+      query: 'What is Multi-Context Prompting and how does it prevent context starvation?',
+    },
+    {
+      category: 'Benchmarks',
+      query: 'Summarize the benchmark results comparing Baseline RAG and Multi-Context Prompting.',
+    },
+    {
+      category: 'Support & Hardware',
+      query: 'What is the warranty coverage for ProX-400 and how to fix error E-101?',
+    },
+    {
+      category: 'Warranty Policy',
+      query: 'What does the warranty policy cover regarding third-party consumables and RMA?',
+    },
+    {
+      category: 'Interview Prep',
+      query: 'What are the key technical interview questions and elevator pitch for this project?',
+    },
   ];
 
   // Auto-fill from navigation state if present
   useEffect(() => {
     if (location.state && (location.state as any).initialQuery) {
       setInputQuery((location.state as any).initialQuery);
-      // clear location state
       window.history.replaceState({}, document.title);
     }
   }, [location.state]);
@@ -99,10 +118,10 @@ export const ChatPage: React.FC = () => {
         <div>
           <h2 className="text-xl sm:text-2xl font-extrabold text-white flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-indigo-400" />
-            AI Customer Support Assistant
+            Document Intelligence & Knowledge Assistant
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">
-            Grounded reasoning against the ApexPrint enterprise knowledge base.
+            An evidence-grounded AI assistant for exploring, understanding, and comparing information across your knowledge base.
           </p>
         </div>
 
@@ -128,30 +147,36 @@ export const ChatPage: React.FC = () => {
             <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mx-auto border border-indigo-500/20">
               <Layers className="w-7 h-7" />
             </div>
-            <div className="max-w-md mx-auto space-y-1">
-              <h3 className="text-base font-bold text-slate-200">How can I assist you today?</h3>
+            <div className="max-w-xl mx-auto space-y-1.5">
+              <h3 className="text-base font-bold text-slate-200">
+                Explore Knowledge Base & Technical Documentation
+              </h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Ask about hardware error codes, connectivity troubleshooting, standard limited warranty coverage,
-                or SLA exclusions. All answers cite verified source passages.
+                Inquire about system architecture, software technology stacks, empirical benchmarks, engineering decisions, or printer troubleshooting and warranty policies. Every response is synthesized with exact chunk citations.
               </p>
             </div>
 
             {/* Quick Sample Queries */}
-            <div className="pt-4 max-w-2xl mx-auto">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2">
-                Suggested Prompts
+            <div className="pt-4 max-w-3xl mx-auto">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-2.5">
+                Suggested Mixed-Domain Prompts
               </span>
-              <div className="flex flex-wrap justify-center gap-2">
-                {samplePrompts.map((prompt, i) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-left">
+                {samplePrompts.map((item, i) => (
                   <button
                     key={i}
                     onClick={() => {
-                      setInputQuery(prompt);
+                      setInputQuery(item.query);
                       textareaRef.current?.focus();
                     }}
-                    className="text-xs text-slate-300 bg-slate-800/80 hover:bg-slate-800 hover:text-white px-3.5 py-1.5 rounded-full border border-slate-700 transition-colors text-left"
+                    className="p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 hover:border-indigo-500/40 border border-slate-700/70 transition-all text-xs text-slate-300 space-y-1 group"
                   >
-                    "{prompt}"
+                    <span className="text-[10px] font-bold text-indigo-400 group-hover:text-cyan-300 transition-colors uppercase tracking-wider block">
+                      {item.category}
+                    </span>
+                    <p className="line-clamp-2 text-slate-200 group-hover:text-white">
+                      "{item.query}"
+                    </p>
                   </button>
                 ))}
               </div>
@@ -201,7 +226,7 @@ export const ChatPage: React.FC = () => {
       <div className="sticky bottom-4 z-20">
         <form
           onSubmit={handleSubmit}
-          className="p-2 rounded-2xl bg-[#151D32]/95 border border-slate-700/80 shadow-2xl backdrop-blur-xl flex items-end gap-2"
+          className="p-2.5 rounded-2xl bg-[#151D32]/95 border border-slate-700/80 shadow-2xl backdrop-blur-xl flex items-end gap-2"
         >
           <textarea
             ref={textareaRef}
@@ -209,9 +234,9 @@ export const ChatPage: React.FC = () => {
             value={inputQuery}
             onChange={(e) => setInputQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type customer support inquiry here... (Enter to submit, Shift+Enter for newline)"
+            placeholder="Ask any question about system architecture, benchmarks, policies, or printer support... (Enter to submit, Shift+Enter for newline)"
             disabled={loading}
-            className="flex-1 text-xs sm:text-sm bg-transparent border-0 p-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-0 resize-none max-h-32 leading-relaxed"
+            className="flex-1 text-xs sm:text-sm bg-transparent border-0 p-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-0 resize-none max-h-36 leading-relaxed"
           />
 
           <Button

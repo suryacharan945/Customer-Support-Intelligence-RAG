@@ -6,7 +6,16 @@
 export type RetrievalMode = 'baseline' | 'multi_context';
 export type LLMProvider = 'auto' | 'local' | 'colab_remote';
 export type EvidenceStatus = 'SUFFICIENT' | 'PARTIAL' | 'INSUFFICIENT';
-export type DocumentCategory = 'product_manual' | 'troubleshooting' | 'warranty' | 'faq' | 'general';
+export type DocumentCategory = 
+  | 'product_manual' 
+  | 'troubleshooting' 
+  | 'warranty' 
+  | 'faq' 
+  | 'general'
+  | 'engineering'
+  | 'architecture'
+  | 'evaluation'
+  | string;
 export type DocumentLifecycleStatus = 
   | 'uploaded'
   | 'processed'

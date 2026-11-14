@@ -34,10 +34,10 @@ export const DashboardPage: React.FC = () => {
   });
 
   const quickQuestions = [
+    "Explain the complete system architecture of this project.",
+    "What is Multi-Context Prompting and how does it prevent context starvation?",
+    "Summarize the benchmark results comparing Baseline RAG and Multi-Context Prompting.",
     "What is the warranty coverage for ProX-400 and how to fix error E-101?",
-    "How do I clear a paper jam in feed tray B on the ApexPrint ColorWave 850?",
-    "Is print head damage covered under standard warranty or SLA tier 2?",
-    "What should I do when error code E-204 appears on the control panel?",
   ];
 
   const handleSelectQuestion = (q: string) => {
@@ -56,13 +56,13 @@ export const DashboardPage: React.FC = () => {
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
-              ApexPrint Customer Support{' '}
-              <span className="gradient-text-brand">Intelligence Platform</span>
+              Document Intelligence &{' '}
+              <span className="gradient-text-brand">Knowledge Assistant</span>
             </h2>
 
             <p className="text-slate-300 text-sm leading-relaxed max-w-xl">
-              Grounded, verifiable enterprise technical support powered by Multi-Context Prompting (MCP),
-              hybrid vector and BM25 retrieval, and automated citation validation.
+              An evidence-grounded AI assistant for exploring, understanding, and comparing information across your knowledge base.
+              Grounded multi-context reasoning across technical architectures, empirical benchmarks, and customer support manuals.
             </p>
           </div>
 
