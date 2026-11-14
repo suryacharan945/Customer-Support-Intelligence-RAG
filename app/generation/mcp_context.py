@@ -178,7 +178,7 @@ class MCPContextBuilder:
         context_blocks.append(footer)
         accumulated_chars += len(footer)
 
-        # 4. Check for potential multi-category conflict (e.g. troubleshooting vs warranty)
+        # 4. Check for potential multi-category conflict and cross-domain synthesis notes
         has_conflict = False
         conflict_notes = None
         if "warranty" in chunks_by_cat and "troubleshooting" in chunks_by_cat:
@@ -187,6 +187,12 @@ class MCPContextBuilder:
                 "Multi-Context Notice: Evidence spans both technical troubleshooting and warranty terms. "
                 "Technical resolution steps must be cross-referenced with warranty coverage limitations "
                 "(e.g., consumable part exclusions or unauthorized repair exclusions)."
+            )
+        elif len(chunks_by_cat) > 1 or len(set(res.metadata.get("filename") or res.source for res in ordered_chunks)) > 1:
+            cats_str = ", ".join(sorted(list(chunks_by_cat.keys())))
+            conflict_notes = (
+                f"Multi-Context Notice: Evidence synthesized across multiple domains/sources ({cats_str}). "
+                "Cross-reference relevant specifications, architectural components, or benchmark data without conflation."
             )
 
         formatted_str = "".join(context_blocks)

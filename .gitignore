@@ -34,6 +34,7 @@ colab_endpoint.json
 *.log
 tmp/
 temp/
+.tmp.driveupload/
 .DS_Store
 Thumbs.db
 

@@ -195,8 +195,8 @@ class RAGService:
                 expanded_query=expanded_query if expanded_query != query else None,
                 answer=(
                     "I could not find sufficient information in the available documentation to answer your query. "
-                    "Based on available ApexPrint documentation, insufficient evidence was found to answer this inquiry. "
-                    "Please consult an authorized support technician or submit an inquiry."
+                    "Based on available documentation, insufficient evidence was found to answer this inquiry. "
+                    "Please verify the question or consult authorized documentation."
                 ),
                 retrieval_mode=retrieval_mode,
                 selected_categories=selected_categories,
