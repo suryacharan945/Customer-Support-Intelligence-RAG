@@ -140,7 +140,7 @@ export const EvidenceDrawer: React.FC<EvidenceDrawerProps> = ({
                   Citation ID Validity Verified
                 </span>
                 <p className="text-emerald-200/80 leading-relaxed text-[11px]">
-                  This chunk was programmatically verified against the retrieved context container delivered to the synthesizer. The source filename, page number, and chunk ID match ground truth indexed chunks.
+                  Verification Scope: Programmatically confirmed that this chunk ID, source filename, and location metadata exist in the retrieved candidate container and meet lexical overlap thresholds (&ge; 20%). Does not imply automated semantic claim verification or human-reviewed factual correctness.
                 </p>
               </div>
             </div>

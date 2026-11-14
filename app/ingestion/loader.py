@@ -15,6 +15,10 @@ VALID_CATEGORIES = {
     "troubleshooting",
     "warranty",
     "faq",
+    "general",
+    "engineering",
+    "architecture",
+    "evaluation",
 }
 
 SUPPORTED_EXTENSIONS = {

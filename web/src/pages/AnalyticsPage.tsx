@@ -177,8 +177,8 @@ export const AnalyticsPage: React.FC = () => {
           {/* Detailed 15-Question Audit Table */}
           <Card>
             <CardHeader
-              title="Stage 8 Phase 2.1 Live Evaluation: 15-Question Dossier Grounding"
-              subtitle="End-to-end evaluation against ChromaDB indexed AI Customer Support Intelligence Platform - Project Dossier.pdf"
+              title="Stage 8 Phase 2.1 Historical Evaluation Audit: 15-Question Dossier Benchmark"
+              subtitle="Historical evaluation results (14 supported questions + 1 unsupported question) evaluated against ChromaDB-indexed Project Dossier"
               icon={<FileText className="w-5 h-5 text-indigo-400" />}
             />
             <div className="overflow-x-auto mt-4">
@@ -225,16 +225,19 @@ export const AnalyticsPage: React.FC = () => {
           <div className="p-4 rounded-2xl bg-indigo-950/30 border border-indigo-500/30 text-xs text-slate-300 space-y-2">
             <div className="flex items-center gap-2 font-bold text-indigo-300">
               <Info className="w-4 h-4 text-cyan-400" />
-              <span>Measurement Scope & Metric Terminology</span>
+              <span>Historical Evaluation Scope & Metric Terminology</span>
             </div>
             <p className="leading-relaxed">
-              <strong>Local Synthesis Latency:</strong> Measures execution of the local grounded response synthesizer in Python (~18.2 ms), distinct from remote Colab GPU inference with Mistral-7B (~12-26s).
+              <strong>Evaluation Dataset:</strong> Stage 8 Phase 2.1 benchmark comprising 15 questions (14 in-domain supported questions across architecture, benchmarks, and tech stack + 1 out-of-domain unsupported question).
             </p>
             <p className="leading-relaxed">
-              <strong>Citation ID Validity (100%):</strong> Verifies that every asserted chunk ID physically matches retrieved candidate metadata without fabrication.
+              <strong>Local Synthesis Latency (~18.2 ms):</strong> Measures deterministic local Python response synthesis, completely distinct from remote Colab GPU inference with Mistral-7B (~12–26s).
             </p>
             <p className="leading-relaxed">
-              <strong>Lexical Evidence Overlap:</strong> Evaluates content token intersection with retrieved blocks ($\ge 20\%$ threshold). Distinct from human-reviewed semantic claim truthfulness.
+              <strong>Citation ID Validity (100%):</strong> Verifies that every cited chunk ID and source metadata physically matches retrieved candidate metadata without fabrication.
+            </p>
+            <p className="leading-relaxed">
+              <strong>Lexical Evidence Overlap:</strong> Evaluates lexical token containment ($\ge 20\%$ threshold). Lexical token overlap is an automated heuristic, not human-reviewed semantic claim truthfulness or factual correctness.
             </p>
           </div>
         </div>

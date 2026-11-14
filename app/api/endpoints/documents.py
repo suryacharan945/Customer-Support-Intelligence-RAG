@@ -84,7 +84,7 @@ class DocumentDeleteResponse(BaseModel):
 )
 async def upload_document(
     file: UploadFile = File(..., description="Document file (.pdf, .txt, or .md)"),
-    category: str = Form("product_manual", description="Category: product_manual, troubleshooting, warranty, faq"),
+    category: str = Form("general", description="Category: general, engineering, architecture, evaluation, product_manual, troubleshooting, warranty, faq"),
     ingestion: IngestionService = Depends(get_ingestion_service),
     vector_retriever: VectorStoreRetriever = Depends(get_vector_retriever),
     bm25_retriever: BM25Retriever = Depends(get_bm25_retriever),

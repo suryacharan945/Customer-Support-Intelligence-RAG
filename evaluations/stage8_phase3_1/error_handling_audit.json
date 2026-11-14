@@ -1,0 +1,58 @@
+[
+  {
+    "case": "Empty Query Payload",
+    "endpoint": "POST /api/v1/query",
+    "expected_status": 422,
+    "actual_status": 422,
+    "status": "PASS",
+    "detail": "FastAPI Pydantic validation rejected missing query field"
+  },
+  {
+    "case": "Invalid Retrieval Mode",
+    "endpoint": "POST /api/v1/query",
+    "expected_status": "200 (fallback) or 422 (validation error)",
+    "actual_status": 200,
+    "status": "PASS",
+    "detail": "System safely handled unsupported retrieval mode without unhandled 500"
+  },
+  {
+    "case": "Oversized File Upload",
+    "endpoint": "POST /api/v1/documents",
+    "expected_status": 413,
+    "actual_status": 413,
+    "status": "PASS",
+    "detail": "OversizedFileError raised and translated to HTTP 413 Content Too Large"
+  },
+  {
+    "case": "Unsupported Extension Defense",
+    "endpoint": "POST /api/v1/documents",
+    "expected_status": 400,
+    "actual_status": 400,
+    "status": "PASS",
+    "detail": "UnsupportedFileTypeError raised and translated to HTTP 400 Bad Request"
+  },
+  {
+    "case": "Path Traversal Defense",
+    "endpoint": "POST /api/v1/documents",
+    "expected_status": 400,
+    "actual_status": 400,
+    "status": "PASS",
+    "detail": "Path traversal pattern detected and rejected with HTTP 400 Bad Request"
+  },
+  {
+    "case": "Corrupted File Header Defense",
+    "endpoint": "POST /api/v1/documents",
+    "expected_status": 400,
+    "actual_status": 400,
+    "status": "PASS",
+    "detail": "CorruptedFileError raised and translated to HTTP 400 Bad Request"
+  },
+  {
+    "case": "Non-existent Document Deletion",
+    "endpoint": "DELETE /api/v1/documents/{id}",
+    "expected_status": 404,
+    "actual_status": 404,
+    "status": "PASS",
+    "detail": "Manifest returned None, resulting in HTTP 404 Not Found"
+  }
+]

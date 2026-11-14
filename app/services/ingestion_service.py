@@ -128,7 +128,7 @@ class IngestionService:
 
         # 4. Category Validation
         if category not in VALID_CATEGORIES:
-            category = "product_manual"
+            category = "general"
 
         # 5. Content Integrity Validation
         if len(content) == 0:
