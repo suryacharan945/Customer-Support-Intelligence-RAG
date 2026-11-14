@@ -262,13 +262,15 @@ class CitationValidator:
         # 3. Numerical & Period Claims Groundedness Check
         combined_text_lower = " ".join(r.text.lower() for r in retrieved_contexts)
         cited_pages = {str(c["page_number"]) for c in raw_citations if c.get("page_number") is not None}
-        answer_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", answer_text))
-        evidence_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", combined_text_lower))
+        norm_answer = re.sub(r"(?<=\d),(?=\d)", "", answer_text)
+        norm_evidence = re.sub(r"(?<=\d),(?=\d)", "", combined_text_lower)
+        answer_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", norm_answer))
+        evidence_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", norm_evidence))
         
         # Check for numbers in answer not present in evidence or citation page numbers
         unsupported_nums = [
             n for n in answer_numbers
-            if n not in evidence_numbers and n not in cited_pages and n not in {"1", "2", "3"}  # ignore basic bullet list indices
+            if n not in evidence_numbers and n not in cited_pages and n not in {"1", "2", "3", "4", "5", "6"}  # ignore basic section/bullet indices
         ]
         for un in unsupported_nums:
             unsupported_claims.append(f"Unsupported numerical claim: '{un}' not found in retrieved documentation")
