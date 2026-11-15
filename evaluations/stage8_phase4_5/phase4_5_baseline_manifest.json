@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "phase": "Stage 8 Phase 4.5",
+    "purpose": "Frozen baseline manifest establishing implementation and benchmark integrity prior to blind validation",
+    "created_at": "2026-11-15T16:25:00+05:30",
+    "git_commit": "534f27908340f5bac74aaf030fc526fa87bedfbb",
+    "git_branch": "master",
+    "parent_commit": "dc1b555e71465e6d628859ff7b57fa0d2382da40"
+  },
+  "pipeline_configuration": {
+    "min_similarity_floor": 0.2800,
+    "bm25_raw_threshold": 10.0,
+    "hybrid_search_alpha": 0.5,
+    "rrf_k": 60,
+    "confidence_threshold_clarify": 0.35,
+    "mcp_max_context_chars": 8000,
+    "dense_embedding_model": "all-MiniLM-L6-v2",
+    "dense_embedding_dim": 384,
+    "sparse_algorithm": "BM25Okapi (k1=1.5, b=0.75)",
+    "vector_store": "ChromaDB (local persistent client / SQLite)"
+  },
+  "implementation_file_hashes": {
+    "app/retrieval/query_decomposer.py": {
+      "sha256": "84ebf8182efd372c5b8e952feb977096e3b46d6cd9e30c50e3ce51d00dc31c08",
+      "size_bytes": 23109
+    },
+    "app/retrieval/evidence_coverage.py": {
+      "sha256": "ea737858d5bbb2dae653ca8a7bfb81ac1a07bcc4a24ef064e1c3f879dec9440c",
+      "size_bytes": 17158
+    },
+    "app/retrieval/evidence_gate.py": {
+      "sha256": "54e3632cb88e185e9320f1b0506803defe3faca58a4f5a7c6780b5f06ed61856",
+      "size_bytes": 31455
+    },
+    "app/services/rag_service.py": {
+      "sha256": "7d0b6129c6c5ae9f69fd4a23792071a732a7978b5a43499a4db8f363448e1d4e",
+      "size_bytes": 33494
+    },
+    "app/generation/local_synthesizer.py": {
+      "sha256": "e1945048c2a9c865fffdbf5e48c6d694b7fc01db826e39687fb208a4468f4fb2",
+      "size_bytes": 53299
+    },
+    "app/generation/citation_validator.py": {
+      "sha256": "68599db1d42b868dac22ae092cec922b0e8ee2a54db47d79ea56008a45fa9a63",
+      "size_bytes": 17414
+    },
+    "app/retrieval/hybrid.py": {
+      "sha256": "29ce67084b646271f54e3e08ed249d5929938ac10cff4b50e08dc1877ac1dfa4",
+      "size_bytes": 10448
+    },
+    "app/retrieval/bm25.py": {
+      "sha256": "7c24f8ac8e5965815200e55d891ebbc4a2234fe70807fc08a986b161fb371e35",
+      "size_bytes": 5928
+    }
+  },
+  "historical_benchmark_dataset_hashes": {
+    "evaluations/stage8_phase4/dataset/benchmark_50_questions.json": {
+      "sha256": "2751138855091e6b9fe5222473809bd439409d657ce59d0dc05651170ce42fa3",
+      "size_bytes": 37545,
+      "query_count": 50
+    },
+    "evaluations/stage8_phase4_1/new_regression_results.json": {
+      "sha256": "316080445f83c912e5032a578a6d873994ea267a99382bf1c6e0a646a2480561",
+      "size_bytes": 6599,
+      "query_count": 10
+    },
+    "evaluations/stage8_phase4_2/independent_validation_dataset.json": {
+      "sha256": "6e4f3b4f93eef04989867a47a673aecde41c0c5f8357c68c8af210f07970f8af",
+      "size_bytes": 25399,
+      "query_count": 32
+    },
+    "evaluations/stage8_phase4_4/compound_query_dataset.json": {
+      "sha256": "19ddb645119f4cc6902ed236572a490ef8be6d55db5872208d81da13a797be7d",
+      "size_bytes": 28450,
+      "query_count": 20
+    }
+  },
+  "baseline_test_status": {
+    "pytest_backend_passed": 233,
+    "pytest_backend_failed": 0,
+    "vitest_frontend_passed": 12,
+    "vitest_frontend_failed": 0,
+    "vite_production_build_exit_code": 0
+  }
+}

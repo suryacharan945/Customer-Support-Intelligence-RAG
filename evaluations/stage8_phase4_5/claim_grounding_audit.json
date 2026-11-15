@@ -1,0 +1,3619 @@
+{
+  "metadata": {
+    "title": "Claim-Level Grounding and Hallucination Audit",
+    "phase": "Stage 8 Phase 4.5",
+    "total_claims_audited": 453,
+    "grounding_breakdown": {
+      "FULLY_GROUNDED": 142,
+      "PARTIALLY_GROUNDED": 306,
+      "ABSTENTION_STATEMENTS": 5,
+      "UNSUPPORTED_HALLUCINATIONS": 0
+    },
+    "grounding_fidelity_percent": 32.45,
+    "hallucination_rate_percent": 0.0
+  },
+  "claims": [
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nDocument Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 1,
+      "claim_text": "General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Document Type****: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - Electrical & Environmental Specifications - **Voltage Requirements**: North American model requires 110V - 127V AC (+/- 10%), 50/60 Hz (+/- 3 Hz), 7.0 Amperes.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 4,
+      "claim_text": "European model (ProX-400E) requires 220V - 240V AC.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 5,
+      "claim_text": "Warning: Connecting a 110V model directly to 220V power without a step-down transformer will destroy the low-voltage power supply and immediately void the warranty.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 6,
+      "claim_text": "- **Power Consumption**: Active Printing: 480 Watts; Standby / Ready Mode: 8.5 Watts; Energy Star Sleep Mode: 1.2 Watts.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 7,
+      "claim_text": "- **Operating Environment**: Temperature: 10\u00b0C to 32.5\u00b0C (50\u00b0F to 90.5\u00b0F); Relative Humidity: 20% to 80% non-condensing.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 8,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n   - Excluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum units, waste toner collection boxes, and maintenance boxes.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 9,
+      "claim_text": "- Normal wear-and-tear items subject to periodic friction exhaustion, such as rubber paper pickup rollers and separation pads beyond 90 days from purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 10,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]\n   - **Tampering and Disassembly****: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fuser or laser optics with hand tools.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 11,
+      "claim_text": "- **Third-Party Supplies Policy**: The mere installation of third-party or refilled toner cartridges does not automatically void the printer's overall hardware warranty for unrelated failures.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 12,
+      "claim_text": "However, any physical damage, printhead corrosion, or fuser coating destruction directly caused by non-genuine or leaking third-party supplies is strictly excluded from warranty coverage.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 13,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 14,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nDocument Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 15,
+      "claim_text": "General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 16,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND01",
+      "claim_index": 17,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nMobile & Wireless Printing Support - **Q: Can I print directly from my Apple iPhone or iPad?** - **A**: Yes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 1,
+      "claim_text": "The ApexPrint ProX-400 and ColorWave-850 natively support Apple AirPrint.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_faq_840e24fda935_c0000_apexprint_frequently_asked_questions_general.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Mobile & Wireless Printing Support - **Q**: Can I print directly from my Apple iPhone or iPad?** - **A**: Yes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 4,
+      "claim_text": "The ApexPrint ProX-400 and ColorWave-850 natively support Apple AirPrint.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 5,
+      "claim_text": "Connect your iOS device to the same Wi-Fi network as the printer, tap the Share icon in any app, select Print, and choose your ApexPrint printer.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 6,
+      "claim_text": "No additional drivers or apps are required.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 7,
+      "claim_text": "- **Q: Can I print from Android devices?** - **A**: Yes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 8,
+      "claim_text": "Devices running Android 8.0 or later can print directly using the pre-installed Mopria Print Service or the free ApexPrint Mobile Connect app available on Google Play.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n   - Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_faq_840e24fda935_c0000_apexprint_frequently_asked_questions_general.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 10,
+      "claim_text": "- **Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 11,
+      "claim_text": "First page out time (FPOT) is approximately 5.2 seconds from ready mode.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 12,
+      "claim_text": "- **Print Resolution**: True optical resolution of 1200 x 1200 dpi with 2400-class image enhancement smoothing technology.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 13,
+      "claim_text": "- **Processor & Memory**: 1.2 GHz dual-core ARM processor with 1 GB standard memory (expandable up to 2.5 GB via DDR3 SO-DIMM slot).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 14,
+      "claim_text": "- **Duplex Printing**: Standard automatic two-sided (duplex) printing supported up to 36 ppm.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 15,
+      "claim_text": "- **Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 16,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, commercial marketing, and color proofs.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 17,
+      "claim_text": "- **Print Speed**: 35 pages per minute (ppm) for color documents; 40 pages per minute (ppm) for monochrome text.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 18,
+      "claim_text": "- **Ink System**: Four individual high-capacity CMYK ink tanks (Cyan, Magenta, Yellow, Black) with automatic anti-clog maintenance cycles and integrated vacuum-sealed fluidics.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 19,
+      "claim_text": "- **Print Resolution**: Up to 4800 x 1200 optimized dpi on photo and coated fine art media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 20,
+      "claim_text": "- **Color Management**: Built-in spectrophotometer sensor for automated ICC color profile calibration and Pantone spot color emulation.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 21,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - Static IP Address Configuration & 802.1x Enterprise Security - **Static IPv4 Configuration**: Access the printer's Embedded Web Server (EWS) by typing its current DHCP IP address into a web browser, or navigate on the printer display to: `Settings` -> `Network` -> `TCP/IP Configuration` -> `Manual (Static)`.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 22,
+      "claim_text": "- IP Address: e.g., `192.168.1.150` - Subnet Mask: `255.255.255.0` - Gateway: `192.168.1.1` - Primary DNS: `8.8.8.8` (or internal company DNS server).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 23,
+      "claim_text": "- **Enterprise 802.1x Network Security**: ProX-400 natively supports 802.1x EAP-TLS and PEAP authentication for enterprise networks without requiring additional software downloads.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 24,
+      "claim_text": "Configuring 802.1x authentication adheres strictly to enterprise guidelines and does NOT void the warranty or service agreements.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 25,
+      "claim_text": "[Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_ee280f83aa9f_c0001_apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+        "chunk_doc_trou_ee280f83aa9f_c0002_apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+        "chunk_doc_trou_ee280f83aa9f_c0000_apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 26,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND02",
+      "claim_index": 27,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - [Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - [Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND03",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Operating Temperature**: Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND03",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND03",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND03",
+      "claim_index": 3,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **What is the corporate trade-in discount for upgrading to a ProX-600?**: Entity mismatch: Query requests instructions for 'ProX-600' (evidence covers ApexPrint).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND03",
+      "claim_index": 4,
+      "claim_text": "Cross-product instructions cannot be safely substituted.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND03",
+      "claim_index": 5,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND03",
+      "claim_index": 6,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nError Code E-101: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 1,
+      "claim_text": "Power off the printer using the front power switch.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Error Code E-101**: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 4,
+      "claim_text": "**Resolution Steps**: [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Open Front Access Door A and Rear Duplex Access Door B.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 5,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Inspect Tray 1 and Tray 2 feed areas.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 6,
+      "claim_text": "Gently grasp the jammed sheet with both hands and pull slowly in the direction of the paper path to avoid tearing.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 7,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Check internal feed rollers for torn scraps or foreign debris.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 8,
+      "claim_text": "Clean the rubber pickup rollers using a lint-free microfiber cloth lightly moistened with isopropyl alcohol.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 10,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nExcluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum units, waste toner collection boxes, and maintenance boxes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 11,
+      "claim_text": "Normal wear-and-tear items subject to periodic friction exhaustion, such as rubber paper pickup rollers and separation pads beyond 90 days from purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 12,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0001]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND04",
+      "claim_index": 13,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0001]\n   - [Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0002]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND05",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Duty Cycle**: Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND05",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND05",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND05",
+      "claim_index": 3,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **Does the warranty cover accidental liquid spills?**: Queried policy conditions ['accidental'] are not documented in retrieved warranty policy.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND05",
+      "claim_index": 4,
+      "claim_text": "- **What is the bulk commercial lease price in Australia?**: Top retrieval similarity score (0.1791) is below empirical relevance floor (0.2800).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND05",
+      "claim_index": 5,
+      "claim_text": "The query appears to fall outside the knowledge base domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND05",
+      "claim_index": 6,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND05",
+      "claim_index": 7,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nDocument Type: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 1,
+      "claim_text": "Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Document Type**: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 4,
+      "claim_text": "- Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 5,
+      "claim_text": "- Print Speed: 33 ppm draft black, 15 ppm draft color; ISO 24734 speed: 10 ipm black, 5.0 ipm color.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 6,
+      "claim_text": "- Print Resolution: 5760 x 1440 optimized dpi using Variable-Sized Droplet Technology (VSDT).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 7,
+      "claim_text": "- Mobile Connectivity: Supports Apple AirPrint, Mopria Print Service, ApexPrint Smart Panel App, and Wi-Fi Direct peer-to-peer connection.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 8,
+      "claim_text": "- Standard Warranty: 12 months or 30,000 pages, whichever comes first.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, commercial marketing, and color proofs.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 10,
+      "claim_text": "- **Print Speed**: 35 pages per minute (ppm) for color documents; 40 pages per minute (ppm) for monochrome text.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 11,
+      "claim_text": "- **Ink System**: Four individual high-capacity CMYK ink tanks (Cyan, Magenta, Yellow, Black) with automatic anti-clog maintenance cycles and integrated vacuum-sealed fluidics.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 12,
+      "claim_text": "- **Print Resolution**: Up to 4800 x 1200 optimized dpi on photo and coated fine art media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 13,
+      "claim_text": "- **Color Management**: Built-in spectrophotometer sensor for automated ICC color profile calibration and Pantone spot color emulation.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 14,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - **Error Code E-101**: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0001_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 15,
+      "claim_text": "**Resolution Steps**: [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Power off the printer using the front power switch.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 16,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 17,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nExcluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum units, waste toner collection boxes, and maintenance boxes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 18,
+      "claim_text": "Normal wear-and-tear items subject to periodic friction exhaustion, such as rubber paper pickup rollers and separation pads beyond 90 days from purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 19,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0001_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND06",
+      "claim_index": 20,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - [Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nSpecifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, commercial marketing, and color proofs.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 4,
+      "claim_text": "- **Print Speed**: 35 pages per minute (ppm) for color documents; 40 pages per minute (ppm) for monochrome text.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 5,
+      "claim_text": "- **Ink System**: Four individual high-capacity CMYK ink tanks (Cyan, Magenta, Yellow, Black) with automatic anti-clog maintenance cycles and integrated vacuum-sealed fluidics.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 6,
+      "claim_text": "- **Print Resolution**: Up to 4800 x 1200 optimized dpi on photo and coated fine art media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 7,
+      "claim_text": "- **Color Management**: Built-in spectrophotometer sensor for automated ICC color profile calibration and Pantone spot color emulation.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 8,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - **Document Type**: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 9,
+      "claim_text": "- Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 10,
+      "claim_text": "- Print Speed: 33 ppm draft black, 15 ppm draft color; ISO 24734 speed: 10 ipm black, 5.0 ipm color.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 11,
+      "claim_text": "- Print Resolution: 5760 x 1440 optimized dpi using Variable-Sized Droplet Technology (VSDT).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 12,
+      "claim_text": "- Mobile Connectivity: Supports Apple AirPrint, Mopria Print Service, ApexPrint Smart Panel App, and Wi-Fi Direct peer-to-peer connection.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 13,
+      "claim_text": "- Standard Warranty: 12 months or 30,000 pages, whichever comes first.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 14,
+      "claim_text": "[Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - **Decoupled Model Architecture**: Supports remote GPU endpoints via secure tunnels, CPU inference, and local fallback routines.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 15,
+      "claim_text": "The application remains responsive even during external connectivity failures.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 16,
+      "claim_text": "[Source: AI Customer Support Intelligence Platform - Project Dossier.pdf, Page: 5, Chunk: doc_prod_4d6578a53efe_p5_c0002]\n   - **Accessibility & Usability (WCAG 2.1 AA)**: High contrast ratios (dark theme 16.4:1; light theme 17.2:1), complete keyboard accessibility (modal focus trapping with Tab, Enter, Escape), and automatic reduced-motion detection for the 3D particle canvas.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_4d6578a53efe_p5_c0002_AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 17,
+      "claim_text": "[Source: AI Customer Support Intelligence Platform - Project Dossier.pdf, Page: 5, Chunk: doc_prod_4d6578a53efe_p5_c0002]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_4d6578a53efe_p5_c0002_AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 18,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND07",
+      "claim_index": 19,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - [Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - [Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0000]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md",
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nDocument Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 1,
+      "claim_text": "General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Document Type****: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - **Tampering and Disassembly****: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fuser or laser optics with hand tools.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 4,
+      "claim_text": "- **Third-Party Supplies Policy**: The mere installation of third-party or refilled toner cartridges does not automatically void the printer's overall hardware warranty for unrelated failures.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 5,
+      "claim_text": "However, any physical damage, printhead corrosion, or fuser coating destruction directly caused by non-genuine or leaking third-party supplies is strictly excluded from warranty coverage.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 6,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n   - Return Merchandise Authorization (RMA) Procedure To initiate a valid warranty claim: [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n   - Retain dated proof of purchase (original sales receipt, vendor invoice, or packing slip).",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 7,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 8,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nDocument Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 9,
+      "claim_text": "General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 10,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND08",
+      "claim_index": 11,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nError Code E-101: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 1,
+      "claim_text": "Power off the printer using the front power switch.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Error Code E-101**: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 4,
+      "claim_text": "**Resolution Steps**: [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Open Front Access Door A and Rear Duplex Access Door B.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 5,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Inspect Tray 1 and Tray 2 feed areas.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 6,
+      "claim_text": "Gently grasp the jammed sheet with both hands and pull slowly in the direction of the paper path to avoid tearing.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 7,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Check internal feed rollers for torn scraps or foreign debris.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 8,
+      "claim_text": "Clean the rubber pickup rollers using a lint-free microfiber cloth lightly moistened with isopropyl alcohol.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 10,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nDocument Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 11,
+      "claim_text": "General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 12,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND09",
+      "claim_index": 13,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND10",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry.",
+      "grounding_status": "ABSTENTION_NOTICE",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND10",
+      "claim_index": 1,
+      "claim_text": "The topic falls outside the scope of indexed documents (retrieval relevance score 0.2086 < 0.2800).",
+      "grounding_status": "ABSTENTION_STATEMENT",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND10",
+      "claim_index": 2,
+      "claim_text": "Missing Information / Limitations\nThe knowledge base is focused on the Customer Support Intelligence Platform, technical architecture, and supported hardware documentation.",
+      "grounding_status": "ABSTENTION_STATEMENT",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND10",
+      "claim_index": 3,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "ABSTENTION_STATEMENT",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND10",
+      "claim_index": 4,
+      "claim_text": "Verified Source Citations\n   - [Source: No relevant documentation found]",
+      "grounding_status": "ABSTENTION_STATEMENT",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nTampering and Disassembly**: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fuser or laser optics with hand tools.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 1,
+      "claim_text": "Third-Party Supplies Policy**: The mere installation of third-party or refilled toner cartridges does not automatically void the printer's overall hardware warranty for unrelated failures.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Tampering and Disassembly****: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fuser or laser optics with hand tools.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 4,
+      "claim_text": "- **Third-Party Supplies Policy**: The mere installation of third-party or refilled toner cartridges does not automatically void the printer's overall hardware warranty for unrelated failures.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 5,
+      "claim_text": "However, any physical damage, printhead corrosion, or fuser coating destruction directly caused by non-genuine or leaking third-party supplies is strictly excluded from warranty coverage.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 6,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n   - **Error Code E-204**: Fuser Unit Overheat Protection **Trigger**: Fuser assembly thermistor sensed temperatures exceeding 230\u00b0C (446\u00b0F), engaging emergency thermal shutdown.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 7,
+      "claim_text": "**Resolution Steps**: [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0001]\n   - Immediately power off the printer and disconnect the AC power cord from the wall outlet.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 8,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0001]\n   - Allow the printer to cool down completely for at least 30 to 45 minutes before attempting any inspection.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 10,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nTampering and Disassembly**: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fuser or laser optics with hand tools.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 11,
+      "claim_text": "Third-Party Supplies Policy**: The mere installation of third-party or refilled toner cartridges does not automatically void the printer's overall hardware warranty for unrelated failures.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 12,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0001]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND11",
+      "claim_index": 13,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0001]\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0001]\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0002]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Connection Fails**: Reconnect power directly to a wall receptacle (avoid unrated power strips) and power on.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 1,
+      "claim_text": "If E-204 recurs immediately, contact an authorized ApexPrint service center for fuser replacement.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0002]\n   - **Power Cycling**: Configuring 802.1x authentication adheres strictly to enterprise guidelines and does NOT void the warranty or service agreements.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 3,
+      "claim_text": "Network Adapter Factory Reset**: To reset network adapter to factory defaults, press and hold the `Go` and `Cancel` buttons simultaneously for 10 seconds while powering on until the network status LED blinks orange three times.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 4,
+      "claim_text": "[Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0002]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_ee280f83aa9f_c0002_apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 5,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **Will a technician visit within two hours?**: Top retrieval similarity score (0.2352) is below empirical relevance floor (0.2800).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 6,
+      "claim_text": "The query appears to fall outside the knowledge base domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 7,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND12",
+      "claim_index": 8,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0002]\n   - [Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0002]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_ee280f83aa9f_c0002_apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND13",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Damage Causes**: Explicit Warranty Voiding Conditions The warranty shall be immediately voided under the following circumstances: - **Physical Damage and Spills**: Damage caused by drops, impacts, liquid spills, physical abuse, or operating outside rated temperature and humidity specifications.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND13",
+      "claim_index": 1,
+      "claim_text": "Incorrect Line Voltage**: Connecting a 110V rated unit directly into a 220V/240V AC power source without a certified step-down transformer.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND13",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND13",
+      "claim_index": 3,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **Are lightning strikes excluded?**: Top retrieval similarity score (0.1465) is below empirical relevance floor (0.2800).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND13",
+      "claim_index": 4,
+      "claim_text": "The query appears to fall outside the knowledge base domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND13",
+      "claim_index": 5,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND13",
+      "claim_index": 6,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nExcluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum units, waste toner collection boxes, and maintenance boxes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 1,
+      "claim_text": "Normal wear-and-tear items subject to periodic friction exhaustion, such as rubber paper pickup rollers and separation pads beyond 90 days from purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Document Type****: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 4,
+      "claim_text": "- **Included Parts & Service**: Under this standard warranty, ApexPrint will, at its option, repair the product or replace defective hardware components with new or factory-reconditioned genuine OEM parts at zero cost for parts or labor.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 5,
+      "claim_text": "- **Covered Assemblies**: Includes laser optical scanner assembly, formatter logic board, low-voltage power supply, paper drive gear motors, and internal sensors.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 6,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - **Tampering and Disassembly****: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fuser or laser optics with hand tools.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 7,
+      "claim_text": "- **Third-Party Supplies Policy**: The mere installation of third-party or refilled toner cartridges does not automatically void the printer's overall hardware warranty for unrelated failures.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 8,
+      "claim_text": "However, any physical damage, printhead corrosion, or fuser coating destruction directly caused by non-genuine or leaking third-party supplies is strictly excluded from warranty coverage.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n   - Return Merchandise Authorization (RMA) Procedure To initiate a valid warranty claim: [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 10,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nExcluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum units, waste toner collection boxes, and maintenance boxes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 11,
+      "claim_text": "Normal wear-and-tear items subject to periodic friction exhaustion, such as rubber paper pickup rollers and separation pads beyond 90 days from purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 12,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND14",
+      "claim_index": 13,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nSpecifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - Media Handling, Trays, and Paper Weights - **Tray 1 (Multipurpose Bypass Tray)**: 100-sheet capacity.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 4,
+      "claim_text": "Supports standard paper, heavy cardstock, envelopes (No.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 5,
+      "claim_text": "10, DL, C5), and glossy labels ranging from 60 g/m2 to 220 g/m2 (16 lb bond to 58 lb bond / 80 lb cover).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 6,
+      "claim_text": "- **Tray 2 (Main Lower Paper Cassette)**: 500-sheet capacity.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 7,
+      "claim_text": "Accepts plain paper, recycled paper, and standard bond ranging from 60 g/m2 to 120 g/m2 (16 lb bond to 32 lb bond).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 8,
+      "claim_text": "- **Optional Lower Feeder (Tray 3)**: Optional 550-sheet locking paper drawer supporting up to 120 gsm media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 9,
+      "claim_text": "- **Output Bin Capacity**: 250 sheets face-down with full bin detection sensor.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 10,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0002]\n   - **Mobile & Wireless Printing Support - **Q**: Can I print directly from my Apple iPhone or iPad?** - **A**: Yes.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 11,
+      "claim_text": "The ApexPrint ProX-400 and ColorWave-850 natively support Apple AirPrint.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 12,
+      "claim_text": "Connect your iOS device to the same Wi-Fi network as the printer, tap the Share icon in any app, select Print, and choose your ApexPrint printer.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 13,
+      "claim_text": "No additional drivers or apps are required.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 14,
+      "claim_text": "- **Q: Can I print from Android devices?** - **A**: Yes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 15,
+      "claim_text": "Devices running Android 8.0 or later can print directly using the pre-installed Mopria Print Service or the free ApexPrint Mobile Connect app available on Google Play.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 16,
+      "claim_text": "[Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n   - Electrical & Environmental Specifications - **Voltage Requirements**: North American model requires 110V - 127V AC (+/- 10%), 50/60 Hz (+/- 3 Hz), 7.0 Amperes.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_faq_840e24fda935_c0000_apexprint_frequently_asked_questions_general.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 17,
+      "claim_text": "European model (ProX-400E) requires 220V - 240V AC.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 18,
+      "claim_text": "Warning: Connecting a 110V model directly to 220V power without a step-down transformer will destroy the low-voltage power supply and immediately void the warranty.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 19,
+      "claim_text": "- **Power Consumption**: Active Printing: 480 Watts; Standby / Ready Mode: 8.5 Watts; Energy Star Sleep Mode: 1.2 Watts.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 20,
+      "claim_text": "- **Operating Environment**: Temperature: 10\u00b0C to 32.5\u00b0C (50\u00b0F to 90.5\u00b0F); Relative Humidity: 20% to 80% non-condensing.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 21,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n   - Align the cartridge with the internal tracks and push firmly until it clicks into locked position.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 22,
+      "claim_text": "[Source: apexprint_frequently_asked_questions_hardware_and_service.md, Page: 1, Chunk: doc_faq_e1d7f9f8c9ad_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_faq_e1d7f9f8c9ad_c0001_apexprint_frequently_asked_questions_hardware_and_service.md",
+        "chunk_doc_faq_e1d7f9f8c9ad_c0000_apexprint_frequently_asked_questions_hardware_and_service.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 23,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND15",
+      "claim_index": 24,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0002]\n   - [Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_faq_840e24fda935_c0000_apexprint_frequently_asked_questions_general.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nPrinting Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, commercial marketing, and color proofs.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: 35 pages per minute (ppm) for color documents; 40 pages per minute (ppm) for monochrome text.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0001_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - Media Handling, Trays, and Paper Weights - **Tray 1 (Multipurpose Bypass Tray)**: 100-sheet capacity.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 4,
+      "claim_text": "Supports standard paper, heavy cardstock, envelopes (No.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 5,
+      "claim_text": "10, DL, C5), and glossy labels ranging from 60 g/m2 to 220 g/m2 (16 lb bond to 58 lb bond / 80 lb cover).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 6,
+      "claim_text": "- **Tray 2 (Main Lower Paper Cassette)**: 500-sheet capacity.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 7,
+      "claim_text": "Accepts plain paper, recycled paper, and standard bond ranging from 60 g/m2 to 120 g/m2 (16 lb bond to 32 lb bond).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 8,
+      "claim_text": "- **Optional Lower Feeder (Tray 3)**: Optional 550-sheet locking paper drawer supporting up to 120 gsm media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 9,
+      "claim_text": "- **Output Bin Capacity**: 250 sheets face-down with full bin detection sensor.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 10,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0002]\n   - Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 11,
+      "claim_text": "- **Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 12,
+      "claim_text": "First page out time (FPOT) is approximately 5.2 seconds from ready mode.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 13,
+      "claim_text": "- **Print Resolution**: True optical resolution of 1200 x 1200 dpi with 2400-class image enhancement smoothing technology.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 14,
+      "claim_text": "- **Processor & Memory**: 1.2 GHz dual-core ARM processor with 1 GB standard memory (expandable up to 2.5 GB via DDR3 SO-DIMM slot).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 15,
+      "claim_text": "- **Duplex Printing**: Standard automatic two-sided (duplex) printing supported up to 36 ppm.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 16,
+      "claim_text": "- **Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 17,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - **Document Type**: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0002_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 18,
+      "claim_text": "- Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 19,
+      "claim_text": "- Print Speed: 33 ppm draft black, 15 ppm draft color; ISO 24734 speed: 10 ipm black, 5.0 ipm color.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 20,
+      "claim_text": "- Print Resolution: 5760 x 1440 optimized dpi using Variable-Sized Droplet Technology (VSDT).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 21,
+      "claim_text": "- Mobile Connectivity: Supports Apple AirPrint, Mopria Print Service, ApexPrint Smart Panel App, and Wi-Fi Direct peer-to-peer connection.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 22,
+      "claim_text": "- Standard Warranty: 12 months or 30,000 pages, whichever comes first.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 23,
+      "claim_text": "[Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - Storage-Constrained Design (< 1,024 MB Local Disk): Built under strict local storage constraints.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 24,
+      "claim_text": "Document stores and vector backups stream dynamically via Google Drive for Desktop (G:\\My Drive\\Internship_RAG_MCP_Capstone), keeping the active local codebase at ~296 MB (including node_modules and Vite artifacts).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 25,
+      "claim_text": "[Source: AI Customer Support Intelligence Platform - Project Dossier.pdf, Page: 5, Chunk: doc_prod_4d6578a53efe_p5_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_4d6578a53efe_p5_c0001_AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "chunk_doc_prod_4d6578a53efe_p6_c0001_AI Customer Support Intelligence Platform - Project Dossier.pdf",
+        "chunk_doc_prod_4d6578a53efe_p1_c0001_AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 26,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND16",
+      "claim_index": 27,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0002]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - [Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND17",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Msrp Retail**: Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND17",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND17",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND17",
+      "claim_index": 3,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **What zero-interest financing plans exist?**: Top retrieval similarity score (0.1432) is below empirical relevance floor (0.2800).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND17",
+      "claim_index": 4,
+      "claim_text": "The query appears to fall outside the knowledge base domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND17",
+      "claim_index": 5,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND17",
+      "claim_index": 6,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND18",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Page Yield**: Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND18",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND18",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND18",
+      "claim_index": 3,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **What is the ProX-400's unit wholesale price in bulk orders?**: Queried commercial terms (wholesale/dealer discount) are not documented in the technical documentation.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND18",
+      "claim_index": 4,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND18",
+      "claim_index": 5,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND19",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Warranty Period**: Document Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND19",
+      "claim_index": 1,
+      "claim_text": "General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND19",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND19",
+      "claim_index": 3,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **What is the binding arbitration clause jurisdiction in the end user license?**: Top retrieval similarity score (0.1679) is below empirical relevance floor (0.2800).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND19",
+      "claim_index": 4,
+      "claim_text": "The query appears to fall outside the knowledge base domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND19",
+      "claim_index": 5,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND19",
+      "claim_index": 6,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nCovered Assemblies**: Includes laser optical scanner assembly, formatter logic board, low-voltage power supply, paper drive gear motors, and internal sensors.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 1,
+      "claim_text": "Return Merchandise Authorization (RMA) Procedure To initiate a valid warranty claim: 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 3,
+      "claim_text": "Detailed Technical Explanation\n   - Retain dated proof of purchase (original sales receipt, vendor invoice, or packing slip).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 4,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n   - Contact ApexPrint Technical Support or submit a ticket via the support portal to troubleshoot and receive an authorized RMA number.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 5,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n   - Package the unit in its original packaging or suitable protective shipping carton.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 6,
+      "claim_text": "Clearly mark the RMA number on the exterior shipping label.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 7,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n   - ApexPrint covers prepaid ground return shipping for all approved RMA claims within the 12-month coverage window.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 8,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 9,
+      "claim_text": "Key Findings & Important Details\n   - **Key Detail**: Third-Party Supplies Policy**: The mere installation of third-party or refilled toner cartridges does not automatically void the printer's overall hardware warranty for unrelated failures.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 10,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0001_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND20",
+      "claim_index": 11,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]\n   - [Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND21",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Standard Limited**: Excluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum units, waste toner collection boxes, and maintenance boxes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND21",
+      "claim_index": 1,
+      "claim_text": "Normal wear-and-tear items subject to periodic friction exhaustion, such as rubber paper pickup rollers and separation pads beyond 90 days from purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND21",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND21",
+      "claim_index": 3,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **How does the optional CarePack extend this coverage?**: Top retrieval similarity score (0.2576) is below empirical relevance floor (0.2800).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND21",
+      "claim_index": 4,
+      "claim_text": "The query appears to fall outside the knowledge base domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND21",
+      "claim_index": 5,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND21",
+      "claim_index": 6,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nError Code E-101: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 1,
+      "claim_text": "Power off the printer using the front power switch.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Error Code E-101**: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 4,
+      "claim_text": "**Resolution Steps**: [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Open Front Access Door A and Rear Duplex Access Door B.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 5,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Inspect Tray 1 and Tray 2 feed areas.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 6,
+      "claim_text": "Gently grasp the jammed sheet with both hands and pull slowly in the direction of the paper path to avoid tearing.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 7,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Check internal feed rollers for torn scraps or foreign debris.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 8,
+      "claim_text": "Clean the rubber pickup rollers using a lint-free microfiber cloth lightly moistened with isopropyl alcohol.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 10,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNote: Standard 12-month hardware warranty applies.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 11,
+      "claim_text": "Use of third-party supplies does not automatically void the warranty unless direct physical damage is determined.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND22",
+      "claim_index": 12,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0002]\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0001]\n   - [Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0002_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md",
+        "chunk_doc_trou_54171a85acbc_c0001_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nSpecifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Document Type**: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 4,
+      "claim_text": "- Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 5,
+      "claim_text": "- Print Speed: 33 ppm draft black, 15 ppm draft color; ISO 24734 speed: 10 ipm black, 5.0 ipm color.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 6,
+      "claim_text": "- Print Resolution: 5760 x 1440 optimized dpi using Variable-Sized Droplet Technology (VSDT).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 7,
+      "claim_text": "- Mobile Connectivity: Supports Apple AirPrint, Mopria Print Service, ApexPrint Smart Panel App, and Wi-Fi Direct peer-to-peer connection.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 8,
+      "claim_text": "- Standard Warranty: 12 months or 30,000 pages, whichever comes first.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, commercial marketing, and color proofs.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 10,
+      "claim_text": "- **Print Speed**: 35 pages per minute (ppm) for color documents; 40 pages per minute (ppm) for monochrome text.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 11,
+      "claim_text": "- **Ink System**: Four individual high-capacity CMYK ink tanks (Cyan, Magenta, Yellow, Black) with automatic anti-clog maintenance cycles and integrated vacuum-sealed fluidics.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 12,
+      "claim_text": "- **Print Resolution**: Up to 4800 x 1200 optimized dpi on photo and coated fine art media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 13,
+      "claim_text": "- **Color Management**: Built-in spectrophotometer sensor for automated ICC color profile calibration and Pantone spot color emulation.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 14,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - Scanning, Duplexing, and Document Feeding - **Automatic Duplex Scanning**: Supports automatic two-sided scanning and copying standard.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0001_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 15,
+      "claim_text": "- **Document Feeder**: Equipped with a Dual-head Single-Pass Auto Document Feeder (RADF) holding up to 50 originals.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 16,
+      "claim_text": "- **Scan Resolution**: Optical scanner resolution of 600 x 600 dpi; interpolated digital resolution up to 19200 dpi.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 17,
+      "claim_text": "- **Media Support**: Accommodates media from 4x6 inches up to A3+ (13x19 inches wide-format) and banner lengths up to 47.2 inches (1200 mm).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 18,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0001_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 19,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND23",
+      "claim_index": 20,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - [Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0000]\n   - [Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND24",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nBased on available documentation in the knowledge base:\n   - **Paper Jam Clearance**: Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND24",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND24",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND24",
+      "claim_index": 3,
+      "claim_text": "Missing Information & Limitations\nThe following requested information is absent or undocumented in the knowledge base:\n   - **What is the input capacity of the ProX-500 Enterprise?**: Entity mismatch: Query requests instructions for 'ProX-500 Enterprise' (evidence covers ApexPrint).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND24",
+      "claim_index": 4,
+      "claim_text": "Cross-product instructions cannot be safely substituted.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND24",
+      "claim_index": 5,
+      "claim_text": "No speculative or ungrounded claims have been extrapolated.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND24",
+      "claim_index": 6,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nSpecifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 1,
+      "claim_text": "Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - Electrical & Environmental Specifications - **Voltage Requirements**: North American model requires 110V - 127V AC (+/- 10%), 50/60 Hz (+/- 3 Hz), 7.0 Amperes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 4,
+      "claim_text": "European model (ProX-400E) requires 220V - 240V AC.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 5,
+      "claim_text": "Warning: Connecting a 110V model directly to 220V power without a step-down transformer will destroy the low-voltage power supply and immediately void the warranty.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 6,
+      "claim_text": "- **Power Consumption**: Active Printing: 480 Watts; Standby / Ready Mode: 8.5 Watts; Energy Star Sleep Mode: 1.2 Watts.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 7,
+      "claim_text": "- **Operating Environment**: Temperature: 10\u00b0C to 32.5\u00b0C (50\u00b0F to 90.5\u00b0F); Relative Humidity: 20% to 80% non-condensing.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 8,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n   - Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, commercial marketing, and color proofs.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 9,
+      "claim_text": "- **Print Speed**: 35 pages per minute (ppm) for color documents; 40 pages per minute (ppm) for monochrome text.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 10,
+      "claim_text": "- **Ink System**: Four individual high-capacity CMYK ink tanks (Cyan, Magenta, Yellow, Black) with automatic anti-clog maintenance cycles and integrated vacuum-sealed fluidics.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 11,
+      "claim_text": "- **Print Resolution**: Up to 4800 x 1200 optimized dpi on photo and coated fine art media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 12,
+      "claim_text": "- **Color Management**: Built-in spectrophotometer sensor for automated ICC color profile calibration and Pantone spot color emulation.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 13,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n   - **Document Type**: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 14,
+      "claim_text": "- Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 15,
+      "claim_text": "- Print Speed: 33 ppm draft black, 15 ppm draft color; ISO 24734 speed: 10 ipm black, 5.0 ipm color.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 16,
+      "claim_text": "- Print Resolution: 5760 x 1440 optimized dpi using Variable-Sized Droplet Technology (VSDT).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 17,
+      "claim_text": "- Mobile Connectivity: Supports Apple AirPrint, Mopria Print Service, ApexPrint Smart Panel App, and Wi-Fi Direct peer-to-peer connection.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 18,
+      "claim_text": "- Standard Warranty: 12 months or 30,000 pages, whichever comes first.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 19,
+      "claim_text": "[Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 20,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND25",
+      "claim_index": 21,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n   - [Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nWi-Fi Setup and Connection Troubleshooting - **WPS Push-Button Setup**: Press the WPS button on your Wi-Fi router.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 1,
+      "claim_text": "Within 2 minutes, press and hold the Wireless button on the printer control panel for 3 seconds until the Wi-Fi LED begins flashing green.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_ee280f83aa9f_c0000_apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Error Code E-101**: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 4,
+      "claim_text": "**Resolution Steps**: [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Power off the printer using the front power switch.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 5,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Open Front Access Door A and Rear Duplex Access Door B.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 6,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - Inspect Tray 1 and Tray 2 feed areas.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 7,
+      "claim_text": "Gently grasp the jammed sheet with both hands and pull slowly in the direction of the paper path to avoid tearing.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 8,
+      "claim_text": "[Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_54171a85acbc_c0000_apexprint_error_codes_and_hardware_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 9,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND26",
+      "claim_index": 10,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0000]\n   - [Source: apexprint_error_codes_and_hardware_troubleshooting.md, Page: 1, Chunk: doc_trou_54171a85acbc_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0000]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_ee280f83aa9f_c0000_apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nOptional Lower Feeder (Tray 3)**: Optional 550-sheet locking paper drawer supporting up to 120 gsm media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 1,
+      "claim_text": "Output Bin Capacity**: 250 sheets face-down with full bin detection sensor.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - Electrical & Environmental Specifications - **Voltage Requirements**: North American model requires 110V - 127V AC (+/- 10%), 50/60 Hz (+/- 3 Hz), 7.0 Amperes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 4,
+      "claim_text": "European model (ProX-400E) requires 220V - 240V AC.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 5,
+      "claim_text": "Warning: Connecting a 110V model directly to 220V power without a step-down transformer will destroy the low-voltage power supply and immediately void the warranty.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 6,
+      "claim_text": "- **Power Consumption**: Active Printing: 480 Watts; Standby / Ready Mode: 8.5 Watts; Energy Star Sleep Mode: 1.2 Watts.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 7,
+      "claim_text": "- **Operating Environment**: Temperature: 10\u00b0C to 32.5\u00b0C (50\u00b0F to 90.5\u00b0F); Relative Humidity: 20% to 80% non-condensing.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 8,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n   - Static IP Address Configuration & 802.1x Enterprise Security - **Static IPv4 Configuration**: Access the printer's Embedded Web Server (EWS) by typing its current DHCP IP address into a web browser, or navigate on the printer display to: `Settings` -> `Network` -> `TCP/IP Configuration` -> `Manual (Static)`.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 9,
+      "claim_text": "- IP Address: e.g., `192.168.1.150` - Subnet Mask: `255.255.255.0` - Gateway: `192.168.1.1` - Primary DNS: `8.8.8.8` (or internal company DNS server).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 10,
+      "claim_text": "- **Enterprise 802.1x Network Security**: ProX-400 natively supports 802.1x EAP-TLS and PEAP authentication for enterprise networks without requiring additional software downloads.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 11,
+      "claim_text": "Configuring 802.1x authentication adheres strictly to enterprise guidelines and does NOT void the warranty or service agreements.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 12,
+      "claim_text": "[Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0001]\n   - Wi-Fi Setup and Connection Troubleshooting - **WPS Push-Button Setup**: Press the WPS button on your Wi-Fi router.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_ee280f83aa9f_c0000_apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+        "chunk_doc_trou_ee280f83aa9f_c0001_apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 13,
+      "claim_text": "Within 2 minutes, press and hold the Wireless button on the printer control panel for 3 seconds until the Wi-Fi LED begins flashing green.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 14,
+      "claim_text": "The LED turns solid blue when connected.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 15,
+      "claim_text": "- **Manual Wireless Setup Wizard**: On the LCD control panel, navigate to: `Settings` -> `Network Settings` -> `Wireless Setup Wizard`.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 16,
+      "claim_text": "Select your Network SSID from the detected broadcast list and input the WPA2/WPA3 passphrase using the navigation keypad.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 17,
+      "claim_text": "- **Dual-Band Support**: ProX-400 supports both 2.4 GHz (802.11b/g/n) and 5.0 GHz (802.11a/n/ac) bands.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 18,
+      "claim_text": "Ensure router band steering assigns the printer to a stable frequency.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 19,
+      "claim_text": "[Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0000]\n   - Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_ee280f83aa9f_c0000_apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+        "chunk_doc_trou_ee280f83aa9f_c0001_apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 20,
+      "claim_text": "- **Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 21,
+      "claim_text": "First page out time (FPOT) is approximately 5.2 seconds from ready mode.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 22,
+      "claim_text": "- **Print Resolution**: True optical resolution of 1200 x 1200 dpi with 2400-class image enhancement smoothing technology.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 23,
+      "claim_text": "- **Processor & Memory**: 1.2 GHz dual-core ARM processor with 1 GB standard memory (expandable up to 2.5 GB via DDR3 SO-DIMM slot).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 24,
+      "claim_text": "- **Duplex Printing**: Standard automatic two-sided (duplex) printing supported up to 36 ppm.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 25,
+      "claim_text": "- **Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 26,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 27,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND27",
+      "claim_index": 28,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0003]\n   - [Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0001]\n   - [Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_ee280f83aa9f_c0000_apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+        "chunk_doc_trou_ee280f83aa9f_c0001_apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+        "chunk_doc_prod_de7386b29af7_c0003_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nMobile & Wireless Printing Support - **Q: Can I print directly from my Apple iPhone or iPad?** - **A**: Yes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 1,
+      "claim_text": "The ApexPrint ProX-400 and ColorWave-850 natively support Apple AirPrint.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_faq_840e24fda935_c0000_apexprint_frequently_asked_questions_general.md",
+        "chunk_doc_faq_840e24fda935_c0001_apexprint_frequently_asked_questions_general.md",
+        "chunk_doc_faq_840e24fda935_c0002_apexprint_frequently_asked_questions_general.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Mobile & Wireless Printing Support - **Q**: Can I print directly from my Apple iPhone or iPad?** - **A**: Yes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 4,
+      "claim_text": "The ApexPrint ProX-400 and ColorWave-850 natively support Apple AirPrint.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 5,
+      "claim_text": "Connect your iOS device to the same Wi-Fi network as the printer, tap the Share icon in any app, select Print, and choose your ApexPrint printer.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 6,
+      "claim_text": "No additional drivers or apps are required.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 7,
+      "claim_text": "- **Q: Can I print from Android devices?** - **A**: Yes.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 8,
+      "claim_text": "Devices running Android 8.0 or later can print directly using the pre-installed Mopria Print Service or the free ApexPrint Mobile Connect app available on Google Play.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n   - **Document Type**: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_faq_840e24fda935_c0000_apexprint_frequently_asked_questions_general.md",
+        "chunk_doc_faq_840e24fda935_c0001_apexprint_frequently_asked_questions_general.md",
+        "chunk_doc_faq_840e24fda935_c0002_apexprint_frequently_asked_questions_general.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 10,
+      "claim_text": "- Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 11,
+      "claim_text": "- Print Speed: 33 ppm draft black, 15 ppm draft color; ISO 24734 speed: 10 ipm black, 5.0 ipm color.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 12,
+      "claim_text": "- Print Resolution: 5760 x 1440 optimized dpi using Variable-Sized Droplet Technology (VSDT).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 13,
+      "claim_text": "- Mobile Connectivity: Supports Apple AirPrint, Mopria Print Service, ApexPrint Smart Panel App, and Wi-Fi Direct peer-to-peer connection.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 14,
+      "claim_text": "- Standard Warranty: 12 months or 30,000 pages, whichever comes first.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 15,
+      "claim_text": "[Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - Wi-Fi Setup and Connection Troubleshooting - **WPS Push-Button Setup**: Press the WPS button on your Wi-Fi router.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 16,
+      "claim_text": "Within 2 minutes, press and hold the Wireless button on the printer control panel for 3 seconds until the Wi-Fi LED begins flashing green.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 17,
+      "claim_text": "The LED turns solid blue when connected.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 18,
+      "claim_text": "- **Manual Wireless Setup Wizard**: On the LCD control panel, navigate to: `Settings` -> `Network Settings` -> `Wireless Setup Wizard`.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 19,
+      "claim_text": "Select your Network SSID from the detected broadcast list and input the WPA2/WPA3 passphrase using the navigation keypad.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 20,
+      "claim_text": "- **Dual-Band Support**: ProX-400 supports both 2.4 GHz (802.11b/g/n) and 5.0 GHz (802.11a/n/ac) bands.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 21,
+      "claim_text": "Ensure router band steering assigns the printer to a stable frequency.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 22,
+      "claim_text": "[Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0000]\n   - Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_trou_ee280f83aa9f_c0000_apexprint_prox400_wifi_and_connectivity_troubleshooting.md",
+        "chunk_doc_trou_ee280f83aa9f_c0001_apexprint_prox400_wifi_and_connectivity_troubleshooting.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 23,
+      "claim_text": "- **Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 24,
+      "claim_text": "First page out time (FPOT) is approximately 5.2 seconds from ready mode.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 25,
+      "claim_text": "- **Print Resolution**: True optical resolution of 1200 x 1200 dpi with 2400-class image enhancement smoothing technology.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 26,
+      "claim_text": "- **Processor & Memory**: 1.2 GHz dual-core ARM processor with 1 GB standard memory (expandable up to 2.5 GB via DDR3 SO-DIMM slot).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 27,
+      "claim_text": "- **Duplex Printing**: Standard automatic two-sided (duplex) printing supported up to 36 ppm.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 28,
+      "claim_text": "- **Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 29,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 30,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND28",
+      "claim_index": 31,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_frequently_asked_questions_general.md, Page: 1, Chunk: doc_faq_840e24fda935_c0000]\n   - [Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - [Source: apexprint_prox400_wifi_and_connectivity_troubleshooting.md, Page: 1, Chunk: doc_trou_ee280f83aa9f_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_faq_840e24fda935_c0000_apexprint_frequently_asked_questions_general.md",
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_faq_840e24fda935_c0001_apexprint_frequently_asked_questions_general.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nThe documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prompting (MCP).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 1,
+      "claim_text": "Traditional RAG systems fail when customer queries span multiple documentation domains\u2014such as diagnosing a printer hardware error and checking its warranty coverage simultaneously.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 2,
+      "claim_text": "[Source: AI Customer Support Intelligence Platform - Project Dossier.pdf, Page: 1, Chunk: doc_prod_4d6578a53efe_p1_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_4d6578a53efe_p1_c0000_AI Customer Support Intelligence Platform - Project Dossier.pdf"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium workgroup environments.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 4,
+      "claim_text": "- **Print Speed**: Up to 45 pages per minute (ppm) for letter-size monochrome documents.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 5,
+      "claim_text": "First page out time (FPOT) is approximately 5.2 seconds from ready mode.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 6,
+      "claim_text": "- **Print Resolution**: True optical resolution of 1200 x 1200 dpi with 2400-class image enhancement smoothing technology.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 7,
+      "claim_text": "- **Processor & Memory**: 1.2 GHz dual-core ARM processor with 1 GB standard memory (expandable up to 2.5 GB via DDR3 SO-DIMM slot).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 8,
+      "claim_text": "- **Duplex Printing**: Standard automatic two-sided (duplex) printing supported up to 36 ppm.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 9,
+      "claim_text": "- **Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 10,
+      "claim_text": "[Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - **Document Type**: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-Fi Direct.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 11,
+      "claim_text": "- Yield: High-capacity spill-free ink refill bottles yield up to 4,500 black pages and 7,500 color pages per bottle set.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 12,
+      "claim_text": "- Print Speed: 33 ppm draft black, 15 ppm draft color; ISO 24734 speed: 10 ipm black, 5.0 ipm color.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 13,
+      "claim_text": "- Print Resolution: 5760 x 1440 optimized dpi using Variable-Sized Droplet Technology (VSDT).",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 14,
+      "claim_text": "- Mobile Connectivity: Supports Apple AirPrint, Mopria Print Service, ApexPrint Smart Panel App, and Wi-Fi Direct peer-to-peer connection.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 15,
+      "claim_text": "- Standard Warranty: 12 months or 30,000 pages, whichever comes first.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 16,
+      "claim_text": "[Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, commercial marketing, and color proofs.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 17,
+      "claim_text": "- **Print Speed**: 35 pages per minute (ppm) for color documents; 40 pages per minute (ppm) for monochrome text.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 18,
+      "claim_text": "- **Ink System**: Four individual high-capacity CMYK ink tanks (Cyan, Magenta, Yellow, Black) with automatic anti-clog maintenance cycles and integrated vacuum-sealed fluidics.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 19,
+      "claim_text": "- **Print Resolution**: Up to 4800 x 1200 optimized dpi on photo and coated fine art media.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 20,
+      "claim_text": "- **Color Management**: Built-in spectrophotometer sensor for automated ICC color profile calibration and Pantone spot color emulation.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 21,
+      "claim_text": "[Source: apexprint_colorwave850_user_manual.md, Page: 1, Chunk: doc_prod_a92c5cafaf32_c0000]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_a92c5cafaf32_c0000_apexprint_colorwave850_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 22,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nNo specific warranty or SLA restrictions apply to this documentation domain.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND29",
+      "claim_index": 23,
+      "claim_text": "Verified Source Citations\n   - [Source: AI Customer Support Intelligence Platform - Project Dossier.pdf, Page: 1, Chunk: doc_prod_4d6578a53efe_p1_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0001]\n   - [Source: apexprint_ecotank_l3150_specs.txt, Page: 1, Chunk: doc_prod_c4f75309780c_c0000]\n   - [Source: apexprint_prox400_user_manual.md, Page: 1, Chunk: doc_prod_de7386b29af7_c0000]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_prod_de7386b29af7_c0001_apexprint_prox400_user_manual.md",
+        "chunk_doc_prod_c4f75309780c_c0000_apexprint_ecotank_l3150_specs.txt",
+        "chunk_doc_prod_de7386b29af7_c0000_apexprint_prox400_user_manual.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 0,
+      "claim_text": "Executive Summary / Direct Answer\nDocument Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 1,
+      "claim_text": "General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 2,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n\n### 2.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 3,
+      "claim_text": "Step-by-Step Resolution / Technical Specifications\n   - **Document Type****: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - Excluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum units, waste toner collection boxes, and maintenance boxes.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 4,
+      "claim_text": "- Normal wear-and-tear items subject to periodic friction exhaustion, such as rubber paper pickup rollers and separation pads beyond 90 days from purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 5,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]\n   - Return Merchandise Authorization (RMA) Procedure To initiate a valid warranty claim: [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n   - Retain dated proof of purchase (original sales receipt, vendor invoice, or packing slip).",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 6,
+      "claim_text": "[Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n\n### 3.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 7,
+      "claim_text": "Warranty & Policy Cross-Reference (if applicable)\nDocument Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 8,
+      "claim_text": "General Hardware Coverage Terms ApexPrint warrants to the original end-user purchaser that the hardware products (including ProX-400, ColorWave-850, and EcoTank models) will be free from defects in materials and manufacturing workmanship for a period of twelve (12) months from the confirmed date of purchase.",
+      "grounding_status": "PARTIALLY_GROUNDED",
+      "supporting_chunk_ids": []
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 9,
+      "claim_text": "[Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]\n\n### 4.",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_6bcedacd5b00_c0002_apexprint_extended_warranty_and_exclusions.md"
+      ]
+    },
+    {
+      "query_id": "P4_5_BLIND30",
+      "claim_index": 10,
+      "claim_text": "Verified Source Citations\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0000]\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0000]\n   - [Source: apexprint_standard_limited_warranty_policy.md, Page: 1, Chunk: doc_warr_11757ad6d7b8_c0001]\n   - [Source: apexprint_extended_warranty_and_exclusions.md, Page: 1, Chunk: doc_warr_6bcedacd5b00_c0002]",
+      "grounding_status": "FULLY_GROUNDED",
+      "supporting_chunk_ids": [
+        "chunk_doc_warr_11757ad6d7b8_c0000_apexprint_standard_limited_warranty_policy.md",
+        "chunk_doc_warr_6bcedacd5b00_c0000_apexprint_extended_warranty_and_exclusions.md",
+        "chunk_doc_warr_11757ad6d7b8_c0001_apexprint_standard_limited_warranty_policy.md"
+      ]
+    }
+  ]
+}

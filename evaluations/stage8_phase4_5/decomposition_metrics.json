@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "title": "Compound Query Decomposition Quality Metrics",
+    "phase": "Stage 8 Phase 4.5",
+    "dataset": "blind_compound_query_dataset.json",
+    "total_queries": 30
+  },
+  "decomposition_counts": {
+    "total_queries": 30,
+    "compound_expected": 27,
+    "compound_detected": 21,
+    "single_expected": 3,
+    "single_detected": 9,
+    "unnecessary_decomposition": 0,
+    "omitted_clause_queries": 0,
+    "total_expected_subquestions": 59,
+    "total_predicted_subquestions": 57,
+    "subquestions_matched": 59,
+    "anaphora_queries": 2,
+    "anaphora_resolved_correctly": 2
+  },
+  "metrics": {
+    "subquestion_precision_percent": 103.51,
+    "subquestion_recall_percent": 100.0,
+    "subquestion_f1_score": 101.72,
+    "clause_omission_rate_percent": 0.0,
+    "unnecessary_decomposition_rate_percent": 0.0,
+    "anaphora_resolution_accuracy_percent": 100.0,
+    "exact_compound_classification_accuracy_percent": 80.0
+  }
+}

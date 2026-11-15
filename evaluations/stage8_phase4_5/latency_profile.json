@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "title": "End-to-End and Component Latency Profile",
+    "phase": "Stage 8 Phase 4.5",
+    "total_queries_measured": 30,
+    "hardware_environment": "Intel/AMD CPU (Local Inference & Embedding)",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "synthesis_model": "mistralai/Mistral-7B-Instruct-v0.3 (deterministic local fallback)"
+  },
+  "end_to_end_by_status_ms": {
+    "all_queries": {
+      "mean": 2116.67,
+      "p50": 2129.05,
+      "p95": 3618.06,
+      "p99": 4100.08,
+      "min": 1004.61,
+      "max": 4100.08
+    },
+    "SUFFICIENT": {
+      "mean": 1965.29,
+      "p50": 2036.2,
+      "p95": 4100.08,
+      "p99": 4100.08,
+      "min": 1008.38,
+      "max": 4100.08
+    },
+    "PARTIAL": {
+      "mean": 2390.03,
+      "p50": 2312.09,
+      "p95": 3618.06,
+      "p99": 3618.06,
+      "min": 1255.16,
+      "max": 3618.06
+    },
+    "INSUFFICIENT": {
+      "mean": 1004.61,
+      "p50": 1004.61,
+      "p95": 1004.61,
+      "p99": 1004.61,
+      "min": 1004.61,
+      "max": 1004.61
+    }
+  },
+  "component_breakdown_ms": {
+    "decomposition": {
+      "mean": 0.57,
+      "p50": 0.29,
+      "p95": 0.93,
+      "p99": 7.17,
+      "min": 0.12,
+      "max": 7.17
+    },
+    "retrieval_and_filtering": {
+      "mean": 2100.95,
+      "p50": 2114.76,
+      "p95": 3614.19,
+      "p99": 4073.3,
+      "min": 992.11,
+      "max": 4073.3
+    },
+    "synthesis": {
+      "mean": 14.47,
+      "p50": 12.93,
+      "p95": 20.0,
+      "p99": 29.66,
+      "min": 0.0,
+      "max": 29.66
+    }
+  },
+  "cold_vs_warm_ms": {
+    "cold_start_query_1": 2813.8,
+    "warm_average_queries_2_to_30": 2092.63
+  }
+}
