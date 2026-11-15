@@ -162,13 +162,17 @@ Customer Support ChatBot/
 │   └── vite.config.ts                   # Vite configuration with API proxy
 ├── data/knowledge_base/                 # Canonical knowledge base documents
 ├── docs/                                # Comprehensive documentation suite
-│   ├── architecture.md                  # Deep-dive system architecture
-│   ├── evaluation.md                    # Benchmark methodology, confusion matrices & metrics
-│   ├── deployment.md                    # Deployment, environment variables & runbook
-│   ├── api.md                           # REST API reference and error catalog
-│   ├── limitations.md                   # System boundaries & honest disclosures
-│   ├── demo_script.md                   # 10-minute evaluator walkthrough script
-│   └── presentation_package.md          # Diagrams, portfolio assets & interview talking points
+│   ├── PROJECT_SUMMARY.md               # High-level overview, capabilities & problem statement
+│   ├── ARCHITECTURE.md                  # Deep-dive system architecture & dataflow diagrams
+│   ├── INSTALLATION.md                  # Step-by-step local setup, environment & verification
+│   ├── DEPLOYMENT_AND_CONFIGURATION.md  # Production serving, environment variables & runbook
+│   ├── EVALUATION.md                    # Benchmark methodology, confusion matrices & metrics
+│   ├── HUMAN_EVALUATION.md              # 50-item evaluation worksheet & scoring rubric
+│   ├── KNOWN_LIMITATIONS.md             # System boundaries & honest disclosures
+│   ├── DEMO_SCRIPT.md                   # 7-minute evaluator walkthrough script
+│   ├── FINAL_HANDOVER.md                # Project status, verification results & handover notes
+│   ├── RESUME_PROJECT_DESCRIPTION.md    # Portfolio highlights & technical interview guide
+│   └── API_REFERENCE.md                 # REST API reference and endpoint catalog
 └── tests/                               # Complete pytest backend test suite (233 tests)
 ```
 
