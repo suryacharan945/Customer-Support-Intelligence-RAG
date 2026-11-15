@@ -10,7 +10,7 @@ class Settings(BaseSettings):
 
     # Application
     PROJECT_NAME: str = "Multi-Context Intelligent RAG System"
-    VERSION: str = "0.1.0"
+    VERSION: str = "1.0.0-rc1"
     ENVIRONMENT: str = "development"
     DEBUG: bool = True
     APP_HOST: str = "0.0.0.0"
