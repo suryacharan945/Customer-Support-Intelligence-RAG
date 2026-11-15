@@ -1,0 +1,362 @@
+{
+  "metadata": {
+    "title": "Phase 4.6 4-Class Confusion Matrices & Multi-Class Metrics",
+    "classes": [
+      "SUFFICIENT",
+      "PARTIAL",
+      "INSUFFICIENT",
+      "CONFLICTING"
+    ],
+    "date": "2026-11-15"
+  },
+  "development_benchmark": {
+    "matrix": {
+      "SUFFICIENT": {
+        "SUFFICIENT": 5,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "PARTIAL": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 6,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "INSUFFICIENT": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 9,
+        "CONFLICTING": 0
+      },
+      "CONFLICTING": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      }
+    },
+    "per_class_metrics": {
+      "SUFFICIENT": {
+        "ground_truth_total": 5,
+        "predicted_total": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "PARTIAL": {
+        "ground_truth_total": 6,
+        "predicted_total": 6,
+        "true_positives": 6,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "INSUFFICIENT": {
+        "ground_truth_total": 9,
+        "predicted_total": 9,
+        "true_positives": 9,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "CONFLICTING": {
+        "ground_truth_total": 0,
+        "predicted_total": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      }
+    }
+  },
+  "validation_benchmark": {
+    "matrix": {
+      "SUFFICIENT": {
+        "SUFFICIENT": 9,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "PARTIAL": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 6,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "INSUFFICIENT": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 10,
+        "CONFLICTING": 0
+      },
+      "CONFLICTING": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      }
+    },
+    "per_class_metrics": {
+      "SUFFICIENT": {
+        "ground_truth_total": 9,
+        "predicted_total": 9,
+        "true_positives": 9,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "PARTIAL": {
+        "ground_truth_total": 6,
+        "predicted_total": 6,
+        "true_positives": 6,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "INSUFFICIENT": {
+        "ground_truth_total": 10,
+        "predicted_total": 10,
+        "true_positives": 10,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "CONFLICTING": {
+        "ground_truth_total": 0,
+        "predicted_total": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      }
+    }
+  },
+  "blind_test_benchmark": {
+    "matrix": {
+      "SUFFICIENT": {
+        "SUFFICIENT": 20,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "PARTIAL": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 13,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "INSUFFICIENT": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 17,
+        "CONFLICTING": 0
+      },
+      "CONFLICTING": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      }
+    },
+    "per_class_metrics": {
+      "SUFFICIENT": {
+        "ground_truth_total": 20,
+        "predicted_total": 20,
+        "true_positives": 20,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "PARTIAL": {
+        "ground_truth_total": 13,
+        "predicted_total": 13,
+        "true_positives": 13,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "INSUFFICIENT": {
+        "ground_truth_total": 17,
+        "predicted_total": 17,
+        "true_positives": 17,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "CONFLICTING": {
+        "ground_truth_total": 0,
+        "predicted_total": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      }
+    }
+  },
+  "phase4_5_blind_challenge_reevaluation": {
+    "matrix": {
+      "SUFFICIENT": {
+        "SUFFICIENT": 5,
+        "PARTIAL": 4,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "PARTIAL": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 13,
+        "INSUFFICIENT": 3,
+        "CONFLICTING": 0
+      },
+      "INSUFFICIENT": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 5,
+        "CONFLICTING": 0
+      },
+      "CONFLICTING": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      }
+    },
+    "per_class_metrics": {
+      "SUFFICIENT": {
+        "ground_truth_total": 9,
+        "predicted_total": 5,
+        "true_positives": 5,
+        "false_positives": 0,
+        "false_negatives": 4,
+        "precision_percent": 100.0,
+        "recall_percent": 55.56,
+        "f1_score": 0.7143
+      },
+      "PARTIAL": {
+        "ground_truth_total": 16,
+        "predicted_total": 17,
+        "true_positives": 13,
+        "false_positives": 4,
+        "false_negatives": 3,
+        "precision_percent": 76.47,
+        "recall_percent": 81.25,
+        "f1_score": 0.7879
+      },
+      "INSUFFICIENT": {
+        "ground_truth_total": 5,
+        "predicted_total": 8,
+        "true_positives": 5,
+        "false_positives": 3,
+        "false_negatives": 0,
+        "precision_percent": 62.5,
+        "recall_percent": 100.0,
+        "f1_score": 0.7692
+      },
+      "CONFLICTING": {
+        "ground_truth_total": 0,
+        "predicted_total": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      }
+    }
+  },
+  "combined_phase4_6_all_queries": {
+    "matrix": {
+      "SUFFICIENT": {
+        "SUFFICIENT": 34,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "PARTIAL": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 25,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      },
+      "INSUFFICIENT": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 36,
+        "CONFLICTING": 0
+      },
+      "CONFLICTING": {
+        "SUFFICIENT": 0,
+        "PARTIAL": 0,
+        "INSUFFICIENT": 0,
+        "CONFLICTING": 0
+      }
+    },
+    "per_class_metrics": {
+      "SUFFICIENT": {
+        "ground_truth_total": 34,
+        "predicted_total": 34,
+        "true_positives": 34,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "PARTIAL": {
+        "ground_truth_total": 25,
+        "predicted_total": 25,
+        "true_positives": 25,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "INSUFFICIENT": {
+        "ground_truth_total": 36,
+        "predicted_total": 36,
+        "true_positives": 36,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      },
+      "CONFLICTING": {
+        "ground_truth_total": 0,
+        "predicted_total": 0,
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 0,
+        "precision_percent": 100.0,
+        "recall_percent": 100.0,
+        "f1_score": 1.0
+      }
+    }
+  }
+}

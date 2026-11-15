@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "title": "Phase 4.6 Latency & Computational Profile",
+    "hardware_environment": "Local Mistral-7B Instruct v0.3 / ChromaDB CPU Engine",
+    "total_requests_profiled": 95
+  },
+  "end_to_end_latency": {
+    "cold_start_request_ms": 1299.49,
+    "overall_all_requests": {
+      "count": 95,
+      "mean_ms": 1489.54,
+      "median_p50_ms": 1173.88,
+      "p90_ms": 2077.78,
+      "p95_ms": 2984.23,
+      "min_ms": 478.99,
+      "max_ms": 3954.31
+    },
+    "warm_requests_steady_state": {
+      "count": 94,
+      "mean_ms": 1491.56,
+      "median_p50_ms": 1160.36,
+      "p90_ms": 2077.78,
+      "p95_ms": 2984.23,
+      "min_ms": 478.99,
+      "max_ms": 3954.31
+    }
+  },
+  "component_breakdown": {
+    "category_selection_ms": {
+      "mean_ms": 1.76,
+      "p50_ms": 1.68,
+      "p95_ms": 2.65
+    },
+    "query_expansion_ms": {
+      "mean_ms": 0.0,
+      "p50_ms": 0.01,
+      "p95_ms": 0.01
+    },
+    "retrieval_dense_ms": {
+      "mean_ms": 930.09,
+      "p50_ms": 901.77,
+      "p95_ms": 1154.45
+    },
+    "retrieval_sparse_ms": {
+      "mean_ms": 0.47,
+      "p50_ms": 0.46,
+      "p95_ms": 0.66
+    },
+    "retrieval_fusion_ms": {
+      "mean_ms": 0.13,
+      "p50_ms": 0.14,
+      "p95_ms": 0.16
+    },
+    "retrieval_total_ms": {
+      "mean_ms": 1499.28,
+      "p50_ms": 1686.95,
+      "p95_ms": 2739.23
+    },
+    "evidence_gate_ms": {
+      "mean_ms": 2.67,
+      "p50_ms": 0.74,
+      "p95_ms": 5.04
+    },
+    "context_assembly_ms": {
+      "mean_ms": 0.62,
+      "p50_ms": 0.88,
+      "p95_ms": 1.82
+    },
+    "llm_generation_ms": {
+      "mean_ms": 6.32,
+      "p50_ms": 6.56,
+      "p95_ms": 15.94
+    },
+    "citation_validation_ms": {
+      "mean_ms": 1.6,
+      "p50_ms": 1.9,
+      "p95_ms": 4.21
+    },
+    "total_pipeline_ms": {
+      "mean_ms": 1509.71,
+      "p50_ms": 1694.75,
+      "p95_ms": 2739.96
+    },
+    "query_decomposition_ms": {
+      "mean_ms": 0.24,
+      "p50_ms": 0.21,
+      "p95_ms": 0.5
+    },
+    "evidence_coverage_ms": {
+      "mean_ms": 1906.57,
+      "p50_ms": 1763.55,
+      "p95_ms": 3429.11
+    },
+    "synthesis_ms": {
+      "mean_ms": 1975.94,
+      "p50_ms": 1765.61,
+      "p95_ms": 3436.15
+    }
+  }
+}

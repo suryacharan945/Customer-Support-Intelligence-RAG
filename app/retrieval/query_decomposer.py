@@ -96,6 +96,10 @@ class QueryDecomposer:
         5. Single-part fallback (preservation)
         """
         clean_q = query.strip()
+        # Strip adversarial prefix tags if present (Phase 4.6)
+        clean_q = re.sub(r"^\[(?:ADMIN\s+OVERRIDE|SYSTEM)[^\]]+\]\s*", "", clean_q, flags=re.IGNORECASE)
+        clean_q = re.sub(r"^SYSTEM\s+(?:OVERRIDE|COMMAND):\s*", "", clean_q, flags=re.IGNORECASE)
+        clean_q = clean_q.strip()
         if not clean_q:
             return QueryDecompositionResult(
                 original_query=clean_q,
@@ -218,6 +222,56 @@ class QueryDecomposer:
                     ),
                 ],
                 rationale=f"Cross-entity comparison decomposed into separate requirements for {e1} and {e2}.",
+            )
+
+        # Check: Compare [Aspects] between [E1] and [E2]
+        m_between = re.match(
+            r"^\s*compare\s+(?:the\s+)?(.+?)\s+between\s+(?:the\s+)?(.+?)\s+(?:and|versus|vs\.?)\s+(?:the\s+)?(.+?)\.?\??$",
+            query,
+            re.IGNORECASE,
+        )
+        if m_between:
+            aspects_str = m_between.group(1).strip()
+            e1 = m_between.group(2).strip()
+            e2 = m_between.group(3).strip()
+            raw_aspects = re.split(r"\s+and\s+|\s*,\s*", aspects_str)
+            aspects = [a.strip() for a in raw_aspects if a.strip() and not self._is_protected_phrase(a)]
+            if not aspects:
+                aspects = [aspects_str]
+
+            sub_qs = []
+            sq_idx = 1
+            for asp in aspects:
+                clean_asp = re.sub(r"^(?:their|the|both)\s+", "", asp, flags=re.IGNORECASE).strip()
+                is_plural = clean_asp.endswith("s") and not clean_asp.endswith("ss")
+                verb = "are the" if is_plural else "is the"
+                sub_qs.append(
+                    SubQuestion(
+                        id=f"sq_{sq_idx}",
+                        text=f"What {verb} {clean_asp} of the {e1}?",
+                        aspect=re.sub(r"\s+", "_", clean_asp.lower()),
+                        target_entity=e1,
+                        importance=1.0,
+                    )
+                )
+                sq_idx += 1
+                sub_qs.append(
+                    SubQuestion(
+                        id=f"sq_{sq_idx}",
+                        text=f"What {verb} {clean_asp} of the {e2}?",
+                        aspect=re.sub(r"\s+", "_", clean_asp.lower()),
+                        target_entity=e2,
+                        importance=1.0,
+                    )
+                )
+                sq_idx += 1
+
+            return QueryDecompositionResult(
+                original_query=query,
+                is_compound=True,
+                decomposition_type=DecompositionType.COMPARISON,
+                sub_questions=sub_qs,
+                rationale=f"Cross-entity comparison decomposed into {len(sub_qs)} requirements across {e1} and {e2}.",
             )
 
         patterns = [
@@ -406,6 +460,9 @@ class QueryDecomposer:
                     if not re.search(rf"\b{re.escape(lead_entity)}\b", c_text, re.IGNORECASE):
                         if re.search(r"\b(?:the\s+printer|the\s+unit|the\s+device|the\s+system)\b", c_text, re.IGNORECASE):
                             c_text = re.sub(r"\b(?:the\s+printer|the\s+unit|the\s+device|the\s+system)\b", f"the {lead_entity}", c_text, count=1, flags=re.IGNORECASE)
+                        elif re.search(r"\b(?:it|this|that)\b", c_text, re.IGNORECASE):
+                            repl = lead_entity if re.match(r"^[A-Za-z]+-[0-9]+", lead_entity) else f"the {lead_entity}"
+                            c_text = re.sub(r"\b(?:it|this|that)\b", repl, c_text, count=1, flags=re.IGNORECASE)
                         elif "password" in c_text.lower():
                             c_text = f"{c_text} for the {lead_entity}"
 

@@ -245,6 +245,34 @@ class EvidenceGate:
                 requires_human_clarification=True,
             )
 
+        # 2.5. Universal Requirement & Predicate Attestation Check (Phase 4.6)
+        from app.retrieval.universal_evidence_sufficiency import universal_evidence_sufficiency
+        universal_report = universal_evidence_sufficiency.evaluate(
+            query=clean_query,
+            retrieved_contexts=retrieved_contexts,
+        )
+        if universal_report.overall_status in ["INSUFFICIENT", "CONFLICTING"]:
+            missing_desc = "; ".join(universal_report.missing_aspects_explanations)
+            reasons.append(f"Universal evidence sufficiency check: {missing_desc}")
+            abstention_msg = (
+                "### 1. Executive Summary / Direct Answer\n"
+                f"Based on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry. {missing_desc}\n\n"
+                "### 2. Missing Information / Limitations\n"
+                "The requested specific attribute or technical specification is not attested in the indexed documentation.\n\n"
+                "### 3. Verified Source Citations\n"
+                "   - [Source: No relevant documentation found]"
+            )
+            return EvidenceSufficiencyDecision(
+                status="INSUFFICIENT" if universal_report.overall_status == "INSUFFICIENT" else "CONFLICTING",
+                top_similarity_score=top_score,
+                similarity_floor_passed=True,
+                relevance_threshold_used=self.MIN_SIMILARITY_FLOOR,
+                entity_result=entity_res,
+                decision_reasons=reasons,
+                abstention_message=abstention_msg,
+                requires_human_clarification=True,
+            )
+
         # 2b. Commercial / Dealer Terms Verification (Address in-domain missing attributes, e.g. P4_2_VAL31)
         commercial_terms = ["wholesale", "dealer discount", "bulk discount", "reseller discount", "dealer pricing", "distributor pricing"]
         if any(term in lower_query for term in commercial_terms):

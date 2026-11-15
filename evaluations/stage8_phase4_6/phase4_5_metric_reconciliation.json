@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "title": "Phase 4.5 Historical Metrics & Claim Grounding Verification",
+    "phase": "Stage 8 Phase 4.6 Audit",
+    "date": "2026-11-15",
+    "verified_historical_queries": 112,
+    "verified_accuracy_percent": 93.75,
+    "mathematical_reconciliation_verdict": "VERIFIED_ACCURATE"
+  },
+  "ground_truth_distribution": {
+    "SUFFICIENT": 78,
+    "PARTIAL": 12,
+    "INSUFFICIENT": 22,
+    "CONFLICTING": 0
+  },
+  "predicted_distribution": {
+    "SUFFICIENT": 71,
+    "PARTIAL": 16,
+    "INSUFFICIENT": 23,
+    "CONFLICTING": 2
+  },
+  "confusion_matrix": {
+    "SUFFICIENT": {
+      "SUFFICIENT": 71,
+      "PARTIAL": 4,
+      "INSUFFICIENT": 1,
+      "CONFLICTING": 2
+    },
+    "PARTIAL": {
+      "SUFFICIENT": 0,
+      "PARTIAL": 12,
+      "INSUFFICIENT": 0,
+      "CONFLICTING": 0
+    },
+    "INSUFFICIENT": {
+      "SUFFICIENT": 0,
+      "PARTIAL": 0,
+      "INSUFFICIENT": 22,
+      "CONFLICTING": 0
+    },
+    "CONFLICTING": {
+      "SUFFICIENT": 0,
+      "PARTIAL": 0,
+      "INSUFFICIENT": 0,
+      "CONFLICTING": 0
+    }
+  },
+  "suite_reconciliation": {
+    "Phase 4 Original": {
+      "total": 50,
+      "correct": 45,
+      "SUFFICIENT": 0,
+      "PARTIAL": 0,
+      "INSUFFICIENT": 0,
+      "CONFLICTING": 0,
+      "FR": 5,
+      "FA": 0
+    },
+    "Phase 4.1 Regression": {
+      "total": 10,
+      "correct": 10,
+      "SUFFICIENT": 0,
+      "PARTIAL": 0,
+      "INSUFFICIENT": 0,
+      "CONFLICTING": 0,
+      "FR": 0,
+      "FA": 0
+    },
+    "Phase 4.2 Independent Validation": {
+      "total": 32,
+      "correct": 30,
+      "SUFFICIENT": 0,
+      "PARTIAL": 0,
+      "INSUFFICIENT": 0,
+      "CONFLICTING": 0,
+      "FR": 2,
+      "FA": 0
+    },
+    "Phase 4.4 Compound Query": {
+      "total": 20,
+      "correct": 20,
+      "SUFFICIENT": 0,
+      "PARTIAL": 0,
+      "INSUFFICIENT": 0,
+      "CONFLICTING": 0,
+      "FR": 0,
+      "FA": 0
+    }
+  },
+  "reliability_rates": {
+    "false_acceptance": {
+      "count": 0,
+      "denominator": 34,
+      "rate_percent": 0.0,
+      "formula": "False Acceptances / (Actual PARTIAL + Actual INSUFFICIENT)"
+    },
+    "false_rejection": {
+      "count": 7,
+      "denominator": 78,
+      "rate_percent": 8.97,
+      "formula": "False Rejections / Actual SUFFICIENT"
+    }
+  },
+  "claim_grounding_audit": {
+    "total_claims_audited": 453,
+    "claim_counts": {
+      "FULLY_GROUNDED": 142,
+      "PARTIALLY_GROUNDED": 306,
+      "ABSTENTION_NOTICE_OR_STATEMENT": 5,
+      "UNSUPPORTED_HALLUCINATIONS": 0
+    },
+    "distinction_note": "Citation validity (pointer resolving to existing chunk) is strictly separated from claim entailment (text logically and factually supporting the proposition)."
+  }
+}

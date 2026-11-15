@@ -283,6 +283,11 @@ class CitationValidator:
             suggests_disassembly = bool(
                 re.search(r"\b(?:can\s+(?:open|disassemble)|open\s+(?:the\s+)?(?:internal|fuser|chassis|assembly|mechanism)|disassemble\s+(?:the\s+)?(?:fuser|assembly|chassis|printer))\b", answer_text.lower())
             )
+            # Guard against false conflict when answer merely quotes or cites the warranty voiding prohibition against opening
+            if suggests_disassembly and bool(re.search(r"\b(?:attempting to|do not|never|prohibits?|void(?:s|ed)?)[^.]*?\bopen\s+(?:the\s+)?internal\b", answer_text.lower())):
+                if not bool(re.search(r"\b(?:user\s+may|you\s+can|recommended\s+to|proceed\s+to)\s+open\s+(?:the\s+)?(?:internal|fuser)\b", answer_text.lower())):
+                    suggests_disassembly = False
+
             if has_void_clause and suggests_disassembly:
                 conflict_detected = True
 

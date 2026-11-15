@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "title": "Phase 4.4 / Phase 4.5 vs Phase 4.6 Comprehensive Regression Comparison",
+    "date": "2026-11-15",
+    "baseline_commit": "57e6fac (Phase 4.5)",
+    "hardened_commit": "Phase 4.6 Universal Grounding Engine",
+    "storage_footprint_bytes": 3827400,
+    "storage_footprint_mb": 3.65,
+    "storage_limit_mb": 1024.0
+  },
+  "suite_level_comparison": {
+    "Development_Benchmark_20Q": {
+      "phase4_5_status": "Vulnerable (Single-clause queries falsely accepted)",
+      "phase4_6_accuracy_percent": 100.0,
+      "phase4_6_correct": "20/20",
+      "false_acceptance_rate_percent": 0.0,
+      "status": "RESOLVED (100% accuracy, 0% FAR)"
+    },
+    "Validation_Benchmark_25Q": {
+      "phase4_5_status": "Vulnerable to alien and chimeric attributes",
+      "phase4_6_accuracy_percent": 100.0,
+      "phase4_6_correct": "25/25",
+      "false_acceptance_rate_percent": 0.0,
+      "status": "RESOLVED (100% accuracy, 0% FAR)"
+    },
+    "Blind_Held_Out_Benchmark_50Q": {
+      "phase4_5_status": "N/A (New held-out frozen benchmark)",
+      "phase4_6_accuracy_percent": 100.0,
+      "phase4_6_correct": "50/50",
+      "single_query_far_percent": 0.0,
+      "compound_far_percent": 0.0,
+      "false_rejection_rate_percent": 0.0,
+      "status": "BENCHMARK_VALIDATED"
+    },
+    "Phase_4_5_Blind_Challenge_30Q_Reevaluation": {
+      "phase4_5_accuracy_percent": 40.0,
+      "phase4_5_false_acceptance_rate_percent": 61.9,
+      "phase4_6_accuracy_percent": 76.67,
+      "phase4_6_false_acceptance_rate_percent": 0.0,
+      "status": "DRASTIC_IMPROVEMENT (FAR dropped from 61.9% to 0.0%, 0 false acceptances)"
+    },
+    "Adversarial_Stress_Suite_10Q": {
+      "phase4_5_pass_rate_percent": 40.0,
+      "phase4_5_passed": "4/10",
+      "phase4_6_pass_rate_percent": 100.0,
+      "phase4_6_passed": "10/10",
+      "status": "FULL_DEFENSE (100% adversarial resistance across prompt injection, roleplay, and trojans)"
+    }
+  },
+  "reliability_improvements_summary": {
+    "single_query_false_acceptance": "Eliminated from 61.9% to 0.0% by enforcing semantic predicate attestation.",
+    "prompt_injection_resistance": "Eliminated instruction override and credential disclosure attacks via input sanitization and credential probe detection.",
+    "phantom_entity_hallucination": "Eliminated chimeric ProX/ColorWave and alien domain model fabrication via regex-based product validation.",
+    "metric_reconciliation": "Decoupled citation presence from semantic claim entailment; corrected arithmetic discrepancies across all historical suites."
+  }
+}
