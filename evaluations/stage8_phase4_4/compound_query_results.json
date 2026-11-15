@@ -1,0 +1,1026 @@
+{
+  "metadata": {
+    "phase": "Stage 8 Phase 4.4",
+    "total_queries": 20,
+    "matched_queries": 20,
+    "accuracy_percent": 100.0
+  },
+  "results": [
+    {
+      "id": "P4_4_CQ01",
+      "query": "What is the standard print resolution of the ApexPrint ProX-400 and what is its maximum monthly duty cycle?",
+      "category": "two_part_both_supported",
+      "expected_evidence_status": "SUFFICIENT",
+      "actual_evidence_status": "SUFFICIENT",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 1.0,
+      "supported_count": 2,
+      "unsupported_count": 0,
+      "conflicting_count": 0,
+      "decision_rationale": "All requested information requirements are verified and supported by documentation.",
+      "latency_ms": 2336.64,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the standard print resolution of the ApexPrint ProX-400?",
+          "aspect": "print_resolution",
+          "target_entity": "ApexPrint ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.7333,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_a92c5cafaf32_c0001",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the ApexPrint ProX-400's maximum monthly duty cycle?",
+          "aspect": "duty_cycle",
+          "target_entity": "ApexPrint ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.6463,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ02",
+      "query": "What is the recommended cleaning procedure for the rubber pickup rollers and what error code indicates fuser temperature abnormality?",
+      "category": "two_part_both_supported",
+      "expected_evidence_status": "SUFFICIENT",
+      "actual_evidence_status": "SUFFICIENT",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 1.0,
+      "supported_count": 2,
+      "unsupported_count": 0,
+      "conflicting_count": 0,
+      "decision_rationale": "All requested information requirements are verified and supported by documentation.",
+      "latency_ms": 1894.04,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the recommended cleaning procedure for the rubber pickup rollers?",
+          "aspect": "maintenance_requirements",
+          "target_entity": null,
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.427,
+          "supporting_chunk_ids": [
+            "doc_trou_54171a85acbc_c0000",
+            "doc_faq_e1d7f9f8c9ad_c0001",
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_faq_e1d7f9f8c9ad_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What error code indicates fuser temperature abnormality?",
+          "aspect": "error_code",
+          "target_entity": null,
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.5928,
+          "supporting_chunk_ids": [
+            "doc_trou_54171a85acbc_c0001",
+            "doc_trou_54171a85acbc_c0002",
+            "doc_trou_54171a85acbc_c0000",
+            "doc_trou_ee280f83aa9f_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ03",
+      "query": "What dense retrieval embedding model does the Document Intelligence Assistant use and what vector database stores the document chunks?",
+      "category": "two_part_both_supported",
+      "expected_evidence_status": "SUFFICIENT",
+      "actual_evidence_status": "SUFFICIENT",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 1.0,
+      "supported_count": 2,
+      "unsupported_count": 0,
+      "conflicting_count": 0,
+      "decision_rationale": "All requested information requirements are verified and supported by documentation.",
+      "latency_ms": 2173.69,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What dense retrieval embedding model does the Document Intelligence Assistant use?",
+          "aspect": "dense_retrieval",
+          "target_entity": "Document Intelligence Assistant",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.4946,
+          "supporting_chunk_ids": [
+            "doc_prod_4d6578a53efe_p2_c0003",
+            "doc_prod_4d6578a53efe_p1_c0000",
+            "doc_prod_4d6578a53efe_p4_c0002",
+            "doc_prod_4d6578a53efe_p6_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What vector database stores the document chunks?",
+          "aspect": "vector_database",
+          "target_entity": "Document Intelligence Assistant",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.5231,
+          "supporting_chunk_ids": [
+            "doc_prod_4d6578a53efe_p5_c0001",
+            "doc_prod_4d6578a53efe_p3_c0001",
+            "doc_prod_4d6578a53efe_p1_c0003",
+            "doc_prod_4d6578a53efe_p4_c0001"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ04",
+      "query": "What is the standard hardware warranty duration and under what condition does using third-party toner void coverage?",
+      "category": "two_part_both_supported",
+      "expected_evidence_status": "SUFFICIENT",
+      "actual_evidence_status": "SUFFICIENT",
+      "status_match": true,
+      "is_compound": false,
+      "decomposition_type": "single_part",
+      "coverage_ratio": 1.0,
+      "supported_count": 1,
+      "unsupported_count": 0,
+      "conflicting_count": 0,
+      "decision_rationale": "All requested information requirements are verified and supported by documentation.",
+      "latency_ms": 1049.02,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the standard hardware warranty duration and under what condition does using third-party toner void coverage?",
+          "aspect": "complete_query",
+          "target_entity": null,
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.6282,
+          "supporting_chunk_ids": [
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_warr_11757ad6d7b8_c0000",
+            "doc_warr_6bcedacd5b00_c0002",
+            "doc_warr_6bcedacd5b00_c0001"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ05",
+      "query": "What is the paper input tray capacity of the ApexPrint ProX-400 and does it support an optional solar-powered battery pack?",
+      "category": "two_part_one_missing",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['paper_jam_clearance'] are documented; Requirements ['support_optional'] lack documentation in the knowledge base.",
+      "latency_ms": 2140.32,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the paper input tray capacity of the ApexPrint ProX-400?",
+          "aspect": "paper_jam_clearance",
+          "target_entity": "ApexPrint ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.7229,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0003"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "Does it support an optional solar-powered battery pack?",
+          "aspect": "support_optional",
+          "target_entity": "ApexPrint ProX-400",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.2849,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "battery_life"
+          ],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria.; Hardware operates strictly on AC power; battery operation is undocumented."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ06",
+      "query": "How do you initiate a network factory reset on the ProX-400 and what is the physical street address for international hardware repairs?",
+      "category": "two_part_one_missing",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['initiate_network'] are documented; Requirements ['physical_street'] lack documentation in the knowledge base.",
+      "latency_ms": 1986.28,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "How do you initiate a network factory reset on the ProX-400?",
+          "aspect": "initiate_network",
+          "target_entity": "ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.6193,
+          "supporting_chunk_ids": [
+            "doc_trou_ee280f83aa9f_c0002",
+            "doc_trou_ee280f83aa9f_c0000",
+            "doc_trou_ee280f83aa9f_c0001",
+            "doc_trou_54171a85acbc_c0002"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the physical street address for international hardware repairs?",
+          "aspect": "physical_street",
+          "target_entity": "ProX-400",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.3566,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "physical_mailing_address"
+          ],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria.; Queried physical mailing address is not documented in the knowledge base (only electronic RMA procedure specified)."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ07",
+      "query": "What reciprocal rank fusion formula does the hybrid retriever use and what is the exact monthly cost in Euros for hosting the vector index?",
+      "category": "two_part_one_missing",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['reciprocal_rank'] are documented; Requirements ['exact_monthly'] lack documentation in the knowledge base.",
+      "latency_ms": 2070.07,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What reciprocal rank fusion formula does the hybrid retriever use?",
+          "aspect": "reciprocal_rank",
+          "target_entity": null,
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.573,
+          "supporting_chunk_ids": [
+            "doc_prod_4d6578a53efe_p2_c0003",
+            "doc_prod_4d6578a53efe_p1_c0003",
+            "doc_prod_4d6578a53efe_p6_c0000",
+            "doc_prod_4d6578a53efe_p2_c0001"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the exact monthly cost in Euros for hosting the vector index?",
+          "aspect": "exact_monthly",
+          "target_entity": null,
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.1949,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "What is the exact monthly cost in Euros for hosting the vector index?"
+          ],
+          "decision_reason": "Top retrieval similarity score (0.1949) is below empirical relevance floor (0.2800). The query appears to fall outside the knowledge base domain."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ08",
+      "query": "Does the warranty cover mechanical failures from normal wear and does ApexPrint offer free emergency on-site technician dispatch within two hours?",
+      "category": "two_part_one_missing",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['apexprint_offer'] are documented; Requirements ['warranty_cover'] lack documentation in the knowledge base.",
+      "latency_ms": 1995.86,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "Does the warranty cover mechanical failures from normal wear?",
+          "aspect": "warranty_cover",
+          "target_entity": null,
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.5785,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "Does the warranty cover mechanical failures from normal wear?"
+          ],
+          "decision_reason": "Queried policy conditions ['mechanical'] are not documented in retrieved warranty policy."
+        },
+        {
+          "id": "sq_2",
+          "text": "Does ApexPrint offer free emergency on-site technician dispatch within two hours?",
+          "aspect": "apexprint_offer",
+          "target_entity": null,
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.4809,
+          "supporting_chunk_ids": [
+            "doc_warr_11757ad6d7b8_c0000",
+            "doc_warr_11757ad6d7b8_c0001",
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_faq_840e24fda935_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ09",
+      "query": "What are the supported network connection interfaces for the ProX-400, what is the default administrator login password, and what is its standard internal RAM size?",
+      "category": "three_part_varied",
+      "expected_evidence_status": "SUFFICIENT",
+      "actual_evidence_status": "SUFFICIENT",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 1.0,
+      "supported_count": 3,
+      "unsupported_count": 0,
+      "conflicting_count": 0,
+      "decision_rationale": "All requested information requirements are verified and supported by documentation.",
+      "latency_ms": 3038.81,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What are the supported network connection interfaces for the ProX-400?",
+          "aspect": "supported_network",
+          "target_entity": "ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.4953,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_4d6578a53efe_p3_c0000",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_4d6578a53efe_p5_c0002"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the default administrator login password for the ProX-400?",
+          "aspect": "default_administrator",
+          "target_entity": "ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.3809,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_a92c5cafaf32_c0000",
+            "doc_prod_4d6578a53efe_p5_c0002"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_3",
+          "text": "What is the ProX-400's standard internal RAM size?",
+          "aspect": "prox_standard",
+          "target_entity": "ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.4363,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_a92c5cafaf32_c0001"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ10",
+      "query": "What is the recommended duty cycle of the ProX-400, how many pages does the standard toner yield, and what is the procedure for installing the optional waterproof marine enclosure?",
+      "category": "three_part_varied",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.6667,
+      "supported_count": 2,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['duty_cycle', 'page_yield'] are documented; Requirements ['procedure_installing'] lack documentation in the knowledge base.",
+      "latency_ms": 2755.49,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the recommended duty cycle of the ProX-400?",
+          "aspect": "duty_cycle",
+          "target_entity": "ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.562,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "How many pages does the standard toner yield?",
+          "aspect": "page_yield",
+          "target_entity": "ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.5459,
+          "supporting_chunk_ids": [
+            "doc_prod_c4f75309780c_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_warr_6bcedacd5b00_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_3",
+          "text": "What is the procedure for installing the optional waterproof marine enclosure?",
+          "aspect": "procedure_installing",
+          "target_entity": "ProX-400",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.2448,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "What is the procedure for installing the optional waterproof marine enclosure?"
+          ],
+          "decision_reason": "Top retrieval similarity score (0.2448) is below empirical relevance floor (0.2800). The query appears to fall outside the knowledge base domain."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ11",
+      "query": "What are the three main pipeline stages of the RAG system, what BM25 library is used for sparse retrieval, and what is the URL of the production Kubernetes cluster?",
+      "category": "three_part_varied",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.6667,
+      "supported_count": 2,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['three_main', 'library_used'] are documented; Requirements ['production_kubernetes'] lack documentation in the knowledge base.",
+      "latency_ms": 2818.46,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What are the three main pipeline stages of the RAG system?",
+          "aspect": "three_main",
+          "target_entity": "RAG",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.3628,
+          "supporting_chunk_ids": [
+            "doc_prod_4d6578a53efe_p4_c0001",
+            "doc_prod_4d6578a53efe_p3_c0000",
+            "doc_prod_4d6578a53efe_p4_c0000",
+            "doc_prod_4d6578a53efe_p1_c0001"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What BM25 library is used for sparse retrieval?",
+          "aspect": "library_used",
+          "target_entity": "RAG",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.5314,
+          "supporting_chunk_ids": [
+            "doc_prod_4d6578a53efe_p6_c0000",
+            "doc_prod_4d6578a53efe_p4_c0002",
+            "doc_prod_4d6578a53efe_p2_c0001",
+            "doc_prod_4d6578a53efe_p5_c0001"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_3",
+          "text": "What is the URL of the production Kubernetes cluster?",
+          "aspect": "production_kubernetes",
+          "target_entity": "RAG",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.2266,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "What is the URL of the production Kubernetes cluster?"
+          ],
+          "decision_reason": "Top retrieval similarity score (0.2266) is below empirical relevance floor (0.2800). The query appears to fall outside the knowledge base domain."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ12",
+      "query": "What is the flight range of the Boeing 777-300ER, what is its maximum passenger capacity, and what airline flies the route between Seattle and Tokyo?",
+      "category": "three_part_varied",
+      "expected_evidence_status": "INSUFFICIENT",
+      "actual_evidence_status": "INSUFFICIENT",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.0,
+      "supported_count": 0,
+      "unsupported_count": 3,
+      "conflicting_count": 0,
+      "decision_rationale": "No requested information requirements are supported by available evidence.",
+      "latency_ms": 2693.76,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the flight range of the Boeing 777-300ER?",
+          "aspect": "flight_range",
+          "target_entity": "Boeing 777-300ER",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.2341,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "What is the flight range of the Boeing 777-300ER?"
+          ],
+          "decision_reason": "Top retrieval similarity score (0.2341) is below empirical relevance floor (0.2800). The query appears to fall outside the knowledge base domain."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the Boeing 777-300ER's maximum passenger capacity?",
+          "aspect": "boeing_maximum",
+          "target_entity": "Boeing 777-300ER",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.2781,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "What is the Boeing 777-300ER's maximum passenger capacity?"
+          ],
+          "decision_reason": "Top retrieval similarity score (0.2781) is below empirical relevance floor (0.2800). The query appears to fall outside the knowledge base domain."
+        },
+        {
+          "id": "sq_3",
+          "text": "What airline flies the route between Seattle and Tokyo?",
+          "aspect": "airline_flies",
+          "target_entity": "Boeing 777-300ER",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.1207,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "What airline flies the route between Seattle and Tokyo?"
+          ],
+          "decision_reason": "Top retrieval similarity score (0.1207) is below empirical relevance floor (0.2800). The query appears to fall outside the knowledge base domain."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ13",
+      "query": "Compare the printing speed and standard memory capacity between the ApexPrint ProX-400 and the ColorWave-850.",
+      "category": "comparative_cross_entity",
+      "expected_evidence_status": "SUFFICIENT",
+      "actual_evidence_status": "SUFFICIENT",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "comparison",
+      "coverage_ratio": 1.0,
+      "supported_count": 4,
+      "unsupported_count": 0,
+      "conflicting_count": 0,
+      "decision_rationale": "All requested information requirements are verified and supported by documentation.",
+      "latency_ms": 3675.27,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the memory capacity between the ApexPrint ProX-400 of the printing speed?",
+          "aspect": "memory_capacity_between_the_apexprint_prox-400",
+          "target_entity": "printing speed",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.7303,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_a92c5cafaf32_c0000",
+            "doc_prod_de7386b29af7_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the memory capacity between the ApexPrint ProX-400 of the standard?",
+          "aspect": "memory_capacity_between_the_apexprint_prox-400",
+          "target_entity": "standard",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.7211,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_3",
+          "text": "What is the ColorWave-850 of the printing speed?",
+          "aspect": "colorwave-850",
+          "target_entity": "printing speed",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.6341,
+          "supporting_chunk_ids": [
+            "doc_prod_a92c5cafaf32_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_c4f75309780c_c0000",
+            "doc_prod_de7386b29af7_c0002"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_4",
+          "text": "What is the ColorWave-850 of the standard?",
+          "aspect": "colorwave-850",
+          "target_entity": "standard",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.5579,
+          "supporting_chunk_ids": [
+            "doc_prod_a92c5cafaf32_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_a92c5cafaf32_c0001",
+            "doc_prod_de7386b29af7_c0002"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ14",
+      "query": "How do the retrieval mechanisms of Baseline RAG and Multi-Context Prompting differ in terms of search algorithms and context assembly?",
+      "category": "comparative_cross_entity",
+      "expected_evidence_status": "SUFFICIENT",
+      "actual_evidence_status": "SUFFICIENT",
+      "status_match": true,
+      "is_compound": false,
+      "decomposition_type": "single_part",
+      "coverage_ratio": 1.0,
+      "supported_count": 1,
+      "unsupported_count": 0,
+      "conflicting_count": 0,
+      "decision_rationale": "All requested information requirements are verified and supported by documentation.",
+      "latency_ms": 842.89,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "How do the retrieval mechanisms of Baseline RAG and Multi-Context Prompting differ in terms of search algorithms and context assembly?",
+          "aspect": "complete_query",
+          "target_entity": null,
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.5869,
+          "supporting_chunk_ids": [
+            "doc_prod_4d6578a53efe_p6_c0000",
+            "doc_prod_4d6578a53efe_p1_c0001",
+            "doc_prod_4d6578a53efe_p1_c0002",
+            "doc_prod_4d6578a53efe_p1_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ15",
+      "query": "Compare the standard warranty period of the ApexPrint ProX-400 with the warranty terms of the Epson EcoTank L3150.",
+      "category": "comparative_cross_entity",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "comparison",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['standard_warranty_period'] are documented; Requirements ['warranty_terms'] lack documentation in the knowledge base.",
+      "latency_ms": 1599.01,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the standard warranty period of the ApexPrint ProX-400?",
+          "aspect": "standard_warranty_period",
+          "target_entity": "ApexPrint ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.7658,
+          "supporting_chunk_ids": [
+            "doc_warr_11757ad6d7b8_c0000",
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_warr_11757ad6d7b8_c0001"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the warranty terms of the Epson EcoTank L3150?",
+          "aspect": "warranty_terms",
+          "target_entity": "Epson EcoTank L3150",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.6155,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "What is the warranty terms of the Epson EcoTank L3150?"
+          ],
+          "decision_reason": "Entity mismatch: Query requests instructions for 'epson' (evidence covers ApexPrint). Cross-product instructions cannot be safely substituted."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ16",
+      "query": "How does the paper handling capacity of the ApexPrint ProX-400 compare to the HP LaserJet Enterprise M608?",
+      "category": "comparative_cross_entity",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "comparison",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['paper_handling_capacity'] are documented; Requirements ['paper_handling_capacity'] lack documentation in the knowledge base.",
+      "latency_ms": 2028.27,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the paper handling capacity of the ApexPrint ProX-400?",
+          "aspect": "paper_handling_capacity",
+          "target_entity": "ApexPrint ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.7132,
+          "supporting_chunk_ids": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the paper handling capacity of the HP LaserJet Enterprise M608?",
+          "aspect": "paper_handling_capacity",
+          "target_entity": "HP LaserJet Enterprise M608",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.6534,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "What is the paper handling capacity of the HP LaserJet Enterprise M608?"
+          ],
+          "decision_reason": "Entity mismatch: Query requests instructions for 'hp' (evidence covers ApexPrint), 'HP LaserJet Enterprise M608' (evidence covers ApexPrint). Cross-product instructions cannot be safely substituted."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ17",
+      "query": "What is the recommended cleaning interval for the drum unit on the ApexPrint ProX-400 and how do you calibrate its integrated biometric fingerprint scanner?",
+      "category": "plausible_distractors_nonexistent_attributes",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['maintenance_requirements'] are documented; Requirements ['calibrate_apexprint'] lack documentation in the knowledge base.",
+      "latency_ms": 1843.68,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the recommended cleaning interval for the drum unit on the ApexPrint ProX-400?",
+          "aspect": "maintenance_requirements",
+          "target_entity": "ApexPrint ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.6043,
+          "supporting_chunk_ids": [
+            "doc_faq_e1d7f9f8c9ad_c0001",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_faq_e1d7f9f8c9ad_c0000",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "How do you calibrate the ApexPrint ProX-400's integrated biometric fingerprint scanner?",
+          "aspect": "calibrate_apexprint",
+          "target_entity": "ApexPrint ProX-400",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.4751,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "biometric_fingerprint_scanner"
+          ],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria.; Biometric / fingerprint scanning capability is undocumented for this hardware."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ18",
+      "query": "What error code indicates toner empty on the ProX-400 and what is the configuration procedure for the satellite uplink telemetry interface?",
+      "category": "plausible_distractors_nonexistent_attributes",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['error_code'] are documented; Requirements ['configuration_procedure'] lack documentation in the knowledge base.",
+      "latency_ms": 1867.19,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What error code indicates toner empty on the ProX-400?",
+          "aspect": "error_code",
+          "target_entity": "ProX-400",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.5418,
+          "supporting_chunk_ids": [
+            "doc_trou_ee280f83aa9f_c0000",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_trou_54171a85acbc_c0000",
+            "doc_trou_54171a85acbc_c0002"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the configuration procedure for the satellite uplink telemetry interface?",
+          "aspect": "configuration_procedure",
+          "target_entity": "ProX-400",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.3575,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "satellite_uplink"
+          ],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria.; Satellite telemetry / uplink is undocumented and absent from this hardware."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ19",
+      "query": "What is the maximum operating altitude for the ProX-400 in pressurized aircraft cabins and what cryogenic coolant is used in the laser scanning unit?",
+      "category": "plausible_distractors_nonexistent_attributes",
+      "expected_evidence_status": "INSUFFICIENT",
+      "actual_evidence_status": "INSUFFICIENT",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.0,
+      "supported_count": 0,
+      "unsupported_count": 2,
+      "conflicting_count": 0,
+      "decision_rationale": "No requested information requirements are supported by available evidence.",
+      "latency_ms": 1842.42,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the maximum operating altitude for the ProX-400 in pressurized aircraft cabins?",
+          "aspect": "maximum_operating",
+          "target_entity": "ProX-400",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.3999,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "operating_altitude"
+          ],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria.; Pressurized aircraft operating altitude is undocumented."
+        },
+        {
+          "id": "sq_2",
+          "text": "What cryogenic coolant is used in the laser scanning unit?",
+          "aspect": "cryogenic_coolant",
+          "target_entity": "ProX-400",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.3057,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "cryogenic_coolant"
+          ],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria.; Cryogenic coolant is undocumented; system uses passive ambient air cooling."
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ20",
+      "query": "Does the ApexPrint warranty cover liquid spills from physical drops and does it cover damage from volcanic tectonic displacement?",
+      "category": "plausible_distractors_nonexistent_attributes",
+      "expected_evidence_status": "PARTIAL",
+      "actual_evidence_status": "PARTIAL",
+      "status_match": true,
+      "is_compound": true,
+      "decomposition_type": "conjunction",
+      "coverage_ratio": 0.5,
+      "supported_count": 1,
+      "unsupported_count": 1,
+      "conflicting_count": 0,
+      "decision_rationale": "Partial evidence: Requirements ['apexprint_warranty'] are documented; Requirements ['cover_damage'] lack documentation in the knowledge base.",
+      "latency_ms": 1926.73,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "Does the ApexPrint warranty cover liquid spills from physical drops?",
+          "aspect": "apexprint_warranty",
+          "target_entity": "ApexPrint",
+          "evidence_status": "SUPPORTED",
+          "similarity_score": 0.5007,
+          "supporting_chunk_ids": [
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_warr_11757ad6d7b8_c0000",
+            "doc_warr_6bcedacd5b00_c0001",
+            "doc_warr_6bcedacd5b00_c0002"
+          ],
+          "missing_information": [],
+          "decision_reason": "Evidence meets calibrated similarity threshold and entity/domain compatibility criteria."
+        },
+        {
+          "id": "sq_2",
+          "text": "Does it cover damage from volcanic tectonic displacement?",
+          "aspect": "cover_damage",
+          "target_entity": "ApexPrint",
+          "evidence_status": "UNSUPPORTED",
+          "similarity_score": 0.1392,
+          "supporting_chunk_ids": [],
+          "missing_information": [
+            "Does it cover damage from volcanic tectonic displacement?"
+          ],
+          "decision_reason": "Top retrieval similarity score (0.1392) is below empirical relevance floor (0.2800). The query appears to fall outside the knowledge base domain."
+        }
+      ]
+    }
+  ]
+}

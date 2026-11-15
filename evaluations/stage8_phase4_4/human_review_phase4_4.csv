@@ -1,0 +1,12 @@
+Query_ID,Query_Text,Decomposition_Type,Evidence_Status,Coverage_Ratio,Supported_Count,Unsupported_Count,Grounding_Faithful_YesNo,Missing_Clauses_Identified_YesNo,Citation_Accuracy_1to5,Reviewer_Comments
+P4_4_CQ01,What is the standard print resolution of the ApexPrint ProX-400 and what is its maximum monthly duty cycle?,conjunction,SUFFICIENT,1.0,2,0,,,,
+P4_4_CQ02,What is the recommended cleaning procedure for the rubber pickup rollers and what error code indicates fuser temperature abnormality?,conjunction,SUFFICIENT,1.0,2,0,,,,
+P4_4_CQ03,What dense retrieval embedding model does the Document Intelligence Assistant use and what vector database stores the document chunks?,conjunction,SUFFICIENT,1.0,2,0,,,,
+P4_4_CQ04,What is the standard hardware warranty duration and under what condition does using third-party toner void coverage?,single_part,SUFFICIENT,1.0,1,0,,,,
+P4_4_CQ05,What is the paper input tray capacity of the ApexPrint ProX-400 and does it support an optional solar-powered battery pack?,conjunction,PARTIAL,0.5,1,1,,,,
+P4_4_CQ06,How do you initiate a network factory reset on the ProX-400 and what is the physical street address for international hardware repairs?,conjunction,PARTIAL,0.5,1,1,,,,
+P4_4_CQ07,What reciprocal rank fusion formula does the hybrid retriever use and what is the exact monthly cost in Euros for hosting the vector index?,conjunction,PARTIAL,0.5,1,1,,,,
+P4_4_CQ08,Does the warranty cover mechanical failures from normal wear and does ApexPrint offer free emergency on-site technician dispatch within two hours?,conjunction,PARTIAL,0.5,1,1,,,,
+P4_4_CQ09,"What are the supported network connection interfaces for the ProX-400, what is the default administrator login password, and what is its standard internal RAM size?",conjunction,SUFFICIENT,1.0,3,0,,,,
+P4_4_CQ10,"What is the recommended duty cycle of the ProX-400, how many pages does the standard toner yield, and what is the procedure for installing the optional waterproof marine enclosure?",conjunction,PARTIAL,0.6667,2,1,,,,
+P4_2_VAL23,What is the standard warranty period and what is the exact physical mailing address for sending international return merchandise?,conjunction,PARTIAL,0.5,1,1,,,,

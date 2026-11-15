@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "total_queries_measured": 112,
+    "date": "2026-11-15",
+    "hardware_environment": "Windows 11 / Local CPU / SQLite ChromaDB / BM25Okapi"
+  },
+  "aggregate_latency_ms": {
+    "mean": 1357.14,
+    "median": 960.82,
+    "p95": 2755.49,
+    "min": 818.69,
+    "max": 3675.27
+  },
+  "per_benchmark_mean_latency_ms": {
+    "phase4_original_50": 1207.21,
+    "phase4_1_regression_10": 1243.47,
+    "phase4_2_independent_32": 1144.59,
+    "phase4_4_compound_20": 2128.89
+  },
+  "component_latency_breakdown_ms": {
+    "query_decomposition": 0.85,
+    "query_intent_analysis": 1.25,
+    "query_expansion": 0.05,
+    "hybrid_retrieval_dense_cpu": 820.5,
+    "hybrid_retrieval_sparse_bm25": 1.1,
+    "rrf_fusion": 0.35,
+    "evidence_gate_evaluation": 1.6,
+    "mcp_context_assembly": 1.8,
+    "local_grounded_synthesis": 14.5,
+    "citation_validation": 3.8
+  },
+  "observation": "End-to-end latency is predominantly bounded by CPU sentence-transformers embedding generation during hybrid retrieval (~820ms). Decomposition and deterministic synthesis add minimal overhead (<15ms)."
+}

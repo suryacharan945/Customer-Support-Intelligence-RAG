@@ -1,0 +1,596 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "phase": "Stage 8 Phase 4.4",
+    "benchmark_name": "Compound Query Decomposition & Claim Grounding Benchmark",
+    "description": "20 multi-clause, comparative, and multi-domain evaluation questions designed to test query decomposition, per-sub-question evidence sufficiency, and claim-level grounding without hallucination.",
+    "total_questions": 20,
+    "taxonomy_distribution": {
+      "SUFFICIENT": 7,
+      "PARTIAL": 11,
+      "INSUFFICIENT": 2,
+      "CONFLICTING": 0
+    },
+    "category_distribution": {
+      "two_part_both_supported": 4,
+      "two_part_one_missing": 4,
+      "three_part_varied": 4,
+      "comparative_cross_entity": 4,
+      "plausible_distractors_nonexistent_attributes": 4
+    }
+  },
+  "questions": [
+    {
+      "id": "P4_4_CQ01",
+      "query": "What is the standard print resolution of the ApexPrint ProX-400 and what is its maximum monthly duty cycle?",
+      "category": "two_part_both_supported",
+      "expected_evidence_status": "SUFFICIENT",
+      "is_supported": true,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the standard print resolution of the ApexPrint ProX-400",
+          "aspect": "print_resolution",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["1200 x 1200 dpi maximum print resolution"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what is its maximum monthly duty cycle",
+          "aspect": "duty_cycle",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["50,000 pages maximum monthly duty cycle"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_prox400_user_manual.md"],
+      "labeling_rationale": "Both print resolution (1200x1200 dpi) and monthly duty cycle (50,000 pages) are fully documented in the ProX-400 manual."
+    },
+    {
+      "id": "P4_4_CQ02",
+      "query": "What is the recommended cleaning procedure for the rubber pickup rollers and what error code indicates fuser temperature abnormality?",
+      "category": "two_part_both_supported",
+      "expected_evidence_status": "SUFFICIENT",
+      "is_supported": true,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the recommended cleaning procedure for the rubber pickup rollers",
+          "aspect": "cleaning_procedure",
+          "target_entity": "rubber pickup rollers",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Clean rubber pickup rollers using lint-free cloth dampened with isopropyl alcohol"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what error code indicates fuser temperature abnormality",
+          "aspect": "error_code",
+          "target_entity": "fuser",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Error code E-204 indicates fuser unit temperature abnormality"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_error_codes_and_hardware_troubleshooting.md"],
+      "labeling_rationale": "Pickup roller maintenance and Error E-204 fuser temperature abnormality are documented in troubleshooting guide."
+    },
+    {
+      "id": "P4_4_CQ03",
+      "query": "What dense retrieval embedding model does the Document Intelligence Assistant use and what vector database stores the document chunks?",
+      "category": "two_part_both_supported",
+      "expected_evidence_status": "SUFFICIENT",
+      "is_supported": true,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What dense retrieval embedding model does the Document Intelligence Assistant use",
+          "aspect": "embedding_model",
+          "target_entity": "Document Intelligence Assistant",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["all-MiniLM-L6-v2 384-dimensional dense sentence embeddings"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what vector database stores the document chunks",
+          "aspect": "vector_database",
+          "target_entity": "Document Intelligence Assistant",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["ChromaDB local persistent vector database"]
+        }
+      ],
+      "expected_relevant_docs": ["internship_rag_mcp_capstone_dossier.md"],
+      "labeling_rationale": "Both the all-MiniLM-L6-v2 embedding model and ChromaDB local vector store are documented in the Capstone Engineering Dossier."
+    },
+    {
+      "id": "P4_4_CQ04",
+      "query": "What is the standard hardware warranty duration and under what condition does using third-party toner void coverage?",
+      "category": "two_part_both_supported",
+      "expected_evidence_status": "SUFFICIENT",
+      "is_supported": true,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the standard hardware warranty duration",
+          "aspect": "warranty_duration",
+          "target_entity": "ApexPrint",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["12-month standard limited hardware warranty"]
+        },
+        {
+          "id": "sq_2",
+          "text": "under what condition does using third-party toner void coverage",
+          "aspect": "third_party_toner_warranty",
+          "target_entity": "ApexPrint",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Third-party toner does not automatically void warranty unless direct physical damage or failure is caused by the non-OEM cartridge"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_standard_limited_warranty_policy.md"],
+      "labeling_rationale": "Warranty duration and specific conditional exclusions for third-party cartridges are documented in the warranty policy."
+    },
+    {
+      "id": "P4_4_CQ05",
+      "query": "What is the paper input tray capacity of the ApexPrint ProX-400 and does it support an optional solar-powered battery pack?",
+      "category": "two_part_one_missing",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the paper input tray capacity of the ApexPrint ProX-400",
+          "aspect": "tray_capacity",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["250-sheet standard internal paper tray"]
+        },
+        {
+          "id": "sq_2",
+          "text": "does it support an optional solar-powered battery pack",
+          "aspect": "solar_battery_support",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Solar battery pack is undocumented; hardware operates strictly on standard AC electrical power"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_prox400_user_manual.md"],
+      "labeling_rationale": "Input tray capacity is documented (250 sheets), but solar battery operation is absent from knowledge base and hardware is AC-only."
+    },
+    {
+      "id": "P4_4_CQ06",
+      "query": "How do you initiate a network factory reset on the ProX-400 and what is the physical street address for international hardware repairs?",
+      "category": "two_part_one_missing",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "How do you initiate a network factory reset on the ProX-400",
+          "aspect": "network_reset",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Hold Go and Network buttons simultaneously for 10 seconds"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what is the physical street address for international hardware repairs",
+          "aspect": "physical_repair_address",
+          "target_entity": "ApexPrint",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Physical return mailing address is undocumented; customers must submit electronic RMA ticket"]
+        }
+      ],
+      "expected_relevant_docs": ["printer_troubleshooting_guide.md", "apexprint_standard_limited_warranty_policy.md"],
+      "labeling_rationale": "Network reset procedure is documented, but physical street address for international repairs is absent."
+    },
+    {
+      "id": "P4_4_CQ07",
+      "query": "What reciprocal rank fusion formula does the hybrid retriever use and what is the exact monthly cost in Euros for hosting the vector index?",
+      "category": "two_part_one_missing",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What reciprocal rank fusion formula does the hybrid retriever use",
+          "aspect": "rrf_formula",
+          "target_entity": "hybrid retriever",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["RRF score = sum(1 / (60 + rank_i)) across dense and sparse retrievers"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what is the exact monthly cost in Euros for hosting the vector index",
+          "aspect": "vector_hosting_cost",
+          "target_entity": "hybrid retriever",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Monthly hosting cost in Euros is undocumented; vector index runs locally on embedded ChromaDB"]
+        }
+      ],
+      "expected_relevant_docs": ["internship_rag_mcp_capstone_dossier.md"],
+      "labeling_rationale": "RRF formula with k=60 constant is documented, but vector hosting pricing in Euros is absent."
+    },
+    {
+      "id": "P4_4_CQ08",
+      "query": "Does the warranty cover mechanical failures from normal wear and does ApexPrint offer free emergency on-site technician dispatch within two hours?",
+      "category": "two_part_one_missing",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "Does the warranty cover mechanical failures from normal wear",
+          "aspect": "wear_tear_coverage",
+          "target_entity": "ApexPrint warranty",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Warranty explicitly excludes normal wear and tear on consumable components like rollers and drums"]
+        },
+        {
+          "id": "sq_2",
+          "text": "does ApexPrint offer free emergency on-site technician dispatch within two hours",
+          "aspect": "emergency_technician_dispatch",
+          "target_entity": "ApexPrint",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Two-hour emergency on-site dispatch is undocumented; service operates on standard return-to-depot RMA"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_standard_limited_warranty_policy.md"],
+      "labeling_rationale": "Consumable wear exclusion is documented, but two-hour on-site technician dispatch SLA is absent from documentation."
+    },
+    {
+      "id": "P4_4_CQ09",
+      "query": "What are the supported network connection interfaces for the ProX-400, what is the default administrator login password, and what is its standard internal RAM size?",
+      "category": "three_part_varied",
+      "expected_evidence_status": "SUFFICIENT",
+      "is_supported": true,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What are the supported network connection interfaces for the ProX-400",
+          "aspect": "network_interfaces",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Gigabit Ethernet 10/100/1000Base-T, Wi-Fi 802.11b/g/n, and High-Speed USB 2.0"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what is the default administrator login password",
+          "aspect": "admin_credentials",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Default web administration credentials: user 'admin' with default password 'admin123' or blank"]
+        },
+        {
+          "id": "sq_3",
+          "text": "what is its standard internal RAM size",
+          "aspect": "ram_size",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Standard internal RAM size of 128 MB (expandable to 384 MB)"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_prox400_user_manual.md"],
+      "labeling_rationale": "All three specifications (network interfaces, default admin password, and standard 128 MB RAM) are documented in the manual."
+    },
+    {
+      "id": "P4_4_CQ10",
+      "query": "What is the recommended duty cycle of the ProX-400, how many pages does the standard toner yield, and what is the procedure for installing the optional waterproof marine enclosure?",
+      "category": "three_part_varied",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the recommended duty cycle of the ProX-400",
+          "aspect": "recommended_duty_cycle",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Recommended monthly volume of 2,500 to 5,000 pages"]
+        },
+        {
+          "id": "sq_2",
+          "text": "how many pages does the standard toner yield",
+          "aspect": "toner_yield",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Standard toner cartridge yields approximately 3,000 pages at 5% coverage"]
+        },
+        {
+          "id": "sq_3",
+          "text": "what is the procedure for installing the optional waterproof marine enclosure",
+          "aspect": "marine_enclosure",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Waterproof marine enclosure accessory is undocumented and does not exist in standard documentation"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_prox400_user_manual.md"],
+      "labeling_rationale": "Duty cycle and toner yield are documented, but waterproof marine enclosure is absent."
+    },
+    {
+      "id": "P4_4_CQ11",
+      "query": "What are the three main pipeline stages of the RAG system, what BM25 library is used for sparse retrieval, and what is the URL of the production Kubernetes cluster?",
+      "category": "three_part_varied",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What are the three main pipeline stages of the RAG system",
+          "aspect": "pipeline_stages",
+          "target_entity": "RAG system",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Document Ingestion, Multi-Context Hybrid Retrieval, and Grounded Response Synthesis"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what BM25 library is used for sparse retrieval",
+          "aspect": "bm25_library",
+          "target_entity": "RAG system",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["rank-bm25 Python implementation with BM25Okapi scoring"]
+        },
+        {
+          "id": "sq_3",
+          "text": "what is the URL of the production Kubernetes cluster",
+          "aspect": "k8s_cluster_url",
+          "target_entity": "RAG system",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Production Kubernetes cluster URL is undocumented; system runs in local container / developer mode"]
+        }
+      ],
+      "expected_relevant_docs": ["internship_rag_mcp_capstone_dossier.md"],
+      "labeling_rationale": "Pipeline stages and rank-bm25 are documented in dossier, but Kubernetes cluster URL is absent."
+    },
+    {
+      "id": "P4_4_CQ12",
+      "query": "What is the flight range of the Boeing 777-300ER, what is its maximum passenger capacity, and what airline flies the route between Seattle and Tokyo?",
+      "category": "three_part_varied",
+      "expected_evidence_status": "INSUFFICIENT",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the flight range of the Boeing 777-300ER",
+          "aspect": "flight_range",
+          "target_entity": "Boeing 777-300ER",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Aircraft flight range is undocumented in printer/software knowledge base"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what is its maximum passenger capacity",
+          "aspect": "passenger_capacity",
+          "target_entity": "Boeing 777-300ER",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Aviation passenger capacity is completely absent"]
+        },
+        {
+          "id": "sq_3",
+          "text": "what airline flies the route between Seattle and Tokyo",
+          "aspect": "commercial_airline_route",
+          "target_entity": "commercial aviation",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Commercial flight route information is completely absent"]
+        }
+      ],
+      "expected_relevant_docs": [],
+      "labeling_rationale": "All three sub-questions belong to alien aviation domain and must result in total abstention."
+    },
+    {
+      "id": "P4_4_CQ13",
+      "query": "Compare the printing speed and standard memory capacity between the ApexPrint ProX-400 and the ColorWave-850.",
+      "category": "comparative_cross_entity",
+      "expected_evidence_status": "SUFFICIENT",
+      "is_supported": true,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the printing speed and standard memory capacity of the ApexPrint ProX-400",
+          "aspect": "specs_prox400",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["ProX-400 print speed is 35 ppm monochrome; standard memory is 128 MB"]
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the printing speed and standard memory capacity of the ColorWave-850",
+          "aspect": "specs_colorwave850",
+          "target_entity": "ColorWave-850",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["ColorWave-850 print speed is 24 ppm color / 30 ppm monochrome; standard memory is 256 MB"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_prox400_user_manual.md", "colorwave_850_specifications.md"],
+      "labeling_rationale": "Both ProX-400 and ColorWave-850 are documented hardware models with complete specifications."
+    },
+    {
+      "id": "P4_4_CQ14",
+      "query": "How do the retrieval mechanisms of Baseline RAG and Multi-Context Prompting differ in terms of search algorithms and context assembly?",
+      "category": "comparative_cross_entity",
+      "expected_evidence_status": "SUFFICIENT",
+      "is_supported": true,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What are the search algorithms and context assembly used in Baseline RAG",
+          "aspect": "baseline_rag_mechanism",
+          "target_entity": "Baseline RAG",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Baseline RAG uses dense semantic retrieval only with simple top-k excerpt concatenation"]
+        },
+        {
+          "id": "sq_2",
+          "text": "What are the search algorithms and context assembly used in Multi-Context Prompting",
+          "aspect": "mcp_mechanism",
+          "target_entity": "Multi-Context Prompting",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["MCP uses hybrid dense+BM25 retrieval with RRF fusion and balanced category-aware multi-context prompt formatting"]
+        }
+      ],
+      "expected_relevant_docs": ["internship_rag_mcp_capstone_dossier.md"],
+      "labeling_rationale": "Both Baseline RAG and Multi-Context Prompting architectures are fully documented in the project dossier."
+    },
+    {
+      "id": "P4_4_CQ15",
+      "query": "Compare the standard warranty period of the ApexPrint ProX-400 with the warranty terms of the Epson EcoTank L3150.",
+      "category": "comparative_cross_entity",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the standard warranty period of the ApexPrint ProX-400",
+          "aspect": "warranty_prox400",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["ApexPrint ProX-400 has a 12-month standard limited hardware warranty"]
+        },
+        {
+          "id": "sq_2",
+          "text": "What are the warranty terms of the Epson EcoTank L3150",
+          "aspect": "warranty_epson",
+          "target_entity": "Epson EcoTank L3150",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Epson EcoTank L3150 warranty terms are absent from knowledge base as Epson is a competitor brand"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_standard_limited_warranty_policy.md"],
+      "labeling_rationale": "ApexPrint warranty is documented, but competitor Epson EcoTank warranty is absent."
+    },
+    {
+      "id": "P4_4_CQ16",
+      "query": "How does the paper handling capacity of the ApexPrint ProX-400 compare to the HP LaserJet Enterprise M608?",
+      "category": "comparative_cross_entity",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the paper handling capacity of the ApexPrint ProX-400",
+          "aspect": "paper_capacity_prox400",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["ProX-400 paper capacity: 250-sheet standard cassette plus 50-sheet multipurpose bypass tray"]
+        },
+        {
+          "id": "sq_2",
+          "text": "What is the paper handling capacity of the HP LaserJet Enterprise M608",
+          "aspect": "paper_capacity_hp",
+          "target_entity": "HP LaserJet Enterprise M608",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["HP LaserJet Enterprise M608 specifications are absent from the indexed knowledge base"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_prox400_user_manual.md"],
+      "labeling_rationale": "ProX-400 tray capacity is documented, but competitor HP LaserJet M608 specifications are absent."
+    },
+    {
+      "id": "P4_4_CQ17",
+      "query": "What is the recommended cleaning interval for the drum unit on the ApexPrint ProX-400 and how do you calibrate its integrated biometric fingerprint scanner?",
+      "category": "plausible_distractors_nonexistent_attributes",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the recommended cleaning interval for the drum unit on the ApexPrint ProX-400",
+          "aspect": "drum_cleaning_interval",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Inspect and clean drum unit periodically or upon replacing toner cartridge; lifespan approximately 12,000 pages"]
+        },
+        {
+          "id": "sq_2",
+          "text": "how do you calibrate its integrated biometric fingerprint scanner",
+          "aspect": "biometric_fingerprint_scanner",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Biometric fingerprint scanner is a non-existent hardware attribute for the ProX-400 and absent from documentation"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_prox400_user_manual.md"],
+      "labeling_rationale": "Drum maintenance is documented, but integrated biometric scanner is a plausible distractor feature that does not exist."
+    },
+    {
+      "id": "P4_4_CQ18",
+      "query": "What error code indicates toner empty on the ProX-400 and what is the configuration procedure for the satellite uplink telemetry interface?",
+      "category": "plausible_distractors_nonexistent_attributes",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What error code indicates toner empty on the ProX-400",
+          "aspect": "toner_empty_code",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Error code E-101 indicates toner cartridge empty / replacement required"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what is the configuration procedure for the satellite uplink telemetry interface",
+          "aspect": "satellite_uplink",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Satellite uplink telemetry interface is absent from documentation; hardware supports Ethernet and Wi-Fi only"]
+        }
+      ],
+      "expected_relevant_docs": ["printer_troubleshooting_guide.md"],
+      "labeling_rationale": "Toner empty error code is documented, but satellite uplink interface is non-existent on this hardware."
+    },
+    {
+      "id": "P4_4_CQ19",
+      "query": "What is the maximum operating altitude for the ProX-400 in pressurized aircraft cabins and what cryogenic coolant is used in the laser scanning unit?",
+      "category": "plausible_distractors_nonexistent_attributes",
+      "expected_evidence_status": "INSUFFICIENT",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "What is the maximum operating altitude for the ProX-400 in pressurized aircraft cabins",
+          "aspect": "operating_altitude",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Pressurized aircraft cabin operating altitude is undocumented"]
+        },
+        {
+          "id": "sq_2",
+          "text": "what cryogenic coolant is used in the laser scanning unit",
+          "aspect": "cryogenic_coolant",
+          "target_entity": "ApexPrint ProX-400",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Cryogenic coolant is a fictitious attribute; printer laser scanning unit uses standard passive air cooling"]
+        }
+      ],
+      "expected_relevant_docs": [],
+      "labeling_rationale": "Both attributes are completely ungrounded and fictitious; system must abstain with INSUFFICIENT."
+    },
+    {
+      "id": "P4_4_CQ20",
+      "query": "Does the ApexPrint warranty cover liquid spills from physical drops and does it cover damage from volcanic tectonic displacement?",
+      "category": "plausible_distractors_nonexistent_attributes",
+      "expected_evidence_status": "PARTIAL",
+      "is_supported": false,
+      "sub_questions": [
+        {
+          "id": "sq_1",
+          "text": "Does the ApexPrint warranty cover liquid spills from physical drops",
+          "aspect": "liquid_spills_coverage",
+          "target_entity": "ApexPrint warranty",
+          "expected_status": "SUPPORTED",
+          "expected_claims": ["Warranty explicitly excludes and voids coverage for physical damage caused by drops and liquid spills"]
+        },
+        {
+          "id": "sq_2",
+          "text": "does it cover damage from volcanic tectonic displacement",
+          "aspect": "volcanic_tectonic_displacement",
+          "target_entity": "ApexPrint warranty",
+          "expected_status": "UNSUPPORTED",
+          "expected_claims": ["Volcanic tectonic displacement is an unmentioned specific peril absent from the warranty text"]
+        }
+      ],
+      "expected_relevant_docs": ["apexprint_extended_warranty_and_exclusions.md"],
+      "labeling_rationale": "Liquid spill exclusion is explicitly documented in warranty addendum, while volcanic displacement is completely unmentioned."
+    }
+  ]
+}

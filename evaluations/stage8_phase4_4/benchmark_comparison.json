@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "Comprehensive Longitudinal Benchmark Comparison (Phases 4.0 - 4.4)",
+    "date": "2026-11-15",
+    "active_repo": "C:\\Users\\surya\\Downloads\\Customer Support ChatBot",
+    "git_branch": "master"
+  },
+  "phase_milestones": {
+    "Phase 4.0 (Baseline)": {
+      "commit": "7d6b49e",
+      "p4_accuracy": "42/50 (84.0%) [41 supported + 1 abstained]",
+      "p4_unsupported_abstention": "1/5 (20.0%)",
+      "p4_supported_accuracy": "41/45 (91.1%)",
+      "false_acceptance_rate": "80.0% (4/5 unsupported accepted)",
+      "compound_query_handling": "None (Lexical overlap pass-through)"
+    },
+    "Phase 4.1 (Evidence Gate)": {
+      "commit": "1c68e2d",
+      "p4_accuracy": "47/50 (94.0%) [42 supported + 5 abstained]",
+      "p4_unsupported_abstention": "5/5 (100.0%)",
+      "p4_supported_accuracy": "42/45 (93.3%)",
+      "regression_10_accuracy": "10/10 (100.0%)",
+      "false_acceptance_rate": "0.0% (0/5 unsupported accepted)",
+      "compound_query_handling": "Single query-level gate"
+    },
+    "Phase 4.2 (Hardening)": {
+      "commit": "8fa19aa",
+      "p4_accuracy": "47/50 (94.0%)",
+      "regression_10_accuracy": "10/10 (100.0%)",
+      "independent_val_32": "30/32 (93.8%) [VAL23 false acceptance, VAL21/VAL22 agreement]",
+      "false_acceptance_rate": "11.1% on independent unsupported/partial (1/9)",
+      "compound_query_handling": "Conjunction leak on VAL23"
+    },
+    "Phase 4.3 (Evaluation Integrity)": {
+      "commit": "dc1b555",
+      "p4_accuracy": "47/50 (94.0%)",
+      "regression_10_accuracy": "10/10 (100.0%)",
+      "independent_val_32": "30/32 (93.8%) audited",
+      "combined_accuracy": "82/92 (89.13%) strict taxonomy across 4 classes",
+      "compound_query_handling": "Documented need for atomic clause decomposition"
+    },
+    "Phase 4.4 (Compound Decomposition & Grounding)": {
+      "commit": "current_working_tree",
+      "p4_accuracy": "42/50 (84.0%)",
+      "regression_10_accuracy": "10/10 (100.0%)",
+      "independent_val_32": "28/32 (87.5%)",
+      "compound_20_accuracy": "20/20 (100.0%)",
+      "val23_resolution": "RESOLVED: Evaluated strictly as PARTIAL with 0% false acceptance",
+      "false_acceptance_rate": "0.0% on partial and unsupported queries",
+      "total_queries_evaluated": 112,
+      "overall_accuracy_across_all_benchmarks": "100/112 (89.29%)"
+    }
+  }
+}

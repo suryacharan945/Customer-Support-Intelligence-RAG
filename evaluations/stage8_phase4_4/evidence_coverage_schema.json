@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EvidenceCoverageReport",
+  "description": "Structured claim-level evidence coverage and sub-question verification representation for compound and multi-requirement queries.",
+  "type": "object",
+  "required": [
+    "original_query",
+    "is_compound",
+    "decomposition_type",
+    "sub_questions",
+    "overall_evidence_status",
+    "coverage_ratio",
+    "supported_count",
+    "unsupported_count",
+    "conflicting_count",
+    "decision_rationale"
+  ],
+  "properties": {
+    "original_query": {
+      "type": "string",
+      "description": "The exact verbatim user inquiry string."
+    },
+    "is_compound": {
+      "type": "boolean",
+      "description": "True if the query was decomposed into multiple atomic requirements; False if evaluated as a single requirement."
+    },
+    "decomposition_type": {
+      "type": "string",
+      "enum": ["single_part", "conjunction", "comparison", "conditional", "multi_aspect"],
+      "description": "The structural strategy utilized to analyze the query."
+    },
+    "sub_questions": {
+      "type": "array",
+      "description": "The atomic sub-questions derived from the query, each with independent evidence grounding.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "text",
+          "aspect",
+          "importance",
+          "evidence_status",
+          "similarity_score",
+          "supporting_chunk_ids",
+          "decision_reason"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the sub-question, e.g. sq_1."
+          },
+          "text": {
+            "type": "string",
+            "description": "The self-contained grammatical sub-question."
+          },
+          "aspect": {
+            "type": "string",
+            "description": "The specific information target or attribute queried."
+          },
+          "target_entity": {
+            "type": ["string", "null"],
+            "description": "The entity or product bounded to this sub-question, if applicable."
+          },
+          "importance": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Relative weight of this information requirement (1.0 = primary, 0.8 = secondary)."
+          },
+          "evidence_status": {
+            "type": "string",
+            "enum": ["SUPPORTED", "UNSUPPORTED", "PARTIAL", "CONFLICTING"],
+            "description": "The evidence sufficiency status for this individual sub-question."
+          },
+          "similarity_score": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0,
+            "description": "Top dense vector similarity score obtained for this sub-question."
+          },
+          "supporting_chunk_ids": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "List of chunk IDs in the knowledge base that directly ground this requirement."
+          },
+          "missing_information": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Specific missing terms, clauses, or values not documented in retrieved chunks."
+          },
+          "decision_reason": {
+            "type": "string",
+            "description": "Explainable rationale justifying the evidence decision for this sub-question."
+          }
+        }
+      }
+    },
+    "overall_evidence_status": {
+      "type": "string",
+      "enum": ["SUFFICIENT", "PARTIAL", "INSUFFICIENT", "CONFLICTING"],
+      "description": "The aggregated system-level evidence status."
+    },
+    "coverage_ratio": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Weighted proportion of requested sub-questions that are supported by verified evidence."
+    },
+    "supported_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of sub-questions with evidence_status == SUPPORTED."
+    },
+    "unsupported_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of sub-questions with evidence_status == UNSUPPORTED."
+    },
+    "conflicting_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of sub-questions with evidence_status == CONFLICTING."
+    },
+    "decision_rationale": {
+      "type": "string",
+      "description": "Comprehensive explanation of how sub-question statuses yielded the overall evidence status."
+    },
+    "claim_level_assertions": {
+      "type": "array",
+      "description": "Detailed factual assertions generated in response to supported sub-questions.",
+      "items": {
+        "type": "object",
+        "required": [
+          "claim_text",
+          "sub_question_id",
+          "is_grounded",
+          "supporting_citations"
+        ],
+        "properties": {
+          "claim_text": {
+            "type": "string",
+            "description": "The factual assertion synthesized in the answer."
+          },
+          "sub_question_id": {
+            "type": "string",
+            "description": "The ID of the sub-question this claim addresses."
+          },
+          "is_grounded": {
+            "type": "boolean",
+            "description": "True if the assertion is strictly grounded in retrieved evidence."
+          },
+          "supporting_citations": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Sources/chunks cited in support of this claim."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,693 @@
+{
+  "metadata": {
+    "phase": "Stage 8 Phase 4.4",
+    "title": "Claim-Level Grounding & Provenance Verification Results",
+    "total_compound_queries": 20
+  },
+  "provenance_traceability": [
+    {
+      "id": "P4_4_CQ01",
+      "query": "What is the standard print resolution of the ApexPrint ProX-400 and what is its maximum monthly duty cycle?",
+      "status": "SUFFICIENT",
+      "coverage_ratio": 1.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the standard print resolution of the ApexPrint ProX-400?",
+          "aspect": "print_resolution",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_a92c5cafaf32_c0001",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the ApexPrint ProX-400's maximum monthly duty cycle?",
+          "aspect": "duty_cycle",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_terms": []
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ02",
+      "query": "What is the recommended cleaning procedure for the rubber pickup rollers and what error code indicates fuser temperature abnormality?",
+      "status": "SUFFICIENT",
+      "coverage_ratio": 1.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the recommended cleaning procedure for the rubber pickup rollers?",
+          "aspect": "maintenance_requirements",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_trou_54171a85acbc_c0000",
+            "doc_faq_e1d7f9f8c9ad_c0001",
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_faq_e1d7f9f8c9ad_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What error code indicates fuser temperature abnormality?",
+          "aspect": "error_code",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_trou_54171a85acbc_c0001",
+            "doc_trou_54171a85acbc_c0002",
+            "doc_trou_54171a85acbc_c0000",
+            "doc_trou_ee280f83aa9f_c0000"
+          ],
+          "missing_terms": []
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ03",
+      "query": "What dense retrieval embedding model does the Document Intelligence Assistant use and what vector database stores the document chunks?",
+      "status": "SUFFICIENT",
+      "coverage_ratio": 1.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What dense retrieval embedding model does the Document Intelligence Assistant use?",
+          "aspect": "dense_retrieval",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_4d6578a53efe_p2_c0003",
+            "doc_prod_4d6578a53efe_p1_c0000",
+            "doc_prod_4d6578a53efe_p4_c0002",
+            "doc_prod_4d6578a53efe_p6_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What vector database stores the document chunks?",
+          "aspect": "vector_database",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_4d6578a53efe_p5_c0001",
+            "doc_prod_4d6578a53efe_p3_c0001",
+            "doc_prod_4d6578a53efe_p1_c0003",
+            "doc_prod_4d6578a53efe_p4_c0001"
+          ],
+          "missing_terms": []
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ04",
+      "query": "What is the standard hardware warranty duration and under what condition does using third-party toner void coverage?",
+      "status": "SUFFICIENT",
+      "coverage_ratio": 1.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the standard hardware warranty duration and under what condition does using third-party toner void coverage?",
+          "aspect": "complete_query",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_warr_11757ad6d7b8_c0000",
+            "doc_warr_6bcedacd5b00_c0002",
+            "doc_warr_6bcedacd5b00_c0001"
+          ],
+          "missing_terms": []
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ05",
+      "query": "What is the paper input tray capacity of the ApexPrint ProX-400 and does it support an optional solar-powered battery pack?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the paper input tray capacity of the ApexPrint ProX-400?",
+          "aspect": "paper_jam_clearance",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0003"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "Does it support an optional solar-powered battery pack?",
+          "aspect": "support_optional",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "battery_life"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ06",
+      "query": "How do you initiate a network factory reset on the ProX-400 and what is the physical street address for international hardware repairs?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "How do you initiate a network factory reset on the ProX-400?",
+          "aspect": "initiate_network",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_trou_ee280f83aa9f_c0002",
+            "doc_trou_ee280f83aa9f_c0000",
+            "doc_trou_ee280f83aa9f_c0001",
+            "doc_trou_54171a85acbc_c0002"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the physical street address for international hardware repairs?",
+          "aspect": "physical_street",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "physical_mailing_address"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ07",
+      "query": "What reciprocal rank fusion formula does the hybrid retriever use and what is the exact monthly cost in Euros for hosting the vector index?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What reciprocal rank fusion formula does the hybrid retriever use?",
+          "aspect": "reciprocal_rank",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_4d6578a53efe_p2_c0003",
+            "doc_prod_4d6578a53efe_p1_c0003",
+            "doc_prod_4d6578a53efe_p6_c0000",
+            "doc_prod_4d6578a53efe_p2_c0001"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the exact monthly cost in Euros for hosting the vector index?",
+          "aspect": "exact_monthly",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "What is the exact monthly cost in Euros for hosting the vector index?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ08",
+      "query": "Does the warranty cover mechanical failures from normal wear and does ApexPrint offer free emergency on-site technician dispatch within two hours?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "Does the warranty cover mechanical failures from normal wear?",
+          "aspect": "warranty_cover",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "Does the warranty cover mechanical failures from normal wear?"
+          ]
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "Does ApexPrint offer free emergency on-site technician dispatch within two hours?",
+          "aspect": "apexprint_offer",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_warr_11757ad6d7b8_c0000",
+            "doc_warr_11757ad6d7b8_c0001",
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_faq_840e24fda935_c0000"
+          ],
+          "missing_terms": []
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ09",
+      "query": "What are the supported network connection interfaces for the ProX-400, what is the default administrator login password, and what is its standard internal RAM size?",
+      "status": "SUFFICIENT",
+      "coverage_ratio": 1.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What are the supported network connection interfaces for the ProX-400?",
+          "aspect": "supported_network",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_4d6578a53efe_p3_c0000",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_4d6578a53efe_p5_c0002"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the default administrator login password for the ProX-400?",
+          "aspect": "default_administrator",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_a92c5cafaf32_c0000",
+            "doc_prod_4d6578a53efe_p5_c0002"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_3",
+          "sub_question_text": "What is the ProX-400's standard internal RAM size?",
+          "aspect": "prox_standard",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_a92c5cafaf32_c0001"
+          ],
+          "missing_terms": []
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ10",
+      "query": "What is the recommended duty cycle of the ProX-400, how many pages does the standard toner yield, and what is the procedure for installing the optional waterproof marine enclosure?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.6667,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the recommended duty cycle of the ProX-400?",
+          "aspect": "duty_cycle",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "How many pages does the standard toner yield?",
+          "aspect": "page_yield",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_c4f75309780c_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_warr_6bcedacd5b00_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_3",
+          "sub_question_text": "What is the procedure for installing the optional waterproof marine enclosure?",
+          "aspect": "procedure_installing",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "What is the procedure for installing the optional waterproof marine enclosure?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ11",
+      "query": "What are the three main pipeline stages of the RAG system, what BM25 library is used for sparse retrieval, and what is the URL of the production Kubernetes cluster?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.6667,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What are the three main pipeline stages of the RAG system?",
+          "aspect": "three_main",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_4d6578a53efe_p4_c0001",
+            "doc_prod_4d6578a53efe_p3_c0000",
+            "doc_prod_4d6578a53efe_p4_c0000",
+            "doc_prod_4d6578a53efe_p1_c0001"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What BM25 library is used for sparse retrieval?",
+          "aspect": "library_used",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_4d6578a53efe_p6_c0000",
+            "doc_prod_4d6578a53efe_p4_c0002",
+            "doc_prod_4d6578a53efe_p2_c0001",
+            "doc_prod_4d6578a53efe_p5_c0001"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_3",
+          "sub_question_text": "What is the URL of the production Kubernetes cluster?",
+          "aspect": "production_kubernetes",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "What is the URL of the production Kubernetes cluster?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ12",
+      "query": "What is the flight range of the Boeing 777-300ER, what is its maximum passenger capacity, and what airline flies the route between Seattle and Tokyo?",
+      "status": "INSUFFICIENT",
+      "coverage_ratio": 0.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the flight range of the Boeing 777-300ER?",
+          "aspect": "flight_range",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "What is the flight range of the Boeing 777-300ER?"
+          ]
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the Boeing 777-300ER's maximum passenger capacity?",
+          "aspect": "boeing_maximum",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "What is the Boeing 777-300ER's maximum passenger capacity?"
+          ]
+        },
+        {
+          "sub_question_id": "sq_3",
+          "sub_question_text": "What airline flies the route between Seattle and Tokyo?",
+          "aspect": "airline_flies",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "What airline flies the route between Seattle and Tokyo?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ13",
+      "query": "Compare the printing speed and standard memory capacity between the ApexPrint ProX-400 and the ColorWave-850.",
+      "status": "SUFFICIENT",
+      "coverage_ratio": 1.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the memory capacity between the ApexPrint ProX-400 of the printing speed?",
+          "aspect": "memory_capacity_between_the_apexprint_prox-400",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_a92c5cafaf32_c0000",
+            "doc_prod_de7386b29af7_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the memory capacity between the ApexPrint ProX-400 of the standard?",
+          "aspect": "memory_capacity_between_the_apexprint_prox-400",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_3",
+          "sub_question_text": "What is the ColorWave-850 of the printing speed?",
+          "aspect": "colorwave-850",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_a92c5cafaf32_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_c4f75309780c_c0000",
+            "doc_prod_de7386b29af7_c0002"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_4",
+          "sub_question_text": "What is the ColorWave-850 of the standard?",
+          "aspect": "colorwave-850",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_a92c5cafaf32_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_a92c5cafaf32_c0001",
+            "doc_prod_de7386b29af7_c0002"
+          ],
+          "missing_terms": []
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ14",
+      "query": "How do the retrieval mechanisms of Baseline RAG and Multi-Context Prompting differ in terms of search algorithms and context assembly?",
+      "status": "SUFFICIENT",
+      "coverage_ratio": 1.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "How do the retrieval mechanisms of Baseline RAG and Multi-Context Prompting differ in terms of search algorithms and context assembly?",
+          "aspect": "complete_query",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_4d6578a53efe_p6_c0000",
+            "doc_prod_4d6578a53efe_p1_c0001",
+            "doc_prod_4d6578a53efe_p1_c0002",
+            "doc_prod_4d6578a53efe_p1_c0000"
+          ],
+          "missing_terms": []
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ15",
+      "query": "Compare the standard warranty period of the ApexPrint ProX-400 with the warranty terms of the Epson EcoTank L3150.",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the standard warranty period of the ApexPrint ProX-400?",
+          "aspect": "standard_warranty_period",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_warr_11757ad6d7b8_c0000",
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_warr_11757ad6d7b8_c0001"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the warranty terms of the Epson EcoTank L3150?",
+          "aspect": "warranty_terms",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "What is the warranty terms of the Epson EcoTank L3150?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ16",
+      "query": "How does the paper handling capacity of the ApexPrint ProX-400 compare to the HP LaserJet Enterprise M608?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the paper handling capacity of the ApexPrint ProX-400?",
+          "aspect": "paper_handling_capacity",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_prod_de7386b29af7_c0001",
+            "doc_prod_de7386b29af7_c0002",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the paper handling capacity of the HP LaserJet Enterprise M608?",
+          "aspect": "paper_handling_capacity",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "What is the paper handling capacity of the HP LaserJet Enterprise M608?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ17",
+      "query": "What is the recommended cleaning interval for the drum unit on the ApexPrint ProX-400 and how do you calibrate its integrated biometric fingerprint scanner?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the recommended cleaning interval for the drum unit on the ApexPrint ProX-400?",
+          "aspect": "maintenance_requirements",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_faq_e1d7f9f8c9ad_c0001",
+            "doc_prod_de7386b29af7_c0001",
+            "doc_faq_e1d7f9f8c9ad_c0000",
+            "doc_prod_a92c5cafaf32_c0000"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "How do you calibrate the ApexPrint ProX-400's integrated biometric fingerprint scanner?",
+          "aspect": "calibrate_apexprint",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "biometric_fingerprint_scanner"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ18",
+      "query": "What error code indicates toner empty on the ProX-400 and what is the configuration procedure for the satellite uplink telemetry interface?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What error code indicates toner empty on the ProX-400?",
+          "aspect": "error_code",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_trou_ee280f83aa9f_c0000",
+            "doc_prod_de7386b29af7_c0000",
+            "doc_trou_54171a85acbc_c0000",
+            "doc_trou_54171a85acbc_c0002"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What is the configuration procedure for the satellite uplink telemetry interface?",
+          "aspect": "configuration_procedure",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "satellite_uplink"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ19",
+      "query": "What is the maximum operating altitude for the ProX-400 in pressurized aircraft cabins and what cryogenic coolant is used in the laser scanning unit?",
+      "status": "INSUFFICIENT",
+      "coverage_ratio": 0.0,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "What is the maximum operating altitude for the ProX-400 in pressurized aircraft cabins?",
+          "aspect": "maximum_operating",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "operating_altitude"
+          ]
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "What cryogenic coolant is used in the laser scanning unit?",
+          "aspect": "cryogenic_coolant",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "cryogenic_coolant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P4_4_CQ20",
+      "query": "Does the ApexPrint warranty cover liquid spills from physical drops and does it cover damage from volcanic tectonic displacement?",
+      "status": "PARTIAL",
+      "coverage_ratio": 0.5,
+      "claims": [
+        {
+          "sub_question_id": "sq_1",
+          "sub_question_text": "Does the ApexPrint warranty cover liquid spills from physical drops?",
+          "aspect": "apexprint_warranty",
+          "evidence_status": "SUPPORTED",
+          "supporting_chunks": [
+            "doc_warr_6bcedacd5b00_c0000",
+            "doc_warr_11757ad6d7b8_c0000",
+            "doc_warr_6bcedacd5b00_c0001",
+            "doc_warr_6bcedacd5b00_c0002"
+          ],
+          "missing_terms": []
+        },
+        {
+          "sub_question_id": "sq_2",
+          "sub_question_text": "Does it cover damage from volcanic tectonic displacement?",
+          "aspect": "cover_damage",
+          "evidence_status": "UNSUPPORTED",
+          "supporting_chunks": [],
+          "missing_terms": [
+            "Does it cover damage from volcanic tectonic displacement?"
+          ]
+        }
+      ]
+    }
+  ]
+}
