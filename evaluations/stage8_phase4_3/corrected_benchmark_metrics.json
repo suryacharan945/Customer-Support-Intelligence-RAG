@@ -1,0 +1,176 @@
+{
+  "audit_metadata": {
+    "audit_phase": "Stage 8 Phase 4.3",
+    "date": "2026-11-15",
+    "auditor": "Evaluation Integrity & Metric Verification Engine",
+    "historical_baseline_evaluated": "Stage 8 Phase 4.2 (Commit 8fa19aa)"
+  },
+  "overall_summary": {
+    "total_queries_evaluated": 92,
+    "total_correct_classifications": 79,
+    "exact_overall_accuracy": 0.858696,
+    "reported_accuracy_in_phase4_2": 0.869,
+    "accuracy_discrepancy_delta": -0.010304,
+    "supported_queries_total": 70,
+    "unsupported_queries_total": 22,
+    "supported_answerability_count": 66,
+    "supported_answerability_rate": 0.942857,
+    "hard_abstentions_on_supported": 1,
+    "hard_false_rejection_rate": 0.014286,
+    "strict_rejections_on_supported": 9,
+    "strict_false_rejection_rate": 0.128571,
+    "false_acceptances_on_unsupported": 4,
+    "false_acceptance_rate_ood": 0.181818,
+    "appropriate_abstentions_on_unsupported": 18,
+    "appropriate_abstention_rate_ood": 0.818182
+  },
+  "reconciled_benchmarks": {
+    "original_phase4_benchmark": {
+      "total_queries": 50,
+      "exact_accuracy": 0.84,
+      "passed_queries": 42,
+      "failed_queries": 8,
+      "supported_queries_count": 45,
+      "unsupported_queries_count": 5,
+      "supported_answered_sufficient": 42,
+      "supported_answerability_rate": 0.933333,
+      "correct_expected_sufficient": 37,
+      "expected_sufficient_total": 40,
+      "correct_expected_sufficient_rate": 0.925,
+      "hard_abstention_count": 1,
+      "hard_false_rejection_rate": 0.022222,
+      "strict_rejection_count": 8,
+      "strict_false_rejection_rate": 0.177778,
+      "false_acceptance_count": 0,
+      "false_acceptance_rate": 0.0,
+      "appropriate_abstention_count": 5,
+      "appropriate_abstention_rate": 1.0,
+      "confusion_matrix": {
+        "SUFFICIENT": {
+          "SUFFICIENT": 37,
+          "PARTIAL": 1,
+          "INSUFFICIENT": 1,
+          "CONFLICTING": 1
+        },
+        "PARTIAL": {
+          "SUFFICIENT": 5,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 0,
+          "CONFLICTING": 0
+        },
+        "INSUFFICIENT": {
+          "SUFFICIENT": 0,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 5,
+          "CONFLICTING": 0
+        },
+        "CONFLICTING": {
+          "SUFFICIENT": 0,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 0,
+          "CONFLICTING": 0
+        }
+      }
+    },
+    "phase4_1_regression_benchmark": {
+      "total_queries": 10,
+      "exact_accuracy": 1.0,
+      "passed_queries": 10,
+      "failed_queries": 0,
+      "supported_queries_count": 5,
+      "unsupported_queries_count": 5,
+      "supported_answered_sufficient": 5,
+      "supported_answerability_rate": 1.0,
+      "correct_expected_sufficient": 5,
+      "expected_sufficient_total": 5,
+      "hard_abstention_count": 0,
+      "hard_false_rejection_rate": 0.0,
+      "strict_rejection_count": 0,
+      "strict_false_rejection_rate": 0.0,
+      "false_acceptance_count": 0,
+      "false_acceptance_rate": 0.0,
+      "appropriate_abstention_count": 5,
+      "appropriate_abstention_rate": 1.0,
+      "confusion_matrix": {
+        "SUFFICIENT": {
+          "SUFFICIENT": 5,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 0,
+          "CONFLICTING": 0
+        },
+        "PARTIAL": {
+          "SUFFICIENT": 0,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 0,
+          "CONFLICTING": 0
+        },
+        "INSUFFICIENT": {
+          "SUFFICIENT": 0,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 5,
+          "CONFLICTING": 0
+        },
+        "CONFLICTING": {
+          "SUFFICIENT": 0,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 0,
+          "CONFLICTING": 0
+        }
+      }
+    },
+    "independent_validation_benchmark": {
+      "total_queries": 32,
+      "exact_accuracy": 0.84375,
+      "passed_queries": 27,
+      "failed_queries": 5,
+      "supported_queries_count": 20,
+      "unsupported_queries_count": 12,
+      "supported_answered_sufficient": 19,
+      "supported_answerability_rate": 0.95,
+      "correct_expected_sufficient": 19,
+      "expected_sufficient_total": 20,
+      "hard_abstention_count": 0,
+      "hard_false_rejection_rate": 0.0,
+      "strict_rejection_count": 1,
+      "strict_false_rejection_rate": 0.05,
+      "false_acceptance_count": 4,
+      "false_acceptance_rate": 0.333333,
+      "appropriate_abstention_count": 8,
+      "appropriate_abstention_rate": 0.666667,
+      "confusion_matrix": {
+        "SUFFICIENT": {
+          "SUFFICIENT": 19,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 0,
+          "CONFLICTING": 1
+        },
+        "PARTIAL": {
+          "SUFFICIENT": 1,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 0,
+          "CONFLICTING": 0
+        },
+        "INSUFFICIENT": {
+          "SUFFICIENT": 1,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 8,
+          "CONFLICTING": 0
+        },
+        "CONFLICTING": {
+          "SUFFICIENT": 2,
+          "PARTIAL": 0,
+          "INSUFFICIENT": 0,
+          "CONFLICTING": 0
+        }
+      }
+    }
+  },
+  "standardized_formula_definitions": {
+    "accuracy": "sum(actual == expected) / total_evaluated",
+    "false_acceptance_rate_ood": "count(is_supported == False and actual == 'SUFFICIENT') / count(is_supported == False)",
+    "appropriate_abstention_rate_ood": "count(is_supported == False and actual in ['INSUFFICIENT', 'CONFLICTING']) / count(is_supported == False)",
+    "hard_false_rejection_rate": "count(is_supported == True and actual == 'INSUFFICIENT') / count(is_supported == True)",
+    "strict_false_rejection_rate": "count(is_supported == True and actual != expected) / count(is_supported == True)",
+    "supported_answerability_rate": "count(is_supported == True and actual == 'SUFFICIENT') / count(is_supported == True)"
+  }
+}

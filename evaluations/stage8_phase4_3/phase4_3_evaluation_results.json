@@ -1,0 +1,2386 @@
+{
+  "metadata": {
+    "evaluation_phase": "Stage 8 Phase 4.3 Master Evaluation Re-Run",
+    "timestamp": "2026-11-15T10:06:02.306113+00:00",
+    "total_queries_evaluated": 92,
+    "architecture": "RAG + MCP + EvidenceGate Hardening",
+    "evidence_gate_similarity_floor": 0.28
+  },
+  "benchmarks": {
+    "original_50_benchmark": {
+      "dataset_name": "Original Phase 4 Benchmark (50 Questions)",
+      "summary_metrics": {
+        "total_evaluated": 50,
+        "supported_query_count": 45,
+        "unsupported_query_count": 5,
+        "correct_sufficient_count": 37,
+        "correct_partial_count": 0,
+        "correct_insufficient_count": 5,
+        "correct_conflicting_count": 0,
+        "total_correct": 42,
+        "false_acceptance_count": 0,
+        "false_acceptance_rate_on_ood": 0.0,
+        "false_rejection_count": 0,
+        "false_rejection_rate_on_supported": 0.0,
+        "appropriate_abstention_count": 5,
+        "appropriate_abstention_rate_on_ood": 1.0,
+        "overall_accuracy": 0.84,
+        "confusion_matrix": {
+          "SUFFICIENT": {
+            "SUFFICIENT": 37,
+            "PARTIAL": 1,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 2
+          },
+          "PARTIAL": {
+            "SUFFICIENT": 5,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "INSUFFICIENT": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 5,
+            "CONFLICTING": 0
+          },
+          "CONFLICTING": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          }
+        },
+        "per_category_breakdown": {
+          "A_direct_factual": {
+            "total": 8,
+            "correct": 8,
+            "accuracy": 1.0
+          },
+          "B_multistep_synthesis": {
+            "total": 7,
+            "correct": 7,
+            "accuracy": 1.0
+          },
+          "C_multidoc_synthesis": {
+            "total": 7,
+            "correct": 5,
+            "accuracy": 0.7143
+          },
+          "D_numerical_benchmark": {
+            "total": 7,
+            "correct": 6,
+            "accuracy": 0.8571
+          },
+          "E_comparison": {
+            "total": 6,
+            "correct": 6,
+            "accuracy": 1.0
+          },
+          "F_conflicting_info": {
+            "total": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          },
+          "G_ambiguous_partial": {
+            "total": 5,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "H_unsupported_ood": {
+            "total": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "detailed_results": [
+        {
+          "id": "P4_Q01",
+          "query": "What is the maximum monthly duty cycle of the ApexPrint ProX-400?",
+          "category": "A_direct_factual",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.946,
+          "retrieval_latency_ms": 1456.94,
+          "generation_latency_ms": 24.48,
+          "total_latency_ms": 1504.32,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium ..."
+        },
+        {
+          "id": "P4_Q02",
+          "query": "What is the print resolution of the ApexPrint ColorWave-850 on photo fine art media?",
+          "category": "A_direct_factual",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.287,
+          "retrieval_latency_ms": 1271.03,
+          "generation_latency_ms": 11.82,
+          "total_latency_ms": 1289.39,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, com..."
+        },
+        {
+          "id": "P4_Q03",
+          "query": "Which embedding model is used for dense semantic retrieval in this platform?",
+          "category": "A_direct_factual",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.738,
+          "retrieval_latency_ms": 1047.93,
+          "generation_latency_ms": 15.18,
+          "total_latency_ms": 1069.11,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_Q04",
+          "query": "What trigger condition causes Error Code E-204 on ApexPrint printers?",
+          "category": "A_direct_factual",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.269,
+          "retrieval_latency_ms": 1347.61,
+          "generation_latency_ms": 6.75,
+          "total_latency_ms": 1360.55,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Error Code E-204: Fuser Unit Overheat Protection **Trigger**: Fuser assembly thermistor sensed temperatures exceeding 230\u00b0C (446\u00b0F), engaging emergency thermal..."
+        },
+        {
+          "id": "P4_Q05",
+          "query": "What is the standard hardware warranty period provided by ApexPrint?",
+          "category": "A_direct_factual",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 4.037,
+          "retrieval_latency_ms": 1293.3,
+          "generation_latency_ms": 15.35,
+          "total_latency_ms": 1319.31,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Document Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1. General Hardware Coverage Terms ApexPrint ..."
+        },
+        {
+          "id": "P4_Q06",
+          "query": "Which Android operating system version or later supports direct printing via default print service?",
+          "category": "A_direct_factual",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.892,
+          "retrieval_latency_ms": 1055.29,
+          "generation_latency_ms": 16.91,
+          "total_latency_ms": 1079.09,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Mobile & Wireless Printing Support - **Q: Can I print directly from my Apple iPhone or iPad?** - **A**: Yes. The ApexPrint ProX-400 and ColorWave-850 natively ..."
+        },
+        {
+          "id": "P4_Q07",
+          "query": "What is the formula used for Reciprocal Rank Fusion (RRF) in the hybrid search engine?",
+          "category": "A_direct_factual",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.361,
+          "retrieval_latency_ms": 1142.51,
+          "generation_latency_ms": 16.85,
+          "total_latency_ms": 1165.95,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Hybrid Search Fusion Reciprocal Rank Fusion (RRF) Rank-based score combination: RRF(d) = sum 1 / (60 + r(d)). Vector Store ChromaDB Metadata-filtered embedding..."
+        },
+        {
+          "id": "P4_Q08",
+          "query": "What is the print resolution and bottle page yield for black ink on the EcoTank L3150?",
+          "category": "A_direct_factual",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.248,
+          "retrieval_latency_ms": 1020.24,
+          "generation_latency_ms": 8.16,
+          "total_latency_ms": 1034.71,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Document Type: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-F..."
+        },
+        {
+          "id": "P4_Q09",
+          "query": "What are the complete step-by-step resolution steps for resolving Error E-101 Printhead Jam?",
+          "category": "B_multistep_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.323,
+          "retrieval_latency_ms": 913.87,
+          "generation_latency_ms": 6.06,
+          "total_latency_ms": 925.18,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Error Code E-101: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters. Power off the prin..."
+        },
+        {
+          "id": "P4_Q10",
+          "query": "How do you replace an empty toner cartridge on the ProX-400 without damaging the drum unit?",
+          "category": "B_multistep_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.233,
+          "retrieval_latency_ms": 1105.9,
+          "generation_latency_ms": 6.81,
+          "total_latency_ms": 1117.9,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Toner Cartridge Replacement Procedure - **Q: How do I replace the toner cartridge on the ProX-400?** - **A**: 1. Open the front access door A. [Source: apexpri..."
+        },
+        {
+          "id": "P4_Q11",
+          "query": "Explain the 5-stage pipeline through which a user query is processed in this system.",
+          "category": "B_multistep_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.359,
+          "retrieval_latency_ms": 1078.59,
+          "generation_latency_ms": 52.57,
+          "total_latency_ms": 1137.45,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_Q12",
+          "query": "How do you configure a static IPv4 address on the ApexPrint ProX-400?",
+          "category": "B_multistep_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.315,
+          "retrieval_latency_ms": 1032.88,
+          "generation_latency_ms": 10.65,
+          "total_latency_ms": 1050.66,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer # ApexPrint ProX-400 Enterprise Monochrome Laser Printer **Document Type**: Official Product Manual & User Guide **Model**: ProX-400 (Monochrome Desktop Laser ..."
+        },
+        {
+          "id": "P4_Q13",
+          "query": "What steps are required to file an RMA warranty replacement claim for defective hardware?",
+          "category": "B_multistep_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 1.03,
+          "retrieval_latency_ms": 1042.99,
+          "generation_latency_ms": 13.91,
+          "total_latency_ms": 1063.52,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Document Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1. General Hardware Coverage Terms ApexPrint ..."
+        },
+        {
+          "id": "P4_Q14",
+          "query": "Explain how the citation validator verifies that a generated answer does not cite phantom sources.",
+          "category": "B_multistep_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.339,
+          "retrieval_latency_ms": 936.26,
+          "generation_latency_ms": 15.84,
+          "total_latency_ms": 958.07,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Stage 5 \u2014 Citation Validation Engine: app/generation/citation_validator.py uses regex to extract asserted filenames and chunk IDs from the generated text, veri..."
+        },
+        {
+          "id": "P4_Q15",
+          "query": "How does the system ensure local storage remains strictly under the 1 GB constraint during operations?",
+          "category": "B_multistep_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.357,
+          "retrieval_latency_ms": 1103.55,
+          "generation_latency_ms": 16.27,
+          "total_latency_ms": 1126.15,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Multi-Category Coverage 31.2% (top category 93.8% Multi-Context Prompting questions. Retrieval Latency (Mean) ~0.35 ms ~0.28 ms Sub-millisecond retrieval memor..."
+        },
+        {
+          "id": "P4_Q16",
+          "query": "Does using non-genuine toner cartridges void the standard limited warranty, and what happens if a printhead clogs because of third-party ink?",
+          "category": "C_multidoc_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 1.06,
+          "retrieval_latency_ms": 971.46,
+          "generation_latency_ms": 16.0,
+          "total_latency_ms": 995.07,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Tampering and Disassembly**: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fu..."
+        },
+        {
+          "id": "P4_Q17",
+          "query": "How do the paper tray capacities and media weights compare between the ProX-400 and the ColorWave-850?",
+          "category": "C_multidoc_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.307,
+          "retrieval_latency_ms": 1119.55,
+          "generation_latency_ms": 11.89,
+          "total_latency_ms": 1138.44,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Optional Lower Feeder (Tray 3)**: Optional 550-sheet locking paper drawer supporting up to 120 gsm media. Output Bin Capacity**: 250 sheets face-down with full..."
+        },
+        {
+          "id": "P4_Q18",
+          "query": "If an ApexPrint printer displays Error E-204 and the user disassembles the fuser unit, is the replacement covered under warranty?",
+          "category": "C_multidoc_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "CONFLICTING",
+          "verdict": "FAIL",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 2.154,
+          "retrieval_latency_ms": 1075.59,
+          "generation_latency_ms": 11.45,
+          "total_latency_ms": 1096.27,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Error Code E-204: Fuser Unit Overheat Protection **Trigger**: Fuser assembly thermistor sensed temperatures exceeding 230\u00b0C (446\u00b0F), engaging emergency thermal..."
+        },
+        {
+          "id": "P4_Q19",
+          "query": "How does the platform's multi-category routing ensure both hardware troubleshooting and warranty policies are retrieved together?",
+          "category": "C_multidoc_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "CONFLICTING",
+          "verdict": "FAIL",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.937,
+          "retrieval_latency_ms": 1069.07,
+          "generation_latency_ms": 14.8,
+          "total_latency_ms": 1091.18,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Excluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum un..."
+        },
+        {
+          "id": "P4_Q20",
+          "query": "What are the Wi-Fi connectivity options for the ProX-400 and what mobile printing protocols are supported across FAQ documentation?",
+          "category": "C_multidoc_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.252,
+          "retrieval_latency_ms": 1001.06,
+          "generation_latency_ms": 11.74,
+          "total_latency_ms": 1019.84,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Mobile & Wireless Printing Support - **Q: Can I print directly from my Apple iPhone or iPad?** - **A**: Yes. The ApexPrint ProX-400 and ColorWave-850 natively ..."
+        },
+        {
+          "id": "P4_Q21",
+          "query": "Can high print volumes causing routine wear on feed rollers be claimed as an RMA defect under warranty?",
+          "category": "C_multidoc_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.84,
+          "retrieval_latency_ms": 994.21,
+          "generation_latency_ms": 14.29,
+          "total_latency_ms": 1015.05,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Excluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum un..."
+        },
+        {
+          "id": "P4_Q22",
+          "query": "What happens if a user connects the printer to an ungrounded or fluctuating power outlet during an E-204 overheat condition?",
+          "category": "C_multidoc_synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.361,
+          "retrieval_latency_ms": 1289.41,
+          "generation_latency_ms": 8.3,
+          "total_latency_ms": 1304.55,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Error Code E-204: Fuser Unit Overheat Protection **Trigger**: Fuser assembly thermistor sensed temperatures exceeding 230\u00b0C (446\u00b0F), engaging emergency thermal..."
+        },
+        {
+          "id": "P4_Q23",
+          "query": "What are the benchmark results for Precision@3 and Recall between Baseline RAG and Multi-Context RAG in the Project Dossier?",
+          "category": "D_numerical_benchmark",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.451,
+          "retrieval_latency_ms": 1061.81,
+          "generation_latency_ms": 32.25,
+          "total_latency_ms": 1101.02,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_Q24",
+          "query": "What was the Multi-Category Coverage percentage achieved by Multi-Context RAG compared to Baseline in the benchmark table?",
+          "category": "D_numerical_benchmark",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.367,
+          "retrieval_latency_ms": 941.2,
+          "generation_latency_ms": 20.59,
+          "total_latency_ms": 968.61,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_Q25",
+          "query": "What is the continuous print speed in pages per minute for monochrome and duplex on the ProX-400?",
+          "category": "D_numerical_benchmark",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.305,
+          "retrieval_latency_ms": 924.9,
+          "generation_latency_ms": 10.48,
+          "total_latency_ms": 941.21,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium ..."
+        },
+        {
+          "id": "P4_Q26",
+          "query": "What were the mean retrieval and generation latencies recorded during the Stage 7B live benchmark?",
+          "category": "D_numerical_benchmark",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.377,
+          "retrieval_latency_ms": 964.98,
+          "generation_latency_ms": 20.37,
+          "total_latency_ms": 991.72,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Stage 5 \u2014 Citation Validation Engine: app/generation/citation_validator.py uses regex to extract asserted filenames and chunk IDs from the generated text, veri..."
+        },
+        {
+          "id": "P4_Q27",
+          "query": "What is the standard ink droplet size in picoliters for the ApexPrint ColorWave-850?",
+          "category": "D_numerical_benchmark",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.238,
+          "retrieval_latency_ms": 1238.84,
+          "generation_latency_ms": 10.97,
+          "total_latency_ms": 1256.45,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Document Type: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-F..."
+        },
+        {
+          "id": "P4_Q28",
+          "query": "What is the temperature threshold that trips the fuser unit thermal fuse on ApexPrint printers?",
+          "category": "D_numerical_benchmark",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "PARTIAL",
+          "verdict": "FAIL",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.986,
+          "retrieval_latency_ms": 1051.13,
+          "generation_latency_ms": 7.65,
+          "total_latency_ms": 1065.83,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Error Code E-204: Fuser Unit Overheat Protection **Trigger**: Fuser assembly thermistor sensed temperatures exceeding 230\u00b0C (446\u00b0F), engaging emergency thermal..."
+        },
+        {
+          "id": "P4_Q29",
+          "query": "What is the storage budget limit enforced across the platform?",
+          "category": "D_numerical_benchmark",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.397,
+          "retrieval_latency_ms": 982.6,
+          "generation_latency_ms": 15.51,
+          "total_latency_ms": 1005.04,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Multi-Category Coverage 31.2% (top category 93.8% Multi-Context Prompting questions. Retrieval Latency (Mean) ~0.35 ms ~0.28 ms Sub-millisecond retrieval memor..."
+        },
+        {
+          "id": "P4_Q30",
+          "query": "Compare Baseline RAG and Multi-Context Prompting in how they handle cross-domain queries.",
+          "category": "E_comparison",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.4,
+          "retrieval_latency_ms": 1108.29,
+          "generation_latency_ms": 20.99,
+          "total_latency_ms": 1136.64,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_Q31",
+          "query": "Compare the printing technology, primary application, and color capabilities of the ProX-400 versus the ColorWave-850.",
+          "category": "E_comparison",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.255,
+          "retrieval_latency_ms": 1195.1,
+          "generation_latency_ms": 11.31,
+          "total_latency_ms": 1213.0,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium ..."
+        },
+        {
+          "id": "P4_Q32",
+          "query": "What is the difference between Error E-101 and Error E-204 in terms of failure mechanism and component affected?",
+          "category": "E_comparison",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.342,
+          "retrieval_latency_ms": 1221.77,
+          "generation_latency_ms": 7.51,
+          "total_latency_ms": 1235.4,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Reconnect power directly to a wall receptacle (avoid unrated power strips) and power on. If E-204 recurs immediately, contact an authorized ApexPrint service c..."
+        },
+        {
+          "id": "P4_Q33",
+          "query": "Compare the Standard Limited Warranty with the Extended Warranty terms regarding accidental damage and consumable parts.",
+          "category": "E_comparison",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 2.059,
+          "retrieval_latency_ms": 966.61,
+          "generation_latency_ms": 17.0,
+          "total_latency_ms": 992.07,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Document Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1. General Hardware Coverage Terms ApexPrint ..."
+        },
+        {
+          "id": "P4_Q34",
+          "query": "Compare Dense Vector Retrieval and BM25 Lexical Retrieval in the context of acronyms and error codes.",
+          "category": "E_comparison",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.951,
+          "retrieval_latency_ms": 995.06,
+          "generation_latency_ms": 13.33,
+          "total_latency_ms": 1014.91,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Stage 2 \u2014 Query Categorization: The router parses the user prompt for hardware codes, error patterns (e.g., E-02, \u201cjam\u201d), and operational clauses (e.g., \u201cwarra..."
+        },
+        {
+          "id": "P4_Q35",
+          "query": "Compare the EcoTank L3150 and the ProX-400 in ink/toner technology and ongoing replenishment mechanism.",
+          "category": "E_comparison",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.239,
+          "retrieval_latency_ms": 1154.91,
+          "generation_latency_ms": 10.67,
+          "total_latency_ms": 1171.83,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Document Type: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-F..."
+        },
+        {
+          "id": "P4_Q36",
+          "query": "A customer claims their 3-year-old printer is covered under the standard warranty because they purchased it for corporate use. Does the warranty cover this claim?",
+          "category": "F_conflicting_info",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 1.067,
+          "retrieval_latency_ms": 1016.46,
+          "generation_latency_ms": 14.74,
+          "total_latency_ms": 1038.28,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Document Type**: Official Commercial Warranty Agreement **Term**: 12 Months (1 Year) Limited Hardware Warranty ## 1. General Hardware Coverage Terms ApexPrint ..."
+        },
+        {
+          "id": "P4_Q37",
+          "query": "Does the warranty cover a replacement printhead if an uncertified third-party repair shop attempted to replace the carriage belt?",
+          "category": "F_conflicting_info",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.961,
+          "retrieval_latency_ms": 1128.15,
+          "generation_latency_ms": 14.98,
+          "total_latency_ms": 1150.34,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Tampering and Disassembly**: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fu..."
+        },
+        {
+          "id": "P4_Q38",
+          "query": "Can high-yield photo printing on glossy cardstock exceeding 350 gsm be run through the ProX-400 multipurpose tray without voiding warranty?",
+          "category": "F_conflicting_info",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 1.006,
+          "retrieval_latency_ms": 1159.14,
+          "generation_latency_ms": 13.36,
+          "total_latency_ms": 1180.42,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Optional Lower Feeder (Tray 3)**: Optional 550-sheet locking paper drawer supporting up to 120 gsm media. Output Bin Capacity**: 250 sheets face-down with full..."
+        },
+        {
+          "id": "P4_Q39",
+          "query": "If an error E-101 occurred during a power outage and the customer opened the case using a screwdriver, will ApexPrint replace the printhead free of charge?",
+          "category": "F_conflicting_info",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.353,
+          "retrieval_latency_ms": 1075.99,
+          "generation_latency_ms": 8.09,
+          "total_latency_ms": 1090.77,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Error Code E-101: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters. Power off the prin..."
+        },
+        {
+          "id": "P4_Q40",
+          "query": "A user claims that Bluetooth audio can be streamed through the ApexPrint ColorWave speakers. Does the documentation support this?",
+          "category": "F_conflicting_info",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 1,
+          "citations_verified": true,
+          "gate_latency_ms": 0.387,
+          "retrieval_latency_ms": 1080.7,
+          "generation_latency_ms": 11.48,
+          "total_latency_ms": 1098.7,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, com..."
+        },
+        {
+          "id": "P4_Q41",
+          "query": "Can the ApexPrint printer print documents sent from an iPhone over Bluetooth without a Wi-Fi router?",
+          "category": "G_ambiguous_partial",
+          "is_supported": true,
+          "expected_status": "PARTIAL",
+          "actual_status": "SUFFICIENT",
+          "verdict": "FAIL",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.241,
+          "retrieval_latency_ms": 1077.21,
+          "generation_latency_ms": 11.02,
+          "total_latency_ms": 1094.73,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Devices running Android 8.0 or later can print directly using the pre-installed Mopria Print Service or the free ApexPrint Mobile Connect app available on Goog..."
+        },
+        {
+          "id": "P4_Q42",
+          "query": "What is the exact battery life of the ApexPrint ProX-400 when used outdoors?",
+          "category": "G_ambiguous_partial",
+          "is_supported": true,
+          "expected_status": "PARTIAL",
+          "actual_status": "SUFFICIENT",
+          "verdict": "FAIL",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.246,
+          "retrieval_latency_ms": 1213.43,
+          "generation_latency_ms": 10.02,
+          "total_latency_ms": 1229.33,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium ..."
+        },
+        {
+          "id": "P4_Q43",
+          "query": "Does the system support natural language querying in Spanish or Japanese?",
+          "category": "G_ambiguous_partial",
+          "is_supported": true,
+          "expected_status": "PARTIAL",
+          "actual_status": "SUFFICIENT",
+          "verdict": "FAIL",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 1.153,
+          "retrieval_latency_ms": 1062.0,
+          "generation_latency_ms": 30.0,
+          "total_latency_ms": 1099.34,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_Q44",
+          "query": "Can the ColorWave-850 print directly from a USB flash drive without a connected computer?",
+          "category": "G_ambiguous_partial",
+          "is_supported": true,
+          "expected_status": "PARTIAL",
+          "actual_status": "SUFFICIENT",
+          "verdict": "FAIL",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.285,
+          "retrieval_latency_ms": 1056.42,
+          "generation_latency_ms": 12.38,
+          "total_latency_ms": 1075.81,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Printing Capabilities and Ink Delivery The ApexPrint ColorWave-850 is a wide-format color inkjet multi-function system engineered for architectural drafts, com..."
+        },
+        {
+          "id": "P4_Q45",
+          "query": "How many total questions were evaluated in the Stage 8 held-out benchmark and what was the completion rate?",
+          "category": "G_ambiguous_partial",
+          "is_supported": true,
+          "expected_status": "PARTIAL",
+          "actual_status": "SUFFICIENT",
+          "verdict": "FAIL",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.377,
+          "retrieval_latency_ms": 988.35,
+          "generation_latency_ms": 21.69,
+          "total_latency_ms": 1017.02,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Stage 5 \u2014 Citation Validation Engine: app/generation/citation_validator.py uses regex to extract asserted filenames and chunk IDs from the generated text, veri..."
+        },
+        {
+          "id": "P4_Q46",
+          "query": "What is the traditional recipe and cooking duration for Hyderabadi chicken dum biryani?",
+          "category": "H_unsupported_ood",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.109,
+          "retrieval_latency_ms": 953.35,
+          "generation_latency_ms": 0.0,
+          "total_latency_ms": 955.45,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry. The topic falls outside the scope of indexe..."
+        },
+        {
+          "id": "P4_Q47",
+          "query": "How do you clear a paper jam on a Hewlett-Packard HP LaserJet Enterprise M608?",
+          "category": "H_unsupported_ood",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.948,
+          "retrieval_latency_ms": 1244.05,
+          "generation_latency_ms": 0.0,
+          "total_latency_ms": 1247.26,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'hewlett-packard..."
+        },
+        {
+          "id": "P4_Q48",
+          "query": "What is the distance between the Earth and the planet Mars at closest approach?",
+          "category": "H_unsupported_ood",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.11,
+          "retrieval_latency_ms": 1026.44,
+          "generation_latency_ms": 0.0,
+          "total_latency_ms": 1028.29,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry. The topic falls outside the scope of indexe..."
+        },
+        {
+          "id": "P4_Q49",
+          "query": "What are the rules and baggage allowance policies for transatlantic flights on Delta Airlines?",
+          "category": "H_unsupported_ood",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.789,
+          "retrieval_latency_ms": 952.67,
+          "generation_latency_ms": 0.0,
+          "total_latency_ms": 955.14,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'delta airlines'..."
+        },
+        {
+          "id": "P4_Q50",
+          "query": "Does the ApexPrint warranty policy cover damage caused by extraterrestrial meteor strikes or nuclear radiation?",
+          "category": "H_unsupported_ood",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 3.088,
+          "retrieval_latency_ms": 979.08,
+          "generation_latency_ms": 0.0,
+          "total_latency_ms": 984.95,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing extraterrestrial, meteor, nuclear, radiation, strikes.  ### 2. S..."
+        }
+      ]
+    },
+    "phase4_1_regression_benchmark": {
+      "dataset_name": "Phase 4.1 Regression Benchmark (10 Questions)",
+      "summary_metrics": {
+        "total_evaluated": 10,
+        "supported_query_count": 5,
+        "unsupported_query_count": 5,
+        "correct_sufficient_count": 5,
+        "correct_partial_count": 0,
+        "correct_insufficient_count": 5,
+        "correct_conflicting_count": 0,
+        "total_correct": 10,
+        "false_acceptance_count": 0,
+        "false_acceptance_rate_on_ood": 0.0,
+        "false_rejection_count": 0,
+        "false_rejection_rate_on_supported": 0.0,
+        "appropriate_abstention_count": 5,
+        "appropriate_abstention_rate_on_ood": 1.0,
+        "overall_accuracy": 1.0,
+        "confusion_matrix": {
+          "SUFFICIENT": {
+            "SUFFICIENT": 5,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "PARTIAL": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "INSUFFICIENT": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 5,
+            "CONFLICTING": 0
+          },
+          "CONFLICTING": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          }
+        },
+        "per_category_breakdown": {
+          "Competitor Hardware": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Missing Policy Clause": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Alien Out-of-Domain": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Generic Troubleshooting": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Generic Paper Handling": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Documented Policy Exclusion": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Project Architecture": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Project Constraints": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "detailed_results": [
+        {
+          "id": "P4_1_REG01",
+          "query": "How do you clear a paper jam on a Canon imageCLASS MF445dw laser multifunction printer?",
+          "category": "Competitor Hardware",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 1.105,
+          "total_latency_ms": 1149.99,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'canon' (evidenc..."
+        },
+        {
+          "id": "P4_1_REG02",
+          "query": "What is the print speed and monthly duty cycle of an Epson EcoTank ET-4760 all-in-one printer?",
+          "category": "Competitor Hardware",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.284,
+          "total_latency_ms": 1058.09,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'epson' (evidenc..."
+        },
+        {
+          "id": "P4_1_REG03",
+          "query": "Does the standard limited warranty cover damage caused by earthquake or tsunami floods?",
+          "category": "Missing Policy Clause",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 2.101,
+          "total_latency_ms": 1068.09,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing earthquake, floods, tsunami.  ### 2. Specific Policy Exclusions ..."
+        },
+        {
+          "id": "P4_1_REG04",
+          "query": "Does the commercial care warranty cover cosmetic scratches and exterior casing scuffs?",
+          "category": "Missing Policy Clause",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 2.664,
+          "total_latency_ms": 949.54,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing casing, cosmetic, scratches, scuffs.  ### 2. Specific Policy Exc..."
+        },
+        {
+          "id": "P4_1_REG05",
+          "query": "What is the capital city of Australia and what is its current estimated population?",
+          "category": "Alien Out-of-Domain",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.765,
+          "total_latency_ms": 998.93,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'Australia' (evi..."
+        },
+        {
+          "id": "P4_1_REG06",
+          "query": "What causes vertical black streaks on laser printer outputs and how do you inspect the drum unit?",
+          "category": "Generic Troubleshooting",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.271,
+          "total_latency_ms": 1102.2,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Align the cartridge with the internal tracks and push firmly until it clicks into locked position. Close front door A and verify the status LED illuminates sol..."
+        },
+        {
+          "id": "P4_1_REG07",
+          "query": "Explain how duplex paper feeding operates mechanically during two-sided document printing.",
+          "category": "Generic Paper Handling",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.329,
+          "total_latency_ms": 1075.27,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages. Media Handling, Trays,..."
+        },
+        {
+          "id": "P4_1_REG08",
+          "query": "Does the warranty policy explicitly exclude damage resulting from non-OEM or third-party ink cartridges?",
+          "category": "Documented Policy Exclusion",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 2.356,
+          "total_latency_ms": 1134.1,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Tampering and Disassembly**: Any disassembly, component replacement, or repair attempted by non-certified technicians, including attempting to open internal fu..."
+        },
+        {
+          "id": "P4_1_REG09",
+          "query": "How does the citation validation engine ensure that source filenames and page numbers are not fabricated?",
+          "category": "Project Architecture",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.365,
+          "total_latency_ms": 975.98,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Stage 5 \u2014 Citation Validation Engine: app/generation/citation_validator.py uses regex to extract asserted filenames and chunk IDs from the generated text, veri..."
+        },
+        {
+          "id": "P4_1_REG10",
+          "query": "What is the storage budget constraint and how does the system enforce a sub-1024 MB disk footprint?",
+          "category": "Project Constraints",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 1,
+          "citations_verified": true,
+          "gate_latency_ms": 0.358,
+          "total_latency_ms": 1108.59,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer A 5-subsystem automated health check reporting on: Storage Subsystem (local disk budget & Google Drive mount), Ingestion Manifest (JSON crash-safe state), Vect..."
+        }
+      ]
+    },
+    "independent_validation_benchmark": {
+      "dataset_name": "Phase 4.2 Independent Validation Benchmark (32 Questions)",
+      "summary_metrics_original_labels": {
+        "total_evaluated": 32,
+        "supported_query_count": 20,
+        "unsupported_query_count": 12,
+        "correct_sufficient_count": 20,
+        "correct_partial_count": 0,
+        "correct_insufficient_count": 9,
+        "correct_conflicting_count": 0,
+        "total_correct": 29,
+        "false_acceptance_count": 3,
+        "false_acceptance_rate_on_ood": 0.25,
+        "false_rejection_count": 0,
+        "false_rejection_rate_on_supported": 0.0,
+        "appropriate_abstention_count": 9,
+        "appropriate_abstention_rate_on_ood": 0.75,
+        "overall_accuracy": 0.9062,
+        "confusion_matrix": {
+          "SUFFICIENT": {
+            "SUFFICIENT": 20,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "PARTIAL": {
+            "SUFFICIENT": 1,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "INSUFFICIENT": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 9,
+            "CONFLICTING": 0
+          },
+          "CONFLICTING": {
+            "SUFFICIENT": 2,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          }
+        },
+        "per_category_breakdown": {
+          "Hardware Specifications": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Architecture & Engineering": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Troubleshooting Synthesis": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Hardware Maintenance": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Cross-Document Comparison": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Technical Terminology": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Documented Exclusion": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "General Document Intelligence": {
+            "total": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "General Product QA": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Contradictory Evidence": {
+            "total": 2,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "Partial Evidence": {
+            "total": 1,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "Competitor Hardware Mismatch": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Missing Policy Peril": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Misleading Lexical Overlap": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Alien Out-of-Domain": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "In-Domain Missing Information": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "summary_metrics_audited_labels": {
+        "total_evaluated": 32,
+        "supported_query_count": 20,
+        "unsupported_query_count": 12,
+        "correct_sufficient_count": 21,
+        "correct_partial_count": 0,
+        "correct_insufficient_count": 9,
+        "correct_conflicting_count": 0,
+        "total_correct": 30,
+        "false_acceptance_count": 3,
+        "false_acceptance_rate_on_ood": 0.25,
+        "false_rejection_count": 0,
+        "false_rejection_rate_on_supported": 0.0,
+        "appropriate_abstention_count": 9,
+        "appropriate_abstention_rate_on_ood": 0.75,
+        "overall_accuracy": 0.9375,
+        "confusion_matrix": {
+          "SUFFICIENT": {
+            "SUFFICIENT": 21,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "PARTIAL": {
+            "SUFFICIENT": 1,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "INSUFFICIENT": {
+            "SUFFICIENT": 1,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 9,
+            "CONFLICTING": 0
+          },
+          "CONFLICTING": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          }
+        },
+        "per_category_breakdown": {
+          "Hardware Specifications": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Architecture & Engineering": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Troubleshooting Synthesis": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Hardware Maintenance": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Cross-Document Comparison": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Technical Terminology": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Documented Exclusion": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "General Document Intelligence": {
+            "total": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "General Product QA": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Contradictory Evidence": {
+            "total": 2,
+            "correct": 1,
+            "accuracy": 0.5
+          },
+          "Partial Evidence": {
+            "total": 1,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "Competitor Hardware Mismatch": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Missing Policy Peril": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Misleading Lexical Overlap": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Alien Out-of-Domain": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "In-Domain Missing Information": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "detailed_results": [
+        {
+          "id": "P4_2_VAL01",
+          "query": "What are the supported network interface protocols and wireless frequencies on the ApexPrint ProX-400?",
+          "category": "Hardware Specifications",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.264,
+          "total_latency_ms": 1040.36,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium ..."
+        },
+        {
+          "id": "P4_2_VAL02",
+          "query": "What is the physical paper tray capacity of Tray 1, Tray 2, and Tray 3 on the ApexPrint ColorWave-850?",
+          "category": "Hardware Specifications",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.362,
+          "total_latency_ms": 1003.68,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Monthly Duty Cycle**: Maximum monthly volume of up to 100,000 pages per month; recommended monthly page volume is 3,000 to 10,000 pages. Media Handling, Trays,..."
+        },
+        {
+          "id": "P4_2_VAL03",
+          "query": "How does the document chunking service split uploaded documents and what overlap is maintained between chunks?",
+          "category": "Architecture & Engineering",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.357,
+          "total_latency_ms": 1127.27,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Stage 1 \u2014 Ingestion & Chunking: Raw technical manuals are parsed via app/ingestion/loader.py. A recursive character chunker (chunk_size = 500, chunk_overlap = ..."
+        },
+        {
+          "id": "P4_2_VAL04",
+          "query": "What distance metric and space configuration are utilized by ChromaDB in this platform?",
+          "category": "Architecture & Engineering",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.355,
+          "total_latency_ms": 1145.73,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Context Fragmentation & Dominance: Support documentation is partitioned into distinct manuals (User Manuals, Troubleshooting Guides, Warranty Policies, and FAQ..."
+        },
+        {
+          "id": "P4_2_VAL05",
+          "query": "What are the diagnostic steps when the ProX-400 front panel displays blinking amber LED alongside error code E-101?",
+          "category": "Troubleshooting Synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.296,
+          "total_latency_ms": 985.09,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Error Code E-101: Paper Jam Sequence **Trigger**: Media failed to actuate paper path registration sensors within expected timing parameters. Power off the prin..."
+        },
+        {
+          "id": "P4_2_VAL06",
+          "query": "What is the recommended cleaning interval and procedure for the optical laser glass and corona wire?",
+          "category": "Hardware Maintenance",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.288,
+          "total_latency_ms": 977.6,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Reconnect power directly to a wall receptacle (avoid unrated power strips) and power on. If E-204 recurs immediately, contact an authorized ApexPrint service c..."
+        },
+        {
+          "id": "P4_2_VAL07",
+          "query": "How does the hybrid retrieval engine fuse dense ChromaDB embeddings with sparse BM25 scores using Reciprocal Rank Fusion?",
+          "category": "Architecture & Engineering",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.422,
+          "total_latency_ms": 1013.95,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Stage 2 \u2014 Query Categorization: The router parses the user prompt for hardware codes, error patterns (e.g., E-02, \u201cjam\u201d), and operational clauses (e.g., \u201cwarra..."
+        },
+        {
+          "id": "P4_2_VAL08",
+          "query": "Compare the duty cycle, resolution, and ink or toner technology between the ProX-400 and the ColorWave-850.",
+          "category": "Cross-Document Comparison",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.243,
+          "total_latency_ms": 1408.42,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Specifications and Hardware Capabilities The ApexPrint ProX-400 is an enterprise-grade desktop monochrome laser printer designed for demanding small-to-medium ..."
+        },
+        {
+          "id": "P4_2_VAL09",
+          "query": "How do the document categories selected during upload influence retrieval filtering and prompt assembly in MCP mode?",
+          "category": "Cross-Document Comparison",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.396,
+          "total_latency_ms": 1058.69,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_2_VAL10",
+          "query": "What is Reciprocal Rank Fusion and what value of k is configured as the rank constant in the hybrid retriever?",
+          "category": "Technical Terminology",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.376,
+          "total_latency_ms": 1016.91,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Hybrid Search Fusion Reciprocal Rank Fusion (RRF) Rank-based score combination: RRF(d) = sum 1 / (60 + r(d)). Vector Store ChromaDB Metadata-filtered embedding..."
+        },
+        {
+          "id": "P4_2_VAL11",
+          "query": "Explain what Multi-Context Prompting is and how it prevents loss-in-the-middle phenomena in customer support answers.",
+          "category": "Technical Terminology",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.401,
+          "total_latency_ms": 1011.59,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_2_VAL12",
+          "query": "Does the standard limited warranty cover damage caused by operating the printer outside specified voltage or temperature limits?",
+          "category": "Documented Exclusion",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 1.504,
+          "total_latency_ms": 1021.21,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Explicit Warranty Voiding Conditions The warranty shall be immediately voided under the following circumstances: - **Physical Damage and Spills**: Damage cause..."
+        },
+        {
+          "id": "P4_2_VAL13",
+          "query": "What specific consumables are excluded from warranty coverage once their initial yield is depleted?",
+          "category": "Documented Exclusion",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 6.233,
+          "total_latency_ms": 1183.98,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Excluded Wear Items and Consumables The standard limited hardware warranty does not cover: - Consumable items, including toner cartridges, ink bottles, drum un..."
+        },
+        {
+          "id": "P4_2_VAL14",
+          "query": "What are the core benchmark metrics achieved by the Customer Support Intelligence Platform in Stage 7B?",
+          "category": "General Document Intelligence",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.366,
+          "total_latency_ms": 1063.44,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Visualizes empirical evaluation datasets (32 generations across 16 benchmark queries, plus 10 held-out questions). Interactive Recharts charts illustrate 100% ..."
+        },
+        {
+          "id": "P4_2_VAL15",
+          "query": "What storage budget constraint was established for the project and how is compliance monitored?",
+          "category": "General Document Intelligence",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.335,
+          "total_latency_ms": 994.07,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Multi-Category Coverage 31.2% (top category 93.8% Multi-Context Prompting questions. Retrieval Latency (Mean) ~0.35 ms ~0.28 ms Sub-millisecond retrieval memor..."
+        },
+        {
+          "id": "P4_2_VAL16",
+          "query": "What five subsystems are evaluated by the automated health check in the backend platform?",
+          "category": "General Document Intelligence",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.336,
+          "total_latency_ms": 975.92,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_2_VAL17",
+          "query": "Can multiple client workstations on different subnets print to the ColorWave-850 simultaneously?",
+          "category": "General Product QA",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.309,
+          "total_latency_ms": 943.16,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_2_VAL18",
+          "query": "What file formats are supported for document upload in the Customer Support Intelligence Platform?",
+          "category": "General Document Intelligence",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 3,
+          "citations_verified": true,
+          "gate_latency_ms": 0.939,
+          "total_latency_ms": 1199.9,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer The documented platform is an enterprise-grade AI Customer Support Intelligence Platform powered by Retrieval-Augmented Generation (RAG) and Multi-Context Prom..."
+        },
+        {
+          "id": "P4_2_VAL19",
+          "query": "What are the print speeds for black and color documents on the EcoTank L3150?",
+          "category": "Hardware Specifications",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.233,
+          "total_latency_ms": 1013.79,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Document Type: Technical Specifications Sheet Model: EcoTank L3150 / L300 Series Key Hardware Specifications: - Functionality: Print, Scan, Copy, Wireless Wi-F..."
+        },
+        {
+          "id": "P4_2_VAL20",
+          "query": "How do you perform a network reset to restore factory Wi-Fi settings on the ApexPrint ProX-400?",
+          "category": "Troubleshooting Synthesis",
+          "is_supported": true,
+          "expected_status": "SUFFICIENT",
+          "actual_status": "SUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.302,
+          "total_latency_ms": 955.83,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Wi-Fi Setup and Connection Troubleshooting - **WPS Push-Button Setup**: Press the WPS button on your Wi-Fi router. Within 2 minutes, press and hold the Wireles..."
+        },
+        {
+          "id": "P4_2_VAL21",
+          "query": "Can I disassemble and replace the fuser unit myself using hand tools if Error E-204 persists?",
+          "category": "Contradictory Evidence",
+          "is_supported": false,
+          "expected_status": "CONFLICTING",
+          "actual_status": "SUFFICIENT",
+          "verdict": "FAIL",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.35,
+          "total_latency_ms": 966.47,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Error Code E-204: Fuser Unit Overheat Protection **Trigger**: Fuser assembly thermistor sensed temperatures exceeding 230\u00b0C (446\u00b0F), engaging emergency thermal..."
+        },
+        {
+          "id": "P4_2_VAL22",
+          "query": "Should I bypass the internal power supply if voltage fluctuations occur in the printing environment?",
+          "category": "Contradictory Evidence",
+          "is_supported": false,
+          "expected_status": "CONFLICTING",
+          "actual_status": "SUFFICIENT",
+          "verdict": "FAIL",
+          "supporting_citations_count": 5,
+          "citations_verified": true,
+          "gate_latency_ms": 0.874,
+          "total_latency_ms": 1015.6,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Optional Lower Feeder (Tray 3)**: Optional 550-sheet locking paper drawer supporting up to 120 gsm media. Output Bin Capacity**: 250 sheets face-down with full..."
+        },
+        {
+          "id": "P4_2_VAL23",
+          "query": "What is the standard warranty period and what is the exact physical mailing address for sending international return merchandise?",
+          "category": "Partial Evidence",
+          "is_supported": false,
+          "expected_status": "PARTIAL",
+          "actual_status": "SUFFICIENT",
+          "verdict": "FAIL",
+          "supporting_citations_count": 4,
+          "citations_verified": true,
+          "gate_latency_ms": 0.994,
+          "total_latency_ms": 1150.38,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Covered Assemblies**: Includes laser optical scanner assembly, formatter logic board, low-voltage power supply, paper drive gear motors, and internal sensors. ..."
+        },
+        {
+          "id": "P4_2_VAL24",
+          "query": "How do you replace the waste toner box on a Ricoh Aficio MP C4503 multi-function copier?",
+          "category": "Competitor Hardware Mismatch",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.759,
+          "total_latency_ms": 1104.51,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'Ricoh Aficio MP..."
+        },
+        {
+          "id": "P4_2_VAL25",
+          "query": "What is the procedure for clearing error code 13.00.00 paper jam on a Lexmark CS720 color laser printer?",
+          "category": "Competitor Hardware Mismatch",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.71,
+          "total_latency_ms": 966.75,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'Lexmark CS720' ..."
+        },
+        {
+          "id": "P4_2_VAL26",
+          "query": "What is the duplex printing speed of a Kyocera ECOSYS P3155dn monochrome printer?",
+          "category": "Competitor Hardware Mismatch",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.749,
+          "total_latency_ms": 1032.13,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'Kyocera ECOSYS ..."
+        },
+        {
+          "id": "P4_2_VAL27",
+          "query": "Does the ApexPrint warranty cover repairs for damage caused by volcanic eruption ash or toxic chemical spills?",
+          "category": "Missing Policy Peril",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 1.893,
+          "total_latency_ms": 1133.76,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing repairs, volcanic.  ### 2. Specific Policy Exclusions & Missing ..."
+        },
+        {
+          "id": "P4_2_VAL28",
+          "query": "Is liquid spill damage from spilled coffee or tea covered under the standard hardware warranty agreement?",
+          "category": "Missing Policy Peril",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 2.219,
+          "total_latency_ms": 972.59,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the documented ApexPrint warranty policies, no terms or clauses were found addressing coffee, spill, spilled, tea.  ### 2. Specific Policy Exclusions ..."
+        },
+        {
+          "id": "P4_2_VAL29",
+          "query": "What are the maximum cabin carry-on dimensions and checked baggage weight limits on United Airlines?",
+          "category": "Misleading Lexical Overlap",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.81,
+          "total_latency_ms": 917.17,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'united airlines..."
+        },
+        {
+          "id": "P4_2_VAL30",
+          "query": "How do astronomers calculate the orbital velocity of Jupiter's moon Europa?",
+          "category": "Alien Out-of-Domain",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.966,
+          "total_latency_ms": 1047.13,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'Jupiter' (evide..."
+        },
+        {
+          "id": "P4_2_VAL31",
+          "query": "What is the wholesale bulk dealer discount percentage for purchasing 500 units of the ColorWave-850?",
+          "category": "In-Domain Missing Information",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 0.342,
+          "total_latency_ms": 1094.47,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry. The knowledge base contains technical speci..."
+        },
+        {
+          "id": "P4_2_VAL32",
+          "query": "What is the exact AWS EC2 instance type and monthly hosting cost for production Kubernetes deployment of this platform?",
+          "category": "In-Domain Missing Information",
+          "is_supported": false,
+          "expected_status": "INSUFFICIENT",
+          "actual_status": "INSUFFICIENT",
+          "verdict": "PASS",
+          "supporting_citations_count": 0,
+          "citations_verified": true,
+          "gate_latency_ms": 1.111,
+          "total_latency_ms": 1015.44,
+          "provider_status": "LOCAL_GROUNDED_SYNTHESIS",
+          "answer_preview": "### 1. Executive Summary / Direct Answer Based on the available documentation, insufficient evidence was found to answer this inquiry. Entity mismatch: Query requests instructions for 'AWS EC2' (evide..."
+        }
+      ]
+    },
+    "combined_suite_92_queries": {
+      "dataset_name": "Combined Master Evaluation Suite (92 Questions)",
+      "summary_metrics_original_labels": {
+        "total_evaluated": 92,
+        "supported_query_count": 70,
+        "unsupported_query_count": 22,
+        "correct_sufficient_count": 62,
+        "correct_partial_count": 0,
+        "correct_insufficient_count": 19,
+        "correct_conflicting_count": 0,
+        "total_correct": 81,
+        "false_acceptance_count": 3,
+        "false_acceptance_rate_on_ood": 0.1364,
+        "false_rejection_count": 0,
+        "false_rejection_rate_on_supported": 0.0,
+        "appropriate_abstention_count": 19,
+        "appropriate_abstention_rate_on_ood": 0.8636,
+        "overall_accuracy": 0.8804,
+        "confusion_matrix": {
+          "SUFFICIENT": {
+            "SUFFICIENT": 62,
+            "PARTIAL": 1,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 2
+          },
+          "PARTIAL": {
+            "SUFFICIENT": 6,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "INSUFFICIENT": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 19,
+            "CONFLICTING": 0
+          },
+          "CONFLICTING": {
+            "SUFFICIENT": 2,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          }
+        },
+        "per_category_breakdown": {
+          "A_direct_factual": {
+            "total": 8,
+            "correct": 8,
+            "accuracy": 1.0
+          },
+          "B_multistep_synthesis": {
+            "total": 7,
+            "correct": 7,
+            "accuracy": 1.0
+          },
+          "C_multidoc_synthesis": {
+            "total": 7,
+            "correct": 5,
+            "accuracy": 0.7143
+          },
+          "D_numerical_benchmark": {
+            "total": 7,
+            "correct": 6,
+            "accuracy": 0.8571
+          },
+          "E_comparison": {
+            "total": 6,
+            "correct": 6,
+            "accuracy": 1.0
+          },
+          "F_conflicting_info": {
+            "total": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          },
+          "G_ambiguous_partial": {
+            "total": 5,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "H_unsupported_ood": {
+            "total": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          },
+          "Competitor Hardware": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Missing Policy Clause": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Alien Out-of-Domain": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Generic Troubleshooting": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Generic Paper Handling": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Documented Policy Exclusion": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Project Architecture": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Project Constraints": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Hardware Specifications": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Architecture & Engineering": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Troubleshooting Synthesis": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Hardware Maintenance": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Cross-Document Comparison": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Technical Terminology": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Documented Exclusion": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "General Document Intelligence": {
+            "total": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "General Product QA": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Contradictory Evidence": {
+            "total": 2,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "Partial Evidence": {
+            "total": 1,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "Competitor Hardware Mismatch": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Missing Policy Peril": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Misleading Lexical Overlap": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "In-Domain Missing Information": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "summary_metrics_audited_labels": {
+        "total_evaluated": 92,
+        "supported_query_count": 70,
+        "unsupported_query_count": 22,
+        "correct_sufficient_count": 63,
+        "correct_partial_count": 0,
+        "correct_insufficient_count": 19,
+        "correct_conflicting_count": 0,
+        "total_correct": 82,
+        "false_acceptance_count": 3,
+        "false_acceptance_rate_on_ood": 0.1364,
+        "false_rejection_count": 0,
+        "false_rejection_rate_on_supported": 0.0,
+        "appropriate_abstention_count": 19,
+        "appropriate_abstention_rate_on_ood": 0.8636,
+        "overall_accuracy": 0.8913,
+        "confusion_matrix": {
+          "SUFFICIENT": {
+            "SUFFICIENT": 63,
+            "PARTIAL": 1,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 2
+          },
+          "PARTIAL": {
+            "SUFFICIENT": 6,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          },
+          "INSUFFICIENT": {
+            "SUFFICIENT": 1,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 19,
+            "CONFLICTING": 0
+          },
+          "CONFLICTING": {
+            "SUFFICIENT": 0,
+            "PARTIAL": 0,
+            "INSUFFICIENT": 0,
+            "CONFLICTING": 0
+          }
+        },
+        "per_category_breakdown": {
+          "A_direct_factual": {
+            "total": 8,
+            "correct": 8,
+            "accuracy": 1.0
+          },
+          "B_multistep_synthesis": {
+            "total": 7,
+            "correct": 7,
+            "accuracy": 1.0
+          },
+          "C_multidoc_synthesis": {
+            "total": 7,
+            "correct": 5,
+            "accuracy": 0.7143
+          },
+          "D_numerical_benchmark": {
+            "total": 7,
+            "correct": 6,
+            "accuracy": 0.8571
+          },
+          "E_comparison": {
+            "total": 6,
+            "correct": 6,
+            "accuracy": 1.0
+          },
+          "F_conflicting_info": {
+            "total": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          },
+          "G_ambiguous_partial": {
+            "total": 5,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "H_unsupported_ood": {
+            "total": 5,
+            "correct": 5,
+            "accuracy": 1.0
+          },
+          "Competitor Hardware": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Missing Policy Clause": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Alien Out-of-Domain": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Generic Troubleshooting": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Generic Paper Handling": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Documented Policy Exclusion": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Project Architecture": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Project Constraints": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Hardware Specifications": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Architecture & Engineering": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Troubleshooting Synthesis": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Hardware Maintenance": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Cross-Document Comparison": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Technical Terminology": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Documented Exclusion": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "General Document Intelligence": {
+            "total": 4,
+            "correct": 4,
+            "accuracy": 1.0
+          },
+          "General Product QA": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "Contradictory Evidence": {
+            "total": 2,
+            "correct": 1,
+            "accuracy": 0.5
+          },
+          "Partial Evidence": {
+            "total": 1,
+            "correct": 0,
+            "accuracy": 0.0
+          },
+          "Competitor Hardware Mismatch": {
+            "total": 3,
+            "correct": 3,
+            "accuracy": 1.0
+          },
+          "Missing Policy Peril": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          },
+          "Misleading Lexical Overlap": {
+            "total": 1,
+            "correct": 1,
+            "accuracy": 1.0
+          },
+          "In-Domain Missing Information": {
+            "total": 2,
+            "correct": 2,
+            "accuracy": 1.0
+          }
+        }
+      }
+    }
+  },
+  "latency_profile": {
+    "metadata": {
+      "active_generation_provider": "local_grounded_synthesizer (Local deterministic execution)",
+      "retrieval_mode": "hybrid_mcp (ChromaDB + BM25 + RRF)",
+      "total_queries_evaluated": 92
+    },
+    "execution_paths": {
+      "evidence_gate_overhead": {
+        "count": 92,
+        "mean": 0.78,
+        "median": 0.38,
+        "p95": 2.36,
+        "min": 0.11,
+        "max": 6.23
+      },
+      "warm_hybrid_retrieval": {
+        "count": 50,
+        "mean": 1083.8,
+        "median": 1061.9,
+        "p95": 1293.3,
+        "min": 913.87,
+        "max": 1456.94
+      },
+      "local_synthesis_generation": {
+        "count": 50,
+        "mean": 13.45,
+        "median": 12.14,
+        "p95": 30.0,
+        "min": 0.0,
+        "max": 52.57
+      },
+      "end_to_end_supported_path": {
+        "count": 73,
+        "mean": 1091.77,
+        "median": 1075.27,
+        "p95": 1319.31,
+        "min": 925.18,
+        "max": 1504.32
+      },
+      "end_to_end_abstention_path": {
+        "count": 19,
+        "mean": 1035.77,
+        "median": 1028.29,
+        "p95": 1247.26,
+        "min": 917.17,
+        "max": 1247.26
+      },
+      "full_query_latency_overall": {
+        "count": 92,
+        "mean": 1080.21,
+        "median": 1063.48,
+        "p95": 1304.55,
+        "min": 917.17,
+        "max": 1504.32
+      }
+    }
+  }
+}

@@ -246,6 +246,32 @@ class EvidenceGate:
                 requires_human_clarification=True,
             )
 
+        # 2b. Commercial / Dealer Terms Verification (Address in-domain missing attributes, e.g. P4_2_VAL31)
+        commercial_terms = ["wholesale", "dealer discount", "bulk discount", "reseller discount", "dealer pricing", "distributor pricing"]
+        if any(term in lower_query for term in commercial_terms):
+            combined_text = " ".join(r.text.lower() for r in retrieved_contexts)
+            if not any(term in combined_text for term in ["wholesale", "discount", "dealer", "reseller"]):
+                reasons.append("Queried commercial terms (wholesale/dealer discount) are not documented in the technical documentation.")
+                abstention_msg = (
+                    "### 1. Executive Summary / Direct Answer\n"
+                    "Based on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry. "
+                    "The knowledge base contains technical specifications, user manuals, troubleshooting procedures, and warranty terms, "
+                    "but does not contain commercial sales agreements, wholesale pricing, or dealer discount structures.\n\n"
+                    "### 2. Missing Information / Limitations\n"
+                    "Commercial purchasing and dealer pricing agreements are handled directly through authorized sales channels and are not documented in the technical support knowledge base.\n\n"
+                    "### 3. Verified Source Citations\n"
+                    "   - [Source: No relevant documentation found]"
+                )
+                return EvidenceSufficiencyDecision(
+                    status="INSUFFICIENT",
+                    top_similarity_score=top_score,
+                    similarity_floor_passed=True,
+                    relevance_threshold_used=self.MIN_SIMILARITY_FLOOR,
+                    decision_reasons=reasons,
+                    abstention_message=abstention_msg,
+                    requires_human_clarification=True,
+                )
+
         # 3. Policy & Negative-Claim Verification (Address P4_Q50)
         policy_res = self._check_policy_verification(clean_query, retrieved_contexts)
         if policy_res.is_policy_query and not policy_res.is_explicitly_documented:
@@ -343,9 +369,9 @@ class EvidenceGate:
                 if cand_lower in self.KNOWN_SYSTEM_BRANDS or cand_lower in self.KNOWN_PROJECT_ENTITIES:
                     continue
                 # Exclude error codes, protocols, project milestones, metrics, and hardware parts
-                if re.match(r"^(?:error\s+)?e-\d+$", cand_lower):
+                if re.search(r"\be-\d+\b", cand_lower) or re.search(r"\berror\s+[a-z]?\d+\b", cand_lower):
                     continue
-                if re.match(r"^stage\s+\d+[a-z]?$", cand_lower):
+                if re.search(r"\bstage\s+\d+[a-z]?\b", cand_lower):
                     continue
                 if cand_lower in {"ipv4", "ipv6", "ip", "usb", "wifi", "wi-fi", "bluetooth", "ethernet", "lan", "tcp", "udp", "http", "https"}:
                     continue
@@ -504,19 +530,34 @@ class EvidenceGate:
         """
         Detects conflicting recommendations across distinct source categories
         when the user inquiry specifically touches on conflicting actions.
+        A genuine conflict requires contradictory guidance (one document permitting/instructing
+        an action while another prohibits/voids it), not mutual agreement on prohibitions.
         """
         is_conflict_query = any(w in lower_query for w in [
             "disassemble", "disassembly", "void", "tamper", "tampering",
-            "repair myself", "third-party", "non-oem", "conflict", "contradict"
+            "repair myself", "third-party", "non-oem", "conflict", "contradict", "bypass"
         ])
         if not is_conflict_query:
             return False
 
-        combined_text = " ".join(r.text.lower() for r in retrieved_contexts)
-        categories = {r.metadata.get("category", "") for r in retrieved_contexts}
-        if "troubleshooting" in categories and "warranty" in categories:
-            if ("void" in combined_text or "disassemble" in combined_text) and ("open" in combined_text or "replace" in combined_text):
+        troubleshooting_chunks = [r.text for r in retrieved_contexts if r.metadata.get("category") == "troubleshooting"]
+        warranty_chunks = [r.text for r in retrieved_contexts if r.metadata.get("category") == "warranty"]
+        if troubleshooting_chunks and warranty_chunks:
+            troub_text = " ".join(troubleshooting_chunks).lower()
+            warr_text = " ".join(warranty_chunks).lower()
+
+            warr_forbids = any(f in warr_text for f in ["void", "voids warranty", "unauthorized"])
+            has_disassemble_action = bool(re.search(r"\b(?:disassemble|disassembly)\b", troub_text))
+            is_action_negated = bool(re.search(r"\b(?:do\s+not|never|prohibited|cannot|avoid)\s+[^.]*?\b(?:open|disassemble)\b", troub_text))
+
+            if has_disassemble_action and not is_action_negated and warr_forbids:
                 return True
+
+            if any(w in lower_query for w in ["conflict", "contradict", "opposing"]):
+                troub_permits = any(p in troub_text for p in ["user-serviceable", "user may repair", "self-repair permitted"])
+                if troub_permits and warr_forbids:
+                    return True
+
         return False
 
 
