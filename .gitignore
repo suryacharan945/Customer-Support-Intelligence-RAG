@@ -46,3 +46,7 @@ web/.vite/
 *.tsbuildinfo
 dist/
 coverage/
+
+# Vercel Deployment Artifacts
+.vercel
+web/.vercel

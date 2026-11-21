@@ -1,0 +1,7 @@
+# Web Subdirectory Vercel Ignore File
+node_modules/
+dist/
+.vite/
+*.local
+.env
+.env.*.local

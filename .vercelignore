@@ -1,0 +1,36 @@
+# Vercel Deployment Ignore File
+# Exclude backend, caches, virtual environments, and local database storage
+.git
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Vector Database & Ephemeral Storage
+.chroma_live/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Backend Source & Test Suites (Frontend Vercel build does not need backend execution files)
+app/
+tests/
+evaluations/
+evaluation/
+notebooks/
+scripts/
+data/
+
+# Environment files
+.env
+.env.local
+*.env
+
+# Build outputs & node_modules
+node_modules/
+web/node_modules/
+web/.vite/

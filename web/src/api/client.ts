@@ -37,10 +37,12 @@ class ApiClient {
     const envUrl = import.meta.env.VITE_API_BASE_URL;
     if (envUrl) {
       this.baseUrl = envUrl.replace(/\/+$/, '');
-    } else if (typeof window !== 'undefined' && window.location.hostname) {
-      this.baseUrl = 'http://' + (window.location.hostname || 'localhost') + ':8000/api/v1';
+    } else if (import.meta.env.DEV) {
+      const hostname = (typeof window !== 'undefined' && window.location.hostname) || 'localhost';
+      this.baseUrl = `http://${hostname}:8000/api/v1`;
     } else {
-      this.baseUrl = 'http://127.0.0.1:8000/api/v1';
+      // In production without explicit VITE_API_BASE_URL, default to relative '/api/v1' for reverse proxy / rewrites
+      this.baseUrl = '/api/v1';
     }
   }
 

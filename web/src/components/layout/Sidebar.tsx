@@ -135,7 +135,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
 
             {/* Streamlit Fallback link */}
             <a
-              href="http://localhost:8501"
+              href={import.meta.env.VITE_STREAMLIT_URL || "http://localhost:8501"}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-indigo-300 bg-slate-800/40 hover:bg-slate-800/80 border border-slate-750 transition-colors"

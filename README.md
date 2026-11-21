@@ -102,6 +102,12 @@ npm run dev
 ```
 Open your browser to `http://localhost:5173/`.
 
+### 4. Vercel Deployment (Frontend)
+The React 18 SPA is deployment-ready on Vercel:
+1. Import this repository into Vercel and set **Root Directory** to `web` (or leave at root; repository includes root and subdirectory `vercel.json` configurations).
+2. Set `VITE_API_BASE_URL` in Vercel Environment Variables to your deployed FastAPI backend URL (e.g. `https://api.yourdomain.com/api/v1`).
+3. For detailed architectural analysis on persistent ChromaDB storage and backend hosting options (Render, Railway, Docker), see [docs/VERCEL_DEPLOYMENT.md](docs/VERCEL_DEPLOYMENT.md).
+
 ---
 
 ## 📊 Comprehensive Benchmark Results
@@ -166,6 +172,7 @@ Customer Support ChatBot/
 │   ├── ARCHITECTURE.md                  # Deep-dive system architecture & dataflow diagrams
 │   ├── INSTALLATION.md                  # Step-by-step local setup, environment & verification
 │   ├── DEPLOYMENT_AND_CONFIGURATION.md  # Production serving, environment variables & runbook
+│   ├── VERCEL_DEPLOYMENT.md             # Vercel frontend setup & architecture analysis
 │   ├── EVALUATION.md                    # Benchmark methodology, confusion matrices & metrics
 │   ├── HUMAN_EVALUATION.md              # 50-item evaluation worksheet & scoring rubric
 │   ├── KNOWN_LIMITATIONS.md             # System boundaries & honest disclosures
