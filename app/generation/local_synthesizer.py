@@ -123,15 +123,17 @@ class LocalGroundedSynthesizer:
                     "category": category,
                 })
 
-        # Pattern 3: Baseline excerpt format: [Excerpt X - Source: <file>]\n<text>
+        # Pattern 3: Baseline excerpt format: [Excerpt X - Source: <file>(?:, Page: <page>)?(?:, Chunk: <id>)?]\n<text>
         if not blocks:
             base_pattern = re.compile(
-                r"\[Excerpt\s*\d+\s*-\s*Source:\s*([^\]]+)\]\s*\n(.*?)(?=\n\[Excerpt|\nCustomer|\nUser|\Z)",
+                r"\[Excerpt\s*\d+\s*-\s*Source:\s*([^,\]]+)(?:,\s*Page:\s*([^,\]]+))?(?:,\s*Chunk:\s*([^,\]]+))?\]\s*\n(.*?)(?=\n\[Excerpt|\nCustomer|\nUser|\nInstructions|\Z)",
                 re.DOTALL,
             )
             for m in base_pattern.finditer(prompt_text):
                 source = m.group(1).strip()
-                text = m.group(2).strip()
+                page = m.group(2).strip() if m.group(2) else "1"
+                chunk_id = m.group(3).strip() if m.group(3) else "doc_excerpt_001"
+                text = m.group(4).strip()
                 category = "general"
                 source_lower = source.lower()
                 if "manual" in source_lower:
@@ -145,8 +147,8 @@ class LocalGroundedSynthesizer:
 
                 blocks.append({
                     "source": source,
-                    "page": "1",
-                    "chunk_id": "doc_excerpt_001",
+                    "page": page,
+                    "chunk_id": chunk_id,
                     "text": text,
                     "category": category,
                 })
@@ -167,13 +169,19 @@ class LocalGroundedSynthesizer:
 
     @staticmethod
     def is_noise_or_header_line(line: str) -> bool:
-        """Filter out running headers, footers, page markers, and standalone titles."""
+        """Filter out running headers, footers, page markers, author metadata, and standalone titles."""
         line_s = line.strip()
         if not line_s:
             return True
         if "|" in line_s and len(line_s) > 10:
             return False
         if re.search(r"Page \d+ of \d+|Capstone Dossier|ENGINEERING DOSSIER|Customer Support Inquiry|User Inquiry", line_s, re.I):
+            return True
+        if re.search(r"[\w\.-]+@[\w\.-]+\.\w+", line_s):
+            return True
+        if any(term in line_s for term in ["Department of", "College (Autonomous)", "Engineering College", "University", "Affiliation:"]):
+            return True
+        if re.match(r"^[A-Z]\.\s+[A-Za-z\s]+$", line_s):
             return True
         if re.match(r"^\d+\.\s+[A-Za-z0-9\s&/—\-\(\)]+$", line_s):
             return True
@@ -186,8 +194,33 @@ class LocalGroundedSynthesizer:
         return False
 
     @classmethod
+    def is_bibliography_chunk(cls, text: str) -> bool:
+        """Identify if a chunk is predominantly reference citations/bibliography rather than core content."""
+        lower = text.lower()
+        if "references" in lower[:35] or "bibliography" in lower[:35]:
+            return True
+        ref_signals = [
+            "ieee", "cvpr", "icml", "neurips", "iccv", "inproc.", "proceedings of",
+            "journal of", "pp. ", "vol. ", "doi:", "et al.", "arxiv:"
+        ]
+        match_count = sum(1 for sig in ref_signals if sig in lower)
+        bracket_cits = len(re.findall(r"\[\d+\]", text))
+        if match_count >= 2 or bracket_cits >= 2:
+            return True
+        return False
+
+    @classmethod
+    def is_author_metadata_chunk(cls, text: str) -> bool:
+        """Check if block contains mostly author affiliations, emails, or paper headers."""
+        lower = text.lower()
+        if re.search(r"[\w\.-]+@[\w\.-]+\.\w+", text):
+            if any(term in lower for term in ["department of", "college", "university", "autonomous", "abstract—"]):
+                return True
+        return False
+
+    @classmethod
     def clean_block_text(cls, text: str) -> str:
-        """Strip structural noise, resolve broken hyphenations, and normalize whitespace."""
+        """Strip structural noise, resolve broken hyphenations, remove in-text citations, and normalize whitespace."""
         text = unicodedata.normalize('NFKD', text).replace('\u2211', 'sum')
         lines = []
         for line in text.split("\n"):
@@ -196,8 +229,44 @@ class LocalGroundedSynthesizer:
                 continue
             lines.append(line_s)
         joined = " ".join(lines)
-        joined = re.sub(r"(\w+)-\s+(\w+)", r"\1-\2", joined)
+
+        # Smart de-hyphenation: merge words split across line breaks (e.g. au-tomated -> automated)
+        def _dehyphen(m):
+            w1 = m.group(1)
+            w2 = m.group(2)
+            if w1.lower() in {"self", "cross", "end", "state", "all", "fine", "trade", "multi", "real"}:
+                return f"{w1}-{w2}"
+            return f"{w1}{w2}"
+
+        joined = re.sub(r"\b([a-zA-Z]{2,})-\s+([a-zA-Z]{2,})\b", _dehyphen, joined)
+
+        # Normalize abbreviation periods so sentence splitting doesn't prematurely fragment text
+        joined = re.sub(r"\bFig\.\s*", "Figure ", joined)
+        joined = re.sub(r"\be\.g\.\s*", "for example, ", joined, flags=re.I)
+        joined = re.sub(r"\bi\.e\.\s*", "that is, ", joined, flags=re.I)
+        joined = re.sub(r"\bet al\.\s*", "et al ", joined, flags=re.I)
+
+        # Strip in-text reference citations like [1], [1, 2], [1]-[4], [cite: 1, 12]
+        joined = re.sub(r"\[\s*cite:[^\]]+\]", "", joined, flags=re.I)
+        joined = re.sub(r"\[\s*\d+(?:\s*[,–—-]\s*\d+)*\s*\]", "", joined)
+
+        # Strip academic headers / section numbers at start of text or sentences
+        joined = re.sub(r"\b(?:Abstract|ABSTRACT)\s*[—–-]\s*", "", joined)
+        joined = re.sub(r"\bIndex Terms\s*[—–-][^.\n]+[\.\n]?", "", joined)
+        joined = re.sub(r"\b(?:[I|V|X]+\.\s+[A-Z\s]{4,})\b", "", joined)
+
+        # Remove raw emails
+        joined = re.sub(r"[\w\.-]+@[\w\.-]+\.\w+", "", joined)
+
+        # Remove broken figure references at end of phrases
+        joined = re.sub(r",?\s*(?:as\s+)?(?:illustrated|depicted|shown)\s+in\s+Fig(?:ure)?\.?\s*\d*.*?(?=[.;,]|\Z)", "", joined, flags=re.I)
+
+        # Spacing normalization around numbers and units (e.g. in12.4ms -> in 12.4 ms)
+        joined = re.sub(r"([a-z])(\d)", r"\1 \2", joined)
+        joined = re.sub(r"(\d+(?:\.\d+)?)\s*(ms|fps|ppm|MB|GB|KB|frames|AUROC)\b", r"\1 \2", joined, flags=re.I)
+
         joined = re.sub(r'^[“"\'\s•\-\*]+', "", joined)
+        joined = re.sub(r"\s{2,}", " ", joined)
         return joined.strip()
 
     @classmethod
@@ -207,15 +276,91 @@ class LocalGroundedSynthesizer:
         sents = []
         for s in re.split(r"(?<=[.!?])\s+", cleaned):
             s_clean = s.strip()
-            s_clean = re.sub(r'^[“"\'\s•\-\*\d\.\)]+', "", s_clean).strip()
+            # If string contains "Figure " with diagram box OCR residue before it, extract from Figure onwards
+            if "Figure" in s_clean:
+                s_clean = re.sub(r"^.*?Figure\s*\d*[:\.\-]?\s*", "", s_clean).strip()
+            s_clean = re.sub(r'^[“"\'\s•\-\*\d\.\)ˆ∈\(\]\w]+[:\.\-]?\s*(?=[A-Z][a-z])', "", s_clean) if any(sym in s_clean[:8] for sym in ["ˆ", "∈", "γ", "Γ"]) else s_clean
+            s_clean = re.sub(r'^[“"\'\s•\-\*\d\.\)ˆ∈\(\]]+', "", s_clean).strip()
+            s_clean = re.sub(r"\[\s*\d+(?:\s*[,–—-]\s*\d+)*\s*\]", "", s_clean).strip()
+            s_clean = re.sub(r",?\s*(?:as\s+)?(?:shown|illustrated|depicted)\s+in\s+Fig(?:ure)?\.?\s*\d*.*$", "", s_clean, flags=re.I).strip()
+            s_clean = re.sub(r"[\s,-]+(?:How|and|or|with|the|in)\s*$", "", s_clean, flags=re.I).strip()
+
             if len(s_clean) > 25 and not s_clean.startswith("**Document"):
                 if ")" in s_clean and "(" not in s_clean:
                     continue
-                if s_clean and not s_clean[0].isupper():
+                if "@" in s_clean:
                     continue
+                if re.match(r"^[a-z]{2,8},\s+", s_clean):
+                    s_clean = re.sub(r"^[a-z]{2,8},\s+", "", s_clean)
+                if not s_clean:
+                    continue
+                if not (s_clean[0].isupper() or s_clean.startswith("**")):
+                    s_clean = s_clean[0].upper() + s_clean[1:]
+                if not any(s_clean.endswith(p) for p in [".", "!", "?", '."', ".'"]):
+                    s_clean += "."
+
                 neutralized = cls.neutralize_voice(s_clean)
                 sents.append(neutralized)
         return sents
+
+    @classmethod
+    def format_as_structured_bullet(cls, sentence: str, citation: str) -> str:
+        """Format a sentence into a clean, structured bullet with a bold semantic topic title like ChatGPT/Gemini."""
+        s = sentence.strip()
+        if s.startswith("**") and "**:" in s:
+            return f"{s} {citation}"
+
+        if ":" in s and not s.startswith("http"):
+            parts = s.split(":", 1)
+            title = parts[0].strip()
+            desc = parts[1].strip()
+            if 3 < len(title) < 45 and len(desc) > 10:
+                title_clean = " ".join(w.capitalize() if not w.isupper() else w for w in title.split())
+                return f"**{title_clean}**: {desc} {citation}"
+
+        words = s.split()
+        lower_s = s.lower()
+        title = "Core Specification"
+        if "defect" in lower_s and "detection" in lower_s:
+            title = "Defect Detection & Vision"
+        elif "optical inspection" in lower_s or "aoi" in lower_s:
+            title = "Automated Optical Inspection (AOI)"
+        elif "anomaly" in lower_s or "scoring" in lower_s:
+            title = "Anomaly Scoring & Calibration"
+        elif "patchcore" in lower_s or "memory bank" in lower_s:
+            title = "Memory Bank & Feature Extraction"
+        elif "architecture" in lower_s or "pipeline" in lower_s:
+            title = "Operational Pipeline"
+        elif "presentation layer" in lower_s or "frontend" in lower_s:
+            title = "Presentation Layer"
+        elif "application server" in lower_s or "fastapi" in lower_s:
+            title = "Application Server"
+        elif "hybrid retrieval" in lower_s or "retrieval" in lower_s:
+            title = "Retrieval Subsystem"
+        elif "vector database" in lower_s or "chromadb" in lower_s:
+            title = "Vector Database"
+        elif "bm25" in lower_s or "keyword" in lower_s:
+            title = "Keyword Search Index"
+        elif "paper jam" in lower_s or "e-101" in lower_s:
+            title = "Paper Jam Remediation"
+        elif "error e-204" in lower_s or "tray 2" in lower_s:
+            title = "Tray Configuration"
+        elif "warranty" in lower_s or "rma" in lower_s:
+            title = "Warranty & Policy Terms"
+        elif "print speed" in lower_s or "ppm" in lower_s:
+            title = "Print Performance & Speed"
+        elif "storage" in lower_s or "budget" in lower_s or "1024" in lower_s:
+            title = "Storage Architecture & Budget"
+        elif "prompt injection" in lower_s or "guardrail" in lower_s:
+            title = "Security & Guardrails"
+        elif len(words) >= 3:
+            lead_words = [w for w in words[:3] if w.lower() not in {"the", "this", "an", "a", "we", "in", "for", "with"}]
+            if lead_words:
+                title = " ".join(w.capitalize() if not w.isupper() else w for w in lead_words)
+            else:
+                title = "Technical Specification"
+
+        return f"**{title}**: {s} {citation}"
 
     @classmethod
     def extract_structured_bullets(
@@ -246,16 +391,7 @@ class LocalGroundedSynthesizer:
                 item = re.sub(r"\s*Page \d+ of \d+.*$", "", item, flags=re.I)
                 item = cls.neutralize_voice(item)
 
-                if ":" in item and not item.startswith("http"):
-                    parts = item.split(":", 1)
-                    title = parts[0].strip()
-                    desc = parts[1].strip()
-                    if 3 < len(title) < 45 and len(desc) > 10:
-                        formatted = f"**{title}**: {desc} {cit}"
-                    else:
-                        formatted = f"{item} {cit}"
-                else:
-                    formatted = f"{item} {cit}"
+                formatted = cls.format_as_structured_bullet(item, cit)
 
                 clean_key = formatted.lower()[:35]
                 if len(formatted) > 25 and clean_key not in seen and clean_key not in exclude_set:
@@ -274,7 +410,8 @@ class LocalGroundedSynthesizer:
                     clean_key = s.lower()[:35]
                     if clean_key not in seen and clean_key not in exclude_set:
                         seen.add(clean_key)
-                        bullets.append(f"{s} {cit}")
+                        formatted = cls.format_as_structured_bullet(s, cit)
+                        bullets.append(formatted)
                         if len(bullets) >= max_bullets:
                             break
                 if len(bullets) >= max_bullets:
@@ -299,15 +436,19 @@ class LocalGroundedSynthesizer:
             for s in sents:
                 # Component patterns: e.g. "Presentation Layer built with React 18...", "Application Server powered by FastAPI..."
                 m = re.search(
-                    r"((?:Presentation Layer|Application Server|Hybrid Retrieval|Vector Database|Keyword Retrieval|Context & Safety Layer|Ranking Fusion|LLM Inference|[A-Z][a-zA-Z0-9\s]{3,30}(?:Layer|Server|Subsystem|Pipeline|Database|Engine|Store|Interface|Service|Controller|Module)))\s*(?:built with|powered by|uses|integrates|is|features|consists of|uses:?|:|\s*-\s*)\s*([^.\r\n]+(?:\.[0-9]+[^.\r\n]*)*)",
+                    r"\b((?:[Pp]resentation [Ll]ayer|[Aa]pplication [Ss]erver|[Hh]ybrid [Rr]etrieval|[Vv]ector [Dd]atabase|[Kk]eyword [Rr]etrieval|[Cc]ontext & [Ss]afety [Ll]ayer|[Rr]anking [Ff]usion|[Ll][Ll][Mm] [Ii]nference|[A-Z][a-zA-Z0-9\s\-]{2,30}(?:Layer|Server|Subsystem|Pipeline|Database|Engine|Store|Interface|Service|Controller|Module)))\s*(?:built with|powered by|uses|integrates|is|features|consists of|uses:?|:|\s*-\s*)\s*([^.\r\n]+(?:\.[0-9]+[^.\r\n]*)*)",
                     s,
-                    re.IGNORECASE,
                 )
                 if m:
                     name = m.group(1).strip()
                     desc = m.group(2).strip()
+                    desc = re.sub(r",?\s*(?:as\s+)?(?:illustrated|depicted|shown)\s+in\s+Fig(?:ure)?\.?\s*\d*.*$", "", desc, flags=re.I).strip()
+                    if desc.lower().startswith("illustrated in") or desc.lower().startswith("shown in"):
+                        continue
+                    if name.lower().startswith("tion") or name.lower().startswith("ing"):
+                        continue
                     key = name.lower()
-                    if key not in seen and len(desc) > 8:
+                    if key not in seen and len(desc) > 12:
                         seen.add(key)
                         subsystems.append({
                             "name": name,
@@ -712,10 +853,17 @@ class LocalGroundedSynthesizer:
                 score += 4
             if "non-oem" in query_lower and "non-oem" in text_lower:
                 score += 4
+
+            # Substantive content prioritization: penalize bibliography and pure author headers
+            if self.is_bibliography_chunk(b["text"]):
+                score -= 50
+            if self.is_author_metadata_chunk(b["text"]):
+                score -= 30
+
             ranked_blocks.append((score, b))
 
         max_score = max((s for s, b in ranked_blocks), default=0)
-        if max_score == 0 and not is_support:
+        if max_score <= -20 and not is_support:
             answer_text = (
                 "### 1. Executive Summary / Direct Answer\n"
                 "Based on the available documentation, insufficient evidence was found in the knowledge base to answer this inquiry. "
@@ -738,9 +886,17 @@ class LocalGroundedSynthesizer:
         ranked_blocks.sort(key=lambda x: x[0], reverse=True)
         top_blocks = [b for s, b in ranked_blocks if s > 0]
         if not top_blocks:
+            top_blocks = [b for s, b in ranked_blocks if s > -25]
+        if not top_blocks:
             top_blocks = [ranked_blocks[0][1]]
 
+        # Pick substantive block as primary
         primary_block = top_blocks[0]
+        for b in top_blocks:
+            if not self.is_bibliography_chunk(b["text"]) and not self.is_author_metadata_chunk(b["text"]):
+                primary_block = b
+                break
+
         for b in top_blocks:
             b_lower = b["text"].lower()
             if primary_intent == "architecture" and ("system architecture" in b_lower or "presentation layer" in b_lower):
@@ -755,7 +911,7 @@ class LocalGroundedSynthesizer:
             elif primary_intent == "interview_prep" and ("interview" in b_lower or "elevator pitch" in b_lower):
                 primary_block = b
                 break
-            elif "executive summary" in b_lower or "overview" in b_lower:
+            elif ("executive summary" in b_lower or "overview" in b_lower) and not self.is_bibliography_chunk(b["text"]):
                 primary_block = b
                 break
 
@@ -933,16 +1089,47 @@ class LocalGroundedSynthesizer:
 
                 finding_lines = []
                 seen_f = set()
+                # Priority 1: High-value metrics, outcomes, architecture, or policy sentences
                 for b in top_blocks:
                     cit = f"[Source: {b['source']}, Page: {b['page']}, Chunk: {b['chunk_id']}]"
                     for s in self.extract_clean_sentences(b["text"]):
-                        if any(k in s.lower() for k in ["grounding", "traceability", "storage", "budget", "policy", "finding", "latency", "constraint"]):
-                            f_key = s.lower()[:30]
-                            if f_key not in seen_f:
+                        s_lower = s.lower()
+                        if any(k in s_lower for k in [
+                            "grounding", "traceability", "storage", "budget", "policy", "finding", "latency",
+                            "constraint", "precision", "accuracy", "auroc", "benchmark", "performance",
+                            "decision", "speed", "metric", "ppm", "framework", "anomaly", "conclusion",
+                            "achieve", "demonstrate", "propose", "evaluation", "result"
+                        ]):
+                            f_key = s_lower[:30]
+                            if f_key not in seen_f and not any(f_key in b_item.lower() for b_item in structured_bullets):
                                 seen_f.add(f_key)
-                                finding_lines.append(f"   - **Key Detail**: {s} {cit}")
+                                if any(m in s_lower for m in ["%", "ms", "ppm", "mb", "gb", "precision", "accuracy", "auroc"]):
+                                    lead = "Performance & Metrics"
+                                elif any(m in s_lower for m in ["policy", "warranty", "sla", "terms", "coverage", "budget", "constraint"]):
+                                    lead = "Policy & Operational Constraints"
+                                elif any(m in s_lower for m in ["architecture", "framework", "pipeline", "subsystem"]):
+                                    lead = "System Architecture"
+                                else:
+                                    lead = "Core Technical Insight"
+                                finding_lines.append(f"   - **{lead}**: {s} {cit}")
                                 if len(finding_lines) >= 3:
                                     break
+                    if len(finding_lines) >= 3:
+                        break
+
+                # Priority 2: Extract remaining clean sentences if fewer than 2 findings
+                if len(finding_lines) < 2:
+                    for b in top_blocks:
+                        cit = f"[Source: {b['source']}, Page: {b['page']}, Chunk: {b['chunk_id']}]"
+                        for s in self.extract_clean_sentences(b["text"]):
+                            f_key = s.lower()[:30]
+                            if f_key not in seen_f and not any(f_key in b_item.lower() for b_item in structured_bullets):
+                                seen_f.add(f_key)
+                                finding_lines.append(f"   - **Engineering Observation**: {s} {cit}")
+                                if len(finding_lines) >= 2:
+                                    break
+                        if len(finding_lines) >= 2:
+                            break
 
                 findings_formatted = "\n".join(finding_lines) if finding_lines else "   - Technical assertions reference exact source document names, page coordinates, and chunk identifiers."
 
@@ -954,13 +1141,41 @@ class LocalGroundedSynthesizer:
                 )
 
         else:
-            # Baseline format: clean, grounded answer with top citation
-            cleaned_base = self.clean_block_text(primary_block["text"])
+            # Baseline format: clean, structured, ChatGPT/Gemini style answer with verified citations
             cit = citations_used[0] if citations_used else f"[Source: {primary_block['source']}]"
             base_sents = self.extract_clean_sentences(primary_block["text"])
-            base_body = " ".join(base_sents[:3]) if base_sents else cleaned_base[:350]
+
+            direct_summary = " ".join(base_sents[:2]) if base_sents else self.clean_block_text(primary_block["text"])[:250]
+            if not direct_summary.endswith("."):
+                direct_summary += "."
+
+            detail_bullets = []
+            used_keys = {direct_summary.lower()[:30]}
+            for b in top_blocks[:3]:
+                b_cit = f"[Source: {b['source']}, Page: {b['page']}, Chunk: {b['chunk_id']}]"
+                for s in self.extract_clean_sentences(b["text"]):
+                    s_key = s.lower()[:30]
+                    if s_key not in used_keys:
+                        used_keys.add(s_key)
+                        detail_bullets.append(f"   - {self.format_as_structured_bullet(s, b_cit)}")
+                        if len(detail_bullets) >= 3:
+                            break
+                if len(detail_bullets) >= 3:
+                    break
+
+            details_formatted = (
+                "\n".join(detail_bullets)
+                if detail_bullets
+                else f"   - **Technical Specifications**: Documented in {primary_block['source']}. {cit}"
+            )
+
             answer_text = (
-                f"Based on verified documentation in {primary_block['source']} {cit}, {base_body.strip()}."
+                f"### 1. Direct Answer\n"
+                f"{direct_summary} {cit}\n\n"
+                f"### 2. Key Technical Details\n"
+                f"{details_formatted}\n\n"
+                f"### 3. Verified Source Citations\n"
+                f"{citations_formatted}"
             )
 
         lat_ms = round((time.perf_counter() - t0) * 1000, 2)

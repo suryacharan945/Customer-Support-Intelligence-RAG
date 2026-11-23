@@ -541,7 +541,10 @@ class RAGService:
             # Simple context concatenation for baseline mode
             blocks = []
             for idx, r in enumerate(retrieved_contexts, start=1):
-                blocks.append(f"[Excerpt {idx} - Source: {r.source}]\n{r.text}\n")
+                p_num = r.metadata.get("page_number")
+                page_str = f"Page: {p_num}" if p_num is not None and p_num != -1 else "Page: 1"
+                chunk_id = r.metadata.get("chunk_id") or r.document_id or f"doc_excerpt_{idx:03d}"
+                blocks.append(f"[Excerpt {idx} - Source: {r.source}, {page_str}, Chunk: {chunk_id}]\n{r.text}\n")
             context_str = "\n".join(blocks)
             user_prompt = PromptTemplates.BASELINE_SYNTHESIS_TEMPLATE.format(
                 context_blocks=context_str,

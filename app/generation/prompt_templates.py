@@ -29,7 +29,16 @@ User Inquiry:
 {user_query}
 
 Instructions:
-Provide a concise, grounded response addressing the inquiry based strictly on the excerpts above. Include source citations for every claim.
+Generate a clear, well-structured, and professional response addressing the user's inquiry based strictly and solely on the provided reference excerpts.
+Format your response using clean Markdown:
+### 1. Direct Answer
+A clear, direct answer to the inquiry with immediate source citation [Source: <filename>, Page: <page>, Chunk: <chunk_id>].
+
+### 2. Key Technical Details
+Bulleted breakdown of technical specifications, procedures, or components. Every bullet must begin with a **Bold Topic Title** and include its source citation.
+
+### 3. Verified Source Citations
+A bulleted list of all cited sources with exact filename, page, and chunk IDs.
 """
 
     MCP_SYNTHESIS_TEMPLATE = """================ MULTI-CONTEXT EVIDENCE BLOCKS ================
@@ -42,11 +51,11 @@ Provide a concise, grounded response addressing the inquiry based strictly on th
 {user_query}
 
 Response Instructions:
-Synthesize an adaptive, structured response based strictly on the retrieved evidence above:
-1. Executive Summary / Direct Answer: Clear, immediate answer addressing the core question.
-2. Detailed Explanation: In-depth technical breakdown, system architecture, workflow, or specifications as relevant to the query.
-3. Key Findings / Important Details: Critical observations, numerical tables, key engineering decisions, or policy details.
-4. Cross-References / Comparisons (if applicable): Cross-domain dependencies or comparisons between systems/documents.
-5. Verified Source Citations: Exact source filenames, page numbers, and chunk IDs for all cited claims.
+Synthesize an adaptive, well-structured, and comprehensive response like a state-of-the-art AI assistant, grounded strictly in the retrieved evidence above:
+1. Executive Summary / Direct Answer: A clear, authoritative summary addressing the inquiry with immediate source citation [Source: <filename>, Page: <page>, Chunk: <chunk_id>].
+2. Detailed Explanation: In-depth technical breakdown, system architecture, workflow, or specifications. Organize into bullet points featuring **Bold Topic Titles** (e.g. **Component Name**: Explanation) for maximum clarity and organization.
+3. Key Findings & Important Details: Critical observations, quantitative performance metrics, key engineering decisions, or policy terms.
+4. Cross-References / Comparisons (if applicable): Cross-domain dependencies, trade-offs, or tables comparing subsystems/modes.
+5. Verified Source Citations: Exact source filenames, page coordinates, and chunk IDs for all cited claims.
 6. Missing Information / Limitations (if applicable): Explicitly state any requested details not substantiated by the evidence.
 """
