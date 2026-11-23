@@ -34,6 +34,7 @@ class IngestionService:
         chunk_size: int = 1000,
         chunk_overlap: int = 200,
         max_file_size_bytes: int = 10 * 1024 * 1024,
+        kb_dir: Optional[str | Path] = None,
     ):
         if not manifest_path:
             # Default to Google Drive 02_Datasets if accessible, else local storage
@@ -42,6 +43,13 @@ class IngestionService:
                 manifest_path = gdrive_manifest
             else:
                 manifest_path = Path("tmp") / "ingestion_manifest.json"
+
+        if kb_dir:
+            self.kb_dir = Path(kb_dir)
+        elif os.environ.get("PYTEST_CURRENT_TEST"):
+            self.kb_dir = Path("tmp/pytest_kb")
+        else:
+            self.kb_dir = Path("data/knowledge_base")
 
         self.manifest = IngestionManifest(manifest_path=manifest_path)
         self.loader = DocumentLoader(max_file_size_bytes=max_file_size_bytes)
@@ -90,6 +98,7 @@ class IngestionService:
         vector_retriever: Optional[Any] = None,
         bm25_retriever: Optional[Any] = None,
         embedding_provider: Optional[Any] = None,
+        auto_index: bool = False,
     ) -> Dict[str, Any]:
         """
         Process, validate, chunk, and register an uploaded file.
@@ -98,6 +107,7 @@ class IngestionService:
         - Maximum file size (10MB)
         - Allowed extensions (.pdf, .txt, .md)
         - File content integrity (PDF header %PDF-, UTF-8 text)
+        - Canonical persistence into data/knowledge_base/<category>/<clean_name>
         - Lifecycle state tracking: uploaded -> processed -> pending_index -> indexed
         - Searchability: only indexed documents are marked searchable
         """
@@ -148,29 +158,97 @@ class IngestionService:
         # 6. Check for duplicate content in manifest
         content_hash = self.loader.compute_sha256(content)
         eval_status, existing_record = self.manifest.evaluate_file(category, clean_name, content_hash)
-        if eval_status == "UNCHANGED":
-            logger.info(f"Duplicate content detected for upload '{clean_name}'. Skipping redundant chunking.")
-            return {
-                "status": "SKIPPED_DUPLICATE",
-                "document_id": existing_record["document_id"],
-                "filename": clean_name,
-                "category": category,
-                "lifecycle_status": existing_record.get("lifecycle_status", "indexed"),
-                "is_searchable": existing_record.get("is_searchable", True),
-                "chunk_count": existing_record.get("chunk_count", 0),
-                "file_size_bytes": len(content),
-                "content_hash": content_hash,
-                "message": f"Document '{clean_name}' is identical to existing document. Skipped duplicate processing.",
-            }
 
-        # 7. Write to storage
-        if Path(settings.GOOGLE_DRIVE_ROOT).exists():
-            upload_dir = Path(settings.GOOGLE_DRIVE_ROOT) / "02_Datasets" / "raw_documents" / category
-        else:
-            upload_dir = Path("tmp") / "uploads" / category
-        upload_dir.mkdir(parents=True, exist_ok=True)
-        dest_file = upload_dir / clean_name
+        # Storage paths: Primary is canonical knowledge base data/knowledge_base/<category>/<clean_name>
+        kb_category_dir = self.kb_dir / category
+        kb_category_dir.mkdir(parents=True, exist_ok=True)
+        dest_file = kb_category_dir / clean_name
+
+        # Handle identical content
+        if eval_status == "UNCHANGED" and existing_record:
+            is_deleted = (
+                existing_record.get("status") == "DELETED"
+                or existing_record.get("lifecycle_status") == "deleted"
+            )
+
+            if is_deleted:
+                logger.info(f"Re-activating previously deleted document '{clean_name}'.")
+                # Ensure physical file is present in knowledge base
+                dest_file.write_bytes(content)
+                if Path(settings.GOOGLE_DRIVE_ROOT).exists():
+                    try:
+                        gdrive_dir = Path(settings.GOOGLE_DRIVE_ROOT) / "02_Datasets" / "raw_documents" / category
+                        gdrive_dir.mkdir(parents=True, exist_ok=True)
+                        (gdrive_dir / clean_name).write_bytes(content)
+                    except Exception as e:
+                        logger.warning(f"Could not mirror uploaded file to Google Drive: {e}")
+
+                doc = self.loader.load_file(dest_file, category)
+                chunks = self.chunker.chunk_document(doc)
+
+                lifecycle_status = "pending_index"
+                if auto_index:
+                    if vector_retriever is not None and getattr(vector_retriever, "_collection", None) is not None:
+                        try:
+                            vector_retriever.upsert_chunks(chunks, embedding_provider=embedding_provider)
+                            lifecycle_status = "indexed"
+                        except Exception as e:
+                            logger.error(f"Failed to upsert chunks into vector store: {e}")
+                            lifecycle_status = "indexing_failed"
+
+                    if bm25_retriever is not None:
+                        try:
+                            if hasattr(bm25_retriever, "add_chunks"):
+                                bm25_retriever.add_chunks(chunks)
+                            else:
+                                bm25_retriever.index_chunks(chunks)
+                            if lifecycle_status != "indexing_failed":
+                                lifecycle_status = "indexed"
+                        except Exception as e:
+                            logger.error(f"Failed to index chunks into BM25 retriever: {e}")
+
+                self.manifest.reactivate_document(existing_record["document_id"], lifecycle_status=lifecycle_status)
+                return {
+                    "status": "SUCCESS",
+                    "document_id": existing_record["document_id"],
+                    "filename": clean_name,
+                    "category": category,
+                    "lifecycle_status": lifecycle_status,
+                    "is_searchable": (lifecycle_status == "indexed"),
+                    "chunk_count": len(chunks),
+                    "file_size_bytes": len(content),
+                    "content_hash": content_hash,
+                    "message": f"Document '{clean_name}' successfully restored to knowledge base.",
+                }
+            else:
+                # Active and already registered: ensure physical file exists on disk
+                if not dest_file.exists():
+                    dest_file.write_bytes(content)
+                logger.info(f"Duplicate content detected for upload '{clean_name}'. Skipping redundant chunking.")
+                return {
+                    "status": "SKIPPED_DUPLICATE",
+                    "document_id": existing_record["document_id"],
+                    "filename": clean_name,
+                    "category": category,
+                    "lifecycle_status": existing_record.get("lifecycle_status", "pending_index"),
+                    "is_searchable": existing_record.get("is_searchable", False),
+                    "chunk_count": existing_record.get("chunk_count", 0),
+                    "file_size_bytes": len(content),
+                    "content_hash": content_hash,
+                    "message": f"Document '{clean_name}' is identical to existing document. Skipped duplicate processing.",
+                }
+
+        # 7. Write to canonical knowledge base storage (data/knowledge_base/<category>/<clean_name>)
         dest_file.write_bytes(content)
+
+        # Mirror backup to Google Drive if connected
+        if Path(settings.GOOGLE_DRIVE_ROOT).exists():
+            try:
+                gdrive_dir = Path(settings.GOOGLE_DRIVE_ROOT) / "02_Datasets" / "raw_documents" / category
+                gdrive_dir.mkdir(parents=True, exist_ok=True)
+                (gdrive_dir / clean_name).write_bytes(content)
+            except Exception as e:
+                logger.warning(f"Could not mirror uploaded file to Google Drive: {e}")
 
         # 8. Load & Chunk
         doc = self.loader.load_file(dest_file, category)
@@ -178,17 +256,28 @@ class IngestionService:
 
         # 9. Determine Indexing & Lifecycle Status
         lifecycle_status = "pending_index"
-        if (
-            vector_retriever is not None
-            and getattr(vector_retriever, "_collection", None) is not None
-            and (embedding_provider is not None or getattr(vector_retriever, "embedding_provider", None) is not None)
-        ):
-            try:
-                vector_retriever.upsert_chunks(chunks, embedding_provider=embedding_provider)
-                lifecycle_status = "indexed"
-            except Exception as e:
-                logger.error(f"Failed to upsert chunks into vector store: {e}")
-                lifecycle_status = "indexing_failed"
+        if auto_index:
+            if vector_retriever is not None and getattr(vector_retriever, "_collection", None) is not None:
+                try:
+                    vector_retriever.upsert_chunks(chunks, embedding_provider=embedding_provider)
+                    lifecycle_status = "indexed"
+                except Exception as e:
+                    logger.error(f"Failed to upsert chunks into vector store: {e}")
+                    lifecycle_status = "indexing_failed"
+
+            # Also index into BM25 retriever if available
+            if bm25_retriever is not None:
+                try:
+                    if hasattr(bm25_retriever, "add_chunks"):
+                        bm25_retriever.add_chunks(chunks)
+                    else:
+                        bm25_retriever.index_chunks(chunks)
+                    if lifecycle_status != "indexing_failed":
+                        lifecycle_status = "indexed"
+                except Exception as e:
+                    logger.error(f"Failed to index chunks into BM25 retriever: {e}")
+                    if lifecycle_status != "indexed":
+                        lifecycle_status = "indexing_failed"
 
         # 10. Register in Manifest
         record = self.manifest.register_document(
@@ -249,6 +338,22 @@ class IngestionService:
         # 3. Mark manifest record as deleted
         self.manifest.mark_deleted(document_id)
         logger.info(f"Document '{document_id}' ({filename}) marked deleted in manifest.")
+
+        # 4. Remove physical file from knowledge base storage if present
+        kb_path = self.kb_dir / category / filename
+        if kb_path.exists():
+            try:
+                kb_path.unlink()
+                logger.info(f"Removed physical file from knowledge base: {kb_path}")
+            except Exception as e:
+                logger.warning(f"Could not remove physical file '{kb_path}': {e}")
+
+        tmp_path = Path("tmp/uploads") / category / filename
+        if tmp_path.exists():
+            try:
+                tmp_path.unlink()
+            except Exception:
+                pass
 
         return {
             "success": True,
@@ -376,6 +481,8 @@ class IngestionService:
         category = doc_record.get("category", "product_manual")
 
         possible_paths = [
+            self.kb_dir / category / filename,
+            self.kb_dir / filename,
             Path("data/knowledge_base") / category / filename,
             Path("data/knowledge_base") / filename,
             Path(settings.GOOGLE_DRIVE_ROOT) / "02_Datasets" / "raw_documents" / category / filename,
@@ -398,7 +505,10 @@ class IngestionService:
         if vector_retriever and getattr(vector_retriever, "_collection", None) is not None:
             indexed_chunks = vector_retriever.upsert_chunks(chunks, embedding_provider=embedding_provider)
         if bm25_retriever:
-            bm25_retriever.index_chunks(chunks)
+            if hasattr(bm25_retriever, "add_chunks"):
+                bm25_retriever.add_chunks(chunks)
+            else:
+                bm25_retriever.index_chunks(chunks)
 
         self.manifest.update_lifecycle_status(document_id, "indexed")
 

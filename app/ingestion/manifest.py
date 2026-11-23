@@ -181,9 +181,20 @@ class IngestionManifest:
         if lifecycle_status == "deleted":
             doc["status"] = "DELETED"
             doc["deleted_at"] = doc["last_seen"]
+        else:
+            doc["status"] = "ACTIVE"
+            doc.pop("deleted_at", None)
 
         self.save()
         return True
+
+    def reactivate_document(
+        self,
+        document_id: str,
+        lifecycle_status: str = "indexed",
+    ) -> bool:
+        """Reactivate a previously deleted or inactive document."""
+        return self.update_lifecycle_status(document_id, lifecycle_status)
 
     def mark_deleted(self, document_id: str) -> bool:
         """Atomically mark document as deleted in manifest."""

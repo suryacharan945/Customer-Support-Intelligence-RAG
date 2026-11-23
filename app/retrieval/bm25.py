@@ -76,6 +76,15 @@ class BM25Retriever(BaseRetriever):
 
         return self.corpus_size
 
+    def add_chunks(self, new_chunks: List[TextChunk]) -> int:
+        """Add new chunks to the existing corpus and rebuild BM25 inverted index."""
+        if not new_chunks:
+            return self.corpus_size
+        new_ids = {getattr(c, "chunk_id", None) for c in new_chunks}
+        existing = [c for c in self.chunks if getattr(c, "chunk_id", None) not in new_ids]
+        combined = existing + list(new_chunks)
+        return self.index_chunks(combined)
+
     def retrieve(
         self,
         query: str,
