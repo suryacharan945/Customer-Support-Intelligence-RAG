@@ -24,7 +24,7 @@ class Settings(BaseSettings):
 
     # LLM & Remote Compute
     # Supported providers: colab_remote, local, auto, groq, gemini, ollama, mock
-    LLM_PROVIDER: str = "colab_remote"
+    LLM_PROVIDER: str = "auto"
     ALLOW_LOCAL_FALLBACK: bool = True
     COLAB_API_ENDPOINT: str = "http://localhost:8001/v1"
     COLAB_API_KEY: str = ""

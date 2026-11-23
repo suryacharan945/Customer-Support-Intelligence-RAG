@@ -75,9 +75,9 @@ export const ModeSelector: React.FC = () => {
             onChange={(e) => setLlmProvider(e.target.value as LLMProvider)}
             className="w-full text-xs font-medium bg-slate-900/80 border border-slate-700/80 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
-            <option value="local">?? Local Grounded AI Engine (100% Offline / Private)</option>
-            <option value="auto">Auto (Remote Colab GPU + Local Engine)</option>
-            <option value="colab_remote">Remote Colab GPU Only</option>
+            <option value="local">🟢 Local Grounded AI Engine (100% Offline / Private)</option>
+            <option value="auto">⚡ Auto (Colab GPU + Local Grounded Fallback)</option>
+            <option value="colab_remote">🌐 Remote Colab GPU Only</option>
           </select>
         </div>
 

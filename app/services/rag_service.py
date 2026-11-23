@@ -573,11 +573,22 @@ class RAGService:
             if "provider" in sig.parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in sig.parameters.values()):
                 gen_kwargs["provider"] = llm_provider
 
-        llm_output = await self.llm_client.generate_response(
-            system_prompt=PromptTemplates.SYSTEM_PROMPT,
-            user_prompt=user_prompt,
-            **gen_kwargs,
-        )
+        try:
+            llm_output = await self.llm_client.generate_response(
+                system_prompt=PromptTemplates.SYSTEM_PROMPT,
+                user_prompt=user_prompt,
+                **gen_kwargs,
+            )
+        except Exception as exc:
+            from app.generation.llm_client import RemoteInferenceError, RemoteInferenceTimeoutError
+            if isinstance(exc, (RemoteInferenceError, RemoteInferenceTimeoutError)) and getattr(settings, "ALLOW_LOCAL_FALLBACK", True):
+                logger.warning(
+                    f"Remote LLM provider failed ({exc}). Falling back to local grounded knowledge base synthesis."
+                )
+                from app.generation.local_synthesizer import local_synthesizer
+                llm_output = local_synthesizer.synthesize(user_prompt, is_fallback=True)
+            else:
+                raise
         generation_latency_ms = round((time.perf_counter() - t0_gen) * 1000, 2)
         answer_text = llm_output.get("text", "")
         is_mock_response = bool(

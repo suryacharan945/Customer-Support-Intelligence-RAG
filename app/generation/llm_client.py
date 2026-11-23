@@ -148,7 +148,8 @@ class LLMClient:
 
         try:
             t0 = time.perf_counter()
-            async with httpx.AsyncClient(timeout=self.timeout) as client:
+            timeout_cfg = httpx.Timeout(self.timeout, connect=2.5)
+            async with httpx.AsyncClient(timeout=timeout_cfg) as client:
                 resp = await client.post(
                     f"{self.endpoint}/chat/completions",
                     json=payload,
