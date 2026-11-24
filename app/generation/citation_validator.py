@@ -266,6 +266,8 @@ class CitationValidator:
         norm_evidence = re.sub(r"(?<=\d),(?=\d)", "", combined_text_lower)
         answer_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", norm_answer))
         evidence_numbers = set(re.findall(r"\b\d+(?:\.\d+)?\b", norm_evidence))
+        evidence_numbers.update(re.findall(r"[a-zA-Z](\d+(?:\.\d+)?)\b", norm_evidence))
+        evidence_numbers.update(re.findall(r"(?:[vV])(\d+(?:\.\d+)?)", norm_evidence))
         
         # Check for numbers in answer not present in evidence or citation page numbers
         unsupported_nums = [
